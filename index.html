@@ -9,962 +9,1434 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ayya:#6c63ff;
-  --malli:#ff4757;
-  --gold:#ffd700;
-  --bg:#0d0d1a;
+  --ayya:#6c63ff;--malli:#ff4757;--gold:#ffd700;
+  --bg:#0d0d1a;--card:rgba(255,255,255,0.05);--border:#2a2a3a;
 }
 body{
-  background:var(--bg);
-  font-family:'Nunito',sans-serif;
-  color:#fff;
-  min-height:100vh;
-  overflow-x:hidden;
-  user-select:none;
+  background:var(--bg);font-family:'Nunito',sans-serif;
+  color:#fff;min-height:100vh;overflow-x:hidden;user-select:none;
 }
-
-/* ─── STARS BG ─── */
 body::before{
-  content:'';
-  position:fixed;inset:0;
-  background:radial-gradient(ellipse at 20% 20%, #1a0a3a 0%, transparent 60%),
-             radial-gradient(ellipse at 80% 80%, #0a1a0a 0%, transparent 60%);
-  pointer-events:none;z-index:0;
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 15% 15%,#1a0a3a 0%,transparent 55%),
+             radial-gradient(ellipse at 85% 85%,#0a1a0a 0%,transparent 55%);
 }
 
-/* ─── HEADER ─── */
+/* ── HEADER ── */
 header{
-  position:relative;z-index:2;
-  text-align:center;
-  padding:16px 10px 10px;
-  background:linear-gradient(180deg,rgba(0,0,0,0.6),transparent);
+  position:relative;z-index:2;text-align:center;
+  padding:14px 10px 8px;
+  background:linear-gradient(180deg,rgba(0,0,0,.7),transparent);
 }
 header h1{
   font-family:'Bangers',cursive;
-  font-size:clamp(2rem,7vw,5rem);
-  letter-spacing:4px;
+  font-size:clamp(1.6rem,5.5vw,3.8rem);
+  letter-spacing:3px;line-height:1;
   background:linear-gradient(90deg,var(--ayya),#fff 50%,var(--malli));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;
 }
-header p{font-size:.9rem;color:#888;margin-top:4px;letter-spacing:1px;}
+header p{font-size:.8rem;color:#666;margin-top:2px;letter-spacing:1px;}
 
-/* ─── SCORE ─── */
+/* ── SCOREBOARD ── */
 .scoreboard{
   position:relative;z-index:2;
   display:flex;justify-content:space-around;align-items:center;
-  padding:10px 20px;
-  background:rgba(0,0,0,0.4);
-  border-bottom:1px solid #222;
-  backdrop-filter:blur(6px);
+  padding:8px 20px;
+  background:rgba(0,0,0,.45);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(8px);
 }
-.score-card{text-align:center;}
-.score-card .sname{
-  font-family:'Bangers',cursive;font-size:1.4rem;letter-spacing:2px;
-}
-.score-card.ayya .sname{color:var(--ayya);}
-.score-card.malli .sname{color:var(--malli);}
-.score-card .spts{font-size:2.6rem;font-weight:900;line-height:1;}
-.vs-text{font-family:'Bangers',cursive;font-size:2.2rem;color:var(--gold);}
+.sc{text-align:center;}
+.sc .sn{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;}
+.sc.ka .sn{color:var(--ayya);}
+.sc.sh .sn{color:var(--malli);}
+.sc .sp{font-size:2.2rem;font-weight:900;line-height:1;}
+.vs-glyph{font-family:'Bangers',cursive;font-size:1.8rem;color:var(--gold);}
 
-/* ─── ARENA ─── */
+/* ── CONNECTION STATUS ── */
+#conn-bar{
+  position:relative;z-index:2;
+  text-align:center;padding:6px;font-size:.8rem;
+  background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);
+  display:none;
+}
+#conn-bar.show{display:block;}
+#conn-dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:#666;margin-right:6px;vertical-align:middle;
+}
+#conn-dot.connected{background:#22c55e;box-shadow:0 0 8px #22c55e;}
+#conn-dot.waiting{background:var(--gold);animation:blink 1s infinite;}
+#conn-dot.error{background:var(--malli);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* ── ARENA ── */
 #arena{
   position:relative;z-index:2;
   display:flex;flex-direction:column;align-items:center;
-  padding:20px 10px 40px;
-  min-height:70vh;
+  padding:16px 10px 40px;min-height:68vh;
 }
 
-/* ─── SCREEN SYSTEM ─── */
-.screen{display:none;width:100%;max-width:960px;flex-direction:column;align-items:center;gap:20px;}
+/* ── SCREEN SYSTEM ── */
+.screen{display:none;width:100%;max-width:900px;flex-direction:column;align-items:center;gap:16px;}
 .screen.active{display:flex;}
 
-/* ══════════════════════════════════════════
-   FIGHT SCREEN
-══════════════════════════════════════════ */
-#fight-screen{gap:0;}
+/* ── CARD ── */
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:20px 24px;
+  width:100%;max-width:560px;text-align:center;
+}
+.card h2{font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:2px;margin-bottom:6px;}
+.card p{color:#aaa;font-size:.9rem;line-height:1.5;}
 
-.fight-stage{
-  width:100%;max-width:900px;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  padding:0 20px;
-  min-height:340px;
-  position:relative;
+/* ── BUTTONS ── */
+.btn{
+  font-family:'Bangers',cursive;font-size:1.4rem;letter-spacing:2px;
+  padding:12px 36px;border:none;border-radius:40px;cursor:pointer;
+  transition:transform .1s,box-shadow .15s;outline:none;
+}
+.btn:active{transform:scale(.92);}
+.btn:disabled{opacity:.45;pointer-events:none;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--ayya),#a855f7);color:#fff;
+  box-shadow:0 4px 24px rgba(108,99,255,.5);
+}
+.btn-danger{
+  background:linear-gradient(135deg,var(--malli),#ff6b35);color:#fff;
+  box-shadow:0 4px 24px rgba(255,71,87,.5);
+}
+.btn-gold{
+  background:linear-gradient(135deg,#ffd700,#f59e0b);color:#000;
+  box-shadow:0 4px 24px rgba(255,215,0,.4);
+}
+.btn-sm{font-size:1rem;padding:8px 24px;letter-spacing:1px;}
+.btn-ghost{
+  background:rgba(255,255,255,.07);color:#ccc;
+  border:1px solid #444;font-size:1rem;padding:10px 28px;
 }
 
-/* ground line */
-.fight-stage::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:3px;
-  background:linear-gradient(90deg,var(--ayya),var(--gold),var(--malli));
-  border-radius:3px;
-  box-shadow:0 0 20px rgba(255,215,0,0.3);
+/* ── HOME SCREEN ── */
+#home-screen .hero-row{
+  display:flex;gap:clamp(20px,6vw,60px);
+  justify-content:center;align-items:flex-end;margin:4px 0;
 }
+.hero-fighter{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.hero-avatar{
+  width:clamp(80px,16vw,130px);height:clamp(80px,16vw,130px);
+  border-radius:50%;object-fit:cover;object-position:top;
+  border:4px solid #444;
+  box-shadow:0 8px 30px rgba(0,0,0,.5);
+}
+.hero-fighter:first-child .hero-avatar{border-color:var(--ayya);animation:float-l 3s ease-in-out infinite;}
+.hero-fighter:last-child .hero-avatar{border-color:var(--malli);animation:float-r 3s ease-in-out infinite;}
+@keyframes float-l{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-12px) rotate(2deg);}}
+@keyframes float-r{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-12px) rotate(-2deg);}}
+.hero-name{font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:2px;}
+.hero-fighter:first-child .hero-name{color:var(--ayya);}
+.hero-fighter:last-child .hero-name{color:var(--malli);}
+.hero-label{font-size:.7rem;color:#555;letter-spacing:1px;}
+.sword-mid{font-size:clamp(2rem,6vw,4rem);align-self:center;filter:drop-shadow(0 0 10px rgba(255,215,0,.4));}
+.home-btn-row{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%;max-width:380px;}
 
-/* fighter wrapper */
-.fighter{
+/* ── CHARACTER PICK ── */
+.char-pick-row{display:flex;gap:14px;justify-content:center;}
+.char-pick{
+  flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;
+  gap:8px;padding:14px 10px;border-radius:18px;cursor:pointer;
+  border:3px solid #333;background:rgba(255,255,255,.03);
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.char-pick:hover{transform:scale(1.04);background:rgba(255,255,255,.07);}
+.char-pick.selected-kasun{border-color:var(--ayya);background:rgba(108,99,255,.15);}
+.char-pick.selected-shavin{border-color:var(--malli);background:rgba(255,71,87,.15);}
+.char-pick img{
+  width:70px;height:70px;border-radius:50%;object-fit:cover;object-position:top;
+  border:3px solid #444;
+}
+.char-pick.selected-kasun img{border-color:var(--ayya);}
+.char-pick.selected-shavin img{border-color:var(--malli);}
+.char-pick .cpn{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:1px;}
+.char-pick.kasun-cp .cpn{color:var(--ayya);}
+.char-pick.shavin-cp .cpn{color:var(--malli);}
+.char-pick .cpl{font-size:.68rem;color:#666;}
+
+/* ── ROOM CODE ── */
+.room-code-box{
+  background:#000;border:2px solid var(--gold);border-radius:14px;
+  padding:14px 28px;text-align:center;
+}
+.room-code-box .rc-label{font-size:.75rem;color:#888;letter-spacing:2px;margin-bottom:4px;}
+.room-code-box .rc-code{
+  font-family:'Bangers',cursive;font-size:3rem;letter-spacing:8px;
+  color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,.4);
+  line-height:1;
+}
+.share-link{
+  font-size:.75rem;color:#666;word-break:break-all;
+  padding:8px 14px;background:rgba(255,255,255,.04);
+  border-radius:8px;border:1px solid #333;margin-top:4px;
+  cursor:pointer;transition:color .2s;
+}
+.share-link:hover{color:#aaa;}
+.copy-hint{font-size:.72rem;color:var(--gold);min-height:16px;margin-top:2px;}
+
+/* ── JOIN INPUT ── */
+.code-input{
+  font-family:'Bangers',cursive;font-size:2rem;letter-spacing:8px;
+  width:200px;text-align:center;text-transform:uppercase;
+  background:#000;border:2px solid #444;border-radius:12px;
+  color:var(--gold);padding:10px 16px;outline:none;
+  transition:border-color .2s;
+}
+.code-input:focus{border-color:var(--gold);}
+
+/* ── LOBBY PLAYERS ── */
+.lobby-players{
+  display:flex;gap:20px;justify-content:center;align-items:center;
+  flex-wrap:wrap;
+}
+.lobby-player{
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  position:relative;
-  transition:transform .15s;
+  padding:16px 20px;border-radius:16px;min-width:140px;
+  border:2px solid #333;background:rgba(255,255,255,.04);
+  transition:border-color .3s,background .3s;
 }
-.fighter-name{
-  font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:2px;
+.lobby-player.connected{
+  border-color:var(--gold);background:rgba(255,215,0,.07);
 }
+.lobby-player img{
+  width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:top;
+  border:3px solid #444;
+}
+.lobby-player.kasun-lp img{border-color:var(--ayya);}
+.lobby-player.shavin-lp img{border-color:var(--malli);}
+.lobby-player .lpn{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:1px;}
+.lobby-player.kasun-lp .lpn{color:var(--ayya);}
+.lobby-player.shavin-lp .lpn{color:var(--malli);}
+.lobby-player .lps{
+  font-size:.72rem;padding:3px 10px;border-radius:20px;letter-spacing:1px;
+}
+.lps.waiting{background:#333;color:#888;}
+.lps.ready{background:#22c55e22;color:#22c55e;border:1px solid #22c55e;}
+.lobby-vs{font-family:'Bangers',cursive;font-size:2.5rem;color:var(--gold);}
+
+/* ── FIGHT SCREEN ── */
+.fight-stage{
+  width:100%;max-width:860px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 16px;min-height:320px;position:relative;
+}
+.fight-stage::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--ayya),var(--gold),var(--malli));
+  border-radius:3px;box-shadow:0 0 16px rgba(255,215,0,.3);
+}
+.fighter{
+  display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;
+}
+.fighter-name{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:1px;}
 .fighter.kasun-f .fighter-name{color:var(--ayya);}
 .fighter.shavin-f .fighter-name{color:var(--malli);}
-
-/* health bar */
-.hp-wrap{
-  width:160px;height:16px;
-  background:#222;border-radius:10px;overflow:hidden;
-  border:2px solid #444;
-}
-.hp-bar{
-  height:100%;border-radius:10px;transition:width .4s;
-}
+.hp-wrap{width:clamp(110px,18vw,160px);height:14px;background:#1a1a2e;border-radius:8px;overflow:hidden;border:1px solid #333;}
+.hp-bar{height:100%;border-radius:8px;transition:width .4s;}
 .fighter.kasun-f .hp-bar{background:linear-gradient(90deg,#6c63ff,#a855f7);}
 .fighter.shavin-f .hp-bar{background:linear-gradient(90deg,#ff4757,#ff6b35);}
-.hp-label{font-size:.75rem;color:#888;letter-spacing:1px;}
-
-/* avatar circle */
+.hp-lbl{font-size:.65rem;color:#666;letter-spacing:1px;}
 .avatar-ring{
-  width:clamp(120px,22vw,170px);
-  height:clamp(120px,22vw,170px);
-  border-radius:50%;
-  border:5px solid #444;
-  overflow:hidden;
-  position:relative;
-  box-shadow:0 0 30px rgba(0,0,0,0.6);
-  transition:border-color .3s, box-shadow .3s;
+  width:clamp(100px,18vw,155px);height:clamp(100px,18vw,155px);
+  border-radius:50%;border:4px solid #444;overflow:hidden;
+  box-shadow:0 0 24px rgba(0,0,0,.6);transition:border-color .3s;
 }
-.avatar-ring img{
-  width:100%;height:100%;object-fit:cover;object-position:top;
-  transition:transform .15s;
-}
+.avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .1s;}
 .fighter.kasun-f .avatar-ring{border-color:var(--ayya);}
 .fighter.shavin-f .avatar-ring{border-color:var(--malli);}
 
+/* me indicator */
+.me-badge{
+  font-size:.65rem;padding:2px 8px;border-radius:10px;letter-spacing:1px;
+  font-weight:700;background:var(--gold);color:#000;
+}
+
 /* ── FIGHT ANIMATIONS ── */
-@keyframes punch-right{
-  0%{transform:translateX(0) rotate(0);}
-  30%{transform:translateX(60px) rotate(5deg) scaleX(1.08);}
-  60%{transform:translateX(30px) rotate(-2deg);}
-  100%{transform:translateX(0) rotate(0);}
-}
-@keyframes punch-left{
-  0%{transform:translateX(0) rotate(0);}
-  30%{transform:translateX(-60px) rotate(-5deg) scaleX(1.08);}
-  60%{transform:translateX(-30px) rotate(2deg);}
-  100%{transform:translateX(0) rotate(0);}
-}
-@keyframes dodge-back-right{
-  0%{transform:translateX(0);}
-  40%{transform:translateX(-40px) rotate(-8deg);}
-  100%{transform:translateX(0);}
-}
-@keyframes dodge-back-left{
-  0%{transform:translateX(0);}
-  40%{transform:translateX(40px) rotate(8deg);}
-  100%{transform:translateX(0);}
-}
-@keyframes hit-flash{
-  0%,100%{filter:brightness(1);}
-  25%{filter:brightness(3) saturate(0);}
-  50%{filter:brightness(0.3) saturate(0);}
-}
-@keyframes fighter-ko{
-  0%{transform:rotate(0) translateY(0);}
-  30%{transform:rotate(-20deg) translateY(-20px);}
-  60%{transform:rotate(90deg) translateY(40px);}
-  100%{transform:rotate(90deg) translateY(60px);}
-}
-@keyframes winner-dance{
-  0%,100%{transform:translateY(0) rotate(-3deg) scale(1);}
-  25%{transform:translateY(-30px) rotate(3deg) scale(1.05);}
-  50%{transform:translateY(-10px) rotate(-3deg) scale(1.02);}
-  75%{transform:translateY(-20px) rotate(2deg) scale(1.04);}
-}
-@keyframes shake{
-  0%,100%{transform:translateX(0);}
-  20%{transform:translateX(-8px);}
-  40%{transform:translateX(8px);}
-  60%{transform:translateX(-6px);}
-  80%{transform:translateX(6px);}
-}
-@keyframes spin-punch{
-  0%{transform:rotate(0) scale(1);}
-  50%{transform:rotate(360deg) scale(1.15);}
-  100%{transform:rotate(720deg) scale(1);}
-}
+@keyframes punch-r{0%{transform:translateX(0);}35%{transform:translateX(55px) scaleX(1.07);}65%{transform:translateX(25px);}100%{transform:translateX(0);}}
+@keyframes punch-l{0%{transform:translateX(0);}35%{transform:translateX(-55px) scaleX(1.07);}65%{transform:translateX(-25px);}100%{transform:translateX(0);}}
+@keyframes dodge-r{0%{transform:translateX(0) rotate(0);}40%{transform:translateX(-38px) rotate(-7deg);}100%{transform:translateX(0) rotate(0);}}
+@keyframes dodge-l{0%{transform:translateX(0) rotate(0);}40%{transform:translateX(38px) rotate(7deg);}100%{transform:translateX(0) rotate(0);}}
+@keyframes shake-hit{0%,100%{transform:translateX(0);}20%{transform:translateX(-7px);}40%{transform:translateX(7px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+@keyframes flash-hit{0%,100%{filter:brightness(1);}30%{filter:brightness(3) saturate(0);}60%{filter:brightness(.3);}}
+@keyframes ko-fall{0%{transform:rotate(0) translateY(0);}35%{transform:rotate(-18deg) translateY(-15px);}65%{transform:rotate(85deg) translateY(35px);}100%{transform:rotate(90deg) translateY(55px);}}
+@keyframes win-dance{0%,100%{transform:translateY(0) rotate(-4deg) scale(1);}25%{transform:translateY(-28px) rotate(4deg) scale(1.06);}75%{transform:translateY(-16px) rotate(-2deg) scale(1.03);}}
+@keyframes spin-special{0%{transform:rotate(0) scale(1);}50%{transform:rotate(360deg) scale(1.18);}100%{transform:rotate(720deg) scale(1);}}
+@keyframes super-shake{0%,100%{transform:translateX(0) translateY(0);}25%{transform:translateX(-10px) translateY(-5px);}50%{transform:translateX(10px) translateY(5px);}75%{transform:translateX(-6px) translateY(-3px);}}
 
-.fighter.anim-punch-r{animation:punch-right .5s ease-out;}
-.fighter.anim-punch-l{animation:punch-left .5s ease-out;}
-.fighter.anim-dodge-r{animation:dodge-back-right .5s ease-out;}
-.fighter.anim-dodge-l{animation:dodge-back-left .5s ease-out;}
-.fighter.anim-hit .avatar-ring{animation:hit-flash .4s;}
-.fighter.anim-hit{animation:shake .4s;}
-.fighter.anim-ko{animation:fighter-ko .8s ease-in forwards;}
-.fighter.anim-win{animation:winner-dance 1s ease-in-out infinite;}
-.fighter.anim-spin .avatar-ring img{animation:spin-punch .6s ease-out;}
+.anim-pr{animation:punch-r .45s ease-out;}
+.anim-pl{animation:punch-l .45s ease-out;}
+.anim-dr{animation:dodge-r .45s ease-out;}
+.anim-dl{animation:dodge-l .45s ease-out;}
+.anim-hit{animation:shake-hit .4s;}
+.anim-hit .avatar-ring{animation:flash-hit .4s;}
+.anim-ko{animation:ko-fall .85s ease-in forwards;}
+.anim-win{animation:win-dance .9s ease-in-out infinite;}
+.anim-spin .avatar-ring img{animation:spin-special .55s ease-out;}
+.anim-super{animation:super-shake .35s;}
 
-/* impact emoji */
+/* impact */
 #impact{
-  position:absolute;
-  top:40%;left:50%;
+  position:absolute;top:38%;left:50%;
   transform:translate(-50%,-50%) scale(0);
-  font-size:clamp(3rem,8vw,5.5rem);
-  pointer-events:none;
-  z-index:10;
-  transition:transform .15s cubic-bezier(0.175,0.885,0.32,1.275);
-  text-shadow:0 0 20px rgba(255,215,0,0.6);
+  font-size:clamp(2.5rem,7vw,5rem);pointer-events:none;z-index:10;
+  transition:transform .12s cubic-bezier(.175,.885,.32,1.275);
 }
 #impact.show{transform:translate(-50%,-50%) scale(1);}
 
 /* commentary */
 #commentary{
-  width:100%;max-width:900px;
-  min-height:52px;
-  text-align:center;
-  font-size:clamp(1rem,2.5vw,1.3rem);
-  font-weight:700;
-  color:#fff;
-  background:rgba(0,0,0,0.4);
-  border:1px solid #333;
-  border-radius:14px;
-  padding:12px 20px;
-  margin:12px 0 0;
-  backdrop-filter:blur(4px);
-  transition:color .3s;
+  width:100%;max-width:860px;min-height:50px;text-align:center;
+  font-size:clamp(.9rem,2.3vw,1.2rem);font-weight:700;
+  background:rgba(0,0,0,.4);border:1px solid #333;border-radius:14px;
+  padding:10px 18px;backdrop-filter:blur(4px);transition:color .25s;
+}
+
+/* mash zone (during countdown) */
+#mash-zone{
+  display:none;flex-direction:column;align-items:center;gap:10px;
+  width:100%;max-width:860px;
+}
+#mash-zone.show{display:flex;}
+.mash-row{display:flex;gap:16px;justify-content:center;width:100%;}
+.mash-side{
+  flex:1;max-width:300px;display:flex;flex-direction:column;
+  align-items:center;gap:8px;padding:14px 10px;border-radius:16px;
+  border:2px solid transparent;
+}
+.mash-side.ka-ms{background:rgba(108,99,255,.1);border-color:rgba(108,99,255,.3);}
+.mash-side.sh-ms{background:rgba(255,71,87,.1);border-color:rgba(255,71,87,.3);}
+.mash-lbl{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:1px;}
+.ka-ms .mash-lbl{color:var(--ayya);}
+.sh-ms .mash-lbl{color:var(--malli);}
+.mash-count{font-family:'Bangers',cursive;font-size:2.5rem;line-height:1;}
+.mash-prog-wrap{width:100%;height:14px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
+.mash-prog{height:100%;border-radius:10px;transition:width .08s;}
+.ka-ms .mash-prog{background:linear-gradient(90deg,var(--ayya),#a855f7);}
+.sh-ms .mash-prog{background:linear-gradient(90deg,var(--malli),#ff6b35);}
+.mash-btn{
+  font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:1px;
+  padding:12px 20px;border:none;border-radius:14px;cursor:pointer;width:100%;
+  transition:transform .05s;outline:none;
+}
+.mash-btn:active,.mash-btn.pressed{transform:scale(.85);}
+.ka-ms .mash-btn{background:var(--ayya);color:#fff;box-shadow:0 3px 16px rgba(108,99,255,.4);}
+.sh-ms .mash-btn{background:var(--malli);color:#fff;box-shadow:0 3px 16px rgba(255,71,87,.4);}
+.mash-hint{font-size:.78rem;color:#666;text-align:center;}
+
+/* taunt bar */
+#taunt-bar{
+  display:none;flex-wrap:wrap;gap:8px;justify-content:center;
+  width:100%;max-width:860px;padding:4px 0;
+}
+#taunt-bar.show{display:flex;}
+.taunt-btn{
+  font-size:1.2rem;padding:6px 14px;border:1px solid #333;
+  border-radius:20px;background:rgba(255,255,255,.06);
+  cursor:pointer;transition:transform .1s,background .15s;
+}
+.taunt-btn:hover{background:rgba(255,255,255,.12);transform:scale(1.1);}
+.taunt-btn:active{transform:scale(.88);}
+
+/* speech bubble */
+.speech-bubble{
+  position:fixed;padding:10px 18px;border-radius:20px;
+  font-size:1.1rem;font-weight:700;z-index:500;pointer-events:none;
+  animation:bubble-life 2.5s ease-out forwards;
+  border:2px solid var(--gold);background:rgba(0,0,0,.85);color:#fff;
+}
+@keyframes bubble-life{
+  0%{transform:translateY(0) scale(.5);opacity:0;}
+  15%{transform:translateY(-10px) scale(1);opacity:1;}
+  75%{transform:translateY(-30px) scale(1);opacity:1;}
+  100%{transform:translateY(-60px) scale(.8);opacity:0;}
 }
 
 /* round dots */
-.round-dots{display:flex;gap:10px;justify-content:center;margin:4px 0;}
-.r-dot{
-  width:16px;height:16px;border-radius:50%;
-  background:#222;border:2px solid #444;transition:.3s;
-}
+.round-dots{display:flex;gap:8px;justify-content:center;}
+.r-dot{width:14px;height:14px;border-radius:50%;background:#1a1a2e;border:2px solid #333;transition:.3s;}
 .r-dot.w-kasun{background:var(--ayya);border-color:var(--ayya);}
 .r-dot.w-shavin{background:var(--malli);border-color:var(--malli);}
 .r-dot.w-tie{background:var(--gold);border-color:var(--gold);}
-.r-dot.cur{border-color:#fff;box-shadow:0 0 8px rgba(255,255,255,0.5);}
+.r-dot.cur{border-color:#fff;box-shadow:0 0 6px rgba(255,255,255,.4);}
 
-/* ── BIG FIGHT BTN ── */
-.fight-btn-wrap{margin-top:16px;}
+/* fight button */
 .btn-fight{
-  font-family:'Bangers',cursive;
-  font-size:clamp(1.8rem,4vw,2.6rem);
-  letter-spacing:4px;
-  padding:16px 60px;
-  border:none;border-radius:60px;
-  cursor:pointer;
-  background:linear-gradient(135deg,#ff4757,#ff6b35,#ffd700);
-  color:#000;
-  box-shadow:0 6px 40px rgba(255,71,87,0.5);
-  transition:transform .1s,box-shadow .1s;
-  animation:fight-btn-pulse 2s infinite;
+  font-family:'Bangers',cursive;font-size:clamp(1.6rem,3.5vw,2.2rem);
+  letter-spacing:3px;padding:14px 50px;border:none;border-radius:50px;cursor:pointer;
+  background:linear-gradient(135deg,#ff4757,#ff6b35,#ffd700);color:#000;
+  box-shadow:0 5px 32px rgba(255,71,87,.5);
+  transition:transform .1s;animation:fight-pulse 2s infinite;
 }
-.btn-fight:hover{transform:scale(1.06);}
-.btn-fight:active{transform:scale(0.93);}
-.btn-fight:disabled{opacity:.5;pointer-events:none;animation:none;}
-@keyframes fight-btn-pulse{
-  0%,100%{box-shadow:0 6px 40px rgba(255,71,87,0.5);}
-  50%{box-shadow:0 6px 60px rgba(255,107,53,0.9);}
-}
+.btn-fight:hover{transform:scale(1.05);}
+.btn-fight:active{transform:scale(.91);}
+.btn-fight:disabled{opacity:.45;pointer-events:none;animation:none;}
+@keyframes fight-pulse{0%,100%{box-shadow:0 5px 32px rgba(255,71,87,.5);}50%{box-shadow:0 5px 52px rgba(255,107,53,.85);}}
 
-/* ══════════════════════════════════════════
-   RESULT SCREEN
-══════════════════════════════════════════ */
-#result-screen{text-align:center;gap:16px;}
+/* result */
+#result-screen{text-align:center;}
 .winner-photo{
-  width:clamp(130px,28vw,200px);
-  height:clamp(130px,28vw,200px);
-  border-radius:50%;
-  object-fit:cover;object-position:top;
-  border:6px solid var(--gold);
-  box-shadow:0 0 50px rgba(255,215,0,0.5);
-  animation:winner-dance 1s ease-in-out infinite;
+  width:clamp(110px,24vw,180px);height:clamp(110px,24vw,180px);
+  border-radius:50%;object-fit:cover;object-position:top;
+  border:5px solid var(--gold);box-shadow:0 0 40px rgba(255,215,0,.45);
+  animation:win-dance .9s ease-in-out infinite;
 }
-.winner-title{
-  font-family:'Bangers',cursive;
-  font-size:clamp(2rem,7vw,4.5rem);
-  letter-spacing:3px;
-  line-height:1;
-  text-shadow:0 0 30px currentColor;
-}
+.winner-title{font-family:'Bangers',cursive;font-size:clamp(1.8rem,5.5vw,4rem);letter-spacing:2px;line-height:1;}
 .winner-roast{
-  max-width:480px;font-size:1rem;
-  color:#ccc;line-height:1.6;
-  background:rgba(255,255,255,0.05);
-  border:1px solid #333;border-radius:14px;
-  padding:14px 20px;
+  max-width:460px;font-size:.95rem;color:#ccc;line-height:1.6;
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 18px;
 }
-.final-row{display:flex;gap:24px;justify-content:center;}
-.final-card{
-  padding:14px 28px;border-radius:16px;text-align:center;min-width:120px;
-}
-.final-card.fk{background:rgba(108,99,255,.2);border:2px solid var(--ayya);}
-.final-card.fs{background:rgba(255,71,87,.2);border:2px solid var(--malli);}
-.final-card .fcn{font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:2px;}
-.final-card.fk .fcn{color:var(--ayya);}
-.final-card.fs .fcn{color:var(--malli);}
-.final-card .fcp{font-size:3rem;font-weight:900;}
+.final-row{display:flex;gap:20px;justify-content:center;}
+.fc{padding:12px 24px;border-radius:14px;text-align:center;min-width:110px;}
+.fc.fk{background:rgba(108,99,255,.2);border:2px solid var(--ayya);}
+.fc.fs{background:rgba(255,71,87,.2);border:2px solid var(--malli);}
+.fc .fcn{font-family:'Bangers',cursive;font-size:1.2rem;}
+.fc.fk .fcn{color:var(--ayya);}
+.fc.fs .fcn{color:var(--malli);}
+.fc .fcp{font-size:2.8rem;font-weight:900;}
 
-/* ─── BUTTONS ─── */
-.btn{
-  font-family:'Bangers',cursive;font-size:1.4rem;letter-spacing:2px;
-  padding:12px 40px;border:none;border-radius:40px;cursor:pointer;
-  transition:transform .1s;
-}
-.btn:active{transform:scale(.93);}
-.btn-primary{
-  background:linear-gradient(135deg,var(--ayya),#a855f7);
-  color:#fff;box-shadow:0 4px 24px rgba(108,99,255,.5);
-}
-.btn-secondary{
-  background:rgba(255,255,255,.08);color:#ccc;
-  border:1px solid #444;font-size:1rem;padding:10px 28px;
-}
-
-/* ─── ANNOUNCER ─── */
+/* announcer */
 #announcer{
   position:fixed;top:50%;left:50%;
   transform:translate(-50%,-50%) scale(0);
-  background:rgba(0,0,0,.92);
-  border:3px solid var(--gold);
-  border-radius:20px;
-  padding:20px 44px;
-  font-family:'Bangers',cursive;
-  font-size:clamp(2rem,5vw,3.5rem);
-  color:var(--gold);
-  text-align:center;
-  z-index:1000;
-  pointer-events:none;
-  letter-spacing:3px;
-  text-shadow:0 0 20px rgba(255,215,0,.5);
-  transition:transform .25s cubic-bezier(0.175,0.885,0.32,1.275);
+  background:rgba(0,0,0,.93);border:3px solid var(--gold);border-radius:18px;
+  padding:18px 42px;font-family:'Bangers',cursive;
+  font-size:clamp(1.8rem,4.5vw,3rem);color:var(--gold);
+  text-align:center;z-index:1000;pointer-events:none;
+  letter-spacing:3px;text-shadow:0 0 18px rgba(255,215,0,.5);
+  transition:transform .22s cubic-bezier(.175,.885,.32,1.275);
   white-space:nowrap;
 }
 #announcer.show{transform:translate(-50%,-50%) scale(1);}
 
-/* ─── COUNTDOWN ─── */
+/* countdown */
 #countdown-overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.85);
-  display:flex;align-items:center;justify-content:center;
-  z-index:900;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s;
+  position:fixed;inset:0;background:rgba(0,0,0,.85);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;z-index:900;opacity:0;pointer-events:none;transition:opacity .3s;
 }
 #countdown-overlay.show{opacity:1;pointer-events:all;}
 #countdown-num{
-  font-family:'Bangers',cursive;
-  font-size:clamp(8rem,20vw,15rem);
-  color:var(--gold);
-  text-shadow:0 0 60px rgba(255,215,0,.6);
-  line-height:1;
+  font-family:'Bangers',cursive;font-size:clamp(7rem,16vw,13rem);
+  color:var(--gold);text-shadow:0 0 50px rgba(255,215,0,.55);line-height:1;
 }
-@keyframes cd-pop{
-  0%{transform:scale(2);opacity:0;}
-  60%{transform:scale(.9);opacity:1;}
-  100%{transform:scale(1);}
+.cd-tap-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:rgba(0,0,0,.5);border-radius:16px;padding:14px 28px;
+  border:1px solid #333;
 }
-.cd-anim{animation:cd-pop .7s ease-out;}
+.cd-tap-label{font-size:.85rem;color:#888;letter-spacing:1px;}
+.cd-tap-count{font-family:'Bangers',cursive;font-size:3rem;color:var(--gold);line-height:1;}
+.cd-tap-btn{
+  font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:2px;
+  padding:12px 40px;border:none;border-radius:14px;cursor:pointer;
+  transition:transform .05s;
+}
+.cd-tap-btn:active,.cd-tap-btn.pressed{transform:scale(.82);}
+.ka-tap-btn{background:var(--ayya);color:#fff;}
+.sh-tap-btn{background:var(--malli);color:#fff;}
 
-/* ─── CONFETTI ─── */
-.conf{
-  position:fixed;border-radius:2px;
-  animation:conf-fall linear forwards;
-  z-index:999;pointer-events:none;
-}
-@keyframes conf-fall{
-  0%{transform:translateY(-20px) rotate(0);opacity:1;}
-  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
-}
-
-/* ─── MENU SCREEN ─── */
-#menu-screen{gap:24px;}
-.menu-fighters{
-  display:flex;gap:clamp(20px,6vw,60px);
-  justify-content:center;align-items:flex-end;
-}
-.menu-fighter{
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-}
-.menu-avatar{
-  width:clamp(90px,18vw,140px);
-  height:clamp(90px,18vw,140px);
-  border-radius:50%;object-fit:cover;object-position:top;
-  border:4px solid #444;
-  animation:float-menu 3s ease-in-out infinite;
-  box-shadow:0 8px 30px rgba(0,0,0,.5);
-}
-.menu-fighter:first-child .menu-avatar{
-  border-color:var(--ayya);
-  box-shadow:0 8px 30px rgba(108,99,255,.4);
-  animation-delay:0s;
-}
-.menu-fighter:last-child .menu-avatar{
-  border-color:var(--malli);
-  box-shadow:0 8px 30px rgba(255,71,87,.4);
-  animation-delay:-1.5s;
-}
-@keyframes float-menu{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-14px);}
-}
-.menu-name{
-  font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:2px;
-}
-.menu-fighter:first-child .menu-name{color:var(--ayya);}
-.menu-fighter:last-child .menu-name{color:var(--malli);}
-.menu-label{font-size:.75rem;color:#666;letter-spacing:1px;}
-.vs-sword{
-  font-size:clamp(2.5rem,7vw,5rem);
-  align-self:center;
-  filter:drop-shadow(0 0 10px rgba(255,215,0,.5));
-}
-.menu-desc{
-  max-width:520px;text-align:center;
-  background:rgba(255,255,255,.04);border:1px solid #2a2a2a;
-  border-radius:16px;padding:16px 22px;
-  color:#bbb;font-size:.95rem;line-height:1.6;
-}
-.menu-desc strong{color:var(--gold);}
+/* confetti */
+.conf{position:fixed;border-radius:2px;animation:cf linear forwards;z-index:999;pointer-events:none;}
+@keyframes cf{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
 
 footer{
-  position:relative;z-index:2;
-  text-align:center;padding:14px;
-  color:#333;font-size:.78rem;border-top:1px solid #1a1a1a;
+  position:relative;z-index:2;text-align:center;
+  padding:12px;color:#2a2a2a;font-size:.75rem;border-top:1px solid #111;
 }
-footer span{color:#555;}
+footer span{color:#444;}
+
+/* loading spinner */
+.spinner{
+  width:32px;height:32px;border:3px solid #333;border-top-color:var(--gold);
+  border-radius:50%;animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
 
 <header>
   <h1>🥊 KASUN AYYA vs SHAVIN MALLI 🥊</h1>
-  <p>ආААA vs මල්ලී • The Brother Battle of the Century</p>
+  <p>Multiplayer Brother Battle • ආААA vs මල්ලී</p>
 </header>
 
 <div class="scoreboard">
-  <div class="score-card ayya">
-    <div class="sname">👑 KASUN</div>
-    <div class="spts" id="kasun-score">0</div>
-  </div>
-  <div class="vs-text">⚡</div>
-  <div class="score-card malli">
-    <div class="sname">SHAVIN 😈</div>
-    <div class="spts" id="shavin-score">0</div>
-  </div>
+  <div class="sc ka"><div class="sn">👑 KASUN</div><div class="sp" id="kasun-score">0</div></div>
+  <div class="vs-glyph">⚡</div>
+  <div class="sc sh"><div class="sn">SHAVIN 😈</div><div class="sp" id="shavin-score">0</div></div>
+</div>
+
+<div id="conn-bar">
+  <span id="conn-dot"></span><span id="conn-text">Connecting...</span>
 </div>
 
 <div id="arena">
 
-  <!-- ── MENU ── -->
-  <div id="menu-screen" class="screen active">
-    <div class="menu-fighters">
-      <div class="menu-fighter">
-        <img src="img/kasun.png" class="menu-avatar" alt="Kasun"/>
-        <div class="menu-name">KASUN AYYA</div>
-        <div class="menu-label">ආААA • The Bearded Legend</div>
+  <!-- ══ HOME ══ -->
+  <div id="home-screen" class="screen active">
+    <div class="hero-row">
+      <div class="hero-fighter">
+        <img src="img/kasun.png" class="hero-avatar" alt="Kasun"/>
+        <div class="hero-name">KASUN AYYA</div>
+        <div class="hero-label">👑 The Bearded Legend</div>
       </div>
-      <div class="vs-sword">⚔️</div>
-      <div class="menu-fighter">
-        <img src="img/shavin.png" class="menu-avatar" alt="Shavin"/>
-        <div class="menu-name">SHAVIN MALLI</div>
-        <div class="menu-label">මල්ලී • The Specs Warrior</div>
+      <div class="sword-mid">⚔️</div>
+      <div class="hero-fighter">
+        <img src="img/shavin.png" class="hero-avatar" alt="Shavin"/>
+        <div class="hero-name">SHAVIN MALLI</div>
+        <div class="hero-label">😈 The Specs Warrior</div>
       </div>
     </div>
 
-    <div class="menu-desc">
-      <strong>3 epic rounds</strong> of auto-battle chaos! 🔥<br/>
-      Watch them throw punches, dodge, spin-kick and K.O. each other!<br/>
-      <strong>Random winner every fight</strong> — may the algorithm decide! 😂<br/>
-      First to <strong>2 rounds</strong> wins the title of <strong>BEST BROTHER</strong>!
+    <div class="card">
+      <h2>🌐 REAL-TIME BATTLE</h2>
+      <p>Play on <strong>different phones</strong>! One creates a room, shares the link, and you fight each other live! Mash your button during countdown to power up! 💪</p>
     </div>
 
-    <div class="round-dots" id="menu-dots">
-      <div class="r-dot cur" id="dot-0"></div>
-      <div class="r-dot" id="dot-1"></div>
-      <div class="r-dot" id="dot-2"></div>
+    <div class="home-btn-row">
+      <button class="btn btn-gold" style="font-size:1.5rem;padding:14px 50px;width:100%;" onclick="showCreateFlow()">
+        ⚔️ CREATE BATTLE ROOM
+      </button>
+      <button class="btn btn-primary" style="width:100%;" onclick="showJoinFlow()">
+        🔗 JOIN WITH CODE
+      </button>
+      <button class="btn btn-ghost" onclick="startSolo()">
+        🤖 Solo Fight (vs Algorithm)
+      </button>
     </div>
-
-    <button class="btn-fight" onclick="startGame()">🥊 LET'S FIGHT!</button>
   </div>
 
-  <!-- ── FIGHT SCREEN ── -->
+  <!-- ══ CREATE ══ -->
+  <div id="create-screen" class="screen">
+    <div class="card">
+      <h2>👤 PICK YOUR FIGHTER</h2>
+      <p>Who are you in this battle?</p>
+    </div>
+
+    <div class="char-pick-row" id="create-char-pick">
+      <div class="char-pick kasun-cp" onclick="pickChar('kasun','create')" id="pick-kasun-create">
+        <img src="img/kasun.png" alt="Kasun"/>
+        <div class="cpn" style="color:var(--ayya)">👑 KASUN AYYA</div>
+        <div class="cpl">The elder bro</div>
+      </div>
+      <div class="char-pick shavin-cp" onclick="pickChar('shavin','create')" id="pick-shavin-create">
+        <img src="img/shavin.png" alt="Shavin"/>
+        <div class="cpn" style="color:var(--malli)">SHAVIN MALLI 😈</div>
+        <div class="cpl">The younger bro</div>
+      </div>
+    </div>
+
+    <button class="btn btn-gold" id="create-go-btn" onclick="createRoom()" disabled style="width:280px;">
+      🚀 CREATE ROOM!
+    </button>
+    <button class="btn btn-ghost btn-sm" onclick="goHome()">← Back</button>
+  </div>
+
+  <!-- ══ WAITING (host) ══ -->
+  <div id="waiting-screen" class="screen">
+    <div class="card">
+      <h2 id="wait-title">⏳ WAITING FOR OPPONENT...</h2>
+      <p id="wait-desc">Share this code or link with your brother!</p>
+    </div>
+
+    <div class="room-code-box">
+      <div class="rc-label">ROOM CODE</div>
+      <div class="rc-code" id="display-code">------</div>
+    </div>
+
+    <div class="share-link" id="share-link" onclick="copyLink()">
+      🔗 tap to copy link
+    </div>
+    <div class="copy-hint" id="copy-hint"></div>
+
+    <div class="spinner" id="wait-spinner"></div>
+    <button class="btn btn-ghost btn-sm" onclick="cancelRoom()">✕ Cancel</button>
+  </div>
+
+  <!-- ══ JOIN ══ -->
+  <div id="join-screen" class="screen">
+    <div class="card">
+      <h2>🔗 JOIN A BATTLE</h2>
+      <p>Enter the 6-digit room code from your brother!</p>
+    </div>
+
+    <div class="char-pick-row" id="join-char-pick">
+      <div class="char-pick kasun-cp" onclick="pickChar('kasun','join')" id="pick-kasun-join">
+        <img src="img/kasun.png" alt="Kasun"/>
+        <div class="cpn" style="color:var(--ayya)">👑 KASUN AYYA</div>
+        <div class="cpl">The elder bro</div>
+      </div>
+      <div class="char-pick shavin-cp" onclick="pickChar('shavin','join')" id="pick-shavin-join">
+        <img src="img/shavin.png" alt="Shavin"/>
+        <div class="cpn" style="color:var(--malli)">SHAVIN MALLI 😈</div>
+        <div class="cpl">The younger bro</div>
+      </div>
+    </div>
+
+    <input class="code-input" id="join-code-input" maxlength="6" placeholder="CODE"
+           oninput="onCodeInput(this)" autocomplete="off" autocorrect="off" spellcheck="false"/>
+
+    <button class="btn btn-danger" id="join-go-btn" onclick="joinRoom()" disabled style="width:280px;">
+      ⚡ JOIN FIGHT!
+    </button>
+    <button class="btn btn-ghost btn-sm" onclick="goHome()">← Back</button>
+    <div id="join-error" style="color:var(--malli);font-size:.85rem;min-height:18px;"></div>
+  </div>
+
+  <!-- ══ LOBBY ══ -->
+  <div id="lobby-screen" class="screen">
+    <div class="card" style="padding:14px 20px;">
+      <h2>🏟️ BATTLE LOBBY</h2>
+      <p id="lobby-msg">Waiting for both players...</p>
+    </div>
+
+    <div class="lobby-players">
+      <div class="lobby-player kasun-lp" id="lobby-kasun">
+        <img src="img/kasun.png" alt="Kasun"/>
+        <div class="lpn">👑 KASUN AYYA</div>
+        <div class="lps waiting" id="kasun-ready-badge">Not ready</div>
+      </div>
+      <div class="lobby-vs">⚔️</div>
+      <div class="lobby-player shavin-lp" id="lobby-shavin">
+        <img src="img/shavin.png" alt="Shavin"/>
+        <div class="lpn">SHAVIN MALLI 😈</div>
+        <div class="lps waiting" id="shavin-ready-badge">Not ready</div>
+      </div>
+    </div>
+
+    <button class="btn-fight" id="ready-btn" onclick="pressReady()">
+      ✅ READY UP!
+    </button>
+    <button class="btn btn-ghost btn-sm" onclick="disconnectAndHome()">← Leave</button>
+  </div>
+
+  <!-- ══ FIGHT ══ -->
   <div id="fight-screen" class="screen">
-
     <div class="fight-stage" id="fight-stage">
-
-      <!-- Kasun (left) -->
       <div class="fighter kasun-f" id="kasun-fighter">
-        <div class="hp-label">HP</div>
+        <div class="hp-lbl">HP</div>
         <div class="hp-wrap"><div class="hp-bar" id="kasun-hp" style="width:100%"></div></div>
-        <div class="avatar-ring">
-          <img src="img/kasun.png" alt="Kasun"/>
-        </div>
+        <div class="avatar-ring"><img src="img/kasun.png" alt="Kasun"/></div>
         <div class="fighter-name">👑 KASUN AYYA</div>
+        <div class="me-badge" id="kasun-me-badge" style="display:none">YOU</div>
       </div>
-
-      <!-- Impact emoji centre -->
       <div id="impact">💥</div>
-
-      <!-- Shavin (right) -->
       <div class="fighter shavin-f" id="shavin-fighter">
-        <div class="hp-label">HP</div>
+        <div class="hp-lbl">HP</div>
         <div class="hp-wrap"><div class="hp-bar" id="shavin-hp" style="width:100%"></div></div>
-        <div class="avatar-ring">
-          <img src="img/shavin.png" alt="Shavin"/>
-        </div>
+        <div class="avatar-ring"><img src="img/shavin.png" alt="Shavin"/></div>
         <div class="fighter-name">SHAVIN MALLI 😈</div>
+        <div class="me-badge" id="shavin-me-badge" style="display:none">YOU</div>
       </div>
+    </div>
 
-    </div><!-- /fight-stage -->
+    <div id="commentary">Ready for the battle of the century! 🥊</div>
 
-    <div id="commentary">Get ready for the fight of the century! 🥊</div>
+    <div id="taunt-bar">
+      <div class="taunt-hint" style="font-size:.72rem;color:#555;width:100%;text-align:center;">Send a taunt to your opponent 👇</div>
+      <button class="taunt-btn" onclick="sendTaunt('😂 HAHA!')">😂</button>
+      <button class="taunt-btn" onclick="sendTaunt('💀 YOU\'RE DEAD!')">💀</button>
+      <button class="taunt-btn" onclick="sendTaunt('👑 I\'M THE KING!')">👑</button>
+      <button class="taunt-btn" onclick="sendTaunt('🔥 TOO EASY!')">🔥</button>
+      <button class="taunt-btn" onclick="sendTaunt('🙏 PLEASE STOP!')">🙏</button>
+      <button class="taunt-btn" onclick="sendTaunt('😤 IS THAT ALL?!')">😤</button>
+      <button class="taunt-btn" onclick="sendTaunt('🤣 LOL!')">🤣</button>
+    </div>
 
-    <div class="round-dots" id="fight-dots">
+    <div class="round-dots">
       <div class="r-dot cur" id="fdot-0"></div>
       <div class="r-dot" id="fdot-1"></div>
       <div class="r-dot" id="fdot-2"></div>
     </div>
 
-    <div class="fight-btn-wrap">
-      <button class="btn-fight" id="fight-btn" onclick="startFight()">🥊 FIGHT!</button>
-    </div>
+    <button class="btn-fight" id="fight-btn" onclick="initiateFight()">🥊 FIGHT!</button>
   </div>
 
-  <!-- ── RESULT SCREEN ── -->
+  <!-- ══ RESULT ══ -->
   <div id="result-screen" class="screen">
     <img id="winner-photo" src="" class="winner-photo" alt="winner"/>
     <div class="winner-title" id="winner-title"></div>
     <div class="winner-roast" id="winner-roast"></div>
     <div class="final-row">
-      <div class="final-card fk">
-        <div class="fcn">👑 KASUN</div>
-        <div class="fcp" id="final-kasun">0</div>
-      </div>
-      <div class="final-card fs">
-        <div class="fcn">SHAVIN 😈</div>
-        <div class="fcp" id="final-shavin">0</div>
-      </div>
+      <div class="fc fk"><div class="fcn">👑 KASUN</div><div class="fcp" id="final-kasun">0</div></div>
+      <div class="fc fs"><div class="fcn">SHAVIN 😈</div><div class="fcp" id="final-shavin">0</div></div>
     </div>
-    <button class="btn btn-primary" onclick="resetGame()">🔄 REMATCH!</button>
-    <button class="btn btn-secondary" onclick="goMenu()">🏠 Menu</button>
+    <button class="btn btn-gold" id="rematch-btn" onclick="requestRematch()" style="width:240px;">🔄 REMATCH!</button>
+    <button class="btn btn-ghost" onclick="disconnectAndHome()">🏠 Leave</button>
   </div>
 
 </div><!-- /arena -->
 
-<!-- ANNOUNCER -->
 <div id="announcer"></div>
 
-<!-- COUNTDOWN -->
-<div id="countdown-overlay"><div id="countdown-num">3</div></div>
+<!-- COUNTDOWN + MASH OVERLAY -->
+<div id="countdown-overlay">
+  <div id="countdown-num">3</div>
+  <div class="cd-tap-wrap" id="cd-tap-wrap" style="display:none">
+    <div class="cd-tap-label">⚡ MASH FOR POWER! ⚡</div>
+    <div class="cd-tap-count" id="cd-tap-count">0</div>
+    <button class="cd-tap-btn" id="cd-tap-btn" ontouchstart="cdTap(event)" onclick="cdTap(event)">
+      💥 TAP! TAP! TAP!
+    </button>
+    <div class="cd-tap-label" id="cd-tap-label" style="color:#666">More taps = more power!</div>
+  </div>
+</div>
 
-<footer>Made with ❤️ for <span>Kasun Ayya & Shavin Malli</span> — by Yehen 😄</footer>
+<footer>Made with ❤️ by <span>Yehen</span> for the brothers 🥊</footer>
 
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  STATE
-// ════════════════════════════════════════════
-let kasunWins = 0, shavinWins = 0;
-let currentRound = 0; // 0-indexed, max 3
-const roundWinners = [null, null, null];
-let fightInProgress = false;
+// ═══════════════════════════════════════════════
+const S = {
+  mode: null,           // 'host' | 'guest' | 'solo'
+  myChar: null,         // 'kasun' | 'shavin'
+  roomCode: null,
+  peer: null,
+  conn: null,
+  isConnected: false,
+  opponentReady: false,
+  myReady: false,
+  kasunScore: 0,
+  shavinScore: 0,
+  currentRound: 0,
+  roundWinners: [null,null,null],
+  fightInProgress: false,
+  isSolo: false,
+  myTaps: 0,
+  opponentTaps: 0,
+  cdInterval: null,
+};
 
-// ════════════════════════════════════════════
+const TAUNTS_RECEIVED = [];
+
+// ═══════════════════════════════════════════════
 //  UTILS
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+const rand = arr => arr[Math.floor(Math.random()*arr.length)];
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   $(id).classList.add('active');
 }
-
-function announce(msg, dur=1800){
-  const el = $('announcer');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), dur);
+function announce(msg, dur=1700){
+  const el=$('announcer');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),dur);
 }
-
-function setCommentary(msg, color='#fff'){
-  const el = $('commentary');
-  el.textContent = msg;
-  el.style.color = color;
+function setCommentary(msg,color='#fff'){
+  $('commentary').textContent=msg;
+  $('commentary').style.color=color;
 }
-
+function showImpact(e){
+  const el=$('impact');el.textContent=e;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),480);
+}
 function confetti(){
-  const colors=['#6c63ff','#ff4757','#ffd700','#22c55e','#f97316','#ec4899','#06b6d4'];
+  const cols=['#6c63ff','#ff4757','#ffd700','#22c55e','#f97316','#ec4899','#06b6d4'];
   for(let i=0;i<90;i++){
     const el=document.createElement('div');
     el.className='conf';
-    el.style.cssText=`left:${Math.random()*100}vw;width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.5+Math.random()*2.5}s;animation-delay:${Math.random()*.8}s;border-radius:${Math.random()>0.5?'50%':'2px'}`;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),4000);
+    el.style.cssText=`left:${Math.random()*100}vw;width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;background:${rand(cols)};animation-duration:${1.5+Math.random()*2.5}s;animation-delay:${Math.random()*.7}s;border-radius:${Math.random()>.5?'50%':'2px'}`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
   }
 }
-
-function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
-
-function updateScore(){
-  $('kasun-score').textContent = kasunWins;
-  $('shavin-score').textContent = shavinWins;
-  $('final-kasun').textContent  = kasunWins;
-  $('final-shavin').textContent  = shavinWins;
+function addAnim(id,cls,dur=550){
+  return new Promise(resolve=>{
+    const el=$(id);
+    el.classList.remove(cls);void el.offsetWidth;
+    el.classList.add(cls);
+    setTimeout(()=>{el.classList.remove(cls);resolve();},dur);
+  });
 }
-
+function setHP(who,pct){$(who+'-hp').style.width=Math.max(0,pct)+'%';}
+function updateScore(){
+  $('kasun-score').textContent=S.kasunScore;
+  $('shavin-score').textContent=S.shavinScore;
+  $('final-kasun').textContent=S.kasunScore;
+  $('final-shavin').textContent=S.shavinScore;
+}
 function updateDots(){
   for(let i=0;i<3;i++){
-    const d=$(`fdot-${i}`), md=$(`dot-${i}`);
-    [d, md].forEach(dot=>{
-      if(!dot) return;
-      dot.className='r-dot';
-      if(roundWinners[i]==='kasun') dot.classList.add('w-kasun');
-      else if(roundWinners[i]==='shavin') dot.classList.add('w-shavin');
-      else if(roundWinners[i]==='tie') dot.classList.add('w-tie');
-      if(i===currentRound && roundWinners[i]===null) dot.classList.add('cur');
+    const d=$(`fdot-${i}`);if(!d)return;
+    d.className='r-dot';
+    if(S.roundWinners[i]==='kasun')d.classList.add('w-kasun');
+    else if(S.roundWinners[i]==='shavin')d.classList.add('w-shavin');
+    else if(S.roundWinners[i]==='tie')d.classList.add('w-tie');
+    if(i===S.currentRound&&S.roundWinners[i]===null)d.classList.add('cur');
+  }
+}
+function setConnStatus(state,text){
+  $('conn-bar').classList.add('show');
+  $('conn-dot').className='';
+  $('conn-dot').classList.add(state);
+  $('conn-text').textContent=text;
+}
+function hideConnBar(){$('conn-bar').classList.remove('show');}
+
+// ═══════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════
+function goHome(){
+  destroyPeer();
+  hideConnBar();
+  resetGameState();
+  $('create-screen').querySelectorAll('.char-pick').forEach(p=>p.classList.remove('selected-kasun','selected-shavin'));
+  $('join-screen').querySelectorAll('.char-pick').forEach(p=>p.classList.remove('selected-kasun','selected-shavin'));
+  $('create-go-btn').disabled=true;
+  $('join-go-btn').disabled=true;
+  $('join-code-input').value='';
+  $('join-error').textContent='';
+  showScreen('home-screen');
+}
+function disconnectAndHome(){ goHome(); }
+function cancelRoom(){ goHome(); }
+
+// character pick
+function pickChar(char, flow){
+  S.myChar = char;
+  const prefix = `pick-`;
+  $(`${prefix}kasun-${flow}`).classList.remove('selected-kasun','selected-shavin');
+  $(`${prefix}shavin-${flow}`).classList.remove('selected-kasun','selected-shavin');
+  $(`${prefix}${char}-${flow}`).classList.add(`selected-${char}`);
+  if(flow==='create') $('create-go-btn').disabled=false;
+  if(flow==='join') checkJoinReady();
+}
+function checkJoinReady(){
+  const code=$('join-code-input').value.trim();
+  $('join-go-btn').disabled=!(S.myChar && code.length===6);
+}
+function onCodeInput(el){
+  el.value=el.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  checkJoinReady();
+}
+
+function showCreateFlow(){ S.myChar=null; showScreen('create-screen'); }
+function showJoinFlow(){
+  S.myChar=null;
+  const urlCode=new URLSearchParams(location.search).get('room');
+  if(urlCode){
+    $('join-code-input').value=urlCode.toUpperCase();
+    // auto-pick Shavin if host likely picked Kasun (can be overridden)
+    pickChar('shavin','join');
+    checkJoinReady();
+  }
+  showScreen('join-screen');
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM CREATION (HOST)
+// ═══════════════════════════════════════════════
+function createRoom(){
+  S.mode='host';
+  const code=Math.random().toString(36).substr(2,6).toUpperCase();
+  S.roomCode=code;
+  const peerId='aymg-'+code.toLowerCase();
+
+  showScreen('waiting-screen');
+  $('display-code').textContent=code;
+  const link=location.origin+location.pathname+'?room='+code;
+  $('share-link').textContent='🔗 '+link;
+  $('wait-title').textContent='⏳ WAITING FOR OPPONENT...';
+  setConnStatus('waiting','Waiting for opponent to join...');
+
+  // show me badge
+  $(`${S.myChar}-me-badge`).style.display='block';
+
+  destroyPeer();
+  S.peer = new Peer(peerId);
+  S.peer.on('open', ()=>{
+    console.log('Host peer open:', peerId);
+  });
+  S.peer.on('error', e=>{
+    if(e.type==='unavailable-id'){
+      // code collision — try new code
+      destroyPeer();
+      createRoom();
+    } else {
+      setConnStatus('error','Connection error. Try again.');
+      $('wait-title').textContent='❌ ERROR';
+    }
+  });
+  S.peer.on('connection', conn=>{
+    S.conn=conn;
+    setupConn(conn);
+    conn.on('open', ()=>{
+      S.isConnected=true;
+      setConnStatus('connected','🟢 Opponent connected!');
+      // send welcome
+      send({t:'welcome', hostChar:S.myChar, code:S.roomCode});
+      enterLobby();
     });
+  });
+}
+
+function copyLink(){
+  const code=S.roomCode;
+  const link=location.origin+location.pathname+'?room='+code;
+  navigator.clipboard.writeText(link).then(()=>{
+    $('copy-hint').textContent='✅ Copied!';
+    setTimeout(()=>$('copy-hint').textContent='',2000);
+  }).catch(()=>{
+    $('copy-hint').textContent='Copy manually: ?room='+code;
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  JOINING (GUEST)
+// ═══════════════════════════════════════════════
+function joinRoom(){
+  const code=$('join-code-input').value.trim().toUpperCase();
+  if(code.length!==6){$('join-error').textContent='Enter full 6-digit code';return;}
+  S.mode='guest';S.roomCode=code;
+  const peerId='aymg-'+code.toLowerCase();
+  $('join-error').textContent='';
+
+  setConnStatus('waiting','Connecting to room '+code+'...');
+  $(`${S.myChar}-me-badge`).style.display='block';
+
+  destroyPeer();
+  S.peer=new Peer();
+  S.peer.on('open', ()=>{
+    S.conn=S.peer.connect(peerId,{reliable:true});
+    setupConn(S.conn);
+    S.conn.on('open',()=>{
+      S.isConnected=true;
+      setConnStatus('connected','🟢 Connected!');
+      send({t:'guest_joined', guestChar:S.myChar});
+    });
+    S.conn.on('error',()=>{
+      $('join-error').textContent='Could not connect. Check code and try again.';
+      setConnStatus('error','Connection failed');
+    });
+  });
+  S.peer.on('error',e=>{
+    $('join-error').textContent='Error: '+e.type+'. Try again.';
+    setConnStatus('error','Error');
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  PEER MESSAGING
+// ═══════════════════════════════════════════════
+function send(data){
+  if(S.conn && S.conn.open) S.conn.send(JSON.stringify(data));
+}
+function setupConn(conn){
+  conn.on('data', raw=>{
+    try{ handleMsg(JSON.parse(raw)); }catch(e){}
+  });
+  conn.on('close',()=>{
+    S.isConnected=false;
+    setConnStatus('error','⚠️ Opponent disconnected');
+    if($('fight-screen').classList.contains('active')){
+      setCommentary('⚠️ Opponent disconnected... 😢','#ff4757');
+    }
+  });
+}
+
+function handleMsg(msg){
+  switch(msg.t){
+    case 'welcome':
+      // host told us their char; we're the guest
+      enterLobby();
+      break;
+    case 'guest_joined':
+      // host receives this
+      break;
+    case 'ready':
+      S.opponentReady=true;
+      markReady(msg.char);
+      checkBothReady();
+      break;
+    case 'fight_start':
+      // guest receives fight params from host
+      startFightAnimation(msg.winner, msg.kasunTaps, msg.shavinTaps);
+      break;
+    case 'taunt':
+      showReceivedTaunt(msg.text);
+      break;
+    case 'rematch':
+      handleRematch();
+      break;
+    case 'tap_update':
+      // live tap update during countdown
+      if(msg.char==='kasun') S.opponentTaps = (msg.char!==S.myChar) ? msg.count : S.opponentTaps;
+      if(msg.char==='shavin') S.opponentTaps = (msg.char!==S.myChar) ? msg.count : S.opponentTaps;
+      // update opponent display
+      updateCdTapDisplay();
+      break;
   }
 }
 
-function showImpact(emoji){
-  const el=$('impact');
-  el.textContent=emoji;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),500);
+// ═══════════════════════════════════════════════
+//  LOBBY
+// ═══════════════════════════════════════════════
+function enterLobby(){
+  resetFighters();
+  resetGameState();
+  updateScore();updateDots();
+  showScreen('lobby-screen');
+  $('lobby-msg').textContent='Both players connected! Press Ready to fight!';
+  // highlight connected players
+  $('lobby-kasun').classList.add('connected');
+  $('lobby-shavin').classList.add('connected');
+  $('kasun-ready-badge').textContent='Not ready';
+  $('kasun-ready-badge').className='lps waiting';
+  $('shavin-ready-badge').textContent='Not ready';
+  $('shavin-ready-badge').className='lps waiting';
+  $('ready-btn').textContent='✅ READY UP!';
+  $('ready-btn').disabled=false;
 }
 
-function addAnim(fighterId, cls, dur=600){
-  return new Promise(resolve=>{
-    const el=$(fighterId);
-    el.classList.remove(cls);
-    void el.offsetWidth;
-    el.classList.add(cls);
-    setTimeout(()=>{ el.classList.remove(cls); resolve(); }, dur);
-  });
+function pressReady(){
+  S.myReady=true;
+  markReady(S.myChar);
+  send({t:'ready', char:S.myChar});
+  $('ready-btn').disabled=true;
+  $('ready-btn').textContent='Waiting for opponent...';
+  checkBothReady();
 }
 
-function setHP(who, pct){
-  const bar = $(`${who}-hp`);
-  bar.style.width = Math.max(0, pct)+'%';
+function markReady(char){
+  const badge=$(char+'-ready-badge');
+  badge.textContent='✅ READY!';
+  badge.className='lps ready';
 }
 
-// ════════════════════════════════════════════
-//  COUNTDOWN
-// ════════════════════════════════════════════
-function showCountdown(){
-  return new Promise(resolve=>{
-    const overlay=$('countdown-overlay'), num=$('countdown-num');
-    overlay.classList.add('show');
-    let c=3;
-    num.textContent=c;
-    num.classList.add('cd-anim');
-    const iv=setInterval(()=>{
-      c--;
-      if(c>0){
-        num.classList.remove('cd-anim');
-        void num.offsetWidth;
-        num.classList.add('cd-anim');
-        num.textContent=c;
-      } else {
-        clearInterval(iv);
-        num.classList.remove('cd-anim');
-        void num.offsetWidth;
-        num.classList.add('cd-anim');
-        num.textContent='FIGHT!';
-        num.style.fontSize='clamp(4rem,10vw,7rem)';
-        setTimeout(()=>{
-          overlay.classList.remove('show');
-          num.style.fontSize='';
-          resolve();
-        },900);
+function checkBothReady(){
+  if(S.myReady && S.opponentReady){
+    setTimeout(()=>{
+      showScreen('fight-screen');
+      $('taunt-bar').classList.add('show');
+      $('fight-btn').textContent='🥊 FIGHT!';
+      $('fight-btn').disabled=false;
+      setCommentary('Both ready! HOST presses FIGHT to start! 🥊');
+      // Only host can initiate fight
+      if(S.mode==='guest'){
+        $('fight-btn').disabled=true;
+        $('fight-btn').textContent='⏳ Waiting for host...';
+        setCommentary('Waiting for Kasun (host) to start the fight... 😤');
       }
-    },900);
-  });
+      // show "YOU" badge
+      $(`${S.myChar}-me-badge`).style.display='block';
+    },600);
+  }
 }
 
-// ════════════════════════════════════════════
-//  COMMENTARY LINES
-// ════════════════════════════════════════════
-const lines = {
-  kasunPunch:[
-    "Kasun swings with his BEARD POWER! 🧔💪",
-    "Kasun throws a UNCLE-STRENGTH punch! 💥",
-    "Age & Experience COMBO! Kasun goes in! 🥊",
-    "Kasun lands a dad-joke punch — confusing but effective! 😂",
-    "KASUN FIRES A BEARD-GUIDED MISSILE! 🚀",
-  ],
-  shavinPunch:[
-    "Shavin hits with the glasses reflection technique! 🕶️💥",
-    "SHAVIN UNLEASHES THE BIRTHDAY BOY ENERGY! 🎂",
-    "Shavin's blue shirt blinds Kasun! 💙⚡",
-    "Shavin says: 'Respect the Malli!' and PUNCHES! 😈",
-    "Shavin hits back — youth is WEAPON! 🔥",
-  ],
-  kasunDodge:[
-    "Kasun dodges — beard acts like a sensor! 🧔",
-    "Kasun swerves! Experience > youth! 😏",
-    "Kasun rolls out of the way elegantly 💅",
-  ],
-  shavinDodge:[
-    "Shavin uses glasses to deflect the attack! 🕶️",
-    "Shavin backflips — wait, he can't, but he tried! 😂",
-    "Shavin ducks under! Malli speed activated! ⚡",
-  ],
-  kasunSpecial:[
-    "KASUN ACTIVATES AYYA MODE! BEARD SPINNING ATTACK! 🌪️🧔",
-    "KASUN'S SECRET MOVE: THE UNCLE UPPERCUT! 👊💫",
-    "KASUN GOES FULL BEAST MODE! 🔥🔥🔥",
-  ],
-  shavinSpecial:[
-    "SHAVIN CHARGES THE BIRTHDAY BLAST! 🎂💥",
-    "SHAVIN'S GLASSES BEAM — UNSTOPPABLE LASER! 🕶️⚡",
-    "SHAVIN UNLEASHES: THE MALLI TORNADO! 🌪️😈",
-  ],
-  tie:["MUTUAL DESTRUCTION! They're too evenly matched! 😂🤝"],
-};
-
-function randLine(key){ return lines[key][Math.floor(Math.random()*lines[key].length)]; }
-
-// ════════════════════════════════════════════
-//  FIGHT SEQUENCE
-// ════════════════════════════════════════════
-const FIGHT_SEQUENCES = [
-  // winner: kasun
-  async ()=>{
-    await sleep(200);
-    setCommentary(randLine('kasunPunch'),'#a78bfa');
-    addAnim('kasun-fighter','anim-punch-r'); await sleep(300);
-    showImpact('👊'); addAnim('shavin-fighter','anim-hit'); setHP('shavin',65); await sleep(600);
-
-    setCommentary(randLine('shavinPunch'),'#fb7185');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💥'); addAnim('kasun-fighter','anim-hit'); setHP('kasun',70); await sleep(600);
-
-    setCommentary(randLine('kasunDodge'),'#6ee7b7');
-    addAnim('kasun-fighter','anim-dodge-r'); await sleep(500);
-
-    setCommentary(randLine('kasunSpecial'),'#fbbf24');
-    addAnim('kasun-fighter','anim-spin'); await sleep(300);
-    showImpact('🌟'); addAnim('shavin-fighter','anim-hit'); setHP('shavin',20); await sleep(700);
-
-    setCommentary("FINAL BLOW! KASUN SENDS SHAVIN TO ANOTHER DIMENSION! 💀",'#ffd700');
-    addAnim('kasun-fighter','anim-punch-r'); await sleep(300);
-    showImpact('💥'); await sleep(200);
-    setHP('shavin',0);
-    await addAnim('shavin-fighter','anim-ko',1000);
-    await sleep(400);
-    return 'kasun';
-  },
-  // winner: shavin
-  async ()=>{
-    await sleep(200);
-    setCommentary(randLine('shavinPunch'),'#fb7185');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💥'); addAnim('kasun-fighter','anim-hit'); setHP('kasun',60); await sleep(600);
-
-    setCommentary(randLine('kasunPunch'),'#a78bfa');
-    addAnim('kasun-fighter','anim-punch-r'); await sleep(300);
-    showImpact('👊'); addAnim('shavin-fighter','anim-hit'); setHP('shavin',75); await sleep(600);
-
-    setCommentary(randLine('shavinDodge'),'#6ee7b7');
-    addAnim('shavin-fighter','anim-dodge-l'); await sleep(500);
-
-    setCommentary(randLine('shavinSpecial'),'#fbbf24');
-    addAnim('shavin-fighter','anim-spin'); await sleep(300);
-    showImpact('🌟'); addAnim('kasun-fighter','anim-hit'); setHP('kasun',15); await sleep(700);
-
-    setCommentary("SHAVIN FINISHES IT! THE MALLI WINS! IMPOSSIBLE! 😱",'#ffd700');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💥'); await sleep(200);
-    setHP('kasun',0);
-    await addAnim('kasun-fighter','anim-ko',1000);
-    await sleep(400);
-    return 'shavin';
-  },
-  // winner: kasun (variant 2)
-  async ()=>{
-    setCommentary("Both charge at each other at full speed! 🏃💨",'#fff');
-    addAnim('kasun-fighter','anim-punch-r');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💢'); setHP('kasun',50); setHP('shavin',50); await sleep(700);
-
-    setCommentary(randLine('kasunSpecial'),'#fbbf24');
-    addAnim('kasun-fighter','anim-spin'); await sleep(400);
-    showImpact('⭐'); addAnim('shavin-fighter','anim-hit'); setHP('shavin',25); await sleep(700);
-
-    setCommentary(randLine('shavinPunch'),'#fb7185');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💥'); addAnim('kasun-fighter','anim-hit'); setHP('kasun',35); await sleep(600);
-
-    setCommentary("Kasun takes the hit and SMILES. Beard of steel! 😤🧔",'#a78bfa');
-    addAnim('kasun-fighter','anim-punch-r'); await sleep(300);
-    showImpact('👊'); setHP('shavin',0);
-    await addAnim('shavin-fighter','anim-ko',1000);
-    await sleep(400);
-    return 'kasun';
-  },
-  // winner: shavin (variant 2)
-  async ()=>{
-    setCommentary("Kasun goes for a big opening move! 🥊",'#a78bfa');
-    addAnim('kasun-fighter','anim-punch-r'); await sleep(300);
-    showImpact('💨'); setCommentary(randLine('shavinDodge'),'#6ee7b7');
-    addAnim('shavin-fighter','anim-dodge-l'); await sleep(600);
-
-    setCommentary(randLine('shavinSpecial'),'#fbbf24');
-    addAnim('shavin-fighter','anim-spin'); await sleep(400);
-    showImpact('🌟'); addAnim('kasun-fighter','anim-hit'); setHP('kasun',30); await sleep(700);
-
-    setCommentary("Kasun stumbles! Shavin smells VICTORY! 🏆",'#ffd700');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💥'); addAnim('kasun-fighter','anim-hit'); setHP('kasun',10); await sleep(600);
-
-    setCommentary("FINISHING BLOW FROM SHAVIN! MALLI IS UNSTOPPABLE! 🔥",'#fb7185');
-    addAnim('shavin-fighter','anim-punch-l'); await sleep(300);
-    showImpact('💥'); setHP('kasun',0);
-    await addAnim('kasun-fighter','anim-ko',1000);
-    await sleep(400);
-    return 'shavin';
-  },
-];
-
-// ════════════════════════════════════════════
-//  GAME FLOW
-// ════════════════════════════════════════════
-function startGame(){
-  kasunWins=0; shavinWins=0; currentRound=0;
-  roundWinners.fill(null);
-  updateScore(); updateDots();
+// ═══════════════════════════════════════════════
+//  SOLO MODE
+// ═══════════════════════════════════════════════
+function startSolo(){
+  S.isSolo=true;S.mode='solo';S.myChar='kasun';
+  $('kasun-me-badge').style.display='block';
+  resetGameState();updateScore();updateDots();
   resetFighters();
   showScreen('fight-screen');
-  setCommentary('Press FIGHT to start Round 1! 🥊');
+  $('taunt-bar').classList.remove('show');
+  $('fight-btn').textContent='🥊 FIGHT!';$('fight-btn').disabled=false;
+  setCommentary('Solo mode — press FIGHT to watch! 🎮');
 }
 
-function resetFighters(){
-  setHP('kasun',100); setHP('shavin',100);
-  ['kasun-fighter','shavin-fighter'].forEach(id=>{
-    const el=$(id);
-    el.className = el.className.replace(/anim-\S+/g,'').trim();
-    // rebuild clean classes
-    $(id).className = id==='kasun-fighter' ? 'fighter kasun-f' : 'fighter shavin-f';
+// ═══════════════════════════════════════════════
+//  COUNTDOWN + MASH PHASE
+// ═══════════════════════════════════════════════
+let cdTapCount=0;
+
+function showCountdownWithMash(){
+  return new Promise(async resolve=>{
+    const overlay=$('countdown-overlay'), num=$('countdown-num');
+    const tapWrap=$('cd-tap-wrap'), tapCountEl=$('cd-tap-count');
+    const tapBtn=$('cd-tap-btn');
+
+    // style tap btn for my character
+    tapBtn.className='cd-tap-btn '+(S.myChar==='kasun'?'ka-tap-btn':'sh-tap-btn');
+
+    cdTapCount=0;S.myTaps=0;S.opponentTaps=0;
+    overlay.classList.add('show');
+    tapWrap.style.display='none';
+    num.textContent='3';
+
+    await sleep(100);
+
+    // count 3→2→1 then show mash phase
+    for(let c=3;c>=1;c--){
+      num.textContent=c;
+      if(c===1){
+        // show mash button during "1" second
+        tapWrap.style.display='flex';
+        tapCountEl.textContent='0';
+      }
+      await sleep(900);
+    }
+    // FIGHT moment
+    tapWrap.style.display='none';
+    num.textContent='FIGHT!';
+    num.style.fontSize='clamp(4rem,9vw,6rem)';
+
+    // report my final tap count
+    S.myTaps=cdTapCount;
+    send({t:'tap_update', char:S.myChar, count:cdTapCount, final:true});
+
+    await sleep(800);
+    overlay.classList.remove('show');
+    num.style.fontSize='';
+    resolve(cdTapCount);
   });
 }
 
-async function startFight(){
-  if(fightInProgress) return;
-  fightInProgress=true;
+function cdTap(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  cdTapCount++;
+  $('cd-tap-count').textContent=cdTapCount;
+  S.myTaps=cdTapCount;
+  send({t:'tap_update', char:S.myChar, count:cdTapCount});
+  // animate button
+  const btn=$('cd-tap-btn');
+  btn.classList.add('pressed');
+  setTimeout(()=>btn.classList.remove('pressed'),70);
+}
+
+function updateCdTapDisplay(){
+  // could show opponent tap count too if desired
+}
+
+// ═══════════════════════════════════════════════
+//  FIGHT INITIATION
+// ═══════════════════════════════════════════════
+async function initiateFight(){
+  if(S.fightInProgress)return;
+  if(S.mode==='guest')return; // only host initiates
+  S.fightInProgress=true;
   $('fight-btn').disabled=true;
-
+  $('taunt-bar').classList.remove('show');
   resetFighters();
-  await showCountdown();
-  announce('ROUND '+(currentRound+1)+'!', 900);
-  await sleep(1000);
 
-  // pick a random sequence with slight weighting for drama
-  const seq = FIGHT_SEQUENCES[Math.floor(Math.random()*FIGHT_SEQUENCES.length)];
-  const winner = await seq();
+  await showCountdownWithMash();
 
-  // celebrate winner
+  // host decides winner based on taps
+  let kasunTaps = S.myChar==='kasun' ? S.myTaps : S.opponentTaps;
+  let shavinTaps= S.myChar==='shavin'? S.myTaps : S.opponentTaps;
+  const winner = decideWinner(kasunTaps, shavinTaps);
+
+  // send to guest
+  send({t:'fight_start', winner, kasunTaps, shavinTaps});
+
+  await startFightAnimation(winner, kasunTaps, shavinTaps);
+}
+
+function decideWinner(kasunTaps, shavinTaps){
+  // weighted random based on taps
+  const total=(kasunTaps+shavinTaps)||1;
+  const kasunWeight = 0.3 + (kasunTaps/total)*0.4; // 30-70% range
+  return Math.random()<kasunWeight ? 'kasun' : 'shavin';
+}
+
+// ═══════════════════════════════════════════════
+//  FIGHT ANIMATION ENGINE
+// ═══════════════════════════════════════════════
+const LINES={
+  kPunch:[
+    "Kasun fires a BEARD-GUIDED punch! 🧔💥",
+    "KASUN UNCLE-STRENGTH COMBO! 💪",
+    "Age and experience SMASHES through! 👊",
+    "Kasun's beard charges the hit! 🧔⚡",
+  ],
+  sPunch:[
+    "Shavin uses the BIRTHDAY ENERGY BLAST! 🎂💥",
+    "Shavin's glasses REFLECT and AMPLIFY! 🕶️⚡",
+    "MALLI POWER ACTIVATED! 😈🔥",
+    "Shavin hits back — youth is UNSTOPPABLE! 💨",
+  ],
+  kDodge:[
+    "Kasun's beard senses the attack and dodges! 🧔",
+    "EXPERIENCE > YOUTH — Kasun sidesteps! 😏",
+    "Kasun rolls gracefully... almost. 💅",
+  ],
+  sDodge:[
+    "Shavin's glasses deflect the blast! 🕶️",
+    "MALLI SPEED — Shavin is already behind you! ⚡",
+    "Shavin ducks under like a pro! 😎",
+  ],
+  kSpecial:[
+    "KASUN ACTIVATES: THE AYYA AURA! 🌟🧔",
+    "BEARD TORNADO SPECIAL ATTACK! 🌪️",
+    "KASUN GOES FULL UNCLE MODE! 💥👑",
+  ],
+  sSpecial:[
+    "SHAVIN CHARGES THE MALLI CANNON! 🔥😈",
+    "GLASSES BEAM — MAXIMUM POWER! 🕶️💀",
+    "SHAVIN UNLEASHES BIRTHDAY RAGE! 🎂⚡",
+  ],
+};
+
+async function startFightAnimation(winner, kasunTaps, shavinTaps){
+  if(winner==='guest_wait')return; // guest waiting, do nothing
+
+  announce('ROUND '+(S.currentRound+1)+'! FIGHT!', 1000);
+
+  // Show tap power
+  const kasunPower=Math.min(kasunTaps||0, 99);
+  const shavinPower=Math.min(shavinTaps||0,99);
+  setCommentary(`⚡ Kasun powered up: ${kasunPower} taps | Shavin powered up: ${shavinPower} taps!`,'#ffd700');
+  await sleep(1200);
+
+  // Run fight based on winner
   if(winner==='kasun'){
-    addAnim('kasun-fighter','anim-win', 2000);
-    announce('KASUN AYYA WINS! 👑', 2000);
-    setCommentary('KASUN WINS THE ROUND! Beard power is REAL! 🧔🔥','#a78bfa');
-    kasunWins++;
-    roundWinners[currentRound]='kasun';
-    confetti();
+    await runKasunWins();
   } else {
-    addAnim('shavin-fighter','anim-win', 2000);
-    announce('SHAVIN MALLI WINS! 😈', 2000);
-    setCommentary('SHAVIN WINS THE ROUND! Malli uprising! 🔥😈','#fb7185');
-    shavinWins++;
-    roundWinners[currentRound]='shavin';
-    confetti();
+    await runShavinWins();
   }
 
-  updateScore(); updateDots();
-  currentRound++;
-  await sleep(2200);
+  // award round
+  S.roundWinners[S.currentRound]=winner;
+  if(winner==='kasun'){S.kasunScore++;confetti();}
+  else{S.shavinScore++;confetti();}
+  updateScore();updateDots();
 
-  // check if someone has 2 wins
-  if(kasunWins>=2 || shavinWins>=2 || currentRound>=3){
-    await sleep(400);
+  const winnerName=winner==='kasun'?'👑 KASUN AYYA':'SHAVIN MALLI 😈';
+  announce(winnerName+' WINS THE ROUND!',2000);
+  setCommentary(winnerName+' wins Round '+(S.currentRound+1)+'! 🔥',winner==='kasun'?'#a78bfa':'#fb7185');
+
+  // win dance
+  addAnim(winner+'-fighter','anim-win',2500);
+
+  S.currentRound++;
+  await sleep(2400);
+
+  if(S.kasunScore>=2||S.shavinScore>=2||S.currentRound>=3){
     showResult();
   } else {
-    setCommentary(`Round ${currentRound+1} coming up! Hit FIGHT! 🥊`);
-    $('fight-btn').textContent = `🥊 ROUND ${currentRound+1}!`;
-    $('fight-btn').disabled=false;
-    fightInProgress=false;
+    S.fightInProgress=false;
+    $('taunt-bar').classList.add('show');
+    setCommentary('Round '+(S.currentRound+1)+'! Host press FIGHT! 🥊');
+    if(S.mode==='host'||S.isSolo){
+      $('fight-btn').textContent='🥊 ROUND '+(S.currentRound+1)+'!';
+      $('fight-btn').disabled=false;
+    } else {
+      $('fight-btn').textContent='⏳ Waiting for host...';
+      $('fight-btn').disabled=true;
+    }
   }
 }
 
-// ════════════════════════════════════════════
+async function runKasunWins(){
+  setCommentary(rand(LINES.kPunch),'#a78bfa');
+  addAnim('kasun-fighter','anim-pr');await sleep(300);
+  showImpact('👊');addAnim('shavin-fighter','anim-hit');setHP('shavin',65);await sleep(600);
+
+  setCommentary(rand(LINES.sPunch),'#fb7185');
+  addAnim('shavin-fighter','anim-pl');await sleep(300);
+  showImpact('💥');addAnim('kasun-fighter','anim-hit');setHP('kasun',72);await sleep(600);
+
+  setCommentary(rand(LINES.kDodge),'#6ee7b7');
+  addAnim('kasun-fighter','anim-dr');await sleep(500);
+
+  setCommentary(rand(LINES.kSpecial),'#fbbf24');
+  addAnim('kasun-fighter','anim-spin');await sleep(400);
+  showImpact('🌟');addAnim('shavin-fighter','anim-hit');setHP('shavin',18);await sleep(800);
+
+  setCommentary("KASUN DELIVERS THE FINAL BEARD-POWERED BLOW! 💀",'#ffd700');
+  addAnim('kasun-fighter','anim-pr');await sleep(300);
+  showImpact('💥');setHP('shavin',0);
+  await addAnim('shavin-fighter','anim-ko',900);await sleep(300);
+}
+
+async function runShavinWins(){
+  setCommentary(rand(LINES.sPunch),'#fb7185');
+  addAnim('shavin-fighter','anim-pl');await sleep(300);
+  showImpact('💥');addAnim('kasun-fighter','anim-hit');setHP('kasun',60);await sleep(600);
+
+  setCommentary(rand(LINES.kPunch),'#a78bfa');
+  addAnim('kasun-fighter','anim-pr');await sleep(300);
+  showImpact('👊');addAnim('shavin-fighter','anim-hit');setHP('shavin',74);await sleep(600);
+
+  setCommentary(rand(LINES.sDodge),'#6ee7b7');
+  addAnim('shavin-fighter','anim-dl');await sleep(500);
+
+  setCommentary(rand(LINES.sSpecial),'#fbbf24');
+  addAnim('shavin-fighter','anim-spin');await sleep(400);
+  showImpact('🌟');addAnim('kasun-fighter','anim-hit');setHP('kasun',16);await sleep(800);
+
+  setCommentary("SHAVIN ENDS IT! MALLI REBELLION SUCCESSFUL! 💀",'#ffd700');
+  addAnim('shavin-fighter','anim-pl');await sleep(300);
+  showImpact('💥');setHP('kasun',0);
+  await addAnim('kasun-fighter','anim-ko',900);await sleep(300);
+}
+
+// ═══════════════════════════════════════════════
+//  SOLO FIGHT
+// ═══════════════════════════════════════════════
+async function initiateSoloFight(){
+  if(S.fightInProgress)return;
+  S.fightInProgress=true;
+  $('fight-btn').disabled=true;
+  resetFighters();
+
+  await showCountdownWithMash();
+
+  const winner=Math.random()<0.5?'kasun':'shavin';
+  await startFightAnimation(winner, S.myTaps, 0);
+}
+
+// override initiateFight to handle solo
+const _origInitiate=initiateFight;
+window.initiateFight=function(){
+  if(S.isSolo) initiateSoloFight();
+  else _origInitiate();
+};
+
+// ═══════════════════════════════════════════════
+//  TAUNTS
+// ═══════════════════════════════════════════════
+function sendTaunt(text){
+  send({t:'taunt',text});
+  // show self taunt
+  spawnBubble(text,true);
+}
+function showReceivedTaunt(text){
+  spawnBubble(text,false);
+}
+function spawnBubble(text,isMine){
+  const el=document.createElement('div');
+  el.className='speech-bubble';
+  el.textContent=(isMine?'You: ':' Opp: ')+text;
+  // position near my fighter or opponent
+  const fighter=$(isMine?S.myChar+'-fighter':(S.myChar==='kasun'?'shavin-fighter':'kasun-fighter'));
+  const rect=fighter.getBoundingClientRect();
+  el.style.left=rect.left+'px';
+  el.style.top=rect.top+'px';
+  el.style.borderColor=isMine?(S.myChar==='kasun'?'var(--ayya)':'var(--malli)'):'var(--gold)';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),2600);
+}
+
+// ═══════════════════════════════════════════════
 //  RESULT
-// ════════════════════════════════════════════
-const kasunRoasts=[
-  "AYYA DOMINATES! Age, wisdom, and beard = UNBEATABLE combo! 🧔👑",
-  "The elder brother proves: experience always beats youth! 💪😤",
-  "Kasun Ayya retains his UNDISPUTED champion title! Crown stays! 👑🏆",
-  "Shavin tried his best. Kasun had breakfast. Kasun wins. 😂",
-];
-const shavinRoasts=[
-  "THE UPSET OF THE CENTURY! Shavin sends Ayya to the shadow realm! 😱💀",
-  "Shavin says: 'Who's the BEST brother now, Ayya?' 😈🔥",
-  "MALLI REBELLION SUCCESSFUL! The throne is OVERTHROWN! 🏆",
-  "Shavin beats Kasun. Kasun needs to hit the gym. 😂💪",
-];
-const tieRoasts=[
-  "IT'S A DRAW! You're literally the same person. 😂🤝",
-  "Nobody wins. Yehen wins. 😂❤️",
-  "Equal! Maybe Kaveesha would've beaten you both anyway 😂",
-];
+// ═══════════════════════════════════════════════
+const ROASTS={
+  kasun:[
+    "AYYA DOMINATES! Beard + age + breakfast = UNBEATABLE! 🧔👑",
+    "Kasun proves: experience ALWAYS beats youth! 💪",
+    "Shavin tried. Kasun had extra rice. Kasun wins. 😂🍚",
+    "The elder brother retains his UNDISPUTED crown! 👑",
+  ],
+  shavin:[
+    "THE MALLI UPRISING! Kasun sent to another dimension! 😱💀",
+    "Shavin asks: 'Who's the BEST brother now, Ayya?!' 😈🔥",
+    "Little bro BIGGER energy! Kasun needs to hit the gym! 😂💪",
+    "GLASSES > BEARD. This is science now. 🕶️⚡",
+  ],
+  tie:[
+    "DRAW! You are literally the same person. 🤝😂",
+    "Nobody wins. Yehen wins. 😂❤️",
+    "Even the algorithm can't decide who's worse! 🤣",
+  ],
+};
 
 function showResult(){
   showScreen('result-screen');
-  $('final-kasun').textContent = kasunWins;
-  $('final-shavin').textContent = shavinWins;
-  const wt=$('winner-title'), wr=$('winner-roast'), wp=$('winner-photo');
-  if(kasunWins>shavinWins){
+  $('taunt-bar').classList.remove('show');
+  const wp=$('winner-photo'),wt=$('winner-title'),wr=$('winner-roast');
+  if(S.kasunScore>S.shavinScore){
     wp.src='img/kasun.png';
     wt.textContent='👑 KASUN AYYA WINS! 👑';
     wt.style.color='var(--ayya)';
-    wr.textContent = kasunRoasts[Math.floor(Math.random()*kasunRoasts.length)];
-    confetti(); confetti();
-  } else if(shavinWins>kasunWins){
+    wr.textContent=rand(ROASTS.kasun);
+    confetti();confetti();
+  } else if(S.shavinScore>S.kasunScore){
     wp.src='img/shavin.png';
     wt.textContent='😈 SHAVIN MALLI WINS! 😈';
     wt.style.color='var(--malli)';
-    wr.textContent = shavinRoasts[Math.floor(Math.random()*shavinRoasts.length)];
-    confetti(); confetti();
+    wr.textContent=rand(ROASTS.shavin);
+    confetti();confetti();
   } else {
-    wp.src='img/kasun.png';
-    wt.textContent="🤝 IT'S A TIE! 🤝";
+    wp.src=Math.random()<.5?'img/kasun.png':'img/shavin.png';
+    wt.textContent="🤝 IT'S A DRAW! 🤝";
     wt.style.color='var(--gold)';
-    wr.textContent = tieRoasts[Math.floor(Math.random()*tieRoasts.length)];
+    wr.textContent=rand(ROASTS.tie);
+  }
+  updateScore();
+
+  // rematch
+  if(S.mode==='guest'){
+    $('rematch-btn').textContent='⏳ Ask host to rematch';
+    $('rematch-btn').onclick=()=>send({t:'rematch'});
   }
 }
 
-function resetGame(){
-  kasunWins=0; shavinWins=0; currentRound=0;
-  roundWinners.fill(null);
-  fightInProgress=false;
-  updateScore(); updateDots();
+function requestRematch(){
+  if(S.isSolo){ soloRematch(); return; }
+  send({t:'rematch'});
+  handleRematch();
+}
+function handleRematch(){
+  S.kasunScore=0;S.shavinScore=0;S.currentRound=0;
+  S.roundWinners=[null,null,null];
+  S.fightInProgress=false;
+  updateScore();updateDots();
   resetFighters();
+  $('taunt-bar').classList.add('show');
   $('fight-btn').textContent='🥊 FIGHT!';
-  $('fight-btn').disabled=false;
-  setCommentary('Press FIGHT to start Round 1! 🥊');
+  if(S.mode==='host'||S.isSolo) $('fight-btn').disabled=false;
+  else{$('fight-btn').disabled=true;$('fight-btn').textContent='⏳ Waiting for host...';}
+  setCommentary('REMATCH! Same battlefield, different outcome! 🔥');
+  showScreen('fight-screen');
+}
+function soloRematch(){
+  S.kasunScore=0;S.shavinScore=0;S.currentRound=0;
+  S.roundWinners=[null,null,null];S.fightInProgress=false;
+  updateScore();updateDots();resetFighters();
+  $('fight-btn').textContent='🥊 FIGHT!';$('fight-btn').disabled=false;
+  setCommentary('REMATCH! Press FIGHT! 🥊');
   showScreen('fight-screen');
 }
 
-function goMenu(){
-  kasunWins=0; shavinWins=0; currentRound=0;
-  roundWinners.fill(null);
-  fightInProgress=false;
-  updateScore(); updateDots();
-  showScreen('menu-screen');
+// ═══════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════
+function resetFighters(){
+  setHP('kasun',100);setHP('shavin',100);
+  ['kasun-fighter','shavin-fighter'].forEach(id=>{
+    $(id).className=id==='kasun-fighter'?'fighter kasun-f':'fighter shavin-f';
+  });
 }
+function resetGameState(){
+  S.kasunScore=0;S.shavinScore=0;S.currentRound=0;
+  S.roundWinners=[null,null,null];S.fightInProgress=false;
+  S.myReady=false;S.opponentReady=false;
+  updateScore();updateDots();
+}
+function destroyPeer(){
+  if(S.peer){try{S.peer.destroy();}catch(e){} S.peer=null;}
+  S.conn=null;S.isConnected=false;
+}
+
+// ═══════════════════════════════════════════════
+//  AUTO-JOIN FROM URL
+// ═══════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  const urlCode=new URLSearchParams(location.search).get('room');
+  if(urlCode&&urlCode.length===6){
+    showJoinFlow();
+  }
+});
+
+// keyboard support during fight
+document.addEventListener('keydown', e=>{
+  if(e.code==='Space'||e.code==='Enter'){
+    if($('cd-tap-wrap').style.display!=='none') cdTap(e);
+  }
+});
 </script>
 </body>
 </html>
