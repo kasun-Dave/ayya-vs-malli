@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AJRLoops — Smart Elevated Pod Transport · Kandy City</title>
+<title>AJRLoops — ස්මාර්ට් ගිලන් රථ ජාල · Kandy City</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#070c18;--bg2:#0d1424;--bg3:#111827;
+  --bg:#070c18;--bg2:#0d1424;
   --cyan:#00f5ff;--blue:#3b82f6;--violet:#7c3aed;
   --green:#10b981;--orange:#f97316;--red:#ef4444;
   --gold:#f59e0b;--purple:#8b5cf6;
@@ -25,336 +25,347 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:12px 36px;
-  background:rgba(7,12,24,0.9);backdrop-filter:blur(16px);
+  padding:12px 32px;
+  background:rgba(7,12,24,0.92);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
 }
 .nav-logo{
-  font-family:'Orbitron',monospace;font-weight:900;font-size:1.1rem;
+  font-family:'Orbitron',monospace;font-weight:900;font-size:1.05rem;
   color:var(--cyan);letter-spacing:3px;
-  text-shadow:0 0 20px rgba(0,245,255,0.5);
+  text-shadow:0 0 18px rgba(0,245,255,0.4);
   display:flex;align-items:center;gap:8px;
 }
-.logo-loop{
-  width:22px;height:22px;border-radius:50%;
-  border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;
-  font-size:.6rem;animation:logo-spin 8s linear infinite;
+.logo-ring{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--cyan);
+  animation:logo-spin 8s linear infinite;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.55rem;color:var(--cyan);
 }
 @keyframes logo-spin{to{transform:rotate(360deg);}}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{font-size:.75rem;letter-spacing:1px;color:var(--dim);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+.nav-links{display:flex;gap:24px;list-style:none;}
+.nav-links a{font-size:.73rem;letter-spacing:1px;color:var(--dim);text-decoration:none;text-transform:uppercase;transition:color .2s;}
 .nav-links a:hover{color:var(--cyan);}
-.nav-cta{font-size:.75rem;padding:7px 18px;border-radius:20px;border:1px solid var(--cyan);color:var(--cyan);background:rgba(0,245,255,0.05);cursor:pointer;font-family:'Orbitron',monospace;letter-spacing:1px;transition:all .2s;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.lang-toggle{
+  font-size:.72rem;padding:5px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.05);color:var(--text);
+  cursor:pointer;transition:all .2s;letter-spacing:.5px;
+  font-family:'Noto Serif Sinhala','Inter',sans-serif;
+}
+.lang-toggle:hover,.lang-toggle.si-active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,255,0.07);}
+.nav-cta{
+  font-size:.72rem;padding:6px 16px;border-radius:20px;
+  border:1px solid var(--cyan);color:var(--cyan);
+  background:rgba(0,245,255,0.05);cursor:pointer;
+  font-family:'Orbitron',monospace;letter-spacing:1px;
+  transition:all .2s;
+}
 .nav-cta:hover{background:rgba(0,245,255,0.12);}
 
 /* ── HERO ── */
-#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;}
+#hero{position:relative;height:100vh;min-height:580px;display:flex;align-items:center;overflow:hidden;}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
-.hero-content{position:relative;z-index:2;max-width:700px;padding:0 40px;}
+.hero-content{position:relative;z-index:2;max-width:680px;padding:0 40px;}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;
   color:var(--cyan);border:1px solid rgba(0,245,255,0.3);
-  padding:5px 14px;border-radius:20px;margin-bottom:22px;
+  padding:5px 14px;border-radius:20px;margin-bottom:20px;
   background:rgba(0,245,255,0.05);
 }
 .hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pd 2s infinite;}
-@keyframes pd{0%,100%{box-shadow:0 0 0 0 rgba(0,245,255,.6);}50%{box-shadow:0 0 0 6px transparent;}}
+@keyframes pd{0%,100%{box-shadow:0 0 0 0 rgba(0,245,255,.6);}50%{box-shadow:0 0 0 5px transparent;}}
 .hero-title{
   font-family:'Orbitron',monospace;font-weight:900;
-  font-size:clamp(2.6rem,6vw,5.5rem);line-height:1;letter-spacing:-1px;
+  font-size:clamp(2.4rem,5.5vw,5rem);line-height:1;letter-spacing:-1px;
   background:linear-gradient(135deg,#fff 0%,var(--cyan) 50%,var(--violet) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:8px;
 }
-.hero-sub{font-family:'Orbitron',monospace;font-size:clamp(.8rem,1.4vw,1rem);color:var(--cyan);letter-spacing:3px;margin-bottom:18px;opacity:.8;}
-.hero-desc{font-size:.95rem;color:rgba(226,232,240,0.65);max-width:500px;margin-bottom:30px;line-height:1.7;}
+.hero-si{
+  font-family:'Noto Serif Sinhala','Inter',sans-serif;
+  font-size:clamp(1rem,2vw,1.4rem);color:rgba(0,245,255,0.7);
+  margin-bottom:16px;letter-spacing:.5px;display:none;
+}
+.hero-si.show{display:block;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:clamp(.75rem,1.3vw,.95rem);color:var(--cyan);letter-spacing:3px;margin-bottom:16px;opacity:.8;}
+.hero-desc{font-size:.92rem;color:rgba(226,232,240,.65);max-width:480px;margin-bottom:28px;line-height:1.7;}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
-.btn-primary{font-family:'Orbitron',monospace;font-size:.78rem;letter-spacing:2px;padding:12px 26px;border-radius:40px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;font-weight:700;box-shadow:0 4px 24px rgba(0,245,255,0.35);transition:transform .15s,box-shadow .15s;}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,245,255,0.5);}
-.btn-outline{font-family:'Orbitron',monospace;font-size:.78rem;letter-spacing:2px;padding:12px 26px;border-radius:40px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--text);transition:border-color .2s,background .2s;}
-.btn-outline:hover{border-color:var(--cyan);background:rgba(0,245,255,0.05);}
-.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--dim);font-size:.68rem;letter-spacing:2px;z-index:2;animation:sh 2.5s infinite;}
-@keyframes sh{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
-.scroll-hint::after{content:'';width:1px;height:36px;background:linear-gradient(to bottom,var(--cyan),transparent);}
+.btn-primary{font-family:'Orbitron',monospace;font-size:.76rem;letter-spacing:2px;padding:11px 24px;border-radius:40px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;font-weight:700;box-shadow:0 4px 20px rgba(0,245,255,0.35);transition:transform .15s,box-shadow .15s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,245,255,0.5);}
+.btn-outline{font-family:'Orbitron',monospace;font-size:.76rem;letter-spacing:2px;padding:11px 24px;border-radius:40px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--text);transition:border-color .2s;}
+.btn-outline:hover{border-color:var(--cyan);}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--dim);font-size:.65rem;letter-spacing:2px;z-index:2;animation:sh 2.5s infinite;}
+@keyframes sh{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-5px);}}
+.scroll-hint::after{content:'';width:1px;height:32px;background:linear-gradient(to bottom,var(--cyan),transparent);}
 
 /* ── SECTIONS ── */
-section{padding:90px 40px;}
+section{padding:85px 40px;}
 .container{max-width:1200px;margin:0 auto;}
-.section-tag{font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;display:block;}
-.section-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.15;margin-bottom:14px;}
-.section-desc{color:rgba(226,232,240,.58);max-width:560px;font-size:.9rem;line-height:1.7;}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s;}
+.section-tag{font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;display:block;}
+.section-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(1.4rem,3vw,2.3rem);line-height:1.15;margin-bottom:12px;}
+.section-desc{color:rgba(226,232,240,.55);max-width:540px;font-size:.88rem;line-height:1.7;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
 .reveal.visible{opacity:1;transform:none;}
-.glass{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(10px);}
 
 /* ── CONCEPT ── */
 #concept{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
-.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:44px;}
-.compare-card{padding:22px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,0.03);transition:border-color .3s,transform .2s;position:relative;overflow:hidden;}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:40px;}
+.compare-card{padding:20px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,0.03);transition:border-color .3s,transform .2s;position:relative;overflow:hidden;}
 .compare-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--cyan));}
 .compare-card:hover{border-color:rgba(0,245,255,0.3);transform:translateY(-3px);}
-.compare-icon{font-size:2rem;margin-bottom:10px;}
-.compare-title{font-family:'Orbitron',monospace;font-size:.85rem;font-weight:600;margin-bottom:7px;color:var(--accent,var(--cyan));}
-.compare-desc{font-size:.78rem;color:var(--dim);line-height:1.6;}
+.compare-icon{font-size:2rem;margin-bottom:9px;}
+.compare-title{font-family:'Orbitron',monospace;font-size:.82rem;font-weight:600;margin-bottom:7px;color:var(--accent,var(--cyan));}
+.compare-desc{font-size:.76rem;color:var(--dim);line-height:1.6;}
 
 /* ── CITY MAP ── */
 #city-map{background:var(--bg2);padding-bottom:40px;}
-.route-selector{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:28px 0 18px;}
+.route-selector{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:26px 0 16px;}
 .route-btn{
-  font-size:.68rem;padding:7px 14px;border-radius:20px;
+  font-size:.66rem;padding:6px 13px;border-radius:20px;
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(255,255,255,0.04);color:var(--dim);
-  cursor:pointer;transition:all .2s;letter-spacing:1px;font-weight:600;
-  text-transform:uppercase;
+  cursor:pointer;transition:all .2s;letter-spacing:.8px;font-weight:600;
+  text-transform:uppercase;font-family:'Inter',sans-serif;
 }
-.route-btn:hover{border-color:rgba(255,255,255,0.3);color:var(--text);}
-.route-btn.active{color:#000;font-weight:700;box-shadow:0 0 16px rgba(0,0,0,0.3);}
+.route-btn.si-label{font-family:'Noto Serif Sinhala','Inter',sans-serif;text-transform:none;font-size:.7rem;}
+.route-btn:hover{border-color:rgba(255,255,255,0.28);color:var(--text);}
+.route-btn.active{color:#000;font-weight:700;box-shadow:0 0 14px rgba(0,0,0,0.3);}
 #city-canvas-wrap{
   width:100%;max-width:1100px;margin:0 auto;
-  border-radius:18px;overflow:hidden;
-  border:1px solid rgba(0,245,255,0.15);
-  box-shadow:0 0 60px rgba(0,245,255,0.05);
+  border-radius:16px;overflow:hidden;
+  border:1px solid rgba(0,245,255,0.14);
+  box-shadow:0 0 50px rgba(0,245,255,0.04);
   position:relative;
 }
-#city-canvas{width:100%;display:block;cursor:pointer;}
+#city-canvas{width:100%;display:block;}
 
 /* ── DEMO PANEL ── */
 #demo-panel{
-  width:100%;max-width:1100px;margin:12px auto 0;
-  border-radius:16px;border:1px solid rgba(0,245,255,0.2);
-  background:rgba(0,10,28,0.85);backdrop-filter:blur(12px);
-  overflow:hidden;transition:max-height .5s,opacity .5s;
-  max-height:0;opacity:0;
+  width:100%;max-width:1100px;margin:10px auto 0;
+  border-radius:14px;border:1px solid rgba(0,245,255,0.18);
+  background:rgba(0,8,24,0.88);backdrop-filter:blur(12px);
+  overflow:hidden;transition:max-height .4s,opacity .4s;
+  max-height:0;opacity:0;position:relative;
 }
-#demo-panel.open{max-height:200px;opacity:1;}
-.demo-panel-inner{padding:16px 20px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:16px;align-items:center;}
-@media(max-width:640px){.demo-panel-inner{grid-template-columns:1fr;gap:10px;}}
-.demo-origin-dest{display:flex;align-items:center;gap:10px;}
-.demo-station-badge{
-  padding:6px 14px;border-radius:10px;font-size:.75rem;font-weight:700;
-  display:flex;flex-direction:column;gap:2px;
-}
-.dsb-label{font-size:.6rem;letter-spacing:1px;opacity:.6;}
-.dsb-name{font-size:.82rem;}
-.demo-arrow{color:var(--cyan);font-size:1.2rem;flex-shrink:0;}
-.demo-progress-area{}
-.demo-phase-label{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:2px;margin-bottom:8px;}
-.demo-progress-track{height:5px;background:rgba(255,255,255,0.08);border-radius:5px;overflow:hidden;}
-.demo-progress-fill{height:100%;border-radius:5px;transition:width .3s;background:linear-gradient(90deg,var(--cyan),var(--violet));}
-.demo-steps{display:flex;justify-content:space-between;margin-top:6px;}
-.demo-step{font-size:.6rem;color:var(--dim);}
+#demo-panel.open{max-height:180px;opacity:1;}
+.demo-panel-inner{padding:14px 18px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:14px;align-items:center;}
+@media(max-width:640px){.demo-panel-inner{grid-template-columns:1fr;gap:8px;}}
+.demo-od{display:flex;align-items:center;gap:10px;}
+.demo-st-badge{padding:6px 12px;border-radius:9px;font-size:.72rem;font-weight:700;display:flex;flex-direction:column;gap:2px;}
+.dsb-lbl{font-size:.58rem;letter-spacing:1px;opacity:.55;}
+.dsb-name{font-size:.78rem;font-family:'Inter','Noto Serif Sinhala',sans-serif;}
+.demo-arrow{color:var(--cyan);font-size:1.1rem;flex-shrink:0;}
+.demo-phase-label{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:2px;margin-bottom:7px;}
+.demo-phase-si{font-family:'Noto Serif Sinhala',serif;font-size:.75rem;color:var(--cyan);margin-bottom:7px;display:none;}
+.demo-phase-si.show{display:block;}
+.demo-progress-track{height:4px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.demo-progress-fill{height:100%;border-radius:4px;transition:width .3s;background:linear-gradient(90deg,var(--cyan),var(--violet));}
+.demo-steps{display:flex;justify-content:space-between;margin-top:5px;}
+.demo-step{font-size:.58rem;color:var(--dim);}
 .demo-step.done{color:var(--cyan);}
-.demo-pod-info{display:flex;flex-direction:column;gap:4px;text-align:right;}
-.dpi-row{font-size:.72rem;color:var(--dim);}
+.demo-pod-info{display:flex;flex-direction:column;gap:3px;text-align:right;}
+.dpi-row{font-size:.7rem;color:var(--dim);}
 .dpi-row span{color:var(--cyan);font-family:'Orbitron',monospace;}
-.demo-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:4px;}
+.demo-close{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--dim);font-size:.9rem;cursor:pointer;}
 
 /* ── INFRASTRUCTURE ── */
 #infrastructure{background:var(--bg);}
-.infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:44px;}
-.infra-card{padding:20px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:border-color .2s,background .2s;}
-.infra-card:hover{border-color:rgba(0,245,255,0.25);background:rgba(0,245,255,0.03);}
-.infra-icon{font-size:1.8rem;margin-bottom:9px;}
-.infra-title{font-family:'Orbitron',monospace;font-size:.74rem;font-weight:600;color:var(--cyan);margin-bottom:5px;letter-spacing:1px;}
-.infra-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
-
-/* ── SAFETY ── */
-#safety{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
-.safety-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:36px;}
-.safety-item{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:background .2s;}
-.safety-item:hover{background:rgba(239,68,68,0.05);}
-.safety-item-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
-.safety-item-title{font-size:.76rem;font-weight:700;color:var(--red);margin-bottom:3px;}
-.safety-item-desc{font-size:.72rem;color:var(--dim);line-height:1.5;}
+.infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:13px;margin-top:40px;}
+.infra-card{padding:18px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:border-color .2s,background .2s;}
+.infra-card:hover{border-color:rgba(0,245,255,0.22);background:rgba(0,245,255,0.025);}
+.infra-icon{font-size:1.7rem;margin-bottom:8px;}
+.infra-title{font-family:'Orbitron',monospace;font-size:.72rem;font-weight:600;color:var(--cyan);margin-bottom:4px;letter-spacing:1px;}
+.infra-desc{font-size:.73rem;color:var(--dim);line-height:1.5;}
 
 /* ── CONTROL ── */
 #control{background:var(--bg2);position:relative;overflow:hidden;}
-#control::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px);pointer-events:none;}
-.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px;}
+#control::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,245,255,0.018) 59px,rgba(0,245,255,0.018) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,245,255,0.018) 59px,rgba(0,245,255,0.018) 60px);pointer-events:none;}
+.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px;}
 @media(max-width:768px){.control-grid{grid-template-columns:1fr;}}
 .metrics-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.metric-card{padding:18px;border-radius:13px;border:1px solid var(--border);background:rgba(0,0,0,0.3);position:relative;overflow:hidden;}
+.metric-card{padding:16px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,0.3);position:relative;overflow:hidden;}
 .metric-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--mcol,var(--cyan)),transparent);}
-.metric-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:7px;}
-.metric-value{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:700;color:var(--mcol,var(--cyan));line-height:1;}
-.metric-sub{font-size:.66rem;color:var(--dim);margin-top:3px;}
-.metric-bar-wrap{height:3px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:9px;overflow:hidden;}
+.metric-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
+.metric-value{font-family:'Orbitron',monospace;font-size:1.85rem;font-weight:700;color:var(--mcol,var(--cyan));line-height:1;}
+.metric-sub{font-size:.64rem;color:var(--dim);margin-top:3px;}
+.metric-bar-wrap{height:3px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:8px;overflow:hidden;}
 .metric-bar{height:100%;border-radius:3px;transition:width .8s;}
-.cc-panel{padding:18px;border-radius:13px;border:1px solid var(--border);background:rgba(0,0,0,0.3);}
-.cc-panel-title{font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:2px;color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
-.cc-panel-title::before{content:'▶';font-size:.48rem;color:var(--green);}
+.cc-panel{padding:16px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,0.3);}
+.cc-panel-title{font-family:'Orbitron',monospace;font-size:.66rem;letter-spacing:2px;color:var(--cyan);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.cc-panel-title::before{content:'▶';font-size:.46rem;color:var(--green);}
 .alert-list{display:flex;flex-direction:column;gap:7px;}
-.alert-item{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:7px;font-size:.72rem;}
-.alert-item.ok{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);}
-.alert-item.warn{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);animation:wp 3s infinite;}
-.alert-item.info{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);}
-@keyframes wp{0%,100%{opacity:1;}50%{opacity:.6;}}
+.alert-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;font-size:.71rem;}
+.alert-item.ok{background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);}
+.alert-item.warn{background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.18);animation:wp 3s infinite;}
+.alert-item.info{background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.18);}
+@keyframes wp{0%,100%{opacity:1;}50%{opacity:.55;}}
 .alert-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.route-status{display:flex;flex-direction:column;gap:7px;}
-.route-status-item{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;}
+.route-status{display:flex;flex-direction:column;gap:6px;}
+.route-status-item{display:flex;align-items:center;justify-content:space-between;font-size:.7rem;}
 .rs-name{color:var(--dim);}
-.rs-pods{font-family:'Orbitron',monospace;color:var(--cyan);font-size:.66rem;}
-.rs-bar-wrap{flex:1;margin:0 9px;height:2.5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.rs-pods{font-family:'Orbitron',monospace;color:var(--cyan);font-size:.63rem;}
+.rs-bar-wrap{flex:1;margin:0 8px;height:2.5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
 .rs-bar{height:100%;border-radius:3px;transition:width 1s;}
 
 /* ── TIMELINE ── */
 #timeline{background:var(--bg);}
-.tl-container{max-width:860px;margin:36px auto 0;position:relative;}
+.tl-container{max-width:840px;margin:34px auto 0;position:relative;}
 .tl-line{position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--cyan),transparent);transform:translateX(-50%);}
-@media(max-width:600px){.tl-line{left:18px;}}
-.tl-items{display:flex;flex-direction:column;gap:20px;}
-.tl-item{display:flex;gap:20px;align-items:flex-start;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s;}
+@media(max-width:580px){.tl-line{left:16px;}}
+.tl-items{display:flex;flex-direction:column;gap:18px;}
+.tl-item{display:flex;gap:18px;align-items:flex-start;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;}
 .tl-item.visible{opacity:1;transform:none;}
 .tl-item:nth-child(even){flex-direction:row-reverse;}
-@media(max-width:600px){.tl-item,.tl-item:nth-child(even){flex-direction:row;padding-left:36px;}}
-.tl-content{flex:1;padding:16px 18px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,0.03);}
+@media(max-width:580px){.tl-item,.tl-item:nth-child(even){flex-direction:row;padding-left:34px;}}
+.tl-content{flex:1;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.025);}
 .tl-item:nth-child(even) .tl-content{text-align:right;}
-@media(max-width:600px){.tl-item:nth-child(even) .tl-content{text-align:left;}}
-.tl-time{font-family:'Orbitron',monospace;font-size:.62rem;color:var(--cyan);letter-spacing:2px;margin-bottom:5px;}
-.tl-title{font-weight:700;font-size:.87rem;margin-bottom:5px;}
-.tl-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
-.tl-node{flex-shrink:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.95rem;position:relative;z-index:2;box-shadow:0 0 14px rgba(0,245,255,0.3);}
+@media(max-width:580px){.tl-item:nth-child(even) .tl-content{text-align:left;}}
+.tl-time{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--cyan);letter-spacing:2px;margin-bottom:4px;}
+.tl-title{font-weight:700;font-size:.85rem;margin-bottom:4px;}
+.tl-desc{font-size:.73rem;color:var(--dim);line-height:1.5;}
+.tl-node{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.9rem;position:relative;z-index:2;box-shadow:0 0 12px rgba(0,245,255,0.28);}
 .tl-spacer{flex:1;}
-@media(max-width:600px){.tl-spacer{display:none;}}
+@media(max-width:580px){.tl-spacer{display:none;}}
 
 /* ── BATTLE ── */
 #battle{background:var(--bg2);}
-.battle-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:44px;}
-@media(max-width:600px){.battle-grid{grid-template-columns:1fr;}}
+.battle-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;margin-top:40px;}
+@media(max-width:580px){.battle-grid{grid-template-columns:1fr;}}
 .battle-side{display:flex;flex-direction:column;gap:10px;}
-.battle-card{padding:14px;border-radius:11px;display:flex;gap:10px;align-items:center;font-size:.8rem;}
-.battle-card.villain{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);}
-.battle-card.hero-c{background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.2);}
-.battle-icon{font-size:1.5rem;flex-shrink:0;}
+.battle-card{padding:12px;border-radius:10px;display:flex;gap:10px;align-items:center;font-size:.78rem;}
+.battle-card.villain{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);}
+.battle-card.hero-c{background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.18);}
+.battle-icon{font-size:1.4rem;flex-shrink:0;}
 .battle-label{font-weight:600;}
-.battle-result{font-size:.7rem;color:var(--dim);margin-top:2px;}
-.battle-badge{display:inline-flex;align-items:center;gap:3px;font-size:.65rem;padding:2px 8px;border-radius:10px;margin-top:3px;}
-.badge-ok{background:rgba(16,185,129,.15);color:var(--green);}
-.badge-warn{background:rgba(239,68,68,.15);color:var(--red);}
-.vs-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:0 8px;}
-.vs-text{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;color:var(--cyan);text-shadow:0 0 18px rgba(0,245,255,0.5);}
-.vs-line{flex:1;width:1px;background:rgba(0,245,255,0.2);}
+.battle-result{font-size:.68rem;color:var(--dim);margin-top:2px;}
+.battle-badge{display:inline-flex;align-items:center;gap:3px;font-size:.63rem;padding:2px 7px;border-radius:9px;margin-top:3px;}
+.badge-ok{background:rgba(16,185,129,.14);color:var(--green);}
+.badge-warn{background:rgba(239,68,68,.14);color:var(--red);}
+.vs-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 6px;}
+.vs-text{font-family:'Orbitron',monospace;font-size:1.25rem;font-weight:900;color:var(--cyan);}
+.vs-line{flex:1;width:1px;background:rgba(0,245,255,0.18);}
 
 /* ── BENEFITS ── */
 #benefits{background:var(--bg);}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:44px;align-items:start;}
-@media(max-width:768px){.two-col{grid-template-columns:1fr;}}
-.list-card{padding:24px;border-radius:15px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
-.list-card-title{font-family:'Orbitron',monospace;font-size:.8rem;font-weight:700;margin-bottom:18px;letter-spacing:2px;}
-.check-list{display:flex;flex-direction:column;gap:10px;list-style:none;}
-.check-list li{display:flex;align-items:flex-start;gap:9px;font-size:.82rem;color:rgba(226,232,240,.7);line-height:1.4;}
-.check-list li::before{content:'▸';font-size:.68rem;margin-top:2px;flex-shrink:0;}
-.list-card.benefits-card .check-list li::before{color:var(--green);}
-.list-card.challenges-card .check-list li::before{color:var(--orange);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+.list-card{padding:22px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.list-card-title{font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;margin-bottom:16px;letter-spacing:2px;}
+.check-list{display:flex;flex-direction:column;gap:9px;list-style:none;}
+.check-list li{display:flex;align-items:flex-start;gap:8px;font-size:.8rem;color:rgba(226,232,240,.68);line-height:1.4;}
+.check-list li::before{content:'▸';font-size:.65rem;margin-top:2px;flex-shrink:0;}
+.benefits-card .check-list li::before{color:var(--green);}
+.challenges-card .check-list li::before{color:var(--orange);}
 
 /* ── CTA ── */
-#cta{background:linear-gradient(135deg,#0d1424 0%,#12082a 50%,#080c18 100%);text-align:center;padding:90px 40px;position:relative;overflow:hidden;}
-#cta::before{content:'';position:absolute;top:50%;left:50%;width:550px;height:550px;background:radial-gradient(circle,rgba(0,245,255,0.06) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none;}
-.cta-title{font-family:'Orbitron',monospace;font-size:clamp(1.4rem,3.2vw,2.8rem);font-weight:900;margin-bottom:18px;}
-.cta-desc{color:rgba(226,232,240,.6);max-width:480px;margin:0 auto 32px;font-size:.92rem;}
-.btn-replay{font-family:'Orbitron',monospace;font-size:.82rem;letter-spacing:2px;padding:14px 34px;border-radius:40px;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;border:none;font-weight:700;box-shadow:0 4px 28px rgba(0,245,255,0.3);transition:transform .15s,box-shadow .2s;}
-.btn-replay:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(0,245,255,0.5);}
+#cta{background:linear-gradient(135deg,#0d1424 0%,#12082a 50%,#080c18 100%);text-align:center;padding:85px 40px;position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;top:50%;left:50%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,245,255,0.055) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none;}
+.cta-title{font-family:'Orbitron',monospace;font-size:clamp(1.4rem,3vw,2.8rem);font-weight:900;margin-bottom:16px;}
+.cta-desc{color:rgba(226,232,240,.58);max-width:460px;margin:0 auto 30px;font-size:.9rem;}
+.btn-replay{font-family:'Orbitron',monospace;font-size:.8rem;letter-spacing:2px;padding:13px 32px;border-radius:40px;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;border:none;font-weight:700;box-shadow:0 4px 26px rgba(0,245,255,0.28);transition:transform .15s,box-shadow .2s;}
+.btn-replay:hover{transform:translateY(-2px);box-shadow:0 8px 34px rgba(0,245,255,0.46);}
 
 /* ── FOOTER ── */
-footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
-.footer-logo{font-family:'Orbitron',monospace;font-size:.8rem;color:var(--cyan);letter-spacing:2px;}
-.footer-disc{font-size:.68rem;color:var(--dim);max-width:540px;line-height:1.5;}
+footer{background:#050810;padding:24px 40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:'Orbitron',monospace;font-size:.78rem;color:var(--cyan);letter-spacing:2px;}
+.footer-disc{font-size:.67rem;color:var(--dim);max-width:520px;line-height:1.5;}
 
-@media(max-width:768px){nav{padding:12px 18px;}.nav-links{display:none;}section{padding:60px 18px;}.battle-grid{gap:10px;}}
+@media(max-width:768px){nav{padding:11px 16px;}.nav-links{display:none;}section{padding:58px 18px;}}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">
-    <div class="logo-loop">⟳</div>
-    AJRLOOPS
-  </div>
+  <div class="nav-logo"><div class="logo-ring">⟳</div>AJRLOOPS</div>
   <ul class="nav-links">
-    <li><a href="#concept">Concept</a></li>
-    <li><a href="#city-map">City Map</a></li>
-    <li><a href="#infrastructure">Infrastructure</a></li>
-    <li><a href="#control">Control</a></li>
-    <li><a href="#battle">City Flow</a></li>
+    <li><a href="#concept" data-en="Concept" data-si="සංකල්පය">Concept</a></li>
+    <li><a href="#city-map" data-en="City Map" data-si="නගර සිතියම">City Map</a></li>
+    <li><a href="#infrastructure" data-en="Infrastructure" data-si="යටිතල">Infrastructure</a></li>
+    <li><a href="#control" data-en="Control" data-si="පාලනය">Control</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})">Explore Map</button>
+  <div class="nav-right">
+    <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">සිංහල</button>
+    <button class="nav-cta" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})" data-en="Explore Map" data-si="සිතියම බලන්න">Explore Map</button>
+  </div>
 </nav>
 
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <div class="hero-badge"><span class="pulse"></span>SMART CITY TRANSPORT CONCEPT · KANDY · SRI LANKA</div>
+    <div class="hero-badge"><span class="pulse"></span><span data-en="SMART CITY CONCEPT · KANDY · SRI LANKA" data-si="ස්මාර්ට් නගර සංකල්පය · කන්ඩි · ශ්‍රී ලංකා">SMART CITY CONCEPT · KANDY · SRI LANKA</span></div>
     <h1 class="hero-title">AJR<br/>Loops</h1>
-    <p class="hero-sub">Elevated Pod Transport Network</p>
-    <p class="hero-desc">Homes, hospitals, schools, offices, and stations connected through elevated smart-pod tunnels above Kandy's roads — always moving, always smart.</p>
+    <div class="hero-si" id="hero-si">නූතන ගිලන් රථ ජාලය · කන්ඩි නගරය</div>
+    <p class="hero-sub" data-en="Elevated Pod Transport Network" data-si="උස් කල ගිලන් රථ ජාලය">Elevated Pod Transport Network</p>
+    <p class="hero-desc" data-en="Homes, hospitals, schools, offices and stations connected above Kandy's roads through elevated smart-pod tunnels." data-si="කන්ඩි නගරයේ නිවාස, රෝහල්, පාසල්, කාර්යාල සහ ස්ථාන ඉහළින් දිවෙන ස්මාර්ට් ගිලන් රථ ජාලයෙන් සම්බන්ධ කරයි.">Homes, hospitals, schools, offices and stations connected above Kandy's roads through elevated smart-pod tunnels.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})">Watch City Demo</button>
-      <button class="btn-outline" onclick="document.getElementById('infrastructure').scrollIntoView({behavior:'smooth'})">Explore Infrastructure</button>
+      <button class="btn-primary" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})" data-en="Watch City Demo" data-si="නගර දර්ශනය">Watch City Demo</button>
+      <button class="btn-outline" onclick="document.getElementById('infrastructure').scrollIntoView({behavior:'smooth'})" data-en="Explore Infrastructure" data-si="යටිතල බලන්න">Explore Infrastructure</button>
     </div>
   </div>
-  <div class="scroll-hint">SCROLL</div>
+  <div class="scroll-hint" data-en="SCROLL" data-si="SCROLL">SCROLL</div>
 </section>
 
 <section id="concept">
   <div class="container">
-    <span class="section-tag reveal">What is AJRLoops?</span>
-    <h2 class="section-title reveal">City-Scale Smart<br/><span style="color:var(--cyan)">Pod Loops</span></h2>
-    <p class="section-desc reveal">Elevated loops above existing roads. Automated pods carrying passengers city-wide. No traffic. No pollution. No delays. Smart routing by AI.</p>
+    <span class="section-tag reveal" data-en="What is AJRLoops?" data-si="AJRLoops යනු කුමක්ද?">What is AJRLoops?</span>
+    <h2 class="section-title reveal" data-en="City-Scale Smart Pod Loops" data-si="නගර පරිමාණ ස්මාර්ට් ගිලන් ලූප">City-Scale Smart <span style="color:var(--cyan)">Pod Loops</span></h2>
+    <p class="section-desc reveal" data-en="Elevated loops above existing roads. Automated pods carrying passengers city-wide. No traffic. No pollution. No delays." data-si="පවතින මාර්ග ඉහළින් ගිලන් ලූප. ස්වයංක්‍රීය ගිලන් රථ. රථවාහන අශෝභය නැත. දූෂණය නැත. ප්‍රමාදය නැත.">Elevated loops above existing roads. Automated pods carrying passengers city-wide. No traffic. No pollution. No delays.</p>
     <div class="compare-grid">
-      <div class="compare-card reveal" style="--accent:#ef4444"><div class="compare-icon">🚗</div><div class="compare-title">Current Roads</div><div class="compare-desc">Traffic, pollution, narrow lanes, no priority routing. Emergency vehicles stuck behind gridlock.</div></div>
-      <div class="compare-card reveal" style="--accent:#f59e0b"><div class="compare-icon">🚄</div><div class="compare-title">Hyperloop (Ref)</div><div class="compare-desc">High-speed city-to-city at 1000km/h. Long distances, vacuum tubes, enormous cost per km.</div></div>
-      <div class="compare-card reveal" style="--accent:#00f5ff"><div class="compare-icon">⟳</div><div class="compare-title">AJRLoops</div><div class="compare-desc">City-scale pod loops above roads. Multi-stop, automated, AI-routed. Book from app, step in, arrive.</div></div>
-      <div class="compare-card reveal" style="--accent:#10b981"><div class="compare-icon">🤖</div><div class="compare-title">AI-First Design</div><div class="compare-desc">App booking, smart capsule dispatch, junction switching, demand prediction, emergency override.</div></div>
+      <div class="compare-card reveal" style="--accent:#ef4444"><div class="compare-icon">🚗</div><div class="compare-title" data-en="Current Roads" data-si="දැනට ඇති මාර්ග">Current Roads</div><div class="compare-desc" data-en="Traffic, pollution, narrow lanes, no priority routing." data-si="රථවාහන, දූෂණය, පටු මාර්ග, ප්‍රමුඛතා නොමැත.">Traffic, pollution, narrow lanes, no priority routing.</div></div>
+      <div class="compare-card reveal" style="--accent:#f59e0b"><div class="compare-icon">🚄</div><div class="compare-title" data-en="Hyperloop (Ref)" data-si="හයිපර්ලූප (ආශ්‍රය)">Hyperloop (Ref)</div><div class="compare-desc" data-en="High-speed city-to-city. Very high cost per km." data-si="නගරය සිට නගරය. ඉතා ඉහළ ගොඩනැඟීමේ පිරිවැය.">High-speed city-to-city. Very high cost per km.</div></div>
+      <div class="compare-card reveal" style="--accent:#00f5ff"><div class="compare-icon">⟳</div><div class="compare-title">AJRLoops</div><div class="compare-desc" data-en="City-scale pod loops above roads. Multi-stop, automated, AI-routed." data-si="නගරය පුරා ගිලන් ලූප. ස්වයංක්‍රීය, AI මාර්ගගත.">City-scale pod loops above roads. Multi-stop, automated, AI-routed.</div></div>
+      <div class="compare-card reveal" style="--accent:#10b981"><div class="compare-icon">🤖</div><div class="compare-title" data-en="AI-First Design" data-si="AI ප්‍රථම නිර්මාණය">AI-First Design</div><div class="compare-desc" data-en="App booking, smart dispatch, demand prediction, emergency override." data-si="ඇප් වෙන් කිරීම, ස්මාර්ට් යෙදවීම, හදිසි ප්‍රමුඛතාව.">App booking, smart dispatch, demand prediction, emergency override.</div></div>
     </div>
   </div>
 </section>
 
 <section id="city-map">
   <div class="container" style="max-width:1200px">
-    <span class="section-tag reveal">Interactive Journey Demo</span>
-    <h2 class="section-title reveal">Kandy City <span style="color:var(--cyan)">Loop Network</span></h2>
-    <p class="section-desc reveal">Select a route below — then watch a passenger book from the app, board a capsule, travel through junctions, and arrive at their destination.</p>
+    <span class="section-tag reveal" data-en="Interactive Journey Demo" data-si="අන්තර්ක්‍රියාකාරී ගමන් දර්ශනය">Interactive Journey Demo</span>
+    <h2 class="section-title reveal" data-en="Kandy City Loop Network" data-si="කන්ඩි නගර ගිලන් ලූප ජාලය">Kandy City <span style="color:var(--cyan)">Loop Network</span></h2>
+    <p class="section-desc reveal" data-en="Select a route to watch a passenger book from the app, board a capsule, and travel along the real Kandy road corridors." data-si="මාර්ගයක් තෝරා මගියා ඇප් එකෙන් වෙන් කර, ගිලන් රථයට නැඟ, කන්ඩි මාර්ග ඔස්සේ ගමන් කිරීම බලන්න.">Select a route to watch a passenger book from the app, board a capsule, and travel along the real Kandy road corridors.</p>
 
     <div class="route-selector" id="route-selector">
-      <button class="route-btn" data-route="all" onclick="selectRoute('all',this)">🗺 All Routes</button>
-      <button class="route-btn" data-route="residential" onclick="selectRoute('residential',this)">🏠 Residential</button>
-      <button class="route-btn" data-route="office" onclick="selectRoute('office',this)">🏛️ Office &amp; Gov</button>
-      <button class="route-btn" data-route="hospital" onclick="selectRoute('hospital',this)">🏥 Hospital Emergency</button>
-      <button class="route-btn" data-route="market" onclick="selectRoute('market',this)">🛒 Market &amp; Shops</button>
-      <button class="route-btn" data-route="tourist" onclick="selectRoute('tourist',this)">🏨 Tourist Route</button>
-      <button class="route-btn" data-route="school" onclick="selectRoute('school',this)">🎓 Schools</button>
-      <button class="route-btn" data-route="transit" onclick="selectRoute('transit',this)">🚉 Main Transit</button>
+      <button class="route-btn" data-route="all" onclick="selectRoute('all',this)" data-en="🗺 All Routes" data-si="🗺 සියලු">🗺 All Routes</button>
+      <button class="route-btn" data-route="residential" onclick="selectRoute('residential',this)" data-en="🏠 Residential" data-si="🏠 නිවාස">🏠 Residential</button>
+      <button class="route-btn" data-route="office" onclick="selectRoute('office',this)" data-en="🏛️ Office &amp; Gov" data-si="🏛️ කාර්යාල">🏛️ Office &amp; Gov</button>
+      <button class="route-btn" data-route="hospital" onclick="selectRoute('hospital',this)" data-en="🏥 Hospital" data-si="🏥 රෝහල">🏥 Hospital</button>
+      <button class="route-btn" data-route="market" onclick="selectRoute('market',this)" data-en="🛒 Market" data-si="🛒 වෙළඳ">🛒 Market</button>
+      <button class="route-btn" data-route="tourist" onclick="selectRoute('tourist',this)" data-en="🏨 Tourist" data-si="🏨 සංචාරක">🏨 Tourist</button>
+      <button class="route-btn" data-route="school" onclick="selectRoute('school',this)" data-en="🎓 School" data-si="🎓 පාසල">🎓 School</button>
+      <button class="route-btn" data-route="transit" onclick="selectRoute('transit',this)" data-en="🚉 Transit" data-si="🚉 ගමනාගමන">🚉 Transit</button>
     </div>
 
-    <div id="city-canvas-wrap" style="position:relative">
-      <canvas id="city-canvas"></canvas>
-    </div>
+    <div id="city-canvas-wrap"><canvas id="city-canvas"></canvas></div>
 
     <div id="demo-panel" style="position:relative">
       <button class="demo-close" onclick="closeDemo()">✕</button>
       <div class="demo-panel-inner">
-        <div class="demo-origin-dest">
-          <div class="demo-station-badge" id="dp-origin" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.3);">
-            <div class="dsb-label">BOARDING</div>
+        <div class="demo-od">
+          <div class="demo-st-badge" style="background:rgba(0,245,255,0.07);border:1px solid rgba(0,245,255,0.25);">
+            <div class="dsb-lbl" data-en="BOARDING" data-si="නැඟීම">BOARDING</div>
             <div class="dsb-name" id="dp-origin-name">—</div>
           </div>
           <div class="demo-arrow">→</div>
-          <div class="demo-station-badge" id="dp-dest" style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);">
-            <div class="dsb-label">DESTINATION</div>
+          <div class="demo-st-badge" style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.25);">
+            <div class="dsb-lbl" data-en="DESTINATION" data-si="ගමනාන්තය">DESTINATION</div>
             <div class="dsb-name" id="dp-dest-name">—</div>
           </div>
         </div>
-        <div class="demo-progress-area">
+        <div>
           <div class="demo-phase-label" id="dp-phase">INITIALIZING...</div>
+          <div class="demo-phase-si" id="dp-phase-si">සූදානම් වෙමින්...</div>
           <div class="demo-progress-track"><div class="demo-progress-fill" id="dp-fill" style="width:0%"></div></div>
           <div class="demo-steps" id="dp-steps"></div>
         </div>
         <div class="demo-pod-info">
-          <div class="dpi-row">Pod ID: <span id="dp-pod-id">—</span></div>
-          <div class="dpi-row">Speed: <span id="dp-speed">—</span></div>
-          <div class="dpi-row">ETA: <span id="dp-eta">—</span></div>
-          <div class="dpi-row">Status: <span id="dp-status" style="color:var(--green)">IDLE</span></div>
+          <div class="dpi-row" data-en="Pod:" data-si="රථය:">Pod: <span id="dp-pod-id">—</span></div>
+          <div class="dpi-row" data-en="Speed:" data-si="වේගය:">Speed: <span id="dp-speed">—</span></div>
+          <div class="dpi-row" data-en="ETA:" data-si="පැමිණෙන:">ETA: <span id="dp-eta">—</span></div>
+          <div class="dpi-row" data-en="Status:" data-si="තත්ත්වය:">Status: <span id="dp-status" style="color:var(--green)">IDLE</span></div>
         </div>
       </div>
     </div>
@@ -363,74 +374,56 @@ footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);d
 
 <section id="infrastructure">
   <div class="container">
-    <span class="section-tag reveal">How It's Built</span>
-    <h2 class="section-title reveal">Infrastructure <span style="color:var(--cyan)">Design</span></h2>
-    <p class="section-desc reveal">Every element designed to sit above Kandy's streets with minimum disruption to existing life.</p>
+    <span class="section-tag reveal" data-en="How It's Built" data-si="ගොඩනඟන ආකාරය">How It's Built</span>
+    <h2 class="section-title reveal" data-en="Infrastructure Design" data-si="යටිතල ව්‍යූහය">Infrastructure <span style="color:var(--cyan)">Design</span></h2>
     <div class="infra-grid">
-      <div class="infra-card reveal"><div class="infra-icon">🏗️</div><div class="infra-title">Elevated Loop Tubes</div><div class="infra-desc">Transparent or semi-opaque sealed tubes on reinforced columns above road medians.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🏛️</div><div class="infra-title">Pylon Columns</div><div class="infra-desc">Placed along road shoulders — no private land acquisition where public roads exist.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🛗</div><div class="infra-title">Pod Stations</div><div class="infra-desc">Elevator + stair access. Skybridges to adjacent buildings. Ground-level drop-off zones.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">📱</div><div class="infra-title">AJRLoops App</div><div class="infra-desc">Book your pod, select destination, see live ETA, board with QR code. Real-time tracking.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🔀</div><div class="infra-title">Smart Junctions</div><div class="infra-desc">AI-controlled switching nodes where loops intersect. Pods route to correct branch in milliseconds.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">☀️</div><div class="infra-title">Solar Canopy</div><div class="infra-desc">Solar panels on tube tops and station roofs. Battery backup at every node.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">📡</div><div class="infra-title">Sensor Network</div><div class="infra-desc">Vibration, heat, structural load, crowd flow, pod location and emergency detection.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🚨</div><div class="infra-title">Emergency Exits</div><div class="infra-desc">Rescue platforms every 150m. Manual access doors. Evacuation walkways alongside tubes.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🔧</div><div class="infra-title">Night Maintenance</div><div class="infra-desc">Inspection drones launch after midnight. Hatches on tube exterior for manual access.</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="safety">
-  <div class="container">
-    <span class="section-tag reveal">Risk Awareness</span>
-    <h2 class="section-title reveal">Safety & <span style="color:var(--red)">Hazard Planning</span></h2>
-    <p class="section-desc reveal">Real constraints. Real terrain. Kandy's unique geography demands careful, honest engineering.</p>
-    <div class="safety-grid">
-      <div class="safety-item reveal"><div class="safety-item-icon">🏛️</div><div><div class="safety-item-title">Heritage Zones</div><div class="safety-item-desc">No elevated structures near Temple of the Tooth. Routes re-planned around cultural corridors.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🏔️</div><div><div class="safety-item-title">Hilly Terrain</div><div class="safety-item-desc">Seismic and vibration monitoring. Soil stability assessment before any pylon placement.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🌊</div><div><div class="safety-item-title">Flood &amp; Landslide</div><div class="safety-item-desc">Routes avoid known landslide corridors. Flood sensors trigger automatic pod hold.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🔥</div><div><div class="safety-item-title">Fire-Safe Stations</div><div class="safety-item-desc">Non-combustible materials, fire suppression, clear evacuation signage and emergency lighting.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🚪</div><div><div class="safety-item-title">Evacuation Platforms</div><div class="safety-item-desc">Rescue platforms every 150m. Manual access doors for emergency crew entry.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">⚡</div><div><div class="safety-item-title">Lightning Protection</div><div class="safety-item-desc">Full lightning rod network across tube spans. Grounding systems at every column base.</div></div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🏗️</div><div class="infra-title" data-en="Elevated Loop Tubes" data-si="උස් ලූප නල">Elevated Loop Tubes</div><div class="infra-desc" data-en="Transparent sealed tubes above road medians on reinforced columns." data-si="ශක්තිමත් කුළු ඉහළ, මාර්ග මධ්‍යයේ ස්වච්ඡ නල.">Transparent sealed tubes above road medians on reinforced columns.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🏛️</div><div class="infra-title" data-en="Pylon Columns" data-si="කුළු සිලින්ඩර">Pylon Columns</div><div class="infra-desc" data-en="Placed along road shoulders — no private land required where public roads exist." data-si="මාර්ග දාරයේ සවිකළ — රජයේ මාර්ග ඇති තැන පෞද්ගලික ඉඩම් අනවශ්‍ය.">Placed along road shoulders — no private land required where public roads exist.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🛗</div><div class="infra-title" data-en="Pod Stations" data-si="ගිලන් රථ ස්ථාන">Pod Stations</div><div class="infra-desc" data-en="Elevator + stair access. Skybridges to adjacent buildings. Ground drop-off zones." data-si="සෑලි + පඩිපෙළ ප්‍රවේශය. අසල ගොඩනැඟිලි සකස් සේතු.">Elevator + stair access. Skybridges to adjacent buildings. Ground drop-off zones.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">📱</div><div class="infra-title">AJRLoops App</div><div class="infra-desc" data-en="Book your pod, select destination, see live ETA. Board with QR code." data-si="ගිලන් රථ වෙන් කරන්න, ගමනාන්තය තෝරන්න, QR කේතයෙන් නැඟෙන්න.">Book your pod, select destination, see live ETA. Board with QR code.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🔀</div><div class="infra-title" data-en="Smart Junctions" data-si="ස්මාර්ට් මංසන්ධි">Smart Junctions</div><div class="infra-desc" data-en="AI-controlled switching nodes where loops meet. Route selection in milliseconds." data-si="ලූප ගැවසෙන AI-පාලිත මාරු නිෂ්ඨා. මිලිතත්පර ගණනාවකින් මාරු.">AI-controlled switching nodes where loops meet. Route selection in milliseconds.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">☀️</div><div class="infra-title" data-en="Solar Canopy" data-si="සූර්ය ශක්ති ආවරණය">Solar Canopy</div><div class="infra-desc" data-en="Solar panels on tube tops and station roofs. Battery backup at every node." data-si="නල සහ ස්ථාන ශිඛරයේ සූර්ය පැනල. සෑම ස්ථානයේ බැටරි උපස්ථ.">Solar panels on tube tops and station roofs. Battery backup at every node.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🚨</div><div class="infra-title" data-en="Emergency Exits" data-si="හදිසි පිටවීම">Emergency Exits</div><div class="infra-desc" data-en="Rescue platforms every 150m. Manual access doors for emergency crew." data-si="150m ට වරක් ගලවා ගැනීමේ වේදිකා. හදිසි ද්‍වාර.">Rescue platforms every 150m. Manual access doors for emergency crew.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🔧</div><div class="infra-title" data-en="Night Maintenance" data-si="රාත්‍රී නඩත්තු">Night Maintenance</div><div class="infra-desc" data-en="Inspection drones launch after midnight. Scheduled hatches on tube exterior." data-si="මධ්‍යම රාත්‍රියෙන් පසු ඩ්‍රෝන් පරීක්ෂාව. ඉදිරිසරු ශිඛර.">Inspection drones launch after midnight. Scheduled hatches on tube exterior.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">📡</div><div class="infra-title" data-en="Sensor Network" data-si="සංවේදක ජාලය">Sensor Network</div><div class="infra-desc" data-en="Vibration, heat, structural load, crowd flow, pod location and emergency detection." data-si="කම්පනය, තාපය, ව්‍යූහ බර, ජනකාය ගලා, ස්ථාන සහ හදිසි හඳුනාගැනීම.">Vibration, heat, structural load, crowd flow and emergency detection.</div></div>
     </div>
   </div>
 </section>
 
 <section id="control">
   <div class="container">
-    <span class="section-tag reveal">Live Operations</span>
-    <h2 class="section-title reveal">AJRLoops <span style="color:var(--cyan)">Control Center</span></h2>
-    <p class="section-desc reveal">AI-powered command center monitoring all loops, pods, passengers, energy and alerts in real time.</p>
+    <span class="section-tag reveal" data-en="Live Operations" data-si="සජීවී මෙහෙයුම">Live Operations</span>
+    <h2 class="section-title reveal" data-en="AJRLoops Control Center" data-si="AJRLoops පාලන මධ්‍යස්ථානය">AJRLoops <span style="color:var(--cyan)">Control Center</span></h2>
     <div class="control-grid reveal">
       <div>
         <div class="metrics-row" style="margin-bottom:12px">
-          <div class="metric-card" style="--mcol:#00f5ff"><div class="metric-label">Active Pods</div><div class="metric-value" id="m-pods">47</div><div class="metric-sub">all loops</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-pods" style="width:67%;background:var(--cyan)"></div></div></div>
-          <div class="metric-card" style="--mcol:#10b981"><div class="metric-label">Loops Online</div><div class="metric-value" id="m-routes">7</div><div class="metric-sub">of 7 active</div><div class="metric-bar-wrap"><div class="metric-bar" style="width:100%;background:var(--green)"></div></div></div>
+          <div class="metric-card" style="--mcol:#00f5ff"><div class="metric-label" data-en="Active Pods" data-si="ක්‍රියාකාරී ගිලන් රථ">Active Pods</div><div class="metric-value" id="m-pods">47</div><div class="metric-sub" data-en="all loops" data-si="සියලු ලූප">all loops</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-pods" style="width:67%;background:var(--cyan)"></div></div></div>
+          <div class="metric-card" style="--mcol:#10b981"><div class="metric-label" data-en="Loops Online" data-si="ක්‍රියාකාරී ලූප">Loops Online</div><div class="metric-value" id="m-routes">7</div><div class="metric-sub" data-en="of 7 active" data-si="7 න් 7">of 7 active</div><div class="metric-bar-wrap"><div class="metric-bar" style="width:100%;background:var(--green)"></div></div></div>
         </div>
         <div class="metrics-row" style="margin-bottom:12px">
-          <div class="metric-card" style="--mcol:#f59e0b"><div class="metric-label">Passengers Today</div><div class="metric-value" id="m-pass">2,847</div><div class="metric-sub">and counting</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-pass" style="width:72%;background:var(--gold)"></div></div></div>
-          <div class="metric-card" style="--mcol:#8b5cf6"><div class="metric-label">Energy Level</div><div class="metric-value" id="m-energy">84<span style="font-size:1rem">%</span></div><div class="metric-sub">solar + grid</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-energy" style="width:84%;background:var(--purple)"></div></div></div>
+          <div class="metric-card" style="--mcol:#f59e0b"><div class="metric-label" data-en="Passengers Today" data-si="අද මගීන්">Passengers Today</div><div class="metric-value" id="m-pass">2,847</div><div class="metric-sub" data-en="and counting" data-si="ගණනය වෙමින්">and counting</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-pass" style="width:72%;background:var(--gold)"></div></div></div>
+          <div class="metric-card" style="--mcol:#8b5cf6"><div class="metric-label" data-en="Energy Level" data-si="ශක්ති මට්ටම">Energy Level</div><div class="metric-value" id="m-energy">84<span style="font-size:1rem">%</span></div><div class="metric-sub" data-en="solar + grid" data-si="සූර්ය + ජාලය">solar + grid</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-energy" style="width:84%;background:var(--purple)"></div></div></div>
         </div>
-        <div class="cc-panel"><div class="cc-panel-title">LOOP STATUS</div><div class="route-status" id="route-status"></div></div>
+        <div class="cc-panel"><div class="cc-panel-title" data-en="LOOP STATUS" data-si="ලූප තත්ත්වය">LOOP STATUS</div><div class="route-status" id="route-status"></div></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div class="cc-panel" style="flex:1">
-          <div class="cc-panel-title">SYSTEM ALERTS</div>
+          <div class="cc-panel-title" data-en="SYSTEM ALERTS" data-si="පද්ධති ඇඟවීම්">SYSTEM ALERTS</div>
           <div class="alert-list">
-            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div>All structural sensors nominal</div>
-            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div>No emergency routes activated</div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span data-en="All structural sensors nominal" data-si="සියලු ව්‍යූහ සංවේදක සාමාන්‍ය">All structural sensors nominal</span></div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span data-en="No emergency routes activated" data-si="හදිසි මාර්ග ක්‍රියාකාරී නැත">No emergency routes activated</span></div>
             <div class="alert-item warn"><div class="alert-dot" style="background:#f97316"></div><span id="alert-demand-text">High demand on Market Loop</span></div>
-            <div class="alert-item info"><div class="alert-dot" style="background:#3b82f6"></div>AI rerouting 3 pods via Transit Loop</div>
-            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div>Solar panels at 91% efficiency</div>
+            <div class="alert-item info"><div class="alert-dot" style="background:#3b82f6"></div><span data-en="AI rerouting 3 pods via Transit Loop" data-si="AI 3 ගිලන් රථ Transit Loop හරහා යොමු කරයි">AI rerouting 3 pods via Transit Loop</span></div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span data-en="Solar panels at 91% efficiency" data-si="සූර්ය පැනල 91% කාර්යක්ෂමතාවයෙන්">Solar panels at 91% efficiency</span></div>
           </div>
         </div>
         <div class="cc-panel">
-          <div class="cc-panel-title">AI OPTIMIZATION</div>
-          <div style="font-size:.74rem;color:var(--dim);line-height:1.9">
-            ▸ Rush surge predicted: <span style="color:var(--gold)">18:30 +34% demand</span><br/>
-            ▸ Adding <span id="ai-pods" style="color:var(--cyan)">4</span> pods to School Loop<br/>
-            ▸ Energy save mode: <span style="color:var(--green)">Active off-peak</span><br/>
-            ▸ Weather: <span id="ai-weather" style="color:var(--orange)">Rain sensors monitoring</span>
+          <div class="cc-panel-title" data-en="AI OPTIMIZATION" data-si="AI ප්‍රශස්තකරණය">AI OPTIMIZATION</div>
+          <div style="font-size:.72rem;color:var(--dim);line-height:1.9">
+            ▸ <span data-en="Rush surge predicted:" data-si="ඉහළ ඉල්ලුම පුරෝකථනය:">Rush surge predicted:</span> <span style="color:var(--gold)" data-en="18:30 +34% demand" data-si="18:30 +34% ඉල්ලුම">18:30 +34% demand</span><br/>
+            ▸ <span data-en="Adding" data-si="එකතු කරමින්">Adding</span> <span id="ai-pods" style="color:var(--cyan)">4</span> <span data-en="pods to School Loop" data-si="ගිලන් රථ School Loop ට">pods to School Loop</span><br/>
+            ▸ <span data-en="Energy save: Active off-peak" data-si="ශක්ති ඉතිරීම: ක්‍රියාකාරී">Energy save: Active off-peak</span><br/>
+            ▸ <span data-en="Weather:" data-si="කාලගුණය:">Weather:</span> <span id="ai-weather" style="color:var(--orange)">Rain sensors monitoring</span>
           </div>
         </div>
       </div>
@@ -440,19 +433,18 @@ footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);d
 
 <section id="timeline">
   <div class="container">
-    <span class="section-tag reveal">Day in the Loop</span>
-    <h2 class="section-title reveal">A Day on <span style="color:var(--cyan)">AJRLoops</span></h2>
+    <span class="section-tag reveal" data-en="Day in the Loop" data-si="ලූපයේ දිනක්">Day in the Loop</span>
+    <h2 class="section-title reveal" data-en="A Day on AJRLoops" data-si="AJRLoops එකේ දිනයක්">A Day on <span style="color:var(--cyan)">AJRLoops</span></h2>
     <div class="tl-container">
       <div class="tl-line"></div>
       <div class="tl-items">
-        <div class="tl-item"><div class="tl-content"><div class="tl-time">06:00 AM</div><div class="tl-title">Morning Rush Begins</div><div class="tl-desc">Pod frequency doubles. AI pre-positions capsules at residential hill stations before peak demand.</div></div><div class="tl-node">🌅</div><div class="tl-spacer"></div></div>
-        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">📱</div><div class="tl-content"><div class="tl-time">07:10 AM</div><div class="tl-title">Book from App</div><div class="tl-desc">Passenger opens AJRLoops app, selects "City Center Office Zone." Pod A-247 dispatched. ETA: 3 min.</div></div></div>
-        <div class="tl-item"><div class="tl-content"><div class="tl-time">07:14 AM</div><div class="tl-title">Capsule Arrives, Board</div><div class="tl-desc">Capsule glides in, doors open. Passenger steps aboard. QR scan confirms boarding. Doors close.</div></div><div class="tl-node">🚀</div><div class="tl-spacer"></div></div>
-        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🔀</div><div class="tl-content"><div class="tl-time">07:16 AM</div><div class="tl-title">Junction Switch</div><div class="tl-desc">At City Center hub, AI routes the pod onto the Office Loop. No slowdown — seamless branching.</div></div></div>
-        <div class="tl-item"><div class="tl-content"><div class="tl-time">09:30 AM</div><div class="tl-title">Emergency Override</div><div class="tl-desc">Hospital Loop gets priority corridor. All other pods hold at nearest station. Response time: 3m 20s.</div></div><div class="tl-node">🚨</div><div class="tl-spacer"></div></div>
-        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🏛️</div><div class="tl-content"><div class="tl-time">11:00 AM</div><div class="tl-title">Tourist Loop Active</div><div class="tl-desc">Purple pods move through elevated paths near Kandy Lake and cultural zones. Announcements in 3 languages.</div></div></div>
-        <div class="tl-item"><div class="tl-content"><div class="tl-time">06:00 PM</div><div class="tl-title">Evening Return Flow</div><div class="tl-desc">AI reverses dominant flow direction. Extra pods deployed on Market and Transit loops.</div></div><div class="tl-node">🌃</div><div class="tl-spacer"></div></div>
-        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🔧</div><div class="tl-content"><div class="tl-time">11:00 PM</div><div class="tl-title">Night Maintenance</div><div class="tl-desc">Reduced frequency. Inspection drones launch. Batteries charge. Control center runs next-day diagnostics.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">06:00 AM</div><div class="tl-title" data-en="Morning Rush Begins" data-si="උදෑසන රද්ධ ප්‍රාරම්භය">Morning Rush Begins</div><div class="tl-desc" data-en="Pod frequency doubles. AI pre-positions capsules at hill stations." data-si="ගිලන් රථ සංඛ්‍යාතය දෙගුණ. AI කුළු ස්ථාන ළඟ ගිලන් රථ සූදානම.">Pod frequency doubles. AI pre-positions capsules at hill stations.</div></div><div class="tl-node">🌅</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">📱</div><div class="tl-content"><div class="tl-time">07:10 AM</div><div class="tl-title" data-en="Book from App" data-si="ඇප් එකෙන් වෙන් කිරීම">Book from App</div><div class="tl-desc" data-en="Passenger selects 'City Center Office Zone.' Pod A-247 dispatched. ETA: 3 min." data-si="මගියා 'නගර මධ්‍ය කාර්යාල කලාපය' තෝරයි. ගිලන් රථ A-247 යවයි. ETA: 3 මිනිත්.">Passenger selects destination. Pod A-247 dispatched. ETA: 3 min.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">07:14 AM</div><div class="tl-title" data-en="Capsule Arrives, Board" data-si="ගිලන් රථ පැමිණීම">Capsule Arrives, Board</div><div class="tl-desc" data-en="Capsule glides in, doors open. Passenger steps aboard. Doors close." data-si="ගිලන් රථ ලිස්සා ඒ, දොරවල් ඇරෙයි. මගියා නැඟේ. දොරවල් වැසෙයි.">Capsule glides in, doors open. Passenger steps aboard. Doors close.</div></div><div class="tl-node">🚀</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🚨</div><div class="tl-content"><div class="tl-time">09:30 AM</div><div class="tl-title" data-en="Emergency Override" data-si="හදිසි ප්‍රමුඛතාව">Emergency Override</div><div class="tl-desc" data-en="Hospital Loop gets priority. All other pods hold. Response time: 3m 20s." data-si="රෝහල් ලූපට ප්‍රමුඛතාව. අනෙකුත් ගිලන් රථ රැදෙයි. ප්‍රතිචාර කාලය: 3 මිනිත් 20 තත්.">Hospital Loop gets priority. All other pods hold. Response time: 3m 20s.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">11:00 AM</div><div class="tl-title" data-en="Tourist Loop Active" data-si="සංචාරක ලූප ක්‍රියාකාරී">Tourist Loop Active</div><div class="tl-desc" data-en="Purple pods near Kandy Lake and cultural zones. Announcements in 3 languages." data-si="කන්ඩි වැව සහ සංස්කෘතික ප්‍රදේශ ළඟ දේදුන්නු ගිලන් රථ. භාෂා 3 කින් නිවේදන.">Purple pods near Kandy Lake and cultural zones. 3-language announcements.</div></div><div class="tl-node">🏛️</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🌃</div><div class="tl-content"><div class="tl-time">06:00 PM</div><div class="tl-title" data-en="Evening Return Flow" data-si="සවස ආපසු ගලා">Evening Return Flow</div><div class="tl-desc" data-en="AI reverses dominant flow. Extra pods deployed on Market and Transit loops." data-si="AI ප්‍රධාන ගලා ආපසු හරවයි. Market සහ Transit ලූප ඉතිරි ගිලන් රථ.">AI reverses dominant flow. Extra pods deployed on key loops.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">11:00 PM</div><div class="tl-title" data-en="Night Maintenance" data-si="රාත්‍රී නඩත්තු">Night Maintenance</div><div class="tl-desc" data-en="Reduced frequency. Inspection drones launch. Batteries charge." data-si="අඩු සංඛ්‍යාතය. ඩ්‍රෝන් පරීක්ෂාව. බැටරි ආරෝපණය.">Reduced frequency. Inspection drones launch. Batteries charge.</div></div><div class="tl-node">🔧</div><div class="tl-spacer"></div></div>
       </div>
     </div>
   </div>
@@ -460,23 +452,21 @@ footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);d
 
 <section id="battle">
   <div class="container">
-    <span class="section-tag reveal">City Flow Battle</span>
-    <h2 class="section-title reveal">AJRLoops vs <span style="color:var(--red)">City Problems</span></h2>
+    <span class="section-tag reveal" data-en="City Flow Battle" data-si="නගර ගලා සටන">City Flow Battle</span>
+    <h2 class="section-title reveal" data-en="AJRLoops vs City Problems" data-si="AJRLoops එදිරිව නගර ගැටළු">AJRLoops vs <span style="color:var(--red)" data-en="City Problems" data-si="නගර ගැටළු">City Problems</span></h2>
     <div class="battle-grid reveal">
       <div class="battle-side">
-        <div class="battle-card villain"><div class="battle-icon">🚗</div><div><div class="battle-label">Traffic Jam Monster</div><div class="battle-result">Gridlock at city center 8AM daily</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">🌧️</div><div><div class="battle-label">Rain Delay</div><div class="battle-result">Floods roads, delays buses 40min</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">🚧</div><div><div class="battle-label">Road Block</div><div class="battle-result">One road blocks entire zone</div><div class="battle-badge badge-warn">THREAT: MED</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">😤</div><div><div class="battle-label">Rush Hour Chaos</div><div class="battle-result">Bus overloaded, kids left behind</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">🚑</div><div><div class="battle-label">Emergency Blocked</div><div class="battle-result">Ambulance stuck in traffic 12min</div><div class="battle-badge badge-warn">THREAT: CRITICAL</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚗</div><div><div class="battle-label" data-en="Traffic Jam Monster" data-si="රථ වාහන රාක්ෂයා">Traffic Jam Monster</div><div class="battle-result" data-en="Gridlock at 8AM daily" data-si="දිනපතා පෙ.ව. 8 රථ රාක්ෂය">Gridlock at 8AM daily</div><div class="battle-badge badge-warn" data-en="THREAT: HIGH" data-si="තර්ජනය: ඉහළ">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🌧️</div><div><div class="battle-label" data-en="Rain Delay" data-si="වර්ෂාවෙන් ප්‍රමාදය">Rain Delay</div><div class="battle-result" data-en="Floods roads, delays 40min" data-si="මාර්ග ගංවතුර, 40 මිනිත් ප්‍රමාදය">Floods roads, delays 40min</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚧</div><div><div class="battle-label" data-en="Road Block" data-si="මාර්ග අවහිරය">Road Block</div><div class="battle-result" data-en="One road blocks entire zone" data-si="එක් මාර්ගයකින් සම්පූර්ණ කලාපය">One road blocks entire zone</div><div class="battle-badge badge-warn">THREAT: MED</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚑</div><div><div class="battle-label" data-en="Emergency Blocked" data-si="හදිසි රථ අවහිරය">Emergency Blocked</div><div class="battle-result" data-en="Ambulance stuck in traffic 12min" data-si="රෝහල් රථය 12 මිනිත් රද්ධේ">Ambulance stuck 12min</div><div class="battle-badge badge-warn">THREAT: CRITICAL</div></div></div>
       </div>
-      <div class="vs-col"><div class="vs-line"></div><div class="vs-text">⟳</div><div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:2px;text-align:center;writing-mode:vertical-rl">AJRLoops Wins</div><div class="vs-text">⟳</div><div class="vs-line"></div></div>
+      <div class="vs-col"><div class="vs-line"></div><div class="vs-text">⟳</div><div style="font-family:'Orbitron',monospace;font-size:.63rem;color:var(--cyan);letter-spacing:2px;text-align:center;writing-mode:vertical-rl" data-en="AJRLoops Wins" data-si="AJRLoops ජය">AJRLoops Wins</div><div class="vs-text">⟳</div><div class="vs-line"></div></div>
       <div class="battle-side">
-        <div class="battle-card hero-c"><div class="battle-icon">⚡</div><div><div class="battle-label">Traffic Jam Skipped</div><div class="battle-result">Pods fly 8m above gridlock. Zero impact.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🌊</div><div><div class="battle-label">Rain Mode: ON</div><div class="battle-result">Sealed tubes unaffected. On-time always.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🔀</div><div><div class="battle-label">Alt Loop Deployed</div><div class="battle-result">AI reroutes in 8 seconds flat.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🤖</div><div><div class="battle-label">Rush Balanced</div><div class="battle-result">AI adds pods before surge hits.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🚨</div><div><div class="battle-label">Emergency Route Clear</div><div class="battle-result">Priority pod corridor. Arrival: 3m 20s.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">⚡</div><div><div class="battle-label" data-en="Traffic Skipped" data-si="රථ වාහන මගහැරිණ">Traffic Skipped</div><div class="battle-result" data-en="Pods fly 8m above gridlock." data-si="ගිලන් රථ 8m ඉහළින් යයි.">Pods fly 8m above gridlock.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🌊</div><div><div class="battle-label" data-en="Rain Mode: ON" data-si="වර්ෂා ප්‍රකාරය: ක්‍රියාකාරී">Rain Mode: ON</div><div class="battle-result" data-en="Sealed tubes unaffected." data-si="වැසූ නල බලපෑමෙන් තොරයි.">Sealed tubes unaffected.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🔀</div><div><div class="battle-label" data-en="Alt Loop Deployed" data-si="විකල්ප ලූප යොදා">Alt Loop Deployed</div><div class="battle-result" data-en="AI reroutes in 8 seconds." data-si="AI 8 තත්පරයෙන් යොමු කරයි.">AI reroutes in 8 seconds.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🚨</div><div><div class="battle-label" data-en="Emergency Route Clear" data-si="හදිසි මාර්ගය නිදහස">Emergency Route Clear</div><div class="battle-result" data-en="Priority pod corridor. 3m 20s." data-si="ප්‍රමුඛ ගිලන් රථ. 3 මිනිත් 20 ත.">Priority corridor. Arrival: 3m 20s.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
       </div>
     </div>
   </div>
@@ -484,19 +474,33 @@ footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);d
 
 <section id="benefits">
   <div class="container">
-    <span class="section-tag reveal">Honest Assessment</span>
-    <h2 class="section-title reveal">Benefits & <span style="color:var(--orange)">Challenges</span></h2>
+    <span class="section-tag reveal" data-en="Honest Assessment" data-si="සාමාන්‍ය ඇගයීම">Honest Assessment</span>
+    <h2 class="section-title reveal" data-en="Benefits & Challenges" data-si="ප්‍රතිලාභ සහ අභියෝග">Benefits & <span style="color:var(--orange)">Challenges</span></h2>
     <div class="two-col">
       <div class="list-card benefits-card reveal">
-        <div class="list-card-title" style="color:var(--green)">✅ POTENTIAL BENEFITS</div>
+        <div class="list-card-title" style="color:var(--green)" data-en="✅ POTENTIAL BENEFITS" data-si="✅ ඉදිරිව ලැබිය හැකි ප්‍රතිලාභ">✅ POTENTIAL BENEFITS</div>
         <ul class="check-list">
-          <li>Reduced road congestion city-wide</li><li>Faster connection between all zones</li><li>Emergency priority routes save lives</li><li>Cleaner, quieter city movement</li><li>App-based booking — no queue, no wait</li><li>Tourism-friendly cultural routes</li><li>Less pressure on narrow Kandy roads</li><li>Real-time AI scheduling and data</li><li>Solar-powered, low-carbon operation</li><li>Barrier-free access with lifts</li>
+          <li data-en="Reduced road congestion city-wide" data-si="නගරය පුරා රථ අශෝභය අඩුවීම">Reduced road congestion city-wide</li>
+          <li data-en="Faster connection between all zones" data-si="සියලු කලාප අතර වේගවත් සම්බන්ධය">Faster connection between all zones</li>
+          <li data-en="Emergency priority routes save lives" data-si="හදිසි ප්‍රමුඛ මාර්ග ජීවිත රකියි">Emergency priority routes save lives</li>
+          <li data-en="Cleaner, quieter city movement" data-si="පිරිසිදු, නිස්කළඹ නගර ගමන">Cleaner, quieter city movement</li>
+          <li data-en="App-based booking — no queue" data-si="ඇප් වෙන් කිරීම — පෝළිමක් නැත">App-based booking — no queue</li>
+          <li data-en="Tourism-friendly cultural routes" data-si="සංස්කෘතික මාර්ග සංචාරකයන්ට හිතවත">Tourism-friendly cultural routes</li>
+          <li data-en="Real-time AI scheduling and data" data-si="සජීවී AI කාලසීමා">Real-time AI scheduling and data</li>
+          <li data-en="Solar-powered, low-carbon operation" data-si="සූර්ය බලයෙන්, අඩු කාබන් මෙහෙයුම">Solar-powered, low-carbon operation</li>
         </ul>
       </div>
       <div class="list-card challenges-card reveal">
-        <div class="list-card-title" style="color:var(--orange)">⚠️ REAL CHALLENGES</div>
+        <div class="list-card-title" style="color:var(--orange)" data-en="⚠️ REAL CHALLENGES" data-si="⚠️ සැබෑ අභියෝග">⚠️ REAL CHALLENGES</div>
         <ul class="check-list">
-          <li>Extremely high construction cost</li><li>Complex regulatory approvals</li><li>Land and right-of-way legal issues</li><li>Ongoing maintenance complexity</li><li>Safety certification requirements</li><li>Heritage and environmental restrictions</li><li>Evacuation planning in dense city</li><li>Public acceptance and trust</li><li>Engineering challenges in hilly terrain</li><li>Seismic resilience design required</li>
+          <li data-en="Extremely high construction cost" data-si="ඉතා ඉහළ ඉදිකිරීමේ පිරිවැය">Extremely high construction cost</li>
+          <li data-en="Complex regulatory approvals" data-si="සංකීර්ණ නියාමන අනුමැතිය">Complex regulatory approvals</li>
+          <li data-en="Land and right-of-way issues" data-si="ඉඩම් සහ මාර්ග අයිතිය ගැටළු">Land and right-of-way issues</li>
+          <li data-en="Safety certification requirements" data-si="ආරක්ෂා සහතිකය අවශ්‍යතා">Safety certification requirements</li>
+          <li data-en="Heritage and environmental restrictions" data-si="උරුමය සහ පරිසර සීමා">Heritage and environmental restrictions</li>
+          <li data-en="Engineering challenges in hilly terrain" data-si="කඳුකර ප්‍රදේශ ඉංජිනේරු අභියෝග">Engineering challenges in hilly terrain</li>
+          <li data-en="Public acceptance and trust" data-si="මහජන පිළිගැනීම සහ විශ්වාසය">Public acceptance and trust</li>
+          <li data-en="Seismic resilience design required" data-si="භූකම්පා ඔරොත්තු නිර්මාණය අවශ්‍ය">Seismic resilience design required</li>
         </ul>
       </div>
     </div>
@@ -505,97 +509,241 @@ footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);d
 
 <section id="cta">
   <div class="container">
-    <h2 class="cta-title reveal">Experience the<br/><span style="color:var(--cyan)">Future City Flow</span></h2>
-    <p class="cta-desc reveal">A concept — a spark. Real cities are built from bold ideas, careful engineering, and public will. What could Kandy become?</p>
-    <button class="btn-replay reveal" onclick="replayDemo()">⟳ Replay City Demo</button>
+    <h2 class="cta-title reveal" data-en="Experience the Future City Flow" data-si="අනාගත නගර ගලා අත්විඳෙන්න">Experience the <span style="color:var(--cyan)" data-en="Future City Flow" data-si="අනාගත නගර ගලා">Future City Flow</span></h2>
+    <p class="cta-desc reveal" data-en="A concept — a spark. Real cities are built from bold ideas, careful engineering, and public will." data-si="සංකල්පයක් — ආරම්භයක්. සැබෑ නගර ධෛර්ය සංකල්ප, ප්‍රවේශම් ඉංජිනේරු, සහ මහජන කැමැත්තෙන් ගොඩනැඟේ.">A concept — a spark. Real cities are built from bold ideas, careful engineering, and public will.</p>
+    <button class="btn-replay reveal" onclick="replayDemo()">⟳ <span data-en="Replay City Demo" data-si="නගර දර්ශනය නැවත">Replay City Demo</span></button>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">⟳ AJRLOOPS</div>
-  <div class="footer-disc">⚠️ This is a conceptual smart-city transport visualization. It is not an approved engineering, government, or construction proposal. All data and animations are simulated for demonstration purposes only.</div>
+  <div class="footer-disc" data-en="⚠️ This is a conceptual smart-city transport visualization. Not an approved engineering, government, or construction proposal. All data simulated." data-si="⚠️ මෙය සංකල්පීය ස්මාර්ට් නගර ප්‍රවාහන දෘශ්‍යකරණයකි. අනුමත ඉංජිනේරු, රජය, හෝ ඉදිකිරීමේ යෝජනාවක් නොවේ. සියලු දත්ත සිමියුලේෂන්.">⚠️ This is a conceptual smart-city transport visualization. Not an approved engineering, government, or construction proposal. All data simulated.</div>
 </footer>
 
 <script>
 // ═══════════════════════════════════════════════
-//  ROUTE & DEMO DATA
+//  LANGUAGE SYSTEM
 // ═══════════════════════════════════════════════
-const BASE_W = 1000, BASE_H = 560;
+let lang = 'en';
 
-const ROUTES = {
-  all:         { label:'All Loops', color:'#ffffff' },
-  residential: { label:'Residential Loop', color:'#10b981', points:[[95,145],[170,210],[255,270],[340,310],[430,295]], pods:6, speed:.0014,
-                 origin:'Res. Hills Station', dest:'City Hub', junctionPt:[255,270], junctionTo:'Office Loop' },
-  office:      { label:'Office & Government', color:'#3b82f6', points:[[270,175],[340,220],[400,265],[430,295],[510,345]], pods:5, speed:.0016,
-                 origin:'Gov. Complex Station', dest:'Commercial Hub', junctionPt:[430,295], junctionTo:'Transit Loop' },
-  hospital:    { label:'Hospital Emergency', color:'#ef4444', points:[[320,490],[390,420],[430,295],[620,280]], pods:4, speed:.0028,
-                 origin:'Bus Stand Hub', dest:'Kandy Hospital', junctionPt:[430,295], junctionTo:'Transit Loop' },
-  market:      { label:'Market & Shops', color:'#f59e0b', points:[[150,450],[280,390],[430,295],[510,345],[620,400]], pods:5, speed:.0013,
-                 origin:'Railway Station', dest:'Market Zone', junctionPt:[430,295], junctionTo:'Tourist Loop' },
-  tourist:     { label:'Tourist Route', color:'#8b5cf6', points:[[565,175],[480,225],[430,295],[490,355],[615,415]], pods:4, speed:.0012,
-                 origin:'Hotel District', dest:'Market Zone', junctionPt:[430,295], junctionTo:'Transit Loop' },
-  school:      { label:'School & University', color:'#06b6d4', points:[[740,140],[605,210],[490,260],[430,295],[215,340]], pods:5, speed:.0015,
-                 origin:'University Hub', dest:'Schools Zone', junctionPt:[490,260], junctionTo:'Office Loop' },
-  transit:     { label:'Main Transit Loop', color:'#a78bfa', points:[[150,450],[320,490],[430,295],[565,175],[740,140]], pods:6, speed:.0017,
-                 origin:'Railway Station', dest:'University Hub', junctionPt:[430,295], junctionTo:'Residential Loop' },
+function toggleLang() {
+  lang = lang === 'en' ? 'si' : 'en';
+  const btn = document.getElementById('lang-btn');
+  btn.textContent = lang === 'en' ? 'සිංහල' : 'English';
+  btn.classList.toggle('si-active', lang === 'si');
+  document.getElementById('hero-si').classList.toggle('show', lang === 'si');
+
+  // Update all data-en/data-si elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) {
+      if (el.tagName === 'INPUT') el.placeholder = txt;
+      else el.textContent = txt;
+    }
+  });
+
+  // Update route buttons
+  document.querySelectorAll('.route-btn').forEach(btn => {
+    const si = btn.getAttribute('data-si'), en = btn.getAttribute('data-en');
+    if (lang === 'si' && si) { btn.textContent = si; btn.classList.add('si-label'); }
+    else if (en) { btn.textContent = en; btn.classList.remove('si-label'); }
+  });
+
+  // Demo phase label
+  document.getElementById('dp-phase').style.display = lang === 'si' ? 'none' : 'block';
+  document.getElementById('dp-phase-si').classList.toggle('show', lang === 'si');
+
+  updateActiveRouteBtn();
+}
+
+function t(en, si) { return lang === 'si' ? si : en; }
+function updateActiveRouteBtn() {
+  document.querySelectorAll('.route-btn').forEach(b => {
+    const key = b.getAttribute('data-en') || '';
+    if (b.classList.contains('active')) {
+      const si = b.getAttribute('data-si'), en = b.getAttribute('data-en');
+      if (lang === 'si' && si) b.textContent = si;
+      else if (en) b.textContent = en;
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  REAL KANDY MAP — ROUTE DATA
+//  Coordinates based on actual Kandy geography
+//  Canvas: 1000 x 570 internal
+// ═══════════════════════════════════════════════
+const BASE_W = 1000, BASE_H = 570;
+
+// Key location nodes (traced from real Kandy map)
+const NODES = {
+  railwayStation: [345, 408],   // Kandy Railway Station (Suduhumpola)
+  busStand:       [432, 388],   // Central Bus Stand
+  lakeCenter:     [468, 328],   // Kandy Lake center
+  dalada:         [448, 285],   // Temple of the Tooth
+  hospital:       [375, 212],   // Kandy Hospital (northwest)
+  udawatta:       [510, 250],   // Udawatta Kele Sanctuary
+  asgiriya:       [362, 188],   // Asgiriya
+  katugastota:    [490, 88],    // Katugastota / Mawinmada (north)
+  buwelikada:     [608, 328],   // Buwelikada (east of lake)
+  lewella:        [625, 242],   // Lewella
+  market:         [488, 358],   // City Market / Commercial
+  university:     [132, 405],   // Peradeniya University
+  peradeniya:     [165, 428],   // Peradeniya area
+  randlesHill:    [268, 492],   // Randles Hill (south residential)
+  bowala:         [285, 552],   // Bowala (south)
+  ampitiya:       [570, 475],   // Ampitiya (south-east)
+  tennekumbura:   [748, 445],   // Tennekumbura (east)
+  gohagoda:       [240, 195],   // Gohagoda / Cinnamon area (northwest)
+  alawathugoda:   [305, 128],   // Alawathugoda (north)
 };
 
+const ROUTES = {
+  all: { label: 'All Routes', labelSi: 'සියලු මාර්ග', color: '#ffffff' },
+
+  residential: {
+    label: 'Residential Loop', labelSi: 'නිවාස ලූපය',
+    color: '#10b981',
+    // A1 road: Randles Hill → Suduhumpola → Railway → Bus Stand → Lake
+    points: [
+      [268,492],[295,468],[318,448],[338,430],[345,408],
+      [370,400],[400,394],[432,388],[450,360],[468,328]
+    ],
+    origin: 'Randles Hill', originSi: 'රෑන්ඩල්ස් කන්ද',
+    dest: 'City Hub', destSi: 'නගර කේන්ද්‍රය',
+    pods: 5, speed: .0013,
+  },
+
+  office: {
+    label: 'Office & Government', labelSi: 'කාර්යාල සහ රජය',
+    color: '#3b82f6',
+    // Asgiriya area → hospital road → dalada → city center
+    points: [
+      [362,188],[372,205],[385,225],[400,250],[425,270],
+      [448,285],[458,305],[468,328],[488,358]
+    ],
+    origin: 'Asgiriya', originSi: 'අස්ගිරිය',
+    dest: 'Commercial Zone', destSi: 'වාණිජ කලාපය',
+    pods: 5, speed: .0015,
+  },
+
+  hospital: {
+    label: 'Hospital Emergency', labelSi: 'රෝහල් හදිසි',
+    color: '#ef4444',
+    // Bus Stand → Lake → Temple area → Hospital (follows upper lake road)
+    points: [
+      [432,388],[448,360],[458,340],[455,315],[448,295],
+      [440,270],[415,248],[395,230],[375,212]
+    ],
+    origin: 'Bus Stand', originSi: 'බස් නිලයාමය',
+    dest: 'Kandy Hospital', destSi: 'කන්ඩි රෝහල',
+    pods: 4, speed: .0025,
+  },
+
+  market: {
+    label: 'Market & Shops', labelSi: 'වෙළඳ සහ කඩ',
+    color: '#f59e0b',
+    // Railway Station → Bus Stand → Market → Buwelikada
+    points: [
+      [345,408],[390,400],[432,388],[455,375],[475,358],
+      [488,358],[530,348],[570,338],[608,328]
+    ],
+    origin: 'Railway Station', originSi: 'දුම්රිය ස්ථානය',
+    dest: 'Buwelikada Market', destSi: 'බූවැලිකඩ',
+    pods: 5, speed: .0012,
+  },
+
+  tourist: {
+    label: 'Tourist Route', labelSi: 'සංචාරක මාර්ගය',
+    color: '#8b5cf6',
+    // Lake road circuit: goes around Kandy Lake
+    points: [
+      [448,285],[462,278],[485,272],[510,278],[535,295],
+      [548,318],[545,342],[530,358],[510,368],[488,372],
+      [462,368],[440,355],[425,338],[418,318],[420,298],
+      [432,285],[448,285]
+    ],
+    origin: 'Dalada Maligawa', originSi: 'ශ්‍රී දළදා මාළිගාව',
+    dest: 'Lake Road Circuit', destSi: 'වැව් මාර්ගය',
+    pods: 5, speed: .0010,
+  },
+
+  school: {
+    label: 'School & University', labelSi: 'පාසල් සහ විශ්ව',
+    color: '#06b6d4',
+    // Peradeniya → Katugastota road through city north
+    points: [
+      [132,405],[165,428],[210,418],[265,412],[305,410],
+      [345,408],[390,400],[432,388],[448,360],[448,318],
+      [445,285],[440,255],[442,222],[458,192],[490,168],[490,88]
+    ],
+    origin: 'Peradeniya Univ.', originSi: 'පේරාදෙණිය',
+    dest: 'Katugastota', destSi: 'කටුගස්තොට',
+    pods: 5, speed: .0012,
+  },
+
+  transit: {
+    label: 'Main Transit', labelSi: 'ප්‍රධාන ගමනාගමන',
+    color: '#a78bfa',
+    // Railway → City → A9 north to Katugastota (main spine)
+    points: [
+      [345,408],[370,395],[405,390],[432,388],[448,360],
+      [455,338],[455,308],[448,285],[438,260],[428,238],
+      [415,215],[405,192],[408,165],[428,138],[460,112],[490,88]
+    ],
+    origin: 'Railway Station', originSi: 'දුම්රිය ස්ථානය',
+    dest: 'Katugastota', destSi: 'කටුගස්තොට',
+    pods: 6, speed: .0014,
+  },
+};
+
+// Landmarks with Sinhala names
 const LANDMARKS = [
-  { name:'Kandy Lake', x:430, y:295, icon:'', color:'#1d4ed8' },
-  { name:'Temple of Tooth', x:440, y:225, icon:'🏛️', color:'#f59e0b' },
-  { name:'Railway Station', x:150, y:450, icon:'🚉', color:'#6366f1' },
-  { name:'Bus Stand', x:320, y:490, icon:'🚌', color:'#6366f1' },
-  { name:'Hospital', x:620, y:280, icon:'🏥', color:'#ef4444' },
-  { name:'Market Zone', x:620, y:400, icon:'🛒', color:'#f59e0b' },
-  { name:'University', x:740, y:140, icon:'🎓', color:'#06b6d4' },
-  { name:'Schools Zone', x:215, y:340, icon:'🏫', color:'#06b6d4' },
-  { name:'Res. Hills', x:95, y:145, icon:'🏠', color:'#10b981' },
-  { name:'Hotels', x:565, y:175, icon:'🏨', color:'#8b5cf6' },
-  { name:'Gov. Complex', x:270, y:175, icon:'🏛', color:'#3b82f6' },
-  { name:'Commercial', x:510, y:345, icon:'🏢', color:'#f97316' },
+  { key:'dalada',   x:448, y:285, en:'Dalada Maligawa', si:'ශ්‍රී දළදා',  icon:'🏛️', col:'#f59e0b', type:'temple' },
+  { key:'railway',  x:345, y:408, en:'Railway Station',  si:'දුම්රිය',     icon:'🚉', col:'#6366f1', type:'station' },
+  { key:'bus',      x:432, y:388, en:'Bus Stand',         si:'බස් නිලය',   icon:'🚌', col:'#6366f1', type:'transit' },
+  { key:'hospital', x:375, y:212, en:'Kandy Hospital',    si:'රෝහල',       icon:'🏥', col:'#ef4444', type:'hospital' },
+  { key:'udawatta', x:510, y:250, en:'Udawatta Kele',     si:'උඩවත්ත කෙළේ',icon:'🌿', col:'#22c55e', type:'nature' },
+  { key:'market',   x:488, y:358, en:'City Market',       si:'නගර වෙළ',   icon:'🛒', col:'#f59e0b', type:'market' },
+  { key:'univ',     x:132, y:405, en:'Peradeniya Univ.', si:'පේරාදෙණිය', icon:'🎓', col:'#06b6d4', type:'school' },
+  { key:'buweli',   x:608, y:328, en:'Buwelikada',        si:'බූවැලිකඩ',  icon:'🏢', col:'#f97316', type:'commercial' },
+  { key:'randles',  x:268, y:492, en:'Randles Hill',      si:'රෑන්ඩල්ස්', icon:'🏠', col:'#10b981', type:'residential' },
+  { key:'katuga',   x:490, y:88,  en:'Katugastota',       si:'කටුගස්',    icon:'🏘️', col:'#06b6d4', type:'residential' },
+  { key:'asgiri',   x:362, y:188, en:'Asgiriya',          si:'අස්ගිරිය',  icon:'🏛', col:'#3b82f6', type:'government' },
+  { key:'lewella',  x:625, y:242, en:'Lewella',            si:'ලේවැල්ල',  icon:'🏘', col:'#10b981', type:'residential' },
 ];
 
 // ═══════════════════════════════════════════════
-//  GLOBAL STATE
+//  STATE
 // ═══════════════════════════════════════════════
 let pods = [];
 let activeRoute = 'all';
 let cityT = 0;
 let cW, cH, scX, scY;
 
-// Zoom/camera
 const cam = { x:500, y:280, zoom:1, tx:500, ty:280, tz:1 };
 
 // Demo system
 const DEMO_PHASES = [
-  { id:'zoom_in',     label:'Zooming to station...', dur:2000 },
-  { id:'waiting',     label:'Passengers waiting at station', dur:2500 },
-  { id:'app_select',  label:'Selecting destination on AJRLoops app', dur:3000 },
-  { id:'pod_arrive',  label:'Pod approaching platform...', dur:2500 },
-  { id:'boarding',    label:'Boarding — doors closing', dur:2000 },
-  { id:'depart',      label:'Departing — entering main tube', dur:1500 },
-  { id:'travel_1',    label:'Travelling at 85 km/h through elevated loop', dur:3500 },
-  { id:'junction',    label:'Route junction — switching loop', dur:2500 },
-  { id:'passing',     label:'Express pod passing on opposite track', dur:2000 },
-  { id:'travel_2',    label:'Final approach to destination', dur:2500 },
-  { id:'arrival',     label:'Arrived! Doors opening...', dur:2000 },
-  { id:'exit',        label:'Passenger exiting via skybridge', dur:1500 },
-  { id:'zoom_out',    label:'Returning to overview...', dur:1500 },
+  { id:'zoom_in',    dur:2000, en:'Zooming to station...', si:'ස්ථානයට ළඟා වෙමින්...' },
+  { id:'waiting',    dur:2500, en:'Passengers waiting at station', si:'ස්ථානයේ මගීන් රැදී සිටිති' },
+  { id:'app_select', dur:3000, en:'Selecting destination on AJRLoops app', si:'AJRLoops ඇප් එකෙන් ගමනාන්තය' },
+  { id:'pod_arrive', dur:2000, en:'Pod approaching platform...', si:'ගිලන් රථ වේදිකාවට...' },
+  { id:'boarding',   dur:2000, en:'Boarding — doors closing', si:'නැඟීම — දොරවල් වැසෙයි' },
+  { id:'travel_1',   dur:4000, en:'Travelling at 85 km/h', si:'85 km/h වේගයෙන් ගමන' },
+  { id:'junction',   dur:2000, en:'Route switch — AI routing', si:'AI මාරු කරයි' },
+  { id:'travel_2',   dur:2500, en:'Final approach to destination', si:'ගමනාන්තයට ළඟ' },
+  { id:'arrival',    dur:2000, en:'Arrived! Doors opening...', si:'පැමිණිණ! දොරවල් ඇරෙයි' },
+  { id:'exit',       dur:1500, en:'Passenger exiting via skybridge', si:'මගියා skybridge ගෙන් යයි' },
+  { id:'zoom_out',   dur:1500, en:'Returning to overview...', si:'දළ දර්ශනයට...' },
 ];
-const DEMO_STEPS = ['Book','Board','Travel','Junction','Arrive'];
+const DEMO_STEPS_EN = ['Book','Board','Travel','Arrive'];
+const DEMO_STEPS_SI = ['වෙන් කරන්න','නඟින්න','ගමන','පැමිණෙන්න'];
 
 let demo = {
-  active: false,
-  routeKey: null,
-  phaseIdx: 0,
-  phaseT: 0,       // ms elapsed in current phase
-  lastTime: 0,
-  podT: 0,         // demo pod progress 0→1
-  passengerState: 'waiting', // waiting|boarding|onboard|exiting
-  junctionFlash: 0,
-  passingPodT: -1,
-  phoneAnim: 0,
-  arriveFlash: 0,
+  active:false, routeKey:null, phaseIdx:0, phaseT:0,
+  lastTime:0, podT:0, passengerState:'waiting',
+  passingPodT:-1, phoneAnim:0,
 };
 
 // ═══════════════════════════════════════════════
@@ -607,39 +755,34 @@ const cCtx = cityCanvas.getContext('2d');
 function resizeCity() {
   const wrap = document.getElementById('city-canvas-wrap');
   cW = cityCanvas.width = wrap.offsetWidth;
-  cH = cityCanvas.height = Math.min(cW * 0.58, 580);
-  scX = cW / BASE_W;
-  scY = cH / BASE_H;
+  cH = cityCanvas.height = Math.min(cW * 0.57, 570);
+  scX = cW / BASE_W; scY = cH / BASE_H;
 }
 
 const cx = x => x * scX;
 const cy = y => y * scY;
 
 function hexA(hex, a) {
+  if (hex.startsWith('rgba')) return hex;
   const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
   return `rgba(${r},${g},${b},${a})`;
 }
 
 // ═══════════════════════════════════════════════
-//  PATH UTILITIES
+//  PATH UTILS
 // ═══════════════════════════════════════════════
-function getPathPos(pts, t) {
+function pathPos(pts, t) {
   t = Math.max(0, Math.min(1, t));
-  const total = pts.length - 1;
-  const segT = t * total;
-  const si = Math.min(Math.floor(segT), total - 1);
-  const lt = segT - si;
-  const p1 = pts[si], p2 = pts[si + 1];
-  return [p1[0] + (p2[0]-p1[0])*lt, p1[1] + (p2[1]-p1[1])*lt];
+  const n = pts.length - 1;
+  const st = t * n; const si = Math.min(Math.floor(st), n-1); const lt = st-si;
+  return [pts[si][0]+(pts[si+1][0]-pts[si][0])*lt, pts[si][1]+(pts[si+1][1]-pts[si][1])*lt];
 }
 
-function getPathAngle(pts, t) {
-  t = Math.max(0, Math.min(0.999, t));
-  const total = pts.length - 1;
-  const segT = t * total;
-  const si = Math.min(Math.floor(segT), total - 1);
-  const p1 = pts[si], p2 = pts[si+1];
-  return Math.atan2(p2[1]-p1[1], p2[0]-p1[0]);
+function pathAngle(pts, t) {
+  t = Math.max(0, Math.min(.999, t));
+  const n = pts.length - 1;
+  const st = t * n; const si = Math.min(Math.floor(st), n-1);
+  return Math.atan2(pts[si+1][1]-pts[si][1], pts[si+1][0]-pts[si][0]);
 }
 
 // ═══════════════════════════════════════════════
@@ -647,609 +790,585 @@ function getPathAngle(pts, t) {
 // ═══════════════════════════════════════════════
 function initPods() {
   pods = [];
-  Object.entries(ROUTES).forEach(([key, r]) => {
+  Object.entries(ROUTES).forEach(([key,r]) => {
     if (key === 'all') return;
     for (let i = 0; i < r.pods; i++) {
-      pods.push({ routeKey:key, t: i/r.pods, color:r.color, speed:r.speed });
+      pods.push({ routeKey:key, t:i/r.pods, color:r.color, speed:r.speed });
     }
   });
 }
 
 // ═══════════════════════════════════════════════
-//  CAMERA / ZOOM
+//  CAMERA
 // ═══════════════════════════════════════════════
 function lerpCam(dt) {
-  const s = Math.min(1, dt * 0.005);
-  cam.zoom += (cam.tz - cam.zoom) * s;
-  cam.x    += (cam.tx - cam.x) * s;
-  cam.y    += (cam.ty - cam.y) * s;
+  const s = Math.min(1, dt * .006);
+  cam.zoom += (cam.tz-cam.zoom)*s; cam.x += (cam.tx-cam.x)*s; cam.y += (cam.ty-cam.y)*s;
 }
-
-function setCamTarget(worldX, worldY, zoom) {
-  cam.tx = worldX; cam.ty = worldY; cam.tz = zoom;
-}
-
-function applyCam() {
-  const z = cam.zoom;
-  cCtx.save();
-  cCtx.translate(cW/2, cH/2);
-  cCtx.scale(z, z);
-  cCtx.translate(-cx(cam.x), -cy(cam.y));
-}
+function setCam(wx, wy, z) { cam.tx=wx; cam.ty=wy; cam.tz=z; }
 
 // ═══════════════════════════════════════════════
-//  DRAWING: TERRAIN + ROADS
+//  TERRAIN — REAL KANDY GEOGRAPHY
 // ═══════════════════════════════════════════════
 function drawTerrain() {
-  const bg = cCtx.createLinearGradient(0,0,0,cH);
-  bg.addColorStop(0,'#070c18'); bg.addColorStop(1,'#0d1428');
-  cCtx.fillStyle = bg; cCtx.fillRect(0,0,cW,cH);
+  // Base background
+  const bg = cCtx.createLinearGradient(0, 0, 0, cH);
+  bg.addColorStop(0, '#07101e'); bg.addColorStop(1, '#0c1828');
+  cCtx.fillStyle = bg; cCtx.fillRect(0, 0, cW, cH);
 
-  const hills=[[[0,0],[200,0],[180,180],[60,260],[0,300]],[[BASE_W,0],[BASE_W,200],[820,250],[750,120]],[[0,BASE_H],[0,400],[120,380],[200,BASE_H]],[[BASE_W,BASE_H],[BASE_W,380],[800,360],[900,BASE_H]]];
-  hills.forEach(pts=>{
-    cCtx.fillStyle='#0d1f35';cCtx.beginPath();
-    cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1]));
-    pts.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));
-    cCtx.closePath();cCtx.fill();
+  // Hill regions (Kandy is surrounded by hills)
+  const hillAreas = [
+    // North-west hills (Asgiriya, Gohagoda)
+    { pts:[[0,0],[280,0],[280,120],[200,200],[100,280],[0,320]], col:'rgba(8,24,16,0.9)' },
+    // North hills (Alawathugoda, toward Katugastota)
+    { pts:[[280,0],[520,0],[520,60],[490,88],[400,130],[280,120]], col:'rgba(8,22,14,0.85)' },
+    // North-east (toward Lewella hills)
+    { pts:[[520,0],[1000,0],[1000,220],[750,300],[640,260],[560,210],[490,88]], col:'rgba(8,22,14,0.8)' },
+    // East hills (Tennekumbura area)
+    { pts:[[1000,220],[1000,570],[840,570],[750,480],[748,445],[800,380],[750,300]], col:'rgba(8,20,12,0.8)' },
+    // South-east (Ampitiya hills)
+    { pts:[[570,475],[650,500],[750,480],[840,570],[1000,570],[1000,570],[700,570],[560,520]], col:'rgba(8,20,12,0.75)' },
+    // South hills (Bowala/Dangolla)
+    { pts:[[0,570],[285,552],[295,530],[280,505],[268,492],[220,480],[100,500],[0,530]], col:'rgba(8,20,12,0.8)' },
+    // West hills (Peradeniya, approaching from Colombo)
+    { pts:[[0,320],[100,280],[100,380],[132,405],[80,440],[0,460]], col:'rgba(8,22,14,0.85)' },
+  ];
+
+  hillAreas.forEach(h => {
+    cCtx.fillStyle = h.col;
+    cCtx.beginPath();
+    cCtx.moveTo(cx(h.pts[0][0]), cy(h.pts[0][1]));
+    h.pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+    cCtx.closePath(); cCtx.fill();
   });
 
-  const roads=[[[0,450],[150,450],[320,490],[500,480],[700,430],[900,400]],[[150,0],[150,450]],[[430,295],[430,150],[430,0]],[[0,300],[95,145],[200,80],[350,50]],[[430,295],[700,280],[900,280]],[[320,490],[430,295]],[[430,295],[565,175],[740,140],[900,120]]];
-  cCtx.lineWidth=cx(8); cCtx.strokeStyle='rgba(25,35,55,0.85)';
-  roads.forEach(r=>{cCtx.beginPath();cCtx.moveTo(cx(r[0][0]),cy(r[0][1]));r.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));cCtx.stroke();});
-  cCtx.lineWidth=1; cCtx.strokeStyle='rgba(35,50,75,0.4)';
-  roads.forEach(r=>{cCtx.beginPath();cCtx.moveTo(cx(r[0][0]),cy(r[0][1]));r.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));cCtx.stroke();});
-}
-
-// ═══════════════════════════════════════════════
-//  DRAWING: BUILDINGS
-// ═══════════════════════════════════════════════
-function drawBuildings() {
-  const zones=[{cx:95,cy:145,r:55,col:'#10b981',d:12},{cx:270,cy:175,r:45,col:'#3b82f6',d:8},{cx:215,cy:340,r:40,col:'#06b6d4',d:8},{cx:510,cy:345,r:40,col:'#f97316',d:10},{cx:620,cy:400,r:45,col:'#f59e0b',d:12},{cx:620,cy:280,r:35,col:'#ef4444',d:6},{cx:565,cy:175,r:40,col:'#8b5cf6',d:8},{cx:740,cy:140,r:40,col:'#06b6d4',d:7},{cx:860,cy:350,r:45,col:'#f97316',d:10},{cx:150,cy:350,r:35,col:'#10b981',d:8}];
-  zones.forEach(z=>{
-    const seed=z.cx*13+z.cy*7;
-    const isActive=activeRoute==='all'||(activeRoute&&ROUTES[activeRoute]&&ROUTES[activeRoute].points&&ROUTES[activeRoute].points.some(p=>Math.hypot(p[0]-z.cx,p[1]-z.cy)<120));
-    for(let i=0;i<z.d;i++){
-      const angle=(seed*i*137.5*Math.PI/180)%(Math.PI*2);
-      const dist=((seed*i*23)%100)/100*z.r*.85;
-      const bx=z.cx+Math.cos(angle)*dist, by=z.cy+Math.sin(angle)*dist;
-      const bw=6+((seed*i*17)%10), bh=5+((seed*i*11)%8);
-      cCtx.fillStyle=hexA(z.col,isActive?.35:.1);
-      cCtx.fillRect(cx(bx-bw/2),cy(by-bh/2),cx(bw)-cx(0),cy(bh)-cy(0));
-      if(isActive){cCtx.strokeStyle=hexA(z.col,.45);cCtx.lineWidth=.5;cCtx.strokeRect(cx(bx-bw/2),cy(by-bh/2),cx(bw)-cx(0),cy(bh)-cy(0));}
-    }
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  DRAWING: LAKE
-// ═══════════════════════════════════════════════
-function drawLake() {
-  const lx=cx(430),ly=cy(295),lrx=cx(90),lry=cy(60);
-  const grad=cCtx.createRadialGradient(lx,ly-lry*.2,0,lx,ly,lrx);
-  grad.addColorStop(0,'rgba(30,64,175,0.92)');grad.addColorStop(.6,'rgba(29,78,216,0.76)');grad.addColorStop(1,'rgba(30,58,138,0.6)');
-  cCtx.fillStyle=grad;cCtx.beginPath();cCtx.ellipse(lx,ly,lrx,lry,0,0,Math.PI*2);cCtx.fill();
-  cCtx.strokeStyle=`rgba(96,165,250,${.12+Math.sin(cityT*.8)*.05})`;cCtx.lineWidth=1;cCtx.beginPath();cCtx.ellipse(lx,ly,lrx*.7,lry*.5,0,0,Math.PI*2);cCtx.stroke();
-  cCtx.fillStyle='rgba(147,197,253,0.65)';cCtx.font=`bold ${Math.max(8,cx(10))}px Inter`;cCtx.textAlign='center';cCtx.fillText('Kandy Lake',lx,ly+4);
-}
-
-// ═══════════════════════════════════════════════
-//  DRAWING: TUBES
-// ═══════════════════════════════════════════════
-function drawTubeSet() {
-  Object.entries(ROUTES).forEach(([key,r])=>{
-    if(key==='all') return;
-    const isActive=activeRoute==='all'||activeRoute===key;
-    const alpha=isActive?.9:.1, lw=isActive?Math.max(2,cx(3)):Math.max(.8,cx(1.5));
-
-    // shadow
-    cCtx.strokeStyle='rgba(0,0,0,0.35)';cCtx.lineWidth=lw+cx(2);cCtx.lineCap='round';cCtx.lineJoin='round';
-    cCtx.beginPath();cCtx.moveTo(cx(r.points[0][0]),cy(r.points[0][1]+6));
-    r.points.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]+6)));cCtx.stroke();
-
-    // glow tube
-    cCtx.save();if(isActive){cCtx.shadowBlur=18;cCtx.shadowColor=r.color;}
-    cCtx.strokeStyle=hexA(r.color,alpha);cCtx.lineWidth=lw;cCtx.lineCap='round';cCtx.lineJoin='round';
-    cCtx.beginPath();cCtx.moveTo(cx(r.points[0][0]),cy(r.points[0][1]));
-    r.points.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));cCtx.stroke();cCtx.restore();
-
-    // highlight
-    if(isActive){
-      cCtx.strokeStyle='rgba(255,255,255,0.22)';cCtx.lineWidth=1;
-      cCtx.beginPath();cCtx.moveTo(cx(r.points[0][0]),cy(r.points[0][1]-1.5));
-      r.points.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]-1.5)));cCtx.stroke();
-    }
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  DRAWING: STATIONS
-// ═══════════════════════════════════════════════
-function drawStations() {
-  const junctions=new Map();
-  Object.entries(ROUTES).forEach(([key,r])=>{
-    if(key==='all') return;
-    const isActive=activeRoute==='all'||activeRoute===key;
-    r.points.forEach(p=>{
-      const k=`${p[0]},${p[1]}`;
-      if(!junctions.has(k)) junctions.set(k,{x:p[0],y:p[1],active:false,color:r.color});
-      if(isActive) junctions.get(k).active=true;
-    });
-  });
-  junctions.forEach(j=>{
-    const pulse=Math.sin(cityT*3+j.x*.05)*.5+.5;
-    cCtx.save();
-    if(j.active){cCtx.shadowBlur=12;cCtx.shadowColor=j.color;}
-    cCtx.strokeStyle=hexA(j.color,j.active?(.35+pulse*.45):.12);cCtx.lineWidth=1;
-    cCtx.beginPath();cCtx.arc(cx(j.x),cy(j.y),cx(6+pulse*3),0,Math.PI*2);cCtx.stroke();
-    cCtx.fillStyle=hexA(j.color,j.active?.9:.18);
-    cCtx.beginPath();cCtx.arc(cx(j.x),cy(j.y),cx(3),0,Math.PI*2);cCtx.fill();
-    cCtx.restore();
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  DRAWING: AMBIENT PODS
-// ═══════════════════════════════════════════════
-function drawAmbientPods() {
-  const ps=cx(8);
-  pods.forEach(pod=>{
-    const isActive=activeRoute==='all'||activeRoute===pod.routeKey;
-    // Slow down pods when demo is active (except selected route)
-    const spd = demo.active ? pod.speed * (activeRoute===pod.routeKey ? 0.3 : 0.1) : pod.speed;
-    pod.t=(pod.t+spd)%1;
-    if(!isActive&&Math.random()>.35) return;
-
-    const pos=getPathPos(ROUTES[pod.routeKey].points,pod.t);
-    const angle=getPathAngle(ROUTES[pod.routeKey].points,pod.t);
-    const alpha=isActive?1:.15;
-
-    cCtx.save();
-    cCtx.translate(cx(pos[0]),cy(pos[1]));cCtx.rotate(angle);
-    cCtx.shadowBlur=isActive?12:0;cCtx.shadowColor=pod.color;
-    const pw=ps,ph=ps*.42;
-    cCtx.fillStyle=`rgba(255,255,255,${alpha})`;
-    cCtx.beginPath();cCtx.roundRect(-pw/2,-ph/2,pw,ph,ph/2);cCtx.fill();
-    cCtx.fillStyle=hexA(pod.color,alpha);
-    cCtx.beginPath();cCtx.roundRect(-pw/2+1.5,-ph/2+1.5,pw-3,ph-3,ph/2-1);cCtx.fill();
-    cCtx.restore();
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  DRAWING: LANDMARKS
-// ═══════════════════════════════════════════════
-function drawLandmarks() {
-  LANDMARKS.forEach(lm=>{
-    if(lm.name==='Kandy Lake') return;
-    const isActive=activeRoute==='all'||(ROUTES[activeRoute]&&ROUTES[activeRoute].points&&ROUTES[activeRoute].points.some(p=>Math.hypot(p[0]-lm.x,p[1]-lm.y)<90));
-    cCtx.globalAlpha=isActive?1:.28;
-    cCtx.font=`${Math.max(9,cx(13))}px serif`;cCtx.textAlign='center';
-    cCtx.fillText(lm.icon,cx(lm.x),cy(lm.y));
-    if(isActive&&cW>480){
-      cCtx.fillStyle=hexA(lm.color,.85);
-      cCtx.font=`bold ${Math.max(6,cx(8))}px Inter`;
-      cCtx.fillText(lm.name,cx(lm.x),cy(lm.y)+Math.max(11,cx(14)));
-    }
-    cCtx.globalAlpha=1;
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  DEMO: DETAILED STATION
-// ═══════════════════════════════════════════════
-function drawDetailedStation(wx, wy, name, color, isOrigin) {
-  const sx=cx(wx), sy=cy(wy);
-  const sw=cx(80), sh=cy(14), py=sy+cy(8);
-
-  // Platform base
-  cCtx.fillStyle='#1a2a45';
-  cCtx.beginPath();cCtx.roundRect(sx-sw/2,py,sw,sh,2);cCtx.fill();
-  cCtx.strokeStyle=hexA(color,.6);cCtx.lineWidth=1;
-  cCtx.beginPath();cCtx.roundRect(sx-sw/2,py,sw,sh,2);cCtx.stroke();
-
-  // Canopy top
-  cCtx.strokeStyle=hexA(color,.8);cCtx.lineWidth=cx(2);
-  cCtx.beginPath();cCtx.moveTo(sx-sw/2-cx(5),py-cy(20));cCtx.lineTo(sx+sw/2+cx(5),py-cy(20));cCtx.stroke();
-  // Canopy columns
-  [sx-sw/2,sx,sx+sw/2].forEach(x=>{
-    cCtx.beginPath();cCtx.moveTo(x,py-cy(20));cCtx.lineTo(x,py);cCtx.strokeStyle=hexA(color,.4);cCtx.lineWidth=1;cCtx.stroke();
-  });
-
-  // Station screen
-  cCtx.fillStyle='#0a1628';cCtx.fillRect(sx-cx(18),py-cy(38),cx(36),cy(16));
-  cCtx.strokeStyle=hexA(color,.5);cCtx.lineWidth=.5;cCtx.strokeRect(sx-cx(18),py-cy(38),cx(36),cy(16));
-  cCtx.fillStyle=color;cCtx.font=`bold ${Math.max(5,cx(6))}px Orbitron,monospace`;cCtx.textAlign='center';
-  cCtx.fillText('AJR STATION',sx,py-cy(26));
-
-  // Name label
-  cCtx.save();cCtx.shadowBlur=8;cCtx.shadowColor=color;
-  cCtx.fillStyle=color;cCtx.font=`bold ${Math.max(7,cx(9))}px Orbitron,monospace`;cCtx.textAlign='center';
-  cCtx.fillText(name,sx,py-cy(44));cCtx.restore();
-
-  // BOARDING / DESTINATION tag
-  const tag=isOrigin?'BOARDING':'DESTINATION';
-  cCtx.fillStyle=hexA(color,.18);
-  cCtx.beginPath();cCtx.roundRect(sx-cx(22),py+sh+cy(2),cx(44),cy(10),2);cCtx.fill();
-  cCtx.fillStyle=hexA(color,.8);cCtx.font=`${Math.max(4,cx(5.5))}px Orbitron,monospace`;cCtx.textAlign='center';
-  cCtx.fillText(tag,sx,py+sh+cy(9.5));
-}
-
-// ═══════════════════════════════════════════════
-//  DEMO: PASSENGER PERSON
-// ═══════════════════════════════════════════════
-function drawPerson(wx, wy, color, state, animT) {
-  const px=cx(wx), py=cy(wy);
-  const sc=cx(3.5);
-
-  // Sway when waiting
-  let ox=0, oy=0;
-  if(state==='waiting') ox=Math.sin(cityT*1.8+animT)*.8;
-  if(state==='boarding') { ox=animT*cx(20); oy=-animT*cy(4); }
-  if(state==='exiting')  { ox=animT*cx(18); }
-
-  const opacity=state==='onboard'?0:1;
-  cCtx.save();cCtx.globalAlpha=opacity;
-  cCtx.translate(px+ox,py+oy);
-  cCtx.shadowBlur=10;cCtx.shadowColor=color;
-
-  // Head
-  cCtx.fillStyle='#fcd5a8';cCtx.beginPath();cCtx.arc(0,-sc*3,sc,0,Math.PI*2);cCtx.fill();
-  // Body
-  cCtx.strokeStyle=color;cCtx.lineWidth=sc*.7;cCtx.lineCap='round';
-  cCtx.beginPath();cCtx.moveTo(0,-sc*2);cCtx.lineTo(0,sc*1.2);cCtx.stroke();
-  // Arms
-  const armAng=Math.sin(cityT*3+animT)*.3;
-  cCtx.beginPath();cCtx.moveTo(-sc*1.5,-sc*.5+Math.sin(armAng)*sc*.3);cCtx.lineTo(0,0);
-  cCtx.moveTo(sc*1.5,-sc*.5-Math.sin(armAng)*sc*.3);cCtx.lineTo(0,0);cCtx.stroke();
-  // Legs
-  const legAng=state==='waiting'?0:Math.sin(cityT*4)*0.4;
+  // Mahaweli Ganga river (flows right side, north to south)
+  const riverPts = [[636,0],[642,80],[648,160],[652,230],[658,300],[665,370],[675,440],[690,510],[710,570]];
+  // River body
+  cCtx.fillStyle = 'rgba(15,40,80,0.7)';
   cCtx.beginPath();
-  cCtx.moveTo(0,sc*1.2);cCtx.lineTo(-sc*.8+Math.sin(legAng)*sc*.5,sc*2.8);
-  cCtx.moveTo(0,sc*1.2);cCtx.lineTo(sc*.8-Math.sin(legAng)*sc*.5,sc*2.8);
+  cCtx.moveTo(cx(riverPts[0][0]-18), cy(riverPts[0][1]));
+  riverPts.forEach(p => cCtx.lineTo(cx(p[0]-18), cy(p[1])));
+  riverPts.slice().reverse().forEach(p => cCtx.lineTo(cx(p[0]+10), cy(p[1])));
+  cCtx.closePath(); cCtx.fill();
+
+  // River shimmer
+  cCtx.strokeStyle = `rgba(29,78,216,${0.25+Math.sin(cityT)*.05})`;
+  cCtx.lineWidth = cx(4);
+  cCtx.beginPath();
+  cCtx.moveTo(cx(riverPts[0][0]-5), cy(riverPts[0][1]));
+  riverPts.forEach(p => cCtx.lineTo(cx(p[0]-5), cy(p[1])));
   cCtx.stroke();
 
-  // Phone if waiting
-  if(state==='waiting'||state==='phone') {
-    cCtx.fillStyle='#1a2a45';cCtx.fillRect(cx(4),-sc*3.5,cx(9),cy(13));
-    cCtx.strokeStyle=hexA(color,.7);cCtx.lineWidth=.5;cCtx.strokeRect(cx(4),-sc*3.5,cx(9),cy(13));
-    cCtx.fillStyle=color;cCtx.fillRect(cx(5),-sc*3.2,cx(7),cy(8));
-    // Screen glow
-    cCtx.fillStyle=hexA(color,.15);cCtx.fillRect(cx(4),-sc*3.5,cx(9),cy(13));
-  }
-  cCtx.restore();
+  // Roads (real Kandy road network)
+  const roads = [
+    // A1 Colombo Road (southwest from city)
+    [[345,408],[318,430],[295,452],[270,475],[248,498],[225,525]],
+    // A9 Kandy-Kurunegala (north from city through Asgiriya)
+    [[432,388],[435,365],[440,338],[445,308],[448,285],[438,258],[425,232],[410,205],[398,180],[390,158],[400,130],[435,108],[470,92],[490,88]],
+    // A26 (east from city toward Tennekumbura)
+    [[432,388],[458,375],[488,358],[525,345],[565,338],[608,328],[660,345],[700,365],[748,445]],
+    // Lake Road (circular around Kandy Lake)
+    [[448,285],[462,278],[488,272],[515,280],[542,300],[550,325],[542,350],[522,368],[495,378],[465,378],[440,365],[420,348],[412,328],[414,305],[428,288],[448,285]],
+    // Peradeniya Road (west)
+    [[432,388],[395,400],[345,408],[305,412],[260,415],[210,418],[165,428],[132,405]],
+    // Hospital Road (from city to hospital)
+    [[448,285],[430,265],[410,248],[390,232],[375,212]],
+    // Udawatta Kele road
+    [[448,285],[478,268],[510,250]],
+    // Lewella road (east, from Buwelikada area going north-east)
+    [[608,328],[618,295],[625,242]],
+    // Ampitiya Road (south from market area)
+    [[488,358],[510,390],[535,418],[555,445],[570,475]],
+  ];
+
+  cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
+
+  // Road shadow
+  cCtx.strokeStyle = 'rgba(0,0,0,0.4)';
+  cCtx.lineWidth = cx(10);
+  roads.forEach(pts => { cCtx.beginPath(); cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1])); pts.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]))); cCtx.stroke(); });
+
+  // Road surface
+  cCtx.strokeStyle = 'rgba(20,32,55,0.9)';
+  cCtx.lineWidth = cx(7);
+  roads.forEach(pts => { cCtx.beginPath(); cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1])); pts.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]))); cCtx.stroke(); });
+
+  // Road center line (subtle)
+  cCtx.strokeStyle = 'rgba(35,50,80,0.5)';
+  cCtx.lineWidth = cx(1);
+  cCtx.setLineDash([cx(8), cx(6)]);
+  roads.forEach(pts => { cCtx.beginPath(); cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1])); pts.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]))); cCtx.stroke(); });
+  cCtx.setLineDash([]);
 }
 
 // ═══════════════════════════════════════════════
-//  DEMO: PHONE UI PANEL (drawn on canvas)
+//  KANDY LAKE — realistic shape
 // ═══════════════════════════════════════════════
-function drawPhoneUI(wx, wy, phase, destName, animT) {
-  const px=cx(wx), py=cy(wy);
-  const pw=cx(80), ph=cy(110);
+function drawKandyLake() {
+  // Lake path following real Kandy Lake shape
+  // Kandy Lake is roughly oval, slightly irregular
+  const lx = cx(468), ly = cy(328);
+  const lakePoints = [
+    [415,308],[428,288],[448,282],[472,278],[500,282],[524,296],
+    [542,315],[545,338],[538,358],[520,372],[498,380],[475,382],
+    [450,378],[428,368],[415,352],[408,335],[410,318],[415,308]
+  ];
 
-  cCtx.save();
-  cCtx.globalAlpha=Math.min(1,animT*2);
+  // Lake depth gradient
+  const grad = cCtx.createRadialGradient(lx, ly-cy(8), 0, lx, ly, cx(70));
+  grad.addColorStop(0, 'rgba(22,58,148,0.92)');
+  grad.addColorStop(0.5, 'rgba(20,52,130,0.82)');
+  grad.addColorStop(1, 'rgba(16,44,110,0.65)');
+  cCtx.fillStyle = grad;
+  cCtx.beginPath();
+  cCtx.moveTo(cx(lakePoints[0][0]), cy(lakePoints[0][1]));
+  lakePoints.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+  cCtx.closePath(); cCtx.fill();
 
-  // Phone shell
-  cCtx.fillStyle='#0e1a2e';cCtx.shadowBlur=20;cCtx.shadowColor='rgba(0,245,255,0.3)';
-  cCtx.beginPath();cCtx.roundRect(px-pw/2,py-ph/2,pw,ph,cx(8));cCtx.fill();
-  cCtx.strokeStyle='rgba(0,245,255,0.4)';cCtx.lineWidth=1;cCtx.shadowBlur=0;
-  cCtx.beginPath();cCtx.roundRect(px-pw/2,py-ph/2,pw,ph,cx(8));cCtx.stroke();
+  // Lake edge
+  cCtx.strokeStyle = `rgba(66,130,230,${0.3+Math.sin(cityT*.6)*.08})`;
+  cCtx.lineWidth = cx(2);
+  cCtx.beginPath();
+  cCtx.moveTo(cx(lakePoints[0][0]), cy(lakePoints[0][1]));
+  lakePoints.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+  cCtx.closePath(); cCtx.stroke();
 
-  // Notch
-  cCtx.fillStyle='#070c18';cCtx.beginPath();cCtx.roundRect(px-cx(12),py-ph/2+cy(3),cx(24),cy(6),cx(3));cCtx.fill();
+  // Shimmer
+  cCtx.strokeStyle = `rgba(96,165,250,${0.1+Math.sin(cityT*.8)*.06})`;
+  cCtx.lineWidth = cx(1);
+  cCtx.beginPath();
+  cCtx.ellipse(lx+cx(Math.sin(cityT*.4)*5), ly, cx(35), cy(22), 0, 0, Math.PI*2);
+  cCtx.stroke();
 
-  // App logo
-  cCtx.fillStyle='#00f5ff';cCtx.font=`bold ${Math.max(6,cx(8))}px Orbitron,monospace`;cCtx.textAlign='center';
-  cCtx.fillText('AJRLoops',px,py-ph/2+cy(22));
+  // Lake label
+  cCtx.fillStyle = `rgba(147,197,253,0.72)`;
+  cCtx.font = `bold ${Math.max(7,cx(9))}px Inter`;
+  cCtx.textAlign = 'center';
+  cCtx.fillText(t('Kandy Lake','කන්ඩි වැව'), lx, ly+cy(6));
+}
 
-  if(phase==='select') {
-    // Destination select UI
-    cCtx.fillStyle='rgba(255,255,255,0.4)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
-    cCtx.fillText('SELECT DESTINATION',px,py-ph/2+cy(34));
-    const dests=['City Center','Hospital','Market','University'];
-    dests.forEach((d,i)=>{
-      const isSelected=d===destName||(destName&&i===0&&animT>.7);
-      const dy=py-ph/2+cy(44+i*17);
-      cCtx.fillStyle=isSelected?'rgba(0,245,255,0.25)':'rgba(255,255,255,0.05)';
-      cCtx.beginPath();cCtx.roundRect(px-pw/2+cx(6),dy-cy(5),pw-cx(12),cy(13),cx(3));cCtx.fill();
-      cCtx.fillStyle=isSelected?'#00f5ff':'rgba(255,255,255,0.5)';
-      cCtx.font=`${Math.max(4,cx(6))}px Inter`;cCtx.textAlign='left';
-      cCtx.fillText(d,px-pw/2+cx(12),dy+cy(5));
-      if(isSelected){cCtx.fillStyle='#00f5ff';cCtx.textAlign='right';cCtx.fillText('✓',px+pw/2-cx(10),dy+cy(5));}
+// ═══════════════════════════════════════════════
+//  BUILDINGS (zone blocks)
+// ═══════════════════════════════════════════════
+function drawBuildings() {
+  const zones = [
+    { cx:432, cy:388, r:28, col:'#6366f1', d:8 },  // bus stand / transit
+    { cx:488, cy:358, r:32, col:'#f59e0b', d:10 },  // market
+    { cx:362, cy:188, r:30, col:'#3b82f6', d:7 },   // Asgiriya gov
+    { cx:375, cy:212, r:22, col:'#ef4444', d:5 },   // hospital
+    { cx:608, cy:328, r:35, col:'#f97316', d:10 },  // Buwelikada
+    { cx:625, cy:242, r:25, col:'#10b981', d:7 },   // Lewella
+    { cx:132, cy:405, r:35, col:'#06b6d4', d:8 },   // Peradeniya
+    { cx:268, cy:492, r:28, col:'#10b981', d:8 },   // Randles Hill
+    { cx:510, cy:250, r:20, col:'#22c55e', d:5 },   // Udawatta
+    { cx:570, cy:475, r:28, col:'#f97316', d:7 },   // Ampitiya
+    { cx:490, cy:88,  r:28, col:'#06b6d4', d:7 },   // Katugastota
+    { cx:240, cy:195, r:22, col:'#3b82f6', d:5 },   // Gohagoda/northwest
+  ];
+
+  zones.forEach(z => {
+    const seed = z.cx * 13 + z.cy * 7;
+    const isActive = activeRoute === 'all' || (ROUTES[activeRoute] &&
+      ROUTES[activeRoute].points.some(p => Math.hypot(p[0]-z.cx, p[1]-z.cy) < 110));
+
+    for (let i = 0; i < z.d; i++) {
+      const angle = (seed*i*137.5*Math.PI/180) % (Math.PI*2);
+      const dist = ((seed*i*23)%100)/100 * z.r * .82;
+      const bx = z.cx + Math.cos(angle)*dist, by = z.cy + Math.sin(angle)*dist;
+      const bw = 5+((seed*i*17)%9), bh = 4+((seed*i*11)%7);
+
+      cCtx.fillStyle = hexA(z.col, isActive ? .32 : .1);
+      cCtx.fillRect(cx(bx-bw/2), cy(by-bh/2), cx(bw)-cx(0), cy(bh)-cy(0));
+      if (isActive) {
+        cCtx.strokeStyle = hexA(z.col, .45); cCtx.lineWidth = .5;
+        cCtx.strokeRect(cx(bx-bw/2), cy(by-bh/2), cx(bw)-cx(0), cy(bh)-cy(0));
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  GRID
+// ═══════════════════════════════════════════════
+function drawGrid() {
+  const gs = cx(60);
+  cCtx.strokeStyle = 'rgba(0,245,255,0.018)'; cCtx.lineWidth = .5;
+  for (let x = 0; x < cW; x += gs) { cCtx.beginPath(); cCtx.moveTo(x,0); cCtx.lineTo(x,cH); cCtx.stroke(); }
+  for (let y = 0; y < cH; y += gs) { cCtx.beginPath(); cCtx.moveTo(0,y); cCtx.lineTo(cW,y); cCtx.stroke(); }
+}
+
+// ═══════════════════════════════════════════════
+//  ELEVATED TUBES
+// ═══════════════════════════════════════════════
+function drawTubes() {
+  Object.entries(ROUTES).forEach(([key, r]) => {
+    if (key === 'all') return;
+    const isActive = activeRoute === 'all' || activeRoute === key;
+    const alpha = isActive ? .88 : .1;
+    const lw = isActive ? Math.max(1.5, cx(2.5)) : Math.max(.6, cx(1));
+
+    // Ground shadow
+    cCtx.strokeStyle = 'rgba(0,0,0,0.3)';
+    cCtx.lineWidth = lw + cx(2); cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
+    cCtx.beginPath(); cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1]+5));
+    r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1]+5))); cCtx.stroke();
+
+    // Tube glow
+    cCtx.save();
+    if (isActive) { cCtx.shadowBlur = 14; cCtx.shadowColor = r.color; }
+    cCtx.strokeStyle = hexA(r.color, alpha);
+    cCtx.lineWidth = lw; cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
+    cCtx.beginPath(); cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1]));
+    r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1]))); cCtx.stroke();
+
+    // Top highlight
+    if (isActive) {
+      cCtx.shadowBlur = 0;
+      cCtx.strokeStyle = 'rgba(255,255,255,0.18)'; cCtx.lineWidth = cx(.8);
+      cCtx.beginPath(); cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1]-1.2));
+      r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1]-1.2))); cCtx.stroke();
+    }
+    cCtx.restore();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  STATION NODES — small, no big circles
+// ═══════════════════════════════════════════════
+function drawStationNodes() {
+  const seen = new Map();
+  Object.entries(ROUTES).forEach(([key, r]) => {
+    if (key === 'all') return;
+    const isActive = activeRoute === 'all' || activeRoute === key;
+    r.points.forEach((p, i) => {
+      const k = `${Math.round(p[0])},${Math.round(p[1])}`;
+      if (!seen.has(k)) seen.set(k, { x:p[0], y:p[1], active:false, color:r.color });
+      if (isActive) seen.get(k).active = true;
     });
-  } else if(phase==='confirmed') {
-    // Booking confirmed
-    cCtx.fillStyle='rgba(0,245,255,0.15)';cCtx.beginPath();cCtx.roundRect(px-pw/2+cx(8),py-cy(14),pw-cx(16),cy(28),cx(4));cCtx.fill();
-    cCtx.fillStyle='#00f5ff';cCtx.font=`bold ${Math.max(5,cx(7))}px Inter`;cCtx.textAlign='center';
-    cCtx.fillText('✓ BOOKED',px,py-cy(2));
-    cCtx.fillStyle='rgba(255,255,255,0.5)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
-    cCtx.fillText('Pod A-247',px,py+cy(9));
-    cCtx.fillText('ETA: 2 min',px,py+cy(18));
-    // Progress pulse
-    const barW=pw-cx(24), barH=cy(4);
-    cCtx.fillStyle='rgba(255,255,255,0.1)';cCtx.fillRect(px-barW/2,py+cy(26),barW,barH);
-    cCtx.fillStyle='#00f5ff';cCtx.fillRect(px-barW/2,py+cy(26),barW*Math.min(1,animT*.8),barH);
-  } else if(phase==='tracking') {
-    // Live tracking
-    cCtx.fillStyle='rgba(16,185,129,0.15)';cCtx.beginPath();cCtx.roundRect(px-pw/2+cx(6),py-cy(30),pw-cx(12),cy(50),cx(4));cCtx.fill();
-    cCtx.fillStyle='#10b981';cCtx.font=`bold ${Math.max(5,cx(6.5))}px Orbitron,monospace`;cCtx.textAlign='center';
-    cCtx.fillText('TRAVELLING',px,py-cy(18));
-    const spd=Math.round(60+animT*25);
-    cCtx.fillStyle='#00f5ff';cCtx.font=`bold ${Math.max(8,cx(14))}px Orbitron,monospace`;
-    cCtx.fillText(spd+' km/h',px,py);
-    cCtx.fillStyle='rgba(255,255,255,0.4)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
-    cCtx.fillText('Pod A-247 · On-Time',px,py+cy(14));
-  }
+  });
 
-  cCtx.restore();
+  seen.forEach(n => {
+    const pulse = Math.sin(cityT*2.5 + n.x*.04) * .5 + .5;
+    cCtx.save();
+    // Small station dot — no big rings
+    if (n.active) { cCtx.shadowBlur = 8; cCtx.shadowColor = n.color; }
+    cCtx.fillStyle = hexA(n.color, n.active ? (.65+pulse*.3) : .18);
+    cCtx.beginPath();
+    cCtx.arc(cx(n.x), cy(n.y), cx(n.active ? 3 : 2), 0, Math.PI*2);
+    cCtx.fill();
+
+    // Tiny pulse ring (active only, subtle)
+    if (n.active) {
+      cCtx.strokeStyle = hexA(n.color, pulse*.3);
+      cCtx.lineWidth = .8;
+      cCtx.beginPath();
+      cCtx.arc(cx(n.x), cy(n.y), cx(4.5+pulse*2), 0, Math.PI*2);
+      cCtx.stroke();
+    }
+    cCtx.restore();
+  });
 }
 
 // ═══════════════════════════════════════════════
-//  DEMO: DETAILED CAPSULE
+//  AMBIENT PODS
 // ═══════════════════════════════════════════════
-function drawDetailedCapsule(wx, wy, angle, color, scale) {
-  const px=cx(wx), py=cy(wy);
-  const w=cx(32)*scale, h=cy(14)*scale;
-  cCtx.save();
-  cCtx.translate(px,py);cCtx.rotate(angle);
-  cCtx.shadowBlur=20;cCtx.shadowColor=color;
+function drawAmbientPods() {
+  const ps = cx(7);
+  pods.forEach(pod => {
+    const isActive = activeRoute === 'all' || activeRoute === pod.routeKey;
+    const spd = demo.active ? pod.speed * (activeRoute===pod.routeKey?.2:.08) : pod.speed;
+    pod.t = (pod.t + spd) % 1;
+    if (!isActive && Math.random() > .3) return;
 
+    const pos = pathPos(ROUTES[pod.routeKey].points, pod.t);
+    const angle = pathAngle(ROUTES[pod.routeKey].points, pod.t);
+    const alpha = isActive ? 1 : .12;
+
+    cCtx.save();
+    cCtx.translate(cx(pos[0]), cy(pos[1])); cCtx.rotate(angle);
+    cCtx.shadowBlur = isActive ? 10 : 0; cCtx.shadowColor = pod.color;
+    const pw = ps, ph = ps*.42;
+    cCtx.fillStyle = `rgba(255,255,255,${alpha})`;
+    cCtx.beginPath(); cCtx.roundRect(-pw/2,-ph/2,pw,ph,ph/2); cCtx.fill();
+    cCtx.fillStyle = hexA(pod.color, alpha);
+    cCtx.beginPath(); cCtx.roundRect(-pw/2+1,-ph/2+1.5,pw-2,ph-3,ph/2-1); cCtx.fill();
+    cCtx.restore();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  LANDMARKS
+// ═══════════════════════════════════════════════
+function drawLandmarks() {
+  LANDMARKS.forEach(lm => {
+    const isActive = activeRoute === 'all' ||
+      (ROUTES[activeRoute] && ROUTES[activeRoute].points.some(p =>
+        Math.hypot(p[0]-lm.x, p[1]-lm.y) < 85));
+    cCtx.globalAlpha = isActive ? 1 : .25;
+    cCtx.font = `${Math.max(9,cx(12))}px serif`;
+    cCtx.textAlign = 'center';
+    cCtx.fillText(lm.icon, cx(lm.x), cy(lm.y));
+    if (isActive && cW > 460) {
+      cCtx.fillStyle = hexA(lm.col, .88);
+      cCtx.font = `bold ${Math.max(6,cx(7.5))}px Inter`;
+      cCtx.fillText(lang==='si'?lm.si:lm.en, cx(lm.x), cy(lm.y)+Math.max(10,cx(13)));
+    }
+    cCtx.globalAlpha = 1;
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  DEMO DETAIL DRAWINGS
+// ═══════════════════════════════════════════════
+function drawDetailStation(wx, wy, name, color, isOrigin) {
+  const sx=cx(wx), sy=cy(wy);
+  const sw=cx(72), sh=cy(12);
+  const py = sy + cy(8);
+
+  cCtx.fillStyle = '#1a2540';
+  cCtx.beginPath(); cCtx.roundRect(sx-sw/2,py,sw,sh,2); cCtx.fill();
+  cCtx.strokeStyle = hexA(color,.55); cCtx.lineWidth=1;
+  cCtx.beginPath(); cCtx.roundRect(sx-sw/2,py,sw,sh,2); cCtx.stroke();
+
+  // Canopy
+  cCtx.strokeStyle = hexA(color,.7); cCtx.lineWidth=cx(1.8);
+  cCtx.beginPath(); cCtx.moveTo(sx-sw/2-cx(4),py-cy(18)); cCtx.lineTo(sx+sw/2+cx(4),py-cy(18)); cCtx.stroke();
+  [sx-sw/3, sx, sx+sw/3].forEach(x => {
+    cCtx.beginPath(); cCtx.moveTo(x,py-cy(18)); cCtx.lineTo(x,py);
+    cCtx.strokeStyle=hexA(color,.3); cCtx.lineWidth=.8; cCtx.stroke();
+  });
+
+  // Name
+  cCtx.save(); cCtx.shadowBlur=8; cCtx.shadowColor=color;
+  cCtx.fillStyle=color; cCtx.font=`bold ${Math.max(6,cx(8))}px Orbitron,monospace`;
+  cCtx.textAlign='center'; cCtx.fillText(name, sx, py-cy(22)); cCtx.restore();
+
+  // Tag
+  cCtx.fillStyle=hexA(color,.15);
+  cCtx.beginPath(); cCtx.roundRect(sx-cx(20),py+sh+cy(1),cx(40),cy(9),2); cCtx.fill();
+  cCtx.fillStyle=hexA(color,.75); cCtx.font=`${Math.max(4,cx(5))}px Orbitron,monospace`;
+  cCtx.fillText(isOrigin?(lang==='si'?'නැඟීම':'BOARDING'):(lang==='si'?'ගමනාන්තය':'DESTINATION'), sx, py+sh+cy(8));
+}
+
+function drawPerson(wx, wy, color, state, animT) {
+  const px=cx(wx), py=cy(wy), sc=cx(3.2);
+  let ox=0, oy=0;
+  if (state==='waiting') ox=Math.sin(cityT*1.8)*.7;
+  if (state==='boarding') { ox=animT*cx(18); oy=-animT*cy(3); }
+  if (state==='exiting') ox=animT*cx(16);
+
+  cCtx.save();
+  cCtx.globalAlpha = state==='onboard'?0:1;
+  cCtx.translate(px+ox, py+oy);
+  cCtx.shadowBlur=8; cCtx.shadowColor=color;
+  // Head
+  cCtx.fillStyle='#fcd5a8'; cCtx.beginPath(); cCtx.arc(0,-sc*3,sc,0,Math.PI*2); cCtx.fill();
   // Body
-  cCtx.fillStyle='#1a2a45';cCtx.beginPath();cCtx.roundRect(-w/2,-h/2,w,h,h/2);cCtx.fill();
-  // Color stripe
-  cCtx.fillStyle=hexA(color,.85);cCtx.beginPath();cCtx.roundRect(-w/2+1,-h/2+2,w-2,h-4,h/2-1);cCtx.fill();
-  // Gloss top
-  const gloss=cCtx.createLinearGradient(0,-h/2,0,0);
-  gloss.addColorStop(0,'rgba(255,255,255,0.22)');gloss.addColorStop(1,'rgba(255,255,255,0)');
-  cCtx.fillStyle=gloss;cCtx.beginPath();cCtx.roundRect(-w/2+1,-h/2+2,w-2,(h-4)/2,h/2-1);cCtx.fill();
-
-  // Windows
-  const winCount=3;
-  for(let i=0;i<winCount;i++){
-    const wx2=-w/2+cx(7)+i*cx(8);
-    cCtx.fillStyle='rgba(200,240,255,0.65)';
-    cCtx.beginPath();cCtx.roundRect(wx2,-cy(3.5),cx(5.5),cy(7),1);cCtx.fill();
-    // Passenger silhouette in window
-    cCtx.fillStyle='rgba(0,0,0,0.35)';
-    cCtx.beginPath();cCtx.arc(wx2+cx(2.5),-cy(1),cy(2.5),0,Math.PI*2);cCtx.fill();
+  cCtx.strokeStyle=color; cCtx.lineWidth=sc*.65; cCtx.lineCap='round';
+  cCtx.beginPath(); cCtx.moveTo(0,-sc*2); cCtx.lineTo(0,sc*1.2); cCtx.stroke();
+  // Arms
+  cCtx.beginPath(); cCtx.moveTo(-sc*1.4,-sc*.4); cCtx.lineTo(0,0); cCtx.moveTo(sc*1.4,-sc*.4); cCtx.lineTo(0,0); cCtx.stroke();
+  // Legs
+  const la=state==='waiting'?0:Math.sin(cityT*4)*.35;
+  cCtx.beginPath(); cCtx.moveTo(0,sc*1.2); cCtx.lineTo(-sc*.7+Math.sin(la)*sc*.4,sc*2.7); cCtx.moveTo(0,sc*1.2); cCtx.lineTo(sc*.7-Math.sin(la)*sc*.4,sc*2.7); cCtx.stroke();
+  // Phone
+  if (state==='waiting') {
+    cCtx.fillStyle='#1a2a45'; cCtx.fillRect(cx(3.5),-sc*3.8,cx(8),cy(12));
+    cCtx.strokeStyle=hexA(color,.7); cCtx.lineWidth=.5; cCtx.strokeRect(cx(3.5),-sc*3.8,cx(8),cy(12));
+    cCtx.fillStyle=color; cCtx.fillRect(cx(4.2),-sc*3.5,cx(6.5),cy(7.5));
+    cCtx.fillStyle='rgba(0,0,0,0.5)'; cCtx.fillRect(cx(4.2),-sc*3.5,cx(6.5),cy(7.5));
   }
+  cCtx.restore();
+}
 
-  // Front headlight
-  cCtx.shadowBlur=14;cCtx.shadowColor='#fff';
-  cCtx.fillStyle='#fff';cCtx.beginPath();cCtx.arc(w/2-cx(2),0,cy(2.5),0,Math.PI*2);cCtx.fill();
+function drawPhoneUI(wx, wy, phase, dest, animT) {
+  const px=cx(wx), py=cy(wy), pw=cx(76), ph=cy(105);
+  cCtx.save(); cCtx.globalAlpha=Math.min(1,animT*2);
+  cCtx.fillStyle='#0c1a30'; cCtx.shadowBlur=18; cCtx.shadowColor='rgba(0,245,255,0.25)';
+  cCtx.beginPath(); cCtx.roundRect(px-pw/2,py-ph/2,pw,ph,cx(7)); cCtx.fill();
+  cCtx.strokeStyle='rgba(0,245,255,0.35)'; cCtx.lineWidth=1; cCtx.shadowBlur=0;
+  cCtx.beginPath(); cCtx.roundRect(px-pw/2,py-ph/2,pw,ph,cx(7)); cCtx.stroke();
+  // Notch
+  cCtx.fillStyle='#060c18'; cCtx.beginPath(); cCtx.roundRect(px-cx(10),py-ph/2+cy(2),cx(20),cy(5),cx(2.5)); cCtx.fill();
+  // Logo
+  cCtx.fillStyle='#00f5ff'; cCtx.font=`bold ${Math.max(5,cx(7))}px Orbitron,monospace`; cCtx.textAlign='center';
+  cCtx.fillText('AJRLoops', px, py-ph/2+cy(20));
+
+  if (phase==='select') {
+    cCtx.fillStyle='rgba(255,255,255,0.35)'; cCtx.font=`${Math.max(3.5,cx(5))}px Inter`;
+    cCtx.fillText(lang==='si'?'ගමනාන්තය':'SELECT DEST.', px, py-ph/2+cy(32));
+    const dests=lang==='si'?['නගර','රෝහල','වෙළඳ','විශ්ව']:['City Hub','Hospital','Market','Univ.'];
+    dests.forEach((d,i) => {
+      const sel=(i===0&&animT>.6);
+      const dy=py-ph/2+cy(41+i*16);
+      cCtx.fillStyle=sel?'rgba(0,245,255,0.22)':'rgba(255,255,255,0.05)';
+      cCtx.beginPath(); cCtx.roundRect(px-pw/2+cx(5),dy-cy(4.5),pw-cx(10),cy(12),cx(2.5)); cCtx.fill();
+      cCtx.fillStyle=sel?'#00f5ff':'rgba(255,255,255,0.45)';
+      cCtx.font=`${Math.max(3.5,cx(5.5))}px Inter`; cCtx.textAlign='left';
+      cCtx.fillText(d, px-pw/2+cx(10), dy+cy(4));
+      if(sel){cCtx.fillStyle='#00f5ff';cCtx.textAlign='right';cCtx.fillText('✓',px+pw/2-cx(9),dy+cy(4));}
+    });
+  } else if (phase==='confirmed') {
+    cCtx.fillStyle='rgba(0,245,255,0.12)'; cCtx.beginPath(); cCtx.roundRect(px-pw/2+cx(7),py-cy(12),pw-cx(14),cy(25),cx(3.5)); cCtx.fill();
+    cCtx.fillStyle='#00f5ff'; cCtx.font=`bold ${Math.max(4.5,cx(6.5))}px Inter`; cCtx.textAlign='center';
+    cCtx.fillText(lang==='si'?'✓ වෙන් කෙරිණ':'✓ BOOKED',px,py-cy(1));
+    cCtx.fillStyle='rgba(255,255,255,0.4)'; cCtx.font=`${Math.max(3.5,cx(5))}px Inter`;
+    cCtx.fillText('Pod A-247',px,py+cy(9));
+    const bw=pw-cx(22),bh=cy(3.5);
+    cCtx.fillStyle='rgba(255,255,255,0.08)'; cCtx.fillRect(px-bw/2,py+cy(20),bw,bh);
+    cCtx.fillStyle='#00f5ff'; cCtx.fillRect(px-bw/2,py+cy(20),bw*Math.min(1,animT*.8),bh);
+  } else if (phase==='tracking') {
+    cCtx.fillStyle='rgba(16,185,129,0.12)'; cCtx.beginPath(); cCtx.roundRect(px-pw/2+cx(5),py-cy(28),pw-cx(10),cy(46),cx(3.5)); cCtx.fill();
+    cCtx.fillStyle='#10b981'; cCtx.font=`bold ${Math.max(4.5,cx(6))}px Orbitron,monospace`; cCtx.textAlign='center';
+    cCtx.fillText(lang==='si'?'ගමනේ':'TRAVELLING',px,py-cy(17));
+    const spd=Math.round(65+animT*22);
+    cCtx.fillStyle='#00f5ff'; cCtx.font=`bold ${Math.max(7,cx(12))}px Orbitron,monospace`;
+    cCtx.fillText(spd+' km/h',px,py-cy(2));
+    cCtx.fillStyle='rgba(255,255,255,0.35)'; cCtx.font=`${Math.max(3.5,cx(5))}px Inter`;
+    cCtx.fillText('Pod A-247 · '+( lang==='si'?'වේලාවට':'On-Time'),px,py+cy(13));
+  }
+  cCtx.restore();
+}
+
+function drawDetailCapsule(wx, wy, angle, color, scale) {
+  const px=cx(wx), py=cy(wy), w=cx(28)*scale, h=cy(12)*scale;
+  cCtx.save(); cCtx.translate(px,py); cCtx.rotate(angle);
+  cCtx.shadowBlur=18; cCtx.shadowColor=color;
+  cCtx.fillStyle='#1a2a45'; cCtx.beginPath(); cCtx.roundRect(-w/2,-h/2,w,h,h/2); cCtx.fill();
+  cCtx.fillStyle=hexA(color,.82); cCtx.beginPath(); cCtx.roundRect(-w/2+1,-h/2+1.5,w-2,h-3,h/2-1); cCtx.fill();
+  const gloss=cCtx.createLinearGradient(0,-h/2,0,0);
+  gloss.addColorStop(0,'rgba(255,255,255,0.2)'); gloss.addColorStop(1,'rgba(255,255,255,0)');
+  cCtx.fillStyle=gloss; cCtx.beginPath(); cCtx.roundRect(-w/2+1,-h/2+1.5,w-2,(h-3)/2,h/2-1); cCtx.fill();
+  // Windows
+  for(let i=0;i<3;i++){
+    const wx2=-w/2+cx(6)+i*cx(7.5);
+    cCtx.fillStyle='rgba(200,235,255,0.6)'; cCtx.beginPath(); cCtx.roundRect(wx2,-cy(3),cx(5),cy(6),1); cCtx.fill();
+    cCtx.fillStyle='rgba(0,0,0,0.3)'; cCtx.beginPath(); cCtx.arc(wx2+cx(2.5),-cy(.5),cy(2),0,Math.PI*2); cCtx.fill();
+  }
+  // Headlight
+  cCtx.shadowBlur=12; cCtx.shadowColor='#fff';
+  cCtx.fillStyle='#fff'; cCtx.beginPath(); cCtx.arc(w/2-cx(1.8),0,cy(2.2),0,Math.PI*2); cCtx.fill();
+  cCtx.restore();
+}
+
+// Junction — subtle, no big spinning ring
+function drawJunctionSubtle(wx, wy, color1, color2, animT) {
+  const px=cx(wx), py=cy(wy);
+  // Just a small bright flash at the junction point
+  const flash = Math.sin(animT*Math.PI*8)*.5+.5;
+  cCtx.save();
+  cCtx.shadowBlur=16; cCtx.shadowColor=color2;
+  cCtx.fillStyle=hexA(color2, .5+flash*.4);
+  cCtx.beginPath(); cCtx.arc(px,py,cx(5+flash*2),0,Math.PI*2); cCtx.fill();
+  // Small label
   cCtx.shadowBlur=0;
-
-  // Undercarriage glow
-  cCtx.strokeStyle=hexA(color,.3);cCtx.lineWidth=1;
-  cCtx.beginPath();cCtx.moveTo(-w/2+h/2,h/2+1);cCtx.lineTo(w/2-h/2,h/2+1);cCtx.stroke();
-
+  cCtx.fillStyle='rgba(0,0,0,0.55)';
+  cCtx.beginPath(); cCtx.roundRect(px-cx(30),py-cy(22),cx(60),cy(12),cx(4)); cCtx.fill();
+  cCtx.fillStyle=color2; cCtx.font=`bold ${Math.max(4.5,cx(6))}px Orbitron,monospace`; cCtx.textAlign='center';
+  cCtx.fillText(lang==='si'?'AI මාරු':'AI SWITCH', px, py-cy(13));
   cCtx.restore();
 }
 
-// ═══════════════════════════════════════════════
-//  DEMO: JUNCTION ANIMATION
-// ═══════════════════════════════════════════════
-function drawJunctionAnim(wx, wy, color1, color2, animT) {
-  const px=cx(wx), py=cy(wy), r=cx(22);
-  cCtx.save();
-  // Rotating ring
-  cCtx.save();cCtx.translate(px,py);cCtx.rotate(animT*Math.PI*2*2);
-  cCtx.strokeStyle=hexA(color1,.7);cCtx.lineWidth=2;
-  cCtx.setLineDash([cx(8),cx(4)]);cCtx.beginPath();cCtx.arc(0,0,r,0,Math.PI*2);cCtx.stroke();
-  cCtx.setLineDash([]);cCtx.restore();
-
-  // Inner pulse
-  const pulse=Math.sin(animT*Math.PI*6)*.5+.5;
-  cCtx.shadowBlur=16;cCtx.shadowColor=color2;
-  cCtx.strokeStyle=hexA(color2,.5+pulse*.4);cCtx.lineWidth=1.5;
-  cCtx.beginPath();cCtx.arc(px,py,r*.6,0,Math.PI*2);cCtx.stroke();
-
-  // Center dot
-  cCtx.fillStyle=color2;cCtx.shadowBlur=12;cCtx.shadowColor=color2;
-  cCtx.beginPath();cCtx.arc(px,py,cx(4),0,Math.PI*2);cCtx.fill();
-
-  // Label
-  cCtx.shadowBlur=0;cCtx.fillStyle=color2;cCtx.font=`bold ${Math.max(5,cx(7))}px Orbitron,monospace`;cCtx.textAlign='center';
-  cCtx.fillText('JUNCTION',px,py-r-cy(5));
-  cCtx.fillStyle='rgba(255,255,255,0.5)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
-  cCtx.fillText('Switching loop...',px,py-r-cy(-3));
-  cCtx.restore();
-}
-
-// ═══════════════════════════════════════════════
-//  DEMO: PASSING CAPSULE
-// ═══════════════════════════════════════════════
-function drawPassingCapsule(wx, wy, angle, color, t) {
-  // t goes 0→1, capsule sweeps across screen from one side
-  const ox=t*cx(200)-cx(80);
-  drawDetailedCapsule(wx+ox/scX, wy, angle+Math.PI, color, 0.85);
-}
-
-// ═══════════════════════════════════════════════
-//  DEMO: SPEED INDICATOR HUD
-// ═══════════════════════════════════════════════
 function drawSpeedHUD(speed, color) {
-  const x=cW-cx(20), y=cy(20);
-  cCtx.save();
-  cCtx.fillStyle='rgba(0,0,0,0.5)';cCtx.beginPath();cCtx.roundRect(x-cx(55),y,cx(52),cy(36),cx(6));cCtx.fill();
-  cCtx.strokeStyle=hexA(color,.4);cCtx.lineWidth=.8;cCtx.beginPath();cCtx.roundRect(x-cx(55),y,cx(52),cy(36),cx(6));cCtx.stroke();
-  cCtx.fillStyle=hexA(color,.6);cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;cCtx.textAlign='center';
-  cCtx.fillText('SPEED',x-cx(29),y+cy(10));
-  cCtx.fillStyle=color;cCtx.font=`bold ${Math.max(8,cx(13))}px Orbitron,monospace`;
-  cCtx.fillText(speed,x-cx(29),y+cy(26));
-  cCtx.fillStyle='rgba(255,255,255,0.3)';cCtx.font=`${Math.max(4,cx(5))}px Inter`;
-  cCtx.fillText('km/h',x-cx(29),y+cy(34));
-  cCtx.restore();
-}
-
-// ═══════════════════════════════════════════════
-//  DEMO: GRID HUD OVERLAY
-// ═══════════════════════════════════════════════
-function drawCityGrid() {
-  const gs=cx(50);
-  cCtx.strokeStyle='rgba(0,245,255,0.022)';cCtx.lineWidth=.5;
-  for(let x=0;x<cW;x+=gs){cCtx.beginPath();cCtx.moveTo(x,0);cCtx.lineTo(x,cH);cCtx.stroke();}
-  for(let y=0;y<cH;y+=gs){cCtx.beginPath();cCtx.moveTo(0,y);cCtx.lineTo(cW,y);cCtx.stroke();}
+  cCtx.fillStyle='rgba(0,0,0,0.42)';
+  cCtx.beginPath(); cCtx.roundRect(cW-cx(95),cy(6),cx(90),cy(32),cx(5)); cCtx.fill();
+  cCtx.strokeStyle=hexA(color,.35); cCtx.lineWidth=.8;
+  cCtx.beginPath(); cCtx.roundRect(cW-cx(95),cy(6),cx(90),cy(32),cx(5)); cCtx.stroke();
+  cCtx.fillStyle=hexA(color,.55); cCtx.font=`${Math.max(4,cx(5))}px Inter`; cCtx.textAlign='center';
+  cCtx.fillText(lang==='si'?'වේගය':'SPEED', cW-cx(50), cy(16));
+  cCtx.fillStyle=color; cCtx.font=`bold ${Math.max(7,cx(12))}px Orbitron,monospace`;
+  cCtx.fillText(speed, cW-cx(50), cy(29));
+  cCtx.fillStyle='rgba(255,255,255,0.28)'; cCtx.font=`${Math.max(3.5,cx(4.5))}px Inter`;
+  cCtx.fillText('km/h', cW-cx(50), cy(37));
 }
 
 // ═══════════════════════════════════════════════
 //  DEMO CONTROLLER
 // ═══════════════════════════════════════════════
 function startDemo(routeKey) {
-  const r = ROUTES[routeKey];
-  if (!r || !r.points) return;
-  demo.active = true;
-  demo.routeKey = routeKey;
-  demo.phaseIdx = 0;
-  demo.phaseT = 0;
-  demo.lastTime = performance.now();
-  demo.podT = 0;
-  demo.passengerState = 'waiting';
-  demo.junctionFlash = 0;
-  demo.passingPodT = -1;
-  demo.phoneAnim = 0;
+  const r = ROUTES[routeKey]; if (!r || !r.points) return;
+  demo = { active:true, routeKey, phaseIdx:0, phaseT:0, lastTime:performance.now(),
+    podT:0, passengerState:'waiting', passingPodT:-1, phoneAnim:0 };
 
-  // Open panel
-  const panel = document.getElementById('demo-panel');
-  panel.classList.add('open');
-  document.getElementById('dp-origin-name').textContent = r.origin || r.points[0].join(',');
-  document.getElementById('dp-dest-name').textContent = r.dest || r.points[r.points.length-1].join(',');
-  document.getElementById('dp-pod-id').textContent = 'A-' + (200+Math.floor(Math.random()*100));
+  document.getElementById('demo-panel').classList.add('open');
+  document.getElementById('dp-origin-name').textContent = lang==='si' ? (r.originSi||r.origin) : r.origin;
+  document.getElementById('dp-dest-name').textContent = lang==='si' ? (r.destSi||r.dest) : r.dest;
+  document.getElementById('dp-pod-id').textContent = 'A-'+(200+Math.floor(Math.random()*100));
 
-  // Build step dots
-  const stepsEl = document.getElementById('dp-steps');
-  stepsEl.innerHTML = DEMO_STEPS.map(s=>`<span class="demo-step">${s}</span>`).join('');
-
+  const steps = lang==='si' ? DEMO_STEPS_SI : DEMO_STEPS_EN;
+  document.getElementById('dp-steps').innerHTML = steps.map(s=>`<span class="demo-step">${s}</span>`).join('');
   updateDemoPanel();
 }
 
 function closeDemo() {
-  demo.active = false;
-  demo.routeKey = null;
+  demo.active=false; demo.routeKey=null;
   document.getElementById('demo-panel').classList.remove('open');
-  // Zoom back to overview
-  cam.tx=500; cam.ty=280; cam.tz=1;
+  setCam(500,280,1);
 }
 
 function updateDemoPanel() {
   if (!demo.active) return;
-  const phase = DEMO_PHASES[demo.phaseIdx];
-  if (!phase) return;
-
-  const overallT = (demo.phaseIdx + demo.phaseT/phase.dur) / DEMO_PHASES.length;
-  document.getElementById('dp-phase').textContent = phase.label.toUpperCase();
+  const phase = DEMO_PHASES[demo.phaseIdx]; if (!phase) return;
+  const overallT = (demo.phaseIdx + Math.min(1,demo.phaseT/(phase.dur||1))) / DEMO_PHASES.length;
+  document.getElementById('dp-phase').textContent = phase.en.toUpperCase();
+  document.getElementById('dp-phase-si').textContent = phase.si;
   document.getElementById('dp-fill').style.width = (overallT*100).toFixed(1)+'%';
-
-  // Speed
-  const speedMap = { travel_1:85, travel_2:70, junction:40, passing:85, depart:55, boarding:0, waiting:0, pod_arrive:30, arrival:20, exit:0, zoom_in:0, zoom_out:0, app_select:0 };
-  const spd = speedMap[phase.id] || 0;
-  document.getElementById('dp-speed').textContent = spd ? spd+' km/h' : '—';
-
-  // Status
-  const statusMap = { waiting:'WAITING',app_select:'BOOKING',pod_arrive:'POD ARRIVING',boarding:'BOARDING',depart:'DEPARTING',travel_1:'EN ROUTE',junction:'SWITCHING',passing:'EN ROUTE',travel_2:'EN ROUTE',arrival:'ARRIVED',exit:'EXITING',zoom_in:'LOADING',zoom_out:'DONE' };
-  const statusEl = document.getElementById('dp-status');
-  statusEl.textContent = statusMap[phase.id]||'ACTIVE';
-  statusEl.style.color = phase.id==='arrival'||phase.id==='exit'?'var(--green)':phase.id==='junction'?'var(--gold)':'var(--cyan)';
-
-  // ETA
-  const phasesLeft = DEMO_PHASES.length - demo.phaseIdx;
-  document.getElementById('dp-eta').textContent = phasesLeft > 3 ? Math.ceil(phasesLeft*1.8)+'s' : 'Arriving';
-
-  // Step highlights
-  const stepMap = { waiting:0,app_select:0,pod_arrive:1,boarding:1,depart:1,travel_1:2,junction:2,passing:2,travel_2:2,arrival:3,exit:4,zoom_out:4 };
-  const activeStep = stepMap[phase.id]||0;
-  document.querySelectorAll('.demo-step').forEach((el,i)=>el.classList.toggle('done',i<=activeStep));
+  const speeds={travel_1:85,travel_2:68,junction:45,boarding:0,waiting:0,pod_arrive:28,arrival:18,exit:0};
+  document.getElementById('dp-speed').textContent = (speeds[phase.id]||0)?(speeds[phase.id]||0)+' km/h':'—';
+  const statusMap={waiting:'WAITING',app_select:'BOOKING',pod_arrive:'ARRIVING',boarding:'BOARDING',depart:'DEPARTING',travel_1:'EN ROUTE',junction:'SWITCHING',travel_2:'EN ROUTE',arrival:'ARRIVED',exit:'EXITING',zoom_in:'—',zoom_out:'—'};
+  const siStatus={waiting:'රැදී',app_select:'වෙන් කරයි',boarding:'නඟිමින්',travel_1:'ගමනේ',junction:'මාරු',arrival:'පැමිණිණ',exit:'යයි'};
+  const stat=lang==='si'?(siStatus[phase.id]||'ගමනේ'):(statusMap[phase.id]||'ACTIVE');
+  document.getElementById('dp-status').textContent=stat;
+  const phasesLeft=DEMO_PHASES.length-demo.phaseIdx;
+  document.getElementById('dp-eta').textContent=phasesLeft>3?Math.ceil(phasesLeft*1.6)+'s':(lang==='si'?'ළඟ':'Soon');
+  const stepMap={waiting:0,app_select:0,pod_arrive:1,boarding:1,depart:1,travel_1:2,junction:2,travel_2:2,arrival:3,exit:3,zoom_out:3};
+  document.querySelectorAll('.demo-step').forEach((el,i)=>el.classList.toggle('done',i<=(stepMap[phase.id]||0)));
 }
 
 function tickDemo(now) {
   if (!demo.active) return;
-  const dt = Math.min(100, now - demo.lastTime);
-  demo.lastTime = now;
-  demo.phaseT += dt;
-  const phase = DEMO_PHASES[demo.phaseIdx];
-  if (!phase) { closeDemo(); return; }
-
-  const t = Math.min(1, demo.phaseT / phase.dur); // 0→1 within phase
-
-  // Update camera per phase
-  const r = ROUTES[demo.routeKey];
-  if (!r) return;
-  const pts = r.points;
-  const origin = pts[0], dest = pts[pts.length-1];
-  const midPt = pts[Math.floor(pts.length/2)];
-  const jPt = r.junctionPt || midPt;
+  const dt = Math.min(80, now-demo.lastTime); demo.lastTime=now; demo.phaseT+=dt;
+  const phase = DEMO_PHASES[demo.phaseIdx]; if (!phase){closeDemo();return;}
+  const t = Math.min(1, demo.phaseT/phase.dur);
+  const r = ROUTES[demo.routeKey]; if (!r) return;
+  const pts = r.points, origin=pts[0], dest=pts[pts.length-1];
+  const jIdx=Math.floor(pts.length/2);
+  const jPt=pts[jIdx];
 
   switch(phase.id) {
-    case 'zoom_in':
-      setCamTarget(origin[0], origin[1]-20, 3.2);
-      break;
-    case 'waiting':
-    case 'app_select':
-      demo.phoneAnim = t;
-      demo.passengerState = 'waiting';
-      setCamTarget(origin[0], origin[1]-10, 3.5);
-      break;
+    case 'zoom_in': setCam(origin[0],origin[1]-15,3.4); break;
+    case 'waiting': case 'app_select':
+      demo.phoneAnim=t; demo.passengerState='waiting';
+      setCam(origin[0],origin[1]-8,3.6); break;
     case 'pod_arrive':
-      demo.podT = t * 0.15; // pod approaching station from 0.15 back
-      setCamTarget(origin[0], origin[1], 3.2);
-      break;
+      demo.podT=t*.12; setCam(origin[0],origin[1],3.2); break;
     case 'boarding':
-      demo.passengerState = t > 0.5 ? 'boarding' : 'waiting';
-      demo.podT = 0.15 * (1-t*0.3);
-      setCamTarget(origin[0], origin[1], 3.0);
-      break;
-    case 'depart':
-      demo.passengerState = 'onboard';
-      demo.podT = 0.1 + t * 0.15;
-      setCamTarget(origin[0] + (midPt[0]-origin[0])*.3, origin[1], 3.0);
-      break;
-    case 'travel_1':
-      demo.passengerState = 'onboard';
-      demo.podT = 0.25 + t * 0.3;
-      const pos1 = getPathPos(pts, demo.podT);
-      setCamTarget(pos1[0], pos1[1], 2.8);
-      break;
+      demo.passengerState=t>.5?'boarding':'waiting'; demo.podT=.12*(1-t*.2);
+      setCam(origin[0],origin[1],3.0); break;
+    case 'depart': case 'travel_1':
+      demo.passengerState='onboard';
+      demo.podT = phase.id==='depart' ? .1+t*.15 : .25+t*.3;
+      const p1=pathPos(pts,demo.podT); setCam(p1[0],p1[1],2.6); break;
     case 'junction':
-      demo.junctionFlash = t;
-      demo.podT = 0.55 + t * 0.08;
-      const jp = getPathPos(pts, demo.podT);
-      setCamTarget(jp[0], jp[1], 3.0);
-      break;
+      demo.podT=.55+t*.06;
+      const pj=pathPos(pts,demo.podT); setCam(pj[0],pj[1],3.0); break;
     case 'passing':
-      demo.passingPodT = t;
-      demo.podT = 0.63 + t * 0.07;
-      const pp = getPathPos(pts, demo.podT);
-      setCamTarget(pp[0], pp[1], 2.8);
-      break;
+      demo.passingPodT=t; demo.podT=.61+t*.08;
+      const pp=pathPos(pts,demo.podT); setCam(pp[0],pp[1],2.7); break;
     case 'travel_2':
-      demo.passingPodT = -1;
-      demo.podT = 0.70 + t * 0.28;
-      const pos2 = getPathPos(pts, demo.podT);
-      setCamTarget(pos2[0]*.7 + dest[0]*.3, pos2[1]*.7+dest[1]*.3, 2.8);
-      break;
+      demo.passingPodT=-1; demo.podT=.69+t*.29;
+      const p2=pathPos(pts,demo.podT); setCam(p2[0]*.6+dest[0]*.4,p2[1]*.6+dest[1]*.4,2.7); break;
     case 'arrival':
-      demo.arriveFlash = t;
-      demo.podT = Math.min(0.98, 0.98 + t*.02);
-      setCamTarget(dest[0], dest[1]-10, 3.5);
-      break;
-    case 'exit':
-      demo.passengerState = 'exiting';
-      setCamTarget(dest[0], dest[1], 3.2);
-      break;
-    case 'zoom_out':
-      setCamTarget(500, 280, 1);
-      break;
+      demo.podT=Math.min(.98,.98+t*.02); setCam(dest[0],dest[1]-8,3.6); break;
+    case 'exit': demo.passengerState='exiting'; setCam(dest[0],dest[1],3.2); break;
+    case 'zoom_out': setCam(500,280,1); break;
   }
 
-  // Advance phase
   if (demo.phaseT >= phase.dur) {
-    demo.phaseIdx++;
-    demo.phaseT = 0;
+    demo.phaseIdx++; demo.phaseT=0;
     if (demo.phaseIdx >= DEMO_PHASES.length) {
-      // Loop demo
-      setTimeout(() => {
-        if (demo.active) { demo.phaseIdx=0; demo.phaseT=0; }
-      }, 1000);
+      setTimeout(()=>{ if(demo.active){demo.phaseIdx=0;demo.phaseT=0;} },1000);
     }
   }
   updateDemoPanel();
@@ -1258,157 +1377,111 @@ function tickDemo(now) {
 // ═══════════════════════════════════════════════
 //  MAIN RENDER LOOP
 // ═══════════════════════════════════════════════
-let lastFrameTime = 0;
-
+let lastFrame=0;
 function animateCity(now) {
-  const dt = Math.min(60, now - lastFrameTime);
-  lastFrameTime = now;
-  cityT += 0.016;
+  const dt=Math.min(60,now-lastFrame); lastFrame=now; cityT+=.016;
+  tickDemo(now); lerpCam(dt);
+  cCtx.clearRect(0,0,cW,cH);
 
-  // Update demo
-  tickDemo(now);
-
-  // Smooth camera
-  lerpCam(dt);
-
-  cCtx.clearRect(0, 0, cW, cH);
-
-  // Apply zoom transform
   cCtx.save();
-  cCtx.translate(cW/2, cH/2);
-  cCtx.scale(cam.zoom, cam.zoom);
-  cCtx.translate(-cx(cam.x), -cy(cam.y));
+  cCtx.translate(cW/2,cH/2);
+  cCtx.scale(cam.zoom,cam.zoom);
+  cCtx.translate(-cx(cam.x),-cy(cam.y));
 
-  // Draw world
   drawTerrain();
-  drawCityGrid();
+  drawGrid();
   drawBuildings();
-  drawLake();
-  drawTubeSet();
-  drawStations();
+  drawKandyLake();
+  drawTubes();
+  drawStationNodes();
   drawAmbientPods();
   drawLandmarks();
 
-  // Demo overlays (drawn in world space)
+  // Demo world-space overlays
   if (demo.active && demo.routeKey) {
-    const r = ROUTES[demo.routeKey];
-    const pts = r.points;
-    const origin = pts[0], dest = pts[pts.length-1];
-    const jPt = r.junctionPt || pts[Math.floor(pts.length/2)];
-    const phase = DEMO_PHASES[demo.phaseIdx] || {};
-    const t = Math.min(1, demo.phaseT / (phase.dur||1));
+    const r=ROUTES[demo.routeKey], pts=r.points;
+    const origin=pts[0], dest=pts[pts.length-1];
+    const jPt=pts[Math.floor(pts.length/2)];
+    const phase=DEMO_PHASES[demo.phaseIdx]||{};
+    const t=Math.min(1,demo.phaseT/(phase.dur||1));
 
-    // Draw detailed origin station
-    if (phase.id !== 'zoom_out') {
-      drawDetailedStation(origin[0], origin[1], r.origin||'Station', r.color, true);
-    }
+    if (phase.id!=='zoom_out') drawDetailStation(origin[0],origin[1],lang==='si'?(r.originSi||r.origin):r.origin,r.color,true);
+    if (['travel_2','arrival','exit','zoom_out'].includes(phase.id)) drawDetailStation(dest[0],dest[1],lang==='si'?(r.destSi||r.dest):r.dest,r.color,false);
 
-    // Draw detailed destination station
-    if (['travel_2','arrival','exit','zoom_out'].includes(phase.id)) {
-      drawDetailedStation(dest[0], dest[1], r.dest||'Destination', r.color, false);
-    }
+    if (['waiting','app_select','pod_arrive','boarding'].includes(phase.id))
+      drawPerson(origin[0]-16,origin[1]+cy(18)/scY,r.color,phase.id==='boarding'&&t>.5?'boarding':'waiting',phase.id==='boarding'?t:0);
+    if (phase.id==='exit') drawPerson(dest[0]+12,dest[1]+cy(18)/scY,r.color,'exiting',t);
 
-    // Passenger at origin
-    const pState = demo.passengerState;
-    if (['waiting','app_select','pod_arrive','boarding'].includes(phase.id)) {
-      drawPerson(origin[0]-18, origin[1]+cy(20)/scY, r.color,
-        phase.id==='boarding'&&t>.5?'boarding':'waiting',
-        phase.id==='boarding'?t:0);
-    }
+    if (phase.id==='waiting') drawPhoneUI(origin[0]+26,origin[1]-18,'select',r.dest,.3);
+    if (phase.id==='app_select') drawPhoneUI(origin[0]+26,origin[1]-18,t<.6?'select':'confirmed',r.dest,t);
+    if (['travel_1','travel_2'].includes(phase.id)) { const pp=pathPos(pts,demo.podT); drawPhoneUI(pp[0]+28,pp[1]-20,'tracking',r.dest,t); }
 
-    // Passenger exits at dest
-    if (phase.id==='exit') {
-      drawPerson(dest[0]+12, dest[1]+cy(20)/scY, r.color, 'exiting', t);
-    }
+    if (demo.podT>0&&!['zoom_in','waiting','app_select'].includes(phase.id)) {
+      const pos=pathPos(pts,Math.min(.98,demo.podT));
+      const ang=pathAngle(pts,Math.min(.98,demo.podT));
+      drawDetailCapsule(pos[0],pos[1],ang,r.color,1);
 
-    // Phone UI
-    if (phase.id==='waiting') drawPhoneUI(origin[0]+28, origin[1]-20, 'select', r.dest, 0.3);
-    if (phase.id==='app_select') drawPhoneUI(origin[0]+28, origin[1]-20, t<.6?'select':'confirmed', r.dest, t);
-    if (['travel_1','travel_2'].includes(phase.id)) {
-      const pp=getPathPos(pts,demo.podT);
-      drawPhoneUI(pp[0]+30, pp[1]-22, 'tracking', r.dest, t);
-    }
-
-    // Demo capsule
-    if (demo.podT > 0 && !['zoom_in','waiting','app_select'].includes(phase.id)) {
-      const podPos = getPathPos(pts, Math.min(.98, demo.podT));
-      const podAngle = getPathAngle(pts, Math.min(.98, demo.podT));
-      drawDetailedCapsule(podPos[0], podPos[1], podAngle, r.color,
-        phase.id==='boarding'||phase.id==='pod_arrive'?1:1);
-
-      // Speed HUD during travel
       if (['travel_1','travel_2','passing'].includes(phase.id)) {
-        const speeds = {travel_1:85, travel_2:70, passing:85};
-        // draw in screen space — pop out of world transform
+        const spds={travel_1:85,travel_2:68,passing:85};
         cCtx.restore();
+        drawSpeedHUD(spds[phase.id]||80,r.color);
         cCtx.save();
-        drawSpeedHUD(speeds[phase.id]||80, r.color);
-        // re-apply world transform
-        cCtx.save();
-        cCtx.translate(cW/2,cH/2);cCtx.scale(cam.zoom,cam.zoom);cCtx.translate(-cx(cam.x),-cy(cam.y));
+        cCtx.translate(cW/2,cH/2); cCtx.scale(cam.zoom,cam.zoom); cCtx.translate(-cx(cam.x),-cy(cam.y));
       }
     }
 
-    // Junction animation
-    if (phase.id==='junction') {
-      drawJunctionAnim(jPt[0], jPt[1], r.color, '#ffd700', t);
+    if (phase.id==='junction') drawJunctionSubtle(jPt[0],jPt[1],r.color,'#ffd700',t);
+
+    if (phase.id==='passing'&&demo.passingPodT>=0) {
+      const pos=pathPos(pts,demo.podT);
+      const ang=pathAngle(pts,demo.podT);
+      const oCol=r.color==='#3b82f6'?'#10b981':'#3b82f6';
+      const ox=demo.passingPodT*cx(180)/scX-cx(60)/scX;
+      drawDetailCapsule(pos[0]+ox,pos[1]-cy(5)/scY,ang+Math.PI,oCol,.9);
     }
 
-    // Passing capsule (from opposite direction)
-    if (phase.id==='passing' && demo.passingPodT >= 0) {
-      const podPos = getPathPos(pts, demo.podT);
-      const podAngle = getPathAngle(pts, demo.podT);
-      const oppositeColor = r.color==='#3b82f6'?'#10b981':'#3b82f6';
-      drawPassingCapsule(podPos[0], podPos[1]-cy(6)/scY, podAngle, oppositeColor, demo.passingPodT);
-    }
-
-    // Arrival flash effect
-    if (phase.id==='arrival' && t > 0.3) {
-      const ap = getPathPos(pts, 0.98);
-      cCtx.save();
-      cCtx.shadowBlur=40;cCtx.shadowColor=r.color;
-      cCtx.strokeStyle=hexA(r.color, (.5+Math.sin(cityT*10)*.4)*(t-.3)/.7);
-      cCtx.lineWidth=2;
-      cCtx.beginPath();cCtx.arc(cx(ap[0]),cy(ap[1]),cx(20*(t-.3)/.7),0,Math.PI*2);cCtx.stroke();
+    if (phase.id==='arrival'&&t>.3) {
+      const ap=pathPos(pts,.98);
+      cCtx.save(); cCtx.shadowBlur=32; cCtx.shadowColor=r.color;
+      cCtx.strokeStyle=hexA(r.color,(.4+Math.sin(cityT*10)*.35)*(t-.3)/.7);
+      cCtx.lineWidth=1.5;
+      cCtx.beginPath(); cCtx.arc(cx(ap[0]),cy(ap[1]),cx(18*(t-.3)/.7),0,Math.PI*2); cCtx.stroke();
       cCtx.restore();
     }
   }
 
-  cCtx.restore(); // end world transform
-
-  // Screen-space HUD
+  cCtx.restore();
   drawScreenHUD();
-
   requestAnimationFrame(animateCity);
 }
 
 function drawScreenHUD() {
-  // Top-right live badge
-  cCtx.fillStyle='rgba(0,0,0,0.45)';
-  cCtx.beginPath();cCtx.roundRect(cW-cx(102),cy(6),cx(98),cy(18),cx(4));cCtx.fill();
-  cCtx.fillStyle='rgba(0,245,255,0.6)';cCtx.font=`${Math.max(6,cx(8))}px Orbitron,monospace`;cCtx.textAlign='right';
-  cCtx.fillText('● LIVE SIMULATION',cW-cx(8),cy(18));
+  // Live badge
+  cCtx.fillStyle='rgba(0,0,0,0.4)';
+  cCtx.beginPath(); cCtx.roundRect(cW-cx(98),cy(5),cx(94),cy(17),cx(4)); cCtx.fill();
+  cCtx.fillStyle='rgba(0,245,255,0.55)';
+  cCtx.font=`${Math.max(5.5,cx(7.5))}px Orbitron,monospace`; cCtx.textAlign='right';
+  cCtx.fillText('● '+(lang==='si'?'සජීවී':'LIVE'), cW-cx(7), cy(17));
 
-  // Demo phase label bottom
-  if (demo.active && demo.routeKey) {
-    const phase = DEMO_PHASES[demo.phaseIdx];
-    if (!phase) return;
-    cCtx.fillStyle='rgba(0,0,0,0.55)';
-    cCtx.beginPath();cCtx.roundRect(cx(8),cH-cy(26),cW-cx(16),cy(22),cx(5));cCtx.fill();
-    cCtx.fillStyle=ROUTES[demo.routeKey].color;
-    cCtx.font=`bold ${Math.max(7,cx(9))}px Orbitron,monospace`;cCtx.textAlign='left';
-    cCtx.fillText('▶ '+phase.label.toUpperCase(),cx(16),cH-cy(11));
-
-    // Overall progress bar
+  // Active route label
+  if (demo.active&&demo.routeKey) {
+    const phase=DEMO_PHASES[demo.phaseIdx]; if (!phase) return;
     const overallT=(demo.phaseIdx+Math.min(1,demo.phaseT/(phase.dur||1)))/DEMO_PHASES.length;
-    cCtx.fillStyle='rgba(255,255,255,0.06)';cCtx.fillRect(cx(8),cH-cy(3),cW-cx(16),cy(3));
-    cCtx.fillStyle=ROUTES[demo.routeKey].color;cCtx.fillRect(cx(8),cH-cy(3),(cW-cx(16))*overallT,cy(3));
+    cCtx.fillStyle='rgba(0,0,0,0.5)';
+    cCtx.beginPath(); cCtx.roundRect(cx(6),cH-cy(24),cW-cx(12),cy(20),cx(4)); cCtx.fill();
+    cCtx.fillStyle=ROUTES[demo.routeKey].color;
+    cCtx.font=`bold ${Math.max(6,cx(8))}px Orbitron,monospace`; cCtx.textAlign='left';
+    cCtx.fillText('▶ '+(lang==='si'?phase.si:phase.en).toUpperCase(), cx(14), cH-cy(10));
+    cCtx.fillStyle='rgba(255,255,255,0.06)'; cCtx.fillRect(cx(6),cH-cy(3),cW-cx(12),cy(3));
+    cCtx.fillStyle=ROUTES[demo.routeKey].color;
+    cCtx.fillRect(cx(6),cH-cy(3),(cW-cx(12))*overallT,cy(3));
   } else {
-    const r = ROUTES[activeRoute];
-    if (r && activeRoute!=='all') {
-      cCtx.fillStyle=hexA(r.color,.7);
-      cCtx.font=`bold ${Math.max(7,cx(9))}px Orbitron,monospace`;cCtx.textAlign='left';
-      cCtx.fillText('▶ '+r.label.toUpperCase()+' — Click to Watch Journey Demo',cx(12),cy(22));
+    const r=ROUTES[activeRoute];
+    if (r&&activeRoute!=='all') {
+      cCtx.fillStyle=hexA(r.color,.65);
+      cCtx.font=`bold ${Math.max(6,cx(8))}px Orbitron,monospace`; cCtx.textAlign='left';
+      const lbl=(lang==='si'?(r.labelSi||r.label):r.label).toUpperCase();
+      cCtx.fillText('▶ '+lbl+' — '+(lang==='si'?'ක්ලික් කරන්න':'Click to demo journey'), cx(10), cy(20));
     }
   }
 }
@@ -1418,33 +1491,29 @@ function drawScreenHUD() {
 // ═══════════════════════════════════════════════
 const heroCanvas=document.getElementById('hero-canvas');
 const hCtx=heroCanvas.getContext('2d');
-let heroW,heroH,heroT=0;
-function resizeHero(){heroW=heroCanvas.width=heroCanvas.offsetWidth;heroH=heroCanvas.height=heroCanvas.offsetHeight;}
+let hW,hH,hT=0;
+function resizeHero(){hW=heroCanvas.width=heroCanvas.offsetWidth;hH=heroCanvas.height=heroCanvas.offsetHeight;}
 function drawHero(){
-  heroT+=.008;hCtx.clearRect(0,0,heroW,heroH);
-  hCtx.strokeStyle='rgba(0,245,255,0.04)';hCtx.lineWidth=1;
-  const gs=60;
-  for(let x=0;x<heroW;x+=gs){hCtx.beginPath();hCtx.moveTo(x,0);hCtx.lineTo(x,heroH);hCtx.stroke();}
-  for(let y=0;y<heroH;y+=gs){hCtx.beginPath();hCtx.moveTo(0,y);hCtx.lineTo(heroW,y);hCtx.stroke();}
-  const sy=(heroT*80)%heroH;
-  const sg=hCtx.createLinearGradient(0,sy-30,0,sy+30);
-  sg.addColorStop(0,'transparent');sg.addColorStop(.5,'rgba(0,245,255,0.05)');sg.addColorStop(1,'transparent');
-  hCtx.fillStyle=sg;hCtx.fillRect(0,sy-30,heroW,60);
-  const hr=[{pts:[[.1*heroW,.6*heroH],[.3*heroW,.45*heroH],[.5*heroW,.5*heroH]],c:'#00f5ff'},{pts:[[.5*heroW,.5*heroH],[.7*heroW,.35*heroH],[heroW,.4*heroH]],c:'#7c3aed'},{pts:[[.2*heroW,.8*heroH],[.5*heroW,.5*heroH],[.8*heroW,.3*heroH]],c:'#3b82f6'},{pts:[[.4*heroW,.9*heroH],[.5*heroW,.5*heroH],[.65*heroW,.2*heroH]],c:'#10b981'}];
+  hT+=.008;hCtx.clearRect(0,0,hW,hH);
+  hCtx.strokeStyle='rgba(0,245,255,0.035)';hCtx.lineWidth=1;
+  for(let x=0;x<hW;x+=60){hCtx.beginPath();hCtx.moveTo(x,0);hCtx.lineTo(x,hH);hCtx.stroke();}
+  for(let y=0;y<hH;y+=60){hCtx.beginPath();hCtx.moveTo(0,y);hCtx.lineTo(hW,y);hCtx.stroke();}
+  const sy=(hT*80)%hH;
+  const sg=hCtx.createLinearGradient(0,sy-28,0,sy+28);
+  sg.addColorStop(0,'transparent');sg.addColorStop(.5,'rgba(0,245,255,0.045)');sg.addColorStop(1,'transparent');
+  hCtx.fillStyle=sg;hCtx.fillRect(0,sy-28,hW,56);
+  const hr=[{pts:[[.1*hW,.62*hH],[.3*hW,.47*hH],[.5*hW,.5*hH]],c:'#00f5ff'},{pts:[[.5*hW,.5*hH],[.7*hW,.36*hH],[hW,.41*hH]],c:'#7c3aed'},{pts:[[.22*hW,.78*hH],[.5*hW,.5*hH],[.8*hW,.3*hH]],c:'#3b82f6'},{pts:[[.42*hW,.88*hH],[.5*hW,.5*hH],[.64*hW,.22*hH]],c:'#10b981'}];
   hr.forEach(r=>{
-    hCtx.save();hCtx.shadowBlur=18;hCtx.shadowColor=r.c;hCtx.strokeStyle=r.c+'28';hCtx.lineWidth=2;
+    hCtx.save();hCtx.shadowBlur=16;hCtx.shadowColor=r.c;hCtx.strokeStyle=r.c+'26';hCtx.lineWidth=2;
     hCtx.beginPath();hCtx.moveTo(r.pts[0][0],r.pts[0][1]);r.pts.slice(1).forEach(p=>hCtx.lineTo(p[0],p[1]));hCtx.stroke();hCtx.restore();
-    const prog=(heroT*.3+r.pts[0][0]*.0005)%1;
-    const tot=r.pts.length-1;const st=prog*tot;const si=Math.min(Math.floor(st),tot-1);const lt=st-si;
-    const px=r.pts[si][0]+(r.pts[si+1][0]-r.pts[si][0])*lt;const py=r.pts[si][1]+(r.pts[si+1][1]-r.pts[si][1])*lt;
-    hCtx.save();hCtx.shadowBlur=14;hCtx.shadowColor=r.c;hCtx.fillStyle='#fff';
-    hCtx.beginPath();hCtx.ellipse(px,py,5,3,0,0,Math.PI*2);hCtx.fill();hCtx.restore();
+    const prog=(hT*.28+r.pts[0][0]*.0004)%1,tot=r.pts.length-1,st=prog*tot,si=Math.min(Math.floor(st),tot-1),lt=st-si;
+    const px=r.pts[si][0]+(r.pts[si+1][0]-r.pts[si][0])*lt,py=r.pts[si][1]+(r.pts[si+1][1]-r.pts[si][1])*lt;
+    hCtx.save();hCtx.shadowBlur=12;hCtx.shadowColor=r.c;hCtx.fillStyle='#fff';hCtx.beginPath();hCtx.ellipse(px,py,5,3,0,0,Math.PI*2);hCtx.fill();hCtx.restore();
   });
-  const nodes=[[.3*heroW,.45*heroH],[.5*heroW,.5*heroH],[.7*heroW,.35*heroH]];
-  nodes.forEach((n,i)=>{
-    const pulse=Math.sin(heroT*2+i*1.5)*.5+.5;
-    hCtx.save();hCtx.strokeStyle=`rgba(0,245,255,${.18+pulse*.3})`;hCtx.lineWidth=1;
-    hCtx.beginPath();hCtx.arc(n[0],n[1],8+pulse*8,0,Math.PI*2);hCtx.stroke();hCtx.restore();
+  [[.3*hW,.47*hH],[.5*hW,.5*hH],[.7*hW,.36*hH]].forEach((n,i)=>{
+    const p=Math.sin(hT*2+i*1.5)*.5+.5;
+    hCtx.save();hCtx.strokeStyle=`rgba(0,245,255,${.15+p*.28})`;hCtx.lineWidth=1;
+    hCtx.beginPath();hCtx.arc(n[0],n[1],7+p*7,0,Math.PI*2);hCtx.stroke();hCtx.restore();
   });
   requestAnimationFrame(drawHero);
 }
@@ -1453,28 +1522,33 @@ function drawHero(){
 //  ROUTE SELECTION
 // ═══════════════════════════════════════════════
 function selectRoute(key, btn) {
-  activeRoute = key;
+  activeRoute=key;
   document.querySelectorAll('.route-btn').forEach(b=>{
     b.classList.remove('active');b.style.background='';b.style.color='';b.style.borderColor='';b.style.boxShadow='';
   });
   if(btn){
     btn.classList.add('active');
     const col=key==='all'?'#00f5ff':ROUTES[key].color;
-    btn.style.background=col;btn.style.borderColor=col;btn.style.boxShadow=`0 0 14px ${col}44`;
+    btn.style.background=col;btn.style.borderColor=col;btn.style.boxShadow=`0 0 14px ${col}40`;
   }
-  // Start demo if specific route
-  if (key !== 'all') {
-    setTimeout(() => startDemo(key), 300);
-    cam.tx=500;cam.ty=280;cam.tz=1; // reset first so zoom-in feels intentional
-  } else {
-    closeDemo();
-  }
+  if(key!=='all'){
+    cam.tx=500;cam.ty=280;cam.tz=1;
+    setTimeout(()=>startDemo(key),400);
+  } else closeDemo();
 }
 
 // ═══════════════════════════════════════════════
 //  CONTROL CENTER
 // ═══════════════════════════════════════════════
-const ccRoutes=[{name:'Residential',color:'#10b981',pods:[5,7],load:[60,80]},{name:'Office & Gov',color:'#3b82f6',pods:[4,6],load:[50,75]},{name:'Hospital Emg',color:'#ef4444',pods:[2,4],load:[20,45]},{name:'Market',color:'#f59e0b',pods:[4,7],load:[55,85]},{name:'Tourist',color:'#8b5cf6',pods:[3,5],load:[30,60]},{name:'School',color:'#06b6d4',pods:[4,6],load:[40,70]},{name:'Transit',color:'#a78bfa',pods:[5,8],load:[65,90]}];
+const ccRoutes=[
+  {name:'Residential',si:'නිවාස',color:'#10b981',pods:[5,7],load:[60,80]},
+  {name:'Office',si:'කාර්යාල',color:'#3b82f6',pods:[4,6],load:[50,75]},
+  {name:'Hospital',si:'රෝහල',color:'#ef4444',pods:[2,4],load:[20,45]},
+  {name:'Market',si:'වෙළඳ',color:'#f59e0b',pods:[4,7],load:[55,85]},
+  {name:'Tourist',si:'සංචාරක',color:'#8b5cf6',pods:[3,5],load:[30,60]},
+  {name:'School',si:'පාසල',color:'#06b6d4',pods:[4,6],load:[40,70]},
+  {name:'Transit',si:'ගමනාගමන',color:'#a78bfa',pods:[5,8],load:[65,90]},
+];
 
 function buildRouteStatus(){
   const wrap=document.getElementById('route-status');wrap.innerHTML='';
@@ -1482,7 +1556,7 @@ function buildRouteStatus(){
     const div=document.createElement('div');div.className='route-status-item';
     const load=r.load[0]+Math.floor(Math.random()*(r.load[1]-r.load[0]));
     const pc=r.pods[0]+Math.floor(Math.random()*(r.pods[1]-r.pods[0]));
-    div.innerHTML=`<span class="rs-name">${r.name}</span><div class="rs-bar-wrap"><div class="rs-bar" style="width:${load}%;background:${r.color}"></div></div><span class="rs-pods">${pc} pods</span>`;
+    div.innerHTML=`<span class="rs-name">${lang==='si'?r.si:r.name}</span><div class="rs-bar-wrap"><div class="rs-bar" style="width:${load}%;background:${r.color}"></div></div><span class="rs-pods">${pc}</span>`;
     wrap.appendChild(div);
   });
 }
@@ -1491,34 +1565,31 @@ function updateMetrics(){
   const mp=44+Math.floor(Math.random()*12);
   document.getElementById('m-pods').textContent=mp;
   document.getElementById('m-pass').textContent=(2800+Math.floor(Math.random()*200)).toLocaleString();
-  document.getElementById('m-energy').innerHTML=(78+Math.floor(Math.random()*14))+'<span style="font-size:1rem">%</span>';
+  document.getElementById('m-energy').innerHTML=(78+Math.floor(Math.random()*14))+'<span style="font-size:.9rem">%</span>';
   document.getElementById('ai-pods').textContent=3+Math.floor(Math.random()*4);
   document.getElementById('mb-pods').style.width=(mp/60*100)+'%';
-  const alerts=['High demand on Market Loop','School Loop surge — pods added','Transit at 88% capacity','All hospital routes clear','Tourist loop: peak hours'];
+  const alerts=lang==='si'
+    ?['වෙළඳ ලූප ඉහළ ඉල්ලුම','පාසල් ලූප — ගිලන් රථ','Transit ලූප 88%','රෝහල් මාර්ග සාමාන්‍ය']
+    :['High demand on Market Loop','School Loop surge','Transit at 88% capacity','Hospital routes clear'];
   document.getElementById('alert-demand-text').textContent=alerts[Math.floor(Math.random()*alerts.length)];
-  const wx=['Rain sensors monitoring','Clear skies — optimal ops','Wind advisory: moderate'];
+  const wx=lang==='si'?['වර්ෂා සංවේදක','맑 - ප්‍රශස්ත']:['Rain sensors active','Clear skies — optimal'];
   document.getElementById('ai-weather').textContent=wx[Math.floor(Math.random()*wx.length)];
   buildRouteStatus();
 }
 
 // ═══════════════════════════════════════════════
-//  SCROLL REVEAL & TIMELINE
+//  SCROLL REVEAL
 // ═══════════════════════════════════════════════
 function initReveal(){
-  const els=document.querySelectorAll('.reveal');
-  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(el=>obs.observe(el));
-  const tl=document.querySelectorAll('.tl-item');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -35px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   const obs2=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs2.unobserve(e.target);}});},{threshold:.2});
-  tl.forEach(el=>obs2.observe(el));
+  document.querySelectorAll('.tl-item').forEach(el=>obs2.observe(el));
 }
 
-// ═══════════════════════════════════════════════
-//  REPLAY
-// ═══════════════════════════════════════════════
 function replayDemo(){
   document.getElementById('city-map').scrollIntoView({behavior:'smooth'});
-  setTimeout(()=>{selectRoute('residential',document.querySelector('[data-route="residential"]'));},800);
+  setTimeout(()=>selectRoute('transit',document.querySelector('[data-route="transit"]')),800);
 }
 
 // ═══════════════════════════════════════════════
@@ -1530,17 +1601,17 @@ window.addEventListener('DOMContentLoaded',()=>{
   requestAnimationFrame(animateCity);
   selectRoute('all',document.querySelector('[data-route="all"]'));
   buildRouteStatus(); updateMetrics();
-  setInterval(updateMetrics,3000);
+  setInterval(updateMetrics,3500);
   initReveal();
   window.addEventListener('resize',()=>{resizeHero();resizeCity();});
 
-  // Auto demo on city-map section entry
-  let autoDemoStarted=false;
+  // Auto-start demo when city map enters viewport
+  let autoStarted=false;
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-      if(e.isIntersecting&&!autoDemoStarted){
-        autoDemoStarted=true;
-        setTimeout(()=>{selectRoute('residential',document.querySelector('[data-route="residential"]'));},1200);
+      if(e.isIntersecting&&!autoStarted){
+        autoStarted=true;
+        setTimeout(()=>selectRoute('residential',document.querySelector('[data-route="residential"]')),1000);
       }
     });
   },{threshold:.4});
