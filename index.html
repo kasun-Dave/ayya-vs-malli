@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kandy HyperGrid — Smart Elevated Tunnel Transport Concept</title>
+<title>AJRLoops — Smart Elevated Pod Transport · Kandy City</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -16,13 +16,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Inter',sans-serif;overflow-x:hidden;
-  line-height:1.6;
-}
-
-/* ── SCROLLBAR ── */
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:#0d1424;}
 ::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:4px;}
@@ -31,427 +25,252 @@ body{
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:14px 40px;
-  background:rgba(7,12,24,0.85);
-  backdrop-filter:blur(16px);
+  padding:12px 36px;
+  background:rgba(7,12,24,0.9);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
-  transition:background .3s;
 }
 .nav-logo{
-  font-family:'Orbitron',monospace;font-weight:700;font-size:1.1rem;
-  color:var(--cyan);letter-spacing:2px;
+  font-family:'Orbitron',monospace;font-weight:900;font-size:1.1rem;
+  color:var(--cyan);letter-spacing:3px;
   text-shadow:0 0 20px rgba(0,245,255,0.5);
+  display:flex;align-items:center;gap:8px;
 }
+.logo-loop{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;animation:logo-spin 8s linear infinite;
+}
+@keyframes logo-spin{to{transform:rotate(360deg);}}
 .nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{
-  font-size:.8rem;letter-spacing:1px;color:var(--dim);
-  text-decoration:none;text-transform:uppercase;
-  transition:color .2s;
-}
+.nav-links a{font-size:.75rem;letter-spacing:1px;color:var(--dim);text-decoration:none;text-transform:uppercase;transition:color .2s;}
 .nav-links a:hover{color:var(--cyan);}
-.nav-cta{
-  font-size:.8rem;padding:7px 18px;border-radius:20px;
-  border:1px solid var(--cyan);color:var(--cyan);
-  background:rgba(0,245,255,0.05);cursor:pointer;
-  font-family:'Orbitron',monospace;letter-spacing:1px;
-  transition:background .2s,box-shadow .2s;
-}
-.nav-cta:hover{background:rgba(0,245,255,0.12);box-shadow:0 0 16px rgba(0,245,255,0.2);}
+.nav-cta{font-size:.75rem;padding:7px 18px;border-radius:20px;border:1px solid var(--cyan);color:var(--cyan);background:rgba(0,245,255,0.05);cursor:pointer;font-family:'Orbitron',monospace;letter-spacing:1px;transition:all .2s;}
+.nav-cta:hover{background:rgba(0,245,255,0.12);}
 
 /* ── HERO ── */
-#hero{
-  position:relative;height:100vh;min-height:600px;
-  display:flex;align-items:center;overflow:hidden;
-}
+#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
-.hero-content{
-  position:relative;z-index:2;
-  max-width:700px;padding:0 40px;
-}
+.hero-content{position:relative;z-index:2;max-width:700px;padding:0 40px;}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
   color:var(--cyan);border:1px solid rgba(0,245,255,0.3);
-  padding:6px 16px;border-radius:20px;margin-bottom:24px;
+  padding:5px 14px;border-radius:20px;margin-bottom:22px;
   background:rgba(0,245,255,0.05);
 }
-.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse-dot 2s infinite;}
-@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,245,255,.6);}50%{opacity:.7;box-shadow:0 0 0 6px transparent;}}
+.hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pd 2s infinite;}
+@keyframes pd{0%,100%{box-shadow:0 0 0 0 rgba(0,245,255,.6);}50%{box-shadow:0 0 0 6px transparent;}}
 .hero-title{
   font-family:'Orbitron',monospace;font-weight:900;
-  font-size:clamp(2.4rem,5.5vw,5rem);
-  line-height:1.05;letter-spacing:-1px;
+  font-size:clamp(2.6rem,6vw,5.5rem);line-height:1;letter-spacing:-1px;
   background:linear-gradient(135deg,#fff 0%,var(--cyan) 50%,var(--violet) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:10px;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
 }
-.hero-sub{
-  font-family:'Orbitron',monospace;font-size:clamp(.85rem,1.5vw,1.1rem);
-  color:var(--cyan);letter-spacing:3px;margin-bottom:20px;opacity:.8;
-}
-.hero-desc{
-  font-size:1rem;color:rgba(226,232,240,0.7);
-  max-width:520px;margin-bottom:32px;line-height:1.7;
-}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-.btn-primary{
-  font-family:'Orbitron',monospace;font-size:.82rem;letter-spacing:2px;
-  padding:13px 28px;border-radius:40px;border:none;cursor:pointer;
-  background:linear-gradient(135deg,var(--cyan),var(--blue));
-  color:#000;font-weight:700;
-  box-shadow:0 4px 24px rgba(0,245,255,0.35);
-  transition:transform .15s,box-shadow .15s;
-}
+.hero-sub{font-family:'Orbitron',monospace;font-size:clamp(.8rem,1.4vw,1rem);color:var(--cyan);letter-spacing:3px;margin-bottom:18px;opacity:.8;}
+.hero-desc{font-size:.95rem;color:rgba(226,232,240,0.65);max-width:500px;margin-bottom:30px;line-height:1.7;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{font-family:'Orbitron',monospace;font-size:.78rem;letter-spacing:2px;padding:12px 26px;border-radius:40px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;font-weight:700;box-shadow:0 4px 24px rgba(0,245,255,0.35);transition:transform .15s,box-shadow .15s;}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,245,255,0.5);}
-.btn-outline{
-  font-family:'Orbitron',monospace;font-size:.82rem;letter-spacing:2px;
-  padding:13px 28px;border-radius:40px;cursor:pointer;
-  background:transparent;border:1px solid rgba(255,255,255,0.2);
-  color:var(--text);transition:border-color .2s,background .2s;
-}
+.btn-outline{font-family:'Orbitron',monospace;font-size:.78rem;letter-spacing:2px;padding:12px 26px;border-radius:40px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--text);transition:border-color .2s,background .2s;}
 .btn-outline:hover{border-color:var(--cyan);background:rgba(0,245,255,0.05);}
-.hero-minimap{
-  position:absolute;right:5%;top:50%;transform:translateY(-50%);
-  width:280px;height:200px;
-  border:1px solid rgba(0,245,255,0.2);border-radius:12px;
-  background:rgba(13,20,36,0.6);backdrop-filter:blur(8px);
-  overflow:hidden;z-index:2;
-  display:none;
-}
-@media(min-width:900px){.hero-minimap{display:block;}}
-#minimap-canvas{width:100%;height:100%;}
-.minimap-label{
-  position:absolute;bottom:8px;left:12px;
-  font-family:'Orbitron',monospace;font-size:.6rem;
-  letter-spacing:2px;color:var(--cyan);opacity:.6;
-}
-.scroll-hint{
-  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:var(--dim);font-size:.72rem;letter-spacing:2px;z-index:2;
-  animation:bounce-up 2s infinite;
-}
-.scroll-hint::after{
-  content:'';width:1px;height:40px;
-  background:linear-gradient(to bottom,var(--cyan),transparent);
-}
-@keyframes bounce-up{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--dim);font-size:.68rem;letter-spacing:2px;z-index:2;animation:sh 2.5s infinite;}
+@keyframes sh{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+.scroll-hint::after{content:'';width:1px;height:36px;background:linear-gradient(to bottom,var(--cyan),transparent);}
 
 /* ── SECTIONS ── */
 section{padding:90px 40px;}
 .container{max-width:1200px;margin:0 auto;}
-.section-tag{
-  font-family:'Orbitron',monospace;font-size:.68rem;
-  letter-spacing:4px;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:14px;display:block;
-}
-.section-title{
-  font-family:'Orbitron',monospace;font-weight:700;
-  font-size:clamp(1.6rem,3.5vw,2.6rem);
-  line-height:1.15;margin-bottom:16px;
-}
-.section-desc{color:rgba(226,232,240,.6);max-width:580px;font-size:.95rem;line-height:1.7;}
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s;}
+.section-tag{font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;display:block;}
+.section-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.15;margin-bottom:14px;}
+.section-desc{color:rgba(226,232,240,.58);max-width:560px;font-size:.9rem;line-height:1.7;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s;}
 .reveal.visible{opacity:1;transform:none;}
+.glass{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(10px);}
 
-/* ── GLASS CARD ── */
-.glass{
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--border);
-  border-radius:16px;
-  backdrop-filter:blur(10px);
-}
-
-/* ── CONCEPT SECTION ── */
+/* ── CONCEPT ── */
 #concept{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
-.compare-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;margin-top:48px;
-}
-.compare-card{
-  padding:24px;border-radius:16px;border:1px solid var(--border);
-  background:rgba(255,255,255,0.03);
-  transition:border-color .3s,transform .2s;
-  position:relative;overflow:hidden;
-}
-.compare-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--accent,var(--cyan));
-}
-.compare-card:hover{border-color:rgba(0,245,255,0.3);transform:translateY(-4px);}
-.compare-icon{font-size:2.2rem;margin-bottom:12px;}
-.compare-title{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:600;margin-bottom:8px;color:var(--accent,var(--cyan));}
-.compare-desc{font-size:.82rem;color:var(--dim);line-height:1.6;}
-.compare-tag{
-  display:inline-block;margin-top:10px;
-  font-size:.68rem;padding:3px 10px;border-radius:20px;
-  letter-spacing:1px;
-}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:44px;}
+.compare-card{padding:22px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,0.03);transition:border-color .3s,transform .2s;position:relative;overflow:hidden;}
+.compare-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--cyan));}
+.compare-card:hover{border-color:rgba(0,245,255,0.3);transform:translateY(-3px);}
+.compare-icon{font-size:2rem;margin-bottom:10px;}
+.compare-title{font-family:'Orbitron',monospace;font-size:.85rem;font-weight:600;margin-bottom:7px;color:var(--accent,var(--cyan));}
+.compare-desc{font-size:.78rem;color:var(--dim);line-height:1.6;}
 
-/* ── CITY MAP SECTION ── */
-#city-map{background:var(--bg2);padding-bottom:60px;}
-.route-selector{
-  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
-  margin:32px 0 24px;
-}
+/* ── CITY MAP ── */
+#city-map{background:var(--bg2);padding-bottom:40px;}
+.route-selector{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:28px 0 18px;}
 .route-btn{
-  font-size:.72rem;padding:7px 16px;border-radius:20px;
+  font-size:.68rem;padding:7px 14px;border-radius:20px;
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(255,255,255,0.04);color:var(--dim);
-  cursor:pointer;transition:all .2s;letter-spacing:1px;
-  font-weight:600;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;letter-spacing:1px;font-weight:600;
+  text-transform:uppercase;
 }
 .route-btn:hover{border-color:rgba(255,255,255,0.3);color:var(--text);}
 .route-btn.active{color:#000;font-weight:700;box-shadow:0 0 16px rgba(0,0,0,0.3);}
 #city-canvas-wrap{
   width:100%;max-width:1100px;margin:0 auto;
-  border-radius:20px;overflow:hidden;
+  border-radius:18px;overflow:hidden;
   border:1px solid rgba(0,245,255,0.15);
   box-shadow:0 0 60px rgba(0,245,255,0.05);
   position:relative;
 }
-#city-canvas{width:100%;display:block;}
-.route-info{
-  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
-  margin-top:20px;
+#city-canvas{width:100%;display:block;cursor:pointer;}
+
+/* ── DEMO PANEL ── */
+#demo-panel{
+  width:100%;max-width:1100px;margin:12px auto 0;
+  border-radius:16px;border:1px solid rgba(0,245,255,0.2);
+  background:rgba(0,10,28,0.85);backdrop-filter:blur(12px);
+  overflow:hidden;transition:max-height .5s,opacity .5s;
+  max-height:0;opacity:0;
 }
-.route-info-chip{
-  display:flex;align-items:center;gap:6px;
-  font-size:.75rem;padding:5px 12px;border-radius:20px;
-  background:rgba(255,255,255,0.04);border:1px solid var(--border);
-  color:var(--dim);
+#demo-panel.open{max-height:200px;opacity:1;}
+.demo-panel-inner{padding:16px 20px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:16px;align-items:center;}
+@media(max-width:640px){.demo-panel-inner{grid-template-columns:1fr;gap:10px;}}
+.demo-origin-dest{display:flex;align-items:center;gap:10px;}
+.demo-station-badge{
+  padding:6px 14px;border-radius:10px;font-size:.75rem;font-weight:700;
+  display:flex;flex-direction:column;gap:2px;
 }
-.route-dot{width:8px;height:8px;border-radius:50%;}
+.dsb-label{font-size:.6rem;letter-spacing:1px;opacity:.6;}
+.dsb-name{font-size:.82rem;}
+.demo-arrow{color:var(--cyan);font-size:1.2rem;flex-shrink:0;}
+.demo-progress-area{}
+.demo-phase-label{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:2px;margin-bottom:8px;}
+.demo-progress-track{height:5px;background:rgba(255,255,255,0.08);border-radius:5px;overflow:hidden;}
+.demo-progress-fill{height:100%;border-radius:5px;transition:width .3s;background:linear-gradient(90deg,var(--cyan),var(--violet));}
+.demo-steps{display:flex;justify-content:space-between;margin-top:6px;}
+.demo-step{font-size:.6rem;color:var(--dim);}
+.demo-step.done{color:var(--cyan);}
+.demo-pod-info{display:flex;flex-direction:column;gap:4px;text-align:right;}
+.dpi-row{font-size:.72rem;color:var(--dim);}
+.dpi-row span{color:var(--cyan);font-family:'Orbitron',monospace;}
+.demo-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:4px;}
 
 /* ── INFRASTRUCTURE ── */
 #infrastructure{background:var(--bg);}
-.infra-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;margin-top:48px;
-}
-.infra-card{
-  padding:22px 20px;border-radius:14px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,0.02);
-  transition:border-color .2s,background .2s;
-}
+.infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:44px;}
+.infra-card{padding:20px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:border-color .2s,background .2s;}
 .infra-card:hover{border-color:rgba(0,245,255,0.25);background:rgba(0,245,255,0.03);}
-.infra-icon{font-size:2rem;margin-bottom:10px;}
-.infra-title{font-family:'Orbitron',monospace;font-size:.78rem;font-weight:600;color:var(--cyan);margin-bottom:6px;letter-spacing:1px;}
-.infra-desc{font-size:.78rem;color:var(--dim);line-height:1.5;}
+.infra-icon{font-size:1.8rem;margin-bottom:9px;}
+.infra-title{font-family:'Orbitron',monospace;font-size:.74rem;font-weight:600;color:var(--cyan);margin-bottom:5px;letter-spacing:1px;}
+.infra-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
 
 /* ── SAFETY ── */
 #safety{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
-.safety-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:14px;margin-top:40px;
-}
-.safety-item{
-  display:flex;gap:14px;align-items:flex-start;
-  padding:18px;border-radius:12px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,0.02);
-  transition:background .2s;
-}
+.safety-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:36px;}
+.safety-item{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:background .2s;}
 .safety-item:hover{background:rgba(239,68,68,0.05);}
-.safety-item-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
-.safety-item-title{font-size:.8rem;font-weight:600;color:var(--red);margin-bottom:4px;letter-spacing:.5px;}
-.safety-item-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
+.safety-item-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.safety-item-title{font-size:.76rem;font-weight:700;color:var(--red);margin-bottom:3px;}
+.safety-item-desc{font-size:.72rem;color:var(--dim);line-height:1.5;}
 
-/* ── CONTROL CENTER ── */
+/* ── CONTROL ── */
 #control{background:var(--bg2);position:relative;overflow:hidden;}
-#control::before{
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px),
-             repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px);
-  pointer-events:none;
-}
-.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;}
+#control::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px);pointer-events:none;}
+.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px;}
 @media(max-width:768px){.control-grid{grid-template-columns:1fr;}}
-.metrics-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-.metric-card{
-  padding:20px;border-radius:14px;border:1px solid var(--border);
-  background:rgba(0,0,0,0.3);position:relative;overflow:hidden;
-}
-.metric-card::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--mcol,var(--cyan)),transparent);
-}
-.metric-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-.metric-value{
-  font-family:'Orbitron',monospace;font-size:2rem;font-weight:700;
-  color:var(--mcol,var(--cyan));line-height:1;
-}
-.metric-sub{font-size:.7rem;color:var(--dim);margin-top:4px;}
-.metric-bar-wrap{height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:10px;overflow:hidden;}
-.metric-bar{height:100%;border-radius:4px;transition:width .8s;}
-.cc-panel{
-  padding:20px;border-radius:14px;border:1px solid var(--border);
-  background:rgba(0,0,0,0.3);
-}
-.cc-panel-title{
-  font-family:'Orbitron',monospace;font-size:.72rem;
-  letter-spacing:2px;color:var(--cyan);margin-bottom:16px;
-  display:flex;align-items:center;gap:8px;
-}
-.cc-panel-title::before{content:'▶';font-size:.5rem;color:var(--green);}
-.alert-list{display:flex;flex-direction:column;gap:8px;}
-.alert-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 12px;border-radius:8px;
-  font-size:.75rem;
-}
+.metrics-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.metric-card{padding:18px;border-radius:13px;border:1px solid var(--border);background:rgba(0,0,0,0.3);position:relative;overflow:hidden;}
+.metric-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--mcol,var(--cyan)),transparent);}
+.metric-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:7px;}
+.metric-value{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:700;color:var(--mcol,var(--cyan));line-height:1;}
+.metric-sub{font-size:.66rem;color:var(--dim);margin-top:3px;}
+.metric-bar-wrap{height:3px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:9px;overflow:hidden;}
+.metric-bar{height:100%;border-radius:3px;transition:width .8s;}
+.cc-panel{padding:18px;border-radius:13px;border:1px solid var(--border);background:rgba(0,0,0,0.3);}
+.cc-panel-title{font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:2px;color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.cc-panel-title::before{content:'▶';font-size:.48rem;color:var(--green);}
+.alert-list{display:flex;flex-direction:column;gap:7px;}
+.alert-item{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:7px;font-size:.72rem;}
 .alert-item.ok{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);}
-.alert-item.warn{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);animation:warn-pulse 3s infinite;}
+.alert-item.warn{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);animation:wp 3s infinite;}
 .alert-item.info{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);}
-@keyframes warn-pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
-.alert-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.route-status{display:flex;flex-direction:column;gap:8px;}
-.route-status-item{display:flex;align-items:center;justify-content:space-between;font-size:.75rem;}
+@keyframes wp{0%,100%{opacity:1;}50%{opacity:.6;}}
+.alert-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.route-status{display:flex;flex-direction:column;gap:7px;}
+.route-status-item{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;}
 .rs-name{color:var(--dim);}
-.rs-pods{font-family:'Orbitron',monospace;color:var(--cyan);font-size:.7rem;}
-.rs-bar-wrap{flex:1;margin:0 10px;height:3px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.rs-pods{font-family:'Orbitron',monospace;color:var(--cyan);font-size:.66rem;}
+.rs-bar-wrap{flex:1;margin:0 9px;height:2.5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
 .rs-bar{height:100%;border-radius:3px;transition:width 1s;}
 
 /* ── TIMELINE ── */
 #timeline{background:var(--bg);}
-.tl-container{max-width:900px;margin:40px auto 0;position:relative;}
-.tl-line{
-  position:absolute;left:50%;top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom,transparent,var(--cyan),transparent);
-  transform:translateX(-50%);
-}
-@media(max-width:640px){.tl-line{left:20px;}}
-.tl-items{display:flex;flex-direction:column;gap:24px;}
-.tl-item{
-  display:flex;gap:24px;align-items:flex-start;
-  opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;
-}
+.tl-container{max-width:860px;margin:36px auto 0;position:relative;}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--cyan),transparent);transform:translateX(-50%);}
+@media(max-width:600px){.tl-line{left:18px;}}
+.tl-items{display:flex;flex-direction:column;gap:20px;}
+.tl-item{display:flex;gap:20px;align-items:flex-start;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s;}
 .tl-item.visible{opacity:1;transform:none;}
 .tl-item:nth-child(even){flex-direction:row-reverse;}
-@media(max-width:640px){.tl-item,.tl-item:nth-child(even){flex-direction:row;padding-left:40px;}}
-.tl-content{
-  flex:1;padding:18px 20px;border-radius:14px;
-  border:1px solid var(--border);background:rgba(255,255,255,0.03);
-}
+@media(max-width:600px){.tl-item,.tl-item:nth-child(even){flex-direction:row;padding-left:36px;}}
+.tl-content{flex:1;padding:16px 18px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,0.03);}
 .tl-item:nth-child(even) .tl-content{text-align:right;}
-@media(max-width:640px){.tl-item:nth-child(even) .tl-content{text-align:left;}}
-.tl-time{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:2px;margin-bottom:6px;}
-.tl-title{font-weight:700;font-size:.9rem;margin-bottom:6px;}
-.tl-desc{font-size:.78rem;color:var(--dim);line-height:1.5;}
-.tl-node{
-  flex-shrink:0;width:36px;height:36px;border-radius:50%;
-  border:2px solid var(--cyan);background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;position:relative;z-index:2;
-  box-shadow:0 0 16px rgba(0,245,255,0.3);
-}
+@media(max-width:600px){.tl-item:nth-child(even) .tl-content{text-align:left;}}
+.tl-time{font-family:'Orbitron',monospace;font-size:.62rem;color:var(--cyan);letter-spacing:2px;margin-bottom:5px;}
+.tl-title{font-weight:700;font-size:.87rem;margin-bottom:5px;}
+.tl-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
+.tl-node{flex-shrink:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.95rem;position:relative;z-index:2;box-shadow:0 0 14px rgba(0,245,255,0.3);}
 .tl-spacer{flex:1;}
-@media(max-width:640px){.tl-spacer{display:none;}}
+@media(max-width:600px){.tl-spacer{display:none;}}
 
-/* ── CITY FLOW BATTLE ── */
+/* ── BATTLE ── */
 #battle{background:var(--bg2);}
-.battle-grid{
-  display:grid;grid-template-columns:1fr auto 1fr;gap:20px;
-  align-items:stretch;margin-top:48px;
-}
-@media(max-width:640px){.battle-grid{grid-template-columns:1fr;}}
-.battle-side{display:flex;flex-direction:column;gap:12px;}
-.battle-card{
-  padding:16px;border-radius:12px;display:flex;gap:12px;align-items:center;
-  font-size:.82rem;
-}
-.battle-card.villain{
-  background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);
-}
-.battle-card.hero-c{
-  background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.2);
-}
-.battle-icon{font-size:1.6rem;flex-shrink:0;}
-.battle-label{font-weight:600;color:var(--text);}
-.battle-result{font-size:.72rem;color:var(--dim);margin-top:2px;}
-.battle-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:.68rem;padding:2px 8px;border-radius:10px;margin-top:4px;
-}
+.battle-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:44px;}
+@media(max-width:600px){.battle-grid{grid-template-columns:1fr;}}
+.battle-side{display:flex;flex-direction:column;gap:10px;}
+.battle-card{padding:14px;border-radius:11px;display:flex;gap:10px;align-items:center;font-size:.8rem;}
+.battle-card.villain{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);}
+.battle-card.hero-c{background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.2);}
+.battle-icon{font-size:1.5rem;flex-shrink:0;}
+.battle-label{font-weight:600;}
+.battle-result{font-size:.7rem;color:var(--dim);margin-top:2px;}
+.battle-badge{display:inline-flex;align-items:center;gap:3px;font-size:.65rem;padding:2px 8px;border-radius:10px;margin-top:3px;}
 .badge-ok{background:rgba(16,185,129,.15);color:var(--green);}
 .badge-warn{background:rgba(239,68,68,.15);color:var(--red);}
-.vs-col{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;padding:0 10px;
-}
-.vs-text{
-  font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;
-  color:var(--cyan);text-shadow:0 0 20px rgba(0,245,255,0.5);
-}
+.vs-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:0 8px;}
+.vs-text{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;color:var(--cyan);text-shadow:0 0 18px rgba(0,245,255,0.5);}
 .vs-line{flex:1;width:1px;background:rgba(0,245,255,0.2);}
 
 /* ── BENEFITS ── */
 #benefits{background:var(--bg);}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;align-items:start;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:44px;align-items:start;}
 @media(max-width:768px){.two-col{grid-template-columns:1fr;}}
-.list-card{padding:28px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
-.list-card-title{font-family:'Orbitron',monospace;font-size:.85rem;font-weight:700;margin-bottom:20px;letter-spacing:2px;}
-.check-list{display:flex;flex-direction:column;gap:12px;list-style:none;}
-.check-list li{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:.85rem;color:rgba(226,232,240,.75);line-height:1.4;
-}
-.check-list li::before{
-  content:'▸';font-size:.7rem;margin-top:2px;flex-shrink:0;
-}
+.list-card{padding:24px;border-radius:15px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.list-card-title{font-family:'Orbitron',monospace;font-size:.8rem;font-weight:700;margin-bottom:18px;letter-spacing:2px;}
+.check-list{display:flex;flex-direction:column;gap:10px;list-style:none;}
+.check-list li{display:flex;align-items:flex-start;gap:9px;font-size:.82rem;color:rgba(226,232,240,.7);line-height:1.4;}
+.check-list li::before{content:'▸';font-size:.68rem;margin-top:2px;flex-shrink:0;}
 .list-card.benefits-card .check-list li::before{color:var(--green);}
 .list-card.challenges-card .check-list li::before{color:var(--orange);}
 
 /* ── CTA ── */
-#cta{
-  background:linear-gradient(135deg,#0d1424 0%,#12082a 50%,#080c18 100%);
-  text-align:center;padding:100px 40px;position:relative;overflow:hidden;
-}
-#cta::before{
-  content:'';position:absolute;top:50%;left:50%;
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(0,245,255,0.06) 0%,transparent 70%);
-  transform:translate(-50%,-50%);pointer-events:none;
-}
-.cta-title{font-family:'Orbitron',monospace;font-size:clamp(1.5rem,3.5vw,3rem);font-weight:900;margin-bottom:20px;}
-.cta-desc{color:rgba(226,232,240,.6);max-width:500px;margin:0 auto 36px;font-size:.95rem;}
-.btn-replay{
-  font-family:'Orbitron',monospace;font-size:.85rem;letter-spacing:2px;
-  padding:16px 36px;border-radius:40px;cursor:pointer;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  color:#fff;border:none;font-weight:700;
-  box-shadow:0 4px 30px rgba(0,245,255,0.3);
-  transition:transform .15s,box-shadow .2s;
-}
-.btn-replay:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(0,245,255,0.5);}
+#cta{background:linear-gradient(135deg,#0d1424 0%,#12082a 50%,#080c18 100%);text-align:center;padding:90px 40px;position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;top:50%;left:50%;width:550px;height:550px;background:radial-gradient(circle,rgba(0,245,255,0.06) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none;}
+.cta-title{font-family:'Orbitron',monospace;font-size:clamp(1.4rem,3.2vw,2.8rem);font-weight:900;margin-bottom:18px;}
+.cta-desc{color:rgba(226,232,240,.6);max-width:480px;margin:0 auto 32px;font-size:.92rem;}
+.btn-replay{font-family:'Orbitron',monospace;font-size:.82rem;letter-spacing:2px;padding:14px 34px;border-radius:40px;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;border:none;font-weight:700;box-shadow:0 4px 28px rgba(0,245,255,0.3);transition:transform .15s,box-shadow .2s;}
+.btn-replay:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(0,245,255,0.5);}
 
 /* ── FOOTER ── */
-footer{
-  background:#050810;padding:32px 40px;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
-}
-.footer-logo{font-family:'Orbitron',monospace;font-size:.85rem;color:var(--cyan);letter-spacing:2px;}
-.footer-disc{font-size:.72rem;color:var(--dim);max-width:550px;line-height:1.5;}
+footer{background:#050810;padding:28px 40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.footer-logo{font-family:'Orbitron',monospace;font-size:.8rem;color:var(--cyan);letter-spacing:2px;}
+.footer-disc{font-size:.68rem;color:var(--dim);max-width:540px;line-height:1.5;}
 
-/* ── MOBILE NAV ── */
-.nav-toggle{display:none;background:none;border:none;color:var(--cyan);font-size:1.2rem;cursor:pointer;}
-@media(max-width:768px){
-  nav{padding:14px 20px;}
-  .nav-links{display:none;}
-  .nav-toggle{display:block;}
-  section{padding:70px 20px;}
-  .battle-grid{gap:12px;}
-}
+@media(max-width:768px){nav{padding:12px 18px;}.nav-links{display:none;}section{padding:60px 18px;}.battle-grid{gap:10px;}}
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo">⚡ KANDY HYPERGRID</div>
+  <div class="nav-logo">
+    <div class="logo-loop">⟳</div>
+    AJRLOOPS
+  </div>
   <ul class="nav-links">
     <li><a href="#concept">Concept</a></li>
     <li><a href="#city-map">City Map</a></li>
@@ -462,186 +281,156 @@ footer{
   <button class="nav-cta" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})">Explore Map</button>
 </nav>
 
-<!-- ── HERO ── -->
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <div class="hero-badge"><span></span>CONCEPTUAL SMART CITY DEMO · SRI LANKA</div>
-    <h1 class="hero-title">Kandy<br/>HyperGrid</h1>
-    <p class="hero-sub">Elevated Tunnel Transport Concept</p>
-    <p class="hero-desc">A visual demo of how homes, shops, offices, hospitals, schools, stations, and public buildings could be connected through an elevated smart pod network across Kandy.</p>
+    <div class="hero-badge"><span class="pulse"></span>SMART CITY TRANSPORT CONCEPT · KANDY · SRI LANKA</div>
+    <h1 class="hero-title">AJR<br/>Loops</h1>
+    <p class="hero-sub">Elevated Pod Transport Network</p>
+    <p class="hero-desc">Homes, hospitals, schools, offices, and stations connected through elevated smart-pod tunnels above Kandy's roads — always moving, always smart.</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})">Watch City Demo</button>
       <button class="btn-outline" onclick="document.getElementById('infrastructure').scrollIntoView({behavior:'smooth'})">Explore Infrastructure</button>
     </div>
   </div>
-  <div class="hero-minimap">
-    <canvas id="minimap-canvas"></canvas>
-    <div class="minimap-label">KANDY LIVE GRID</div>
-  </div>
   <div class="scroll-hint">SCROLL</div>
 </section>
 
-<!-- ── CONCEPT ── -->
 <section id="concept">
   <div class="container">
-    <span class="section-tag reveal">What is this?</span>
-    <h2 class="section-title reveal">City-Scale Elevated<br/><span style="color:var(--cyan)">Pod Transport</span></h2>
-    <p class="section-desc reveal">Inspired by hyperloop principles, but reimagined for dense urban connectivity — not high-speed intercity travel. Pods run inside elevated transparent tubes above existing roads, connecting every key zone in Kandy.</p>
+    <span class="section-tag reveal">What is AJRLoops?</span>
+    <h2 class="section-title reveal">City-Scale Smart<br/><span style="color:var(--cyan)">Pod Loops</span></h2>
+    <p class="section-desc reveal">Elevated loops above existing roads. Automated pods carrying passengers city-wide. No traffic. No pollution. No delays. Smart routing by AI.</p>
     <div class="compare-grid">
-      <div class="compare-card reveal" style="--accent:#ef4444">
-        <div class="compare-icon">🚗</div>
-        <div class="compare-title">Current Roads</div>
-        <div class="compare-desc">Traffic congestion, narrow lanes, pollution, no priority for emergency vehicles.</div>
-        <div class="compare-tag" style="background:rgba(239,68,68,.1);color:#ef4444">CURRENT</div>
-      </div>
-      <div class="compare-card reveal" style="--accent:#f59e0b">
-        <div class="compare-icon">🚄</div>
-        <div class="compare-title">Hyperloop</div>
-        <div class="compare-desc">High-speed city-to-city travel. Long distances, vacuum tubes, very high cost per km.</div>
-        <div class="compare-tag" style="background:rgba(245,158,11,.1);color:#f59e0b">INSPIRATION</div>
-      </div>
-      <div class="compare-card reveal" style="--accent:#00f5ff">
-        <div class="compare-icon">⚡</div>
-        <div class="compare-title">Kandy HyperGrid</div>
-        <div class="compare-desc">City-scale pod network. Elevated above roads. Multiple stops. Smart routing. Clean energy.</div>
-        <div class="compare-tag" style="background:rgba(0,245,255,.1);color:#00f5ff">THIS CONCEPT</div>
-      </div>
-      <div class="compare-card reveal" style="--accent:#10b981">
-        <div class="compare-icon">🤖</div>
-        <div class="compare-title">Smart Integration</div>
-        <div class="compare-desc">AI scheduling, real-time routing, emergency priority, demand-based pod frequency.</div>
-        <div class="compare-tag" style="background:rgba(16,185,129,.1);color:#10b981">FEATURE</div>
-      </div>
+      <div class="compare-card reveal" style="--accent:#ef4444"><div class="compare-icon">🚗</div><div class="compare-title">Current Roads</div><div class="compare-desc">Traffic, pollution, narrow lanes, no priority routing. Emergency vehicles stuck behind gridlock.</div></div>
+      <div class="compare-card reveal" style="--accent:#f59e0b"><div class="compare-icon">🚄</div><div class="compare-title">Hyperloop (Ref)</div><div class="compare-desc">High-speed city-to-city at 1000km/h. Long distances, vacuum tubes, enormous cost per km.</div></div>
+      <div class="compare-card reveal" style="--accent:#00f5ff"><div class="compare-icon">⟳</div><div class="compare-title">AJRLoops</div><div class="compare-desc">City-scale pod loops above roads. Multi-stop, automated, AI-routed. Book from app, step in, arrive.</div></div>
+      <div class="compare-card reveal" style="--accent:#10b981"><div class="compare-icon">🤖</div><div class="compare-title">AI-First Design</div><div class="compare-desc">App booking, smart capsule dispatch, junction switching, demand prediction, emergency override.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ── CITY MAP ── -->
 <section id="city-map">
   <div class="container" style="max-width:1200px">
-    <span class="section-tag reveal">Interactive Demo</span>
-    <h2 class="section-title reveal">Kandy City <span style="color:var(--cyan)">Route Network</span></h2>
-    <p class="section-desc reveal">Click a route to see pods move through that corridor. All routes run simultaneously in real operation.</p>
+    <span class="section-tag reveal">Interactive Journey Demo</span>
+    <h2 class="section-title reveal">Kandy City <span style="color:var(--cyan)">Loop Network</span></h2>
+    <p class="section-desc reveal">Select a route below — then watch a passenger book from the app, board a capsule, travel through junctions, and arrive at their destination.</p>
 
     <div class="route-selector" id="route-selector">
-      <button class="route-btn" data-route="all" onclick="selectRoute('all',this)">All Routes</button>
+      <button class="route-btn" data-route="all" onclick="selectRoute('all',this)">🗺 All Routes</button>
       <button class="route-btn" data-route="residential" onclick="selectRoute('residential',this)">🏠 Residential</button>
-      <button class="route-btn" data-route="office" onclick="selectRoute('office',this)">🏛️ Office & Gov</button>
+      <button class="route-btn" data-route="office" onclick="selectRoute('office',this)">🏛️ Office &amp; Gov</button>
       <button class="route-btn" data-route="hospital" onclick="selectRoute('hospital',this)">🏥 Hospital Emergency</button>
-      <button class="route-btn" data-route="market" onclick="selectRoute('market',this)">🛒 Market & Shops</button>
+      <button class="route-btn" data-route="market" onclick="selectRoute('market',this)">🛒 Market &amp; Shops</button>
       <button class="route-btn" data-route="tourist" onclick="selectRoute('tourist',this)">🏨 Tourist Route</button>
       <button class="route-btn" data-route="school" onclick="selectRoute('school',this)">🎓 Schools</button>
       <button class="route-btn" data-route="transit" onclick="selectRoute('transit',this)">🚉 Main Transit</button>
     </div>
 
-    <div id="city-canvas-wrap">
+    <div id="city-canvas-wrap" style="position:relative">
       <canvas id="city-canvas"></canvas>
     </div>
 
-    <div class="route-info" id="route-info"></div>
-  </div>
-</section>
-
-<!-- ── INFRASTRUCTURE ── -->
-<section id="infrastructure">
-  <div class="container">
-    <span class="section-tag reveal">How It's Built</span>
-    <h2 class="section-title reveal">Infrastructure <span style="color:var(--cyan)">Proposal</span></h2>
-    <p class="section-desc reveal">The system is designed to integrate with Kandy's existing urban fabric with minimum disruption.</p>
-    <div class="infra-grid">
-      <div class="infra-card reveal"><div class="infra-icon">🏗️</div><div class="infra-title">Elevated Tubes</div><div class="infra-desc">Transparent or semi-opaque tubes mounted on reinforced columns above road medians and edges.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🏛️</div><div class="infra-title">Support Columns</div><div class="infra-desc">Pylon-style columns spaced along road shoulders — no private land acquisition where roads exist.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🛗</div><div class="infra-title">Vertical Lift Stations</div><div class="infra-desc">Elevator and stairway access from ground level. Stations attached to buildings via skybridges.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🚨</div><div class="infra-title">Emergency Exits</div><div class="infra-desc">Safe exit platforms every defined interval. Manual evacuation walkways alongside main tube.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">☀️</div><div class="infra-title">Solar Canopy</div><div class="infra-desc">Solar panels integrated on tube tops and station roofs. Battery backup nodes at every station.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">📡</div><div class="infra-title">Smart Sensors</div><div class="infra-desc">Vibration, heat, structural load, crowd flow, pod location and emergency detection sensors.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🔇</div><div class="infra-title">Noise Reduction Shell</div><div class="infra-desc">Acoustic dampening on tube exterior. Pod speed limited in dense residential zones.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🌧️</div><div class="infra-title">Weather Protection</div><div class="infra-desc">Lightning arrestors, drainage channels, flood-resistant station design, rain sensor override.</div></div>
-      <div class="infra-card reveal"><div class="infra-icon">🔧</div><div class="infra-title">Maintenance Rail</div><div class="infra-desc">Inspection drone rail and hatches alongside tubes. Scheduled maintenance windows at night.</div></div>
+    <div id="demo-panel" style="position:relative">
+      <button class="demo-close" onclick="closeDemo()">✕</button>
+      <div class="demo-panel-inner">
+        <div class="demo-origin-dest">
+          <div class="demo-station-badge" id="dp-origin" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.3);">
+            <div class="dsb-label">BOARDING</div>
+            <div class="dsb-name" id="dp-origin-name">—</div>
+          </div>
+          <div class="demo-arrow">→</div>
+          <div class="demo-station-badge" id="dp-dest" style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);">
+            <div class="dsb-label">DESTINATION</div>
+            <div class="dsb-name" id="dp-dest-name">—</div>
+          </div>
+        </div>
+        <div class="demo-progress-area">
+          <div class="demo-phase-label" id="dp-phase">INITIALIZING...</div>
+          <div class="demo-progress-track"><div class="demo-progress-fill" id="dp-fill" style="width:0%"></div></div>
+          <div class="demo-steps" id="dp-steps"></div>
+        </div>
+        <div class="demo-pod-info">
+          <div class="dpi-row">Pod ID: <span id="dp-pod-id">—</span></div>
+          <div class="dpi-row">Speed: <span id="dp-speed">—</span></div>
+          <div class="dpi-row">ETA: <span id="dp-eta">—</span></div>
+          <div class="dpi-row">Status: <span id="dp-status" style="color:var(--green)">IDLE</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── SAFETY ── -->
+<section id="infrastructure">
+  <div class="container">
+    <span class="section-tag reveal">How It's Built</span>
+    <h2 class="section-title reveal">Infrastructure <span style="color:var(--cyan)">Design</span></h2>
+    <p class="section-desc reveal">Every element designed to sit above Kandy's streets with minimum disruption to existing life.</p>
+    <div class="infra-grid">
+      <div class="infra-card reveal"><div class="infra-icon">🏗️</div><div class="infra-title">Elevated Loop Tubes</div><div class="infra-desc">Transparent or semi-opaque sealed tubes on reinforced columns above road medians.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🏛️</div><div class="infra-title">Pylon Columns</div><div class="infra-desc">Placed along road shoulders — no private land acquisition where public roads exist.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🛗</div><div class="infra-title">Pod Stations</div><div class="infra-desc">Elevator + stair access. Skybridges to adjacent buildings. Ground-level drop-off zones.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">📱</div><div class="infra-title">AJRLoops App</div><div class="infra-desc">Book your pod, select destination, see live ETA, board with QR code. Real-time tracking.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🔀</div><div class="infra-title">Smart Junctions</div><div class="infra-desc">AI-controlled switching nodes where loops intersect. Pods route to correct branch in milliseconds.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">☀️</div><div class="infra-title">Solar Canopy</div><div class="infra-desc">Solar panels on tube tops and station roofs. Battery backup at every node.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">📡</div><div class="infra-title">Sensor Network</div><div class="infra-desc">Vibration, heat, structural load, crowd flow, pod location and emergency detection.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🚨</div><div class="infra-title">Emergency Exits</div><div class="infra-desc">Rescue platforms every 150m. Manual access doors. Evacuation walkways alongside tubes.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🔧</div><div class="infra-title">Night Maintenance</div><div class="infra-desc">Inspection drones launch after midnight. Hatches on tube exterior for manual access.</div></div>
+    </div>
+  </div>
+</section>
+
 <section id="safety">
   <div class="container">
     <span class="section-tag reveal">Risk Awareness</span>
     <h2 class="section-title reveal">Safety & <span style="color:var(--red)">Hazard Planning</span></h2>
-    <p class="section-desc reveal">This concept takes real-world constraints seriously. Every design choice accounts for Kandy's unique geography, heritage, and urban density.</p>
+    <p class="section-desc reveal">Real constraints. Real terrain. Kandy's unique geography demands careful, honest engineering.</p>
     <div class="safety-grid">
-      <div class="safety-item reveal"><div class="safety-item-icon">🏛️</div><div><div class="safety-item-title">Heritage Zones</div><div class="safety-item-desc">No elevated structures within restricted zones near the Temple of the Tooth. Routes re-planned around cultural corridors.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🏔️</div><div><div class="safety-item-title">Hilly Terrain</div><div class="safety-item-desc">Seismic and vibration monitoring for all columns. Soil stability assessment before any pylon placement.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🌊</div><div><div class="safety-item-title">Flood & Landslide</div><div class="safety-item-desc">Route planning avoids known landslide-prone corridors. Flood sensors trigger automatic pod hold.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🔥</div><div><div class="safety-item-title">Fire-Safe Stations</div><div class="safety-item-desc">Non-combustible materials, fire suppression systems, clear evacuation signage and emergency lighting.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🚪</div><div><div class="safety-item-title">Evacuation Platforms</div><div class="safety-item-desc">Rescue platforms accessible every 150m of tube. Manual access doors for emergency crew.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🏘️</div><div><div class="safety-item-title">Right-of-Way</div><div class="safety-item-desc">Routes use public road corridors first. Private land only with compensation and legal approval.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">⚡</div><div><div class="safety-item-title">Lightning Arrest</div><div class="safety-item-desc">Full lightning rod network across tube spans. Grounding systems at every column base.</div></div></div>
-      <div class="safety-item reveal"><div class="safety-item-icon">🤖</div><div><div class="safety-item-title">Inspection Drones</div><div class="safety-item-desc">Automated structural inspection drones run nightly checks. Alerts sent to control center.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🏛️</div><div><div class="safety-item-title">Heritage Zones</div><div class="safety-item-desc">No elevated structures near Temple of the Tooth. Routes re-planned around cultural corridors.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🏔️</div><div><div class="safety-item-title">Hilly Terrain</div><div class="safety-item-desc">Seismic and vibration monitoring. Soil stability assessment before any pylon placement.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🌊</div><div><div class="safety-item-title">Flood &amp; Landslide</div><div class="safety-item-desc">Routes avoid known landslide corridors. Flood sensors trigger automatic pod hold.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🔥</div><div><div class="safety-item-title">Fire-Safe Stations</div><div class="safety-item-desc">Non-combustible materials, fire suppression, clear evacuation signage and emergency lighting.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🚪</div><div><div class="safety-item-title">Evacuation Platforms</div><div class="safety-item-desc">Rescue platforms every 150m. Manual access doors for emergency crew entry.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">⚡</div><div><div class="safety-item-title">Lightning Protection</div><div class="safety-item-desc">Full lightning rod network across tube spans. Grounding systems at every column base.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTROL CENTER ── -->
 <section id="control">
   <div class="container">
     <span class="section-tag reveal">Live Operations</span>
-    <h2 class="section-title reveal">Control <span style="color:var(--cyan)">Command Center</span></h2>
-    <p class="section-desc reveal">A unified AI-powered command center monitors all routes, pods, passengers, energy, and alerts in real time.</p>
+    <h2 class="section-title reveal">AJRLoops <span style="color:var(--cyan)">Control Center</span></h2>
+    <p class="section-desc reveal">AI-powered command center monitoring all loops, pods, passengers, energy and alerts in real time.</p>
     <div class="control-grid reveal">
       <div>
-        <div class="metrics-row" style="margin-bottom:14px">
-          <div class="metric-card" style="--mcol:#00f5ff">
-            <div class="metric-label">Active Pods</div>
-            <div class="metric-value" id="m-pods">47</div>
-            <div class="metric-sub">across all routes</div>
-            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-pods" style="width:67%;background:var(--cyan)"></div></div>
-          </div>
-          <div class="metric-card" style="--mcol:#10b981">
-            <div class="metric-label">Routes Online</div>
-            <div class="metric-value" id="m-routes">7</div>
-            <div class="metric-sub">of 7 active</div>
-            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-routes" style="width:100%;background:var(--green)"></div></div>
-          </div>
+        <div class="metrics-row" style="margin-bottom:12px">
+          <div class="metric-card" style="--mcol:#00f5ff"><div class="metric-label">Active Pods</div><div class="metric-value" id="m-pods">47</div><div class="metric-sub">all loops</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-pods" style="width:67%;background:var(--cyan)"></div></div></div>
+          <div class="metric-card" style="--mcol:#10b981"><div class="metric-label">Loops Online</div><div class="metric-value" id="m-routes">7</div><div class="metric-sub">of 7 active</div><div class="metric-bar-wrap"><div class="metric-bar" style="width:100%;background:var(--green)"></div></div></div>
         </div>
-        <div class="metrics-row" style="margin-bottom:14px">
-          <div class="metric-card" style="--mcol:#f59e0b">
-            <div class="metric-label">Passenger Flow</div>
-            <div class="metric-value" id="m-pass">2,847</div>
-            <div class="metric-sub">today so far</div>
-            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-pass" style="width:72%;background:var(--gold)"></div></div>
-          </div>
-          <div class="metric-card" style="--mcol:#8b5cf6">
-            <div class="metric-label">Energy Level</div>
-            <div class="metric-value" id="m-energy">84<span style="font-size:1rem">%</span></div>
-            <div class="metric-sub">solar + grid</div>
-            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-energy" style="width:84%;background:var(--purple)"></div></div>
-          </div>
+        <div class="metrics-row" style="margin-bottom:12px">
+          <div class="metric-card" style="--mcol:#f59e0b"><div class="metric-label">Passengers Today</div><div class="metric-value" id="m-pass">2,847</div><div class="metric-sub">and counting</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-pass" style="width:72%;background:var(--gold)"></div></div></div>
+          <div class="metric-card" style="--mcol:#8b5cf6"><div class="metric-label">Energy Level</div><div class="metric-value" id="m-energy">84<span style="font-size:1rem">%</span></div><div class="metric-sub">solar + grid</div><div class="metric-bar-wrap"><div class="metric-bar" id="mb-energy" style="width:84%;background:var(--purple)"></div></div></div>
         </div>
-        <div class="cc-panel">
-          <div class="cc-panel-title">ROUTE STATUS</div>
-          <div class="route-status" id="route-status"></div>
-        </div>
+        <div class="cc-panel"><div class="cc-panel-title">LOOP STATUS</div><div class="route-status" id="route-status"></div></div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
         <div class="cc-panel" style="flex:1">
           <div class="cc-panel-title">SYSTEM ALERTS</div>
           <div class="alert-list">
-            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span>All structural sensors nominal</span></div>
-            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span>No emergency routes activated</span></div>
-            <div class="alert-item warn" id="alert-demand"><div class="alert-dot" style="background:#f97316"></div><span id="alert-demand-text">High demand on Market Route</span></div>
-            <div class="alert-item info"><div class="alert-dot" style="background:#3b82f6"></div><span>AI rerouting 3 pods via Transit Loop</span></div>
-            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span>Solar panels at 91% efficiency</span></div>
-            <div class="alert-item info" id="alert-maint"><div class="alert-dot" style="background:#3b82f6"></div><span>Night maintenance scheduled: Zone B</span></div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div>All structural sensors nominal</div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div>No emergency routes activated</div>
+            <div class="alert-item warn"><div class="alert-dot" style="background:#f97316"></div><span id="alert-demand-text">High demand on Market Loop</span></div>
+            <div class="alert-item info"><div class="alert-dot" style="background:#3b82f6"></div>AI rerouting 3 pods via Transit Loop</div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div>Solar panels at 91% efficiency</div>
           </div>
         </div>
         <div class="cc-panel">
           <div class="cc-panel-title">AI OPTIMIZATION</div>
-          <div style="font-size:.78rem;color:var(--dim);line-height:1.8">
-            ▸ Rush hour prediction: <span style="color:var(--gold)">18:30 surge expected</span><br/>
-            ▸ Adding <span id="ai-pods" style="color:var(--cyan)">4</span> pods to School Route<br/>
-            ▸ Energy save mode: <span style="color:var(--green)">Active on off-peak routes</span><br/>
-            ▸ Weather alert: <span id="ai-weather" style="color:var(--orange)">Rain sensors monitoring</span>
+          <div style="font-size:.74rem;color:var(--dim);line-height:1.9">
+            ▸ Rush surge predicted: <span style="color:var(--gold)">18:30 +34% demand</span><br/>
+            ▸ Adding <span id="ai-pods" style="color:var(--cyan)">4</span> pods to School Loop<br/>
+            ▸ Energy save mode: <span style="color:var(--green)">Active off-peak</span><br/>
+            ▸ Weather: <span id="ai-weather" style="color:var(--orange)">Rain sensors monitoring</span>
           </div>
         </div>
       </div>
@@ -649,93 +438,50 @@ footer{
   </div>
 </section>
 
-<!-- ── TIMELINE ── -->
 <section id="timeline">
   <div class="container">
-    <span class="section-tag reveal">Day in the Grid</span>
-    <h2 class="section-title reveal">A Day Running on <span style="color:var(--cyan)">HyperGrid</span></h2>
-    <p class="section-desc reveal">From morning rush to evening return — how the network adapts throughout the day.</p>
+    <span class="section-tag reveal">Day in the Loop</span>
+    <h2 class="section-title reveal">A Day on <span style="color:var(--cyan)">AJRLoops</span></h2>
     <div class="tl-container">
       <div class="tl-line"></div>
       <div class="tl-items">
-        <div class="tl-item">
-          <div class="tl-content"><div class="tl-time">06:00 AM</div><div class="tl-title">Morning Rush Begins</div><div class="tl-desc">Pod frequency doubles on Residential routes. AI pre-positions pods at hill stations before peak demand.</div></div>
-          <div class="tl-node">🌅</div>
-          <div class="tl-spacer"></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-spacer"></div>
-          <div class="tl-node">🏠</div>
-          <div class="tl-content"><div class="tl-time">07:15 AM</div><div class="tl-title">Residential Zones Activate</div><div class="tl-desc">Houses connect to their nearest station. Pods load passengers and depart every 90 seconds.</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content"><div class="tl-time">08:00 AM</div><div class="tl-title">Pod Split — Work & School</div><div class="tl-desc">At central junction pods branch: some route toward government offices, others toward school zones and university.</div></div>
-          <div class="tl-node">🔀</div>
-          <div class="tl-spacer"></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-spacer"></div>
-          <div class="tl-node">🚨</div>
-          <div class="tl-content"><div class="tl-time">09:30 AM</div><div class="tl-title">Emergency Priority Activated</div><div class="tl-desc">Hospital route turns orange. Medical pod gets clear corridor — all other pods hold at nearest station. Response time: under 4 min.</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content"><div class="tl-time">11:00 AM</div><div class="tl-title">Tourist Route Highlights</div><div class="tl-desc">Purple tourist pods move through scenic elevated paths near Kandy Lake and cultural zones, with announcements in 3 languages.</div></div>
-          <div class="tl-node">🏛️</div>
-          <div class="tl-spacer"></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-spacer"></div>
-          <div class="tl-node">🌃</div>
-          <div class="tl-content"><div class="tl-time">06:00 PM</div><div class="tl-title">Evening Return Flow</div><div class="tl-desc">Flow reverses. AI predicts demand surges. Extra pods deployed. Market route stays active until 10 PM.</div></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content"><div class="tl-time">11:00 PM</div><div class="tl-title">Night Mode & Maintenance</div><div class="tl-desc">Reduced pod frequency. Inspection drones launch. Battery systems charge. Control center runs diagnostics for next day.</div></div>
-          <div class="tl-node">🔧</div>
-          <div class="tl-spacer"></div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-spacer"></div>
-          <div class="tl-node">⚡</div>
-          <div class="tl-content"><div class="tl-time">Solar Hours</div><div class="tl-title">Energy Optimization</div><div class="tl-desc">Peak solar generation runs 9AM–3PM. Excess energy feeds back to grid. Tube lighting auto-dims in daylight hours.</div></div>
-        </div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">06:00 AM</div><div class="tl-title">Morning Rush Begins</div><div class="tl-desc">Pod frequency doubles. AI pre-positions capsules at residential hill stations before peak demand.</div></div><div class="tl-node">🌅</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">📱</div><div class="tl-content"><div class="tl-time">07:10 AM</div><div class="tl-title">Book from App</div><div class="tl-desc">Passenger opens AJRLoops app, selects "City Center Office Zone." Pod A-247 dispatched. ETA: 3 min.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">07:14 AM</div><div class="tl-title">Capsule Arrives, Board</div><div class="tl-desc">Capsule glides in, doors open. Passenger steps aboard. QR scan confirms boarding. Doors close.</div></div><div class="tl-node">🚀</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🔀</div><div class="tl-content"><div class="tl-time">07:16 AM</div><div class="tl-title">Junction Switch</div><div class="tl-desc">At City Center hub, AI routes the pod onto the Office Loop. No slowdown — seamless branching.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">09:30 AM</div><div class="tl-title">Emergency Override</div><div class="tl-desc">Hospital Loop gets priority corridor. All other pods hold at nearest station. Response time: 3m 20s.</div></div><div class="tl-node">🚨</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🏛️</div><div class="tl-content"><div class="tl-time">11:00 AM</div><div class="tl-title">Tourist Loop Active</div><div class="tl-desc">Purple pods move through elevated paths near Kandy Lake and cultural zones. Announcements in 3 languages.</div></div></div>
+        <div class="tl-item"><div class="tl-content"><div class="tl-time">06:00 PM</div><div class="tl-title">Evening Return Flow</div><div class="tl-desc">AI reverses dominant flow direction. Extra pods deployed on Market and Transit loops.</div></div><div class="tl-node">🌃</div><div class="tl-spacer"></div></div>
+        <div class="tl-item"><div class="tl-spacer"></div><div class="tl-node">🔧</div><div class="tl-content"><div class="tl-time">11:00 PM</div><div class="tl-title">Night Maintenance</div><div class="tl-desc">Reduced frequency. Inspection drones launch. Batteries charge. Control center runs next-day diagnostics.</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CITY FLOW BATTLE ── -->
 <section id="battle">
   <div class="container">
     <span class="section-tag reveal">City Flow Battle</span>
-    <h2 class="section-title reveal">HyperGrid vs <span style="color:var(--red)">City Problems</span></h2>
-    <p class="section-desc reveal">Every city has enemies. Here's how the HyperGrid handles them.</p>
+    <h2 class="section-title reveal">AJRLoops vs <span style="color:var(--red)">City Problems</span></h2>
     <div class="battle-grid reveal">
       <div class="battle-side">
-        <div class="battle-card villain"><div class="battle-icon">🚗</div><div><div class="battle-label">Traffic Jam Monster</div><div class="battle-result">Gridlocks entire city center at 8AM</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">🌧️</div><div><div class="battle-label">Rain Delay</div><div class="battle-result">Floods narrow roads, delays buses 40min</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">🚧</div><div><div class="battle-label">Road Block</div><div class="battle-result">One blocked road cripples entire zone</div><div class="battle-badge badge-warn">THREAT: MED</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">😤</div><div><div class="battle-label">Rush Hour Crowd</div><div class="battle-result">Bus overloaded, school kids left behind</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
-        <div class="battle-card villain"><div class="battle-icon">🚑</div><div><div class="battle-label">Emergency Blocked</div><div class="battle-result">Ambulance stuck behind traffic 12min</div><div class="battle-badge badge-warn">THREAT: CRITICAL</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚗</div><div><div class="battle-label">Traffic Jam Monster</div><div class="battle-result">Gridlock at city center 8AM daily</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🌧️</div><div><div class="battle-label">Rain Delay</div><div class="battle-result">Floods roads, delays buses 40min</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚧</div><div><div class="battle-label">Road Block</div><div class="battle-result">One road blocks entire zone</div><div class="battle-badge badge-warn">THREAT: MED</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">😤</div><div><div class="battle-label">Rush Hour Chaos</div><div class="battle-result">Bus overloaded, kids left behind</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚑</div><div><div class="battle-label">Emergency Blocked</div><div class="battle-result">Ambulance stuck in traffic 12min</div><div class="battle-badge badge-warn">THREAT: CRITICAL</div></div></div>
       </div>
-      <div class="vs-col">
-        <div class="vs-line"></div>
-        <div class="vs-text">⚡</div>
-        <div style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:2px;text-align:center;writing-mode:vertical-rl">HyperGrid Wins</div>
-        <div class="vs-text">⚡</div>
-        <div class="vs-line"></div>
-      </div>
+      <div class="vs-col"><div class="vs-line"></div><div class="vs-text">⟳</div><div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:2px;text-align:center;writing-mode:vertical-rl">AJRLoops Wins</div><div class="vs-text">⟳</div><div class="vs-line"></div></div>
       <div class="battle-side">
-        <div class="battle-card hero-c"><div class="battle-icon">⚡</div><div><div class="battle-label">Traffic Jam Dodged</div><div class="battle-result">Pods fly above gridlock. Zero impact.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🌊</div><div><div class="battle-label">Rain Mode Active</div><div class="battle-result">Enclosed tubes unaffected. On-time.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🔀</div><div><div class="battle-label">Alt Route Deployed</div><div class="battle-result">AI reroutes pods in 8 seconds flat.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🤖</div><div><div class="battle-label">School Rush Balanced</div><div class="battle-result">AI adds 3 pods to school route. Done.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
-        <div class="battle-card hero-c"><div class="battle-icon">🚨</div><div><div class="battle-label">Emergency Route Cleared</div><div class="battle-result">Dedicated pod priority. Arrival: 3m 20s.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">⚡</div><div><div class="battle-label">Traffic Jam Skipped</div><div class="battle-result">Pods fly 8m above gridlock. Zero impact.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🌊</div><div><div class="battle-label">Rain Mode: ON</div><div class="battle-result">Sealed tubes unaffected. On-time always.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🔀</div><div><div class="battle-label">Alt Loop Deployed</div><div class="battle-result">AI reroutes in 8 seconds flat.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🤖</div><div><div class="battle-label">Rush Balanced</div><div class="battle-result">AI adds pods before surge hits.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🚨</div><div><div class="battle-label">Emergency Route Clear</div><div class="battle-result">Priority pod corridor. Arrival: 3m 20s.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── BENEFITS & CHALLENGES ── -->
 <section id="benefits">
   <div class="container">
     <span class="section-tag reveal">Honest Assessment</span>
@@ -744,249 +490,119 @@ footer{
       <div class="list-card benefits-card reveal">
         <div class="list-card-title" style="color:var(--green)">✅ POTENTIAL BENEFITS</div>
         <ul class="check-list">
-          <li>Reduced road congestion in city center</li>
-          <li>Faster connection between all city zones</li>
-          <li>Emergency priority routes save lives</li>
-          <li>Cleaner, quieter city movement</li>
-          <li>Better integration with rail & bus</li>
-          <li>Tourism-friendly routes near landmarks</li>
-          <li>Less pressure on narrow Kandy roads</li>
-          <li>Real-time city data and smart routing</li>
-          <li>Renewable energy powered operation</li>
-          <li>Barrier-free access with lifts and ramps</li>
+          <li>Reduced road congestion city-wide</li><li>Faster connection between all zones</li><li>Emergency priority routes save lives</li><li>Cleaner, quieter city movement</li><li>App-based booking — no queue, no wait</li><li>Tourism-friendly cultural routes</li><li>Less pressure on narrow Kandy roads</li><li>Real-time AI scheduling and data</li><li>Solar-powered, low-carbon operation</li><li>Barrier-free access with lifts</li>
         </ul>
       </div>
       <div class="list-card challenges-card reveal">
         <div class="list-card-title" style="color:var(--orange)">⚠️ REAL CHALLENGES</div>
         <ul class="check-list">
-          <li>Extremely high construction cost</li>
-          <li>Complex regulatory and government approvals</li>
-          <li>Land and right-of-way legal issues</li>
-          <li>Ongoing maintenance complexity</li>
-          <li>Safety certification requirements</li>
-          <li>Heritage and environmental restrictions</li>
-          <li>Evacuation planning in dense city</li>
-          <li>Public acceptance and trust</li>
-          <li>Engineering challenges in hilly terrain</li>
-          <li>Seismic resilience design requirements</li>
+          <li>Extremely high construction cost</li><li>Complex regulatory approvals</li><li>Land and right-of-way legal issues</li><li>Ongoing maintenance complexity</li><li>Safety certification requirements</li><li>Heritage and environmental restrictions</li><li>Evacuation planning in dense city</li><li>Public acceptance and trust</li><li>Engineering challenges in hilly terrain</li><li>Seismic resilience design required</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CTA ── -->
 <section id="cta">
   <div class="container">
     <h2 class="cta-title reveal">Experience the<br/><span style="color:var(--cyan)">Future City Flow</span></h2>
-    <p class="cta-desc reveal">This is a concept — a spark. Real cities are built from bold ideas, careful engineering, and public will. What could Kandy become?</p>
+    <p class="cta-desc reveal">A concept — a spark. Real cities are built from bold ideas, careful engineering, and public will. What could Kandy become?</p>
     <button class="btn-replay reveal" onclick="replayDemo()">⟳ Replay City Demo</button>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-logo">⚡ KANDY HYPERGRID</div>
-  <div class="footer-disc">⚠️ This is a conceptual smart-city transport visualization. It is not an approved engineering, government, or construction proposal. All data shown is simulated for demonstration purposes only.</div>
+  <div class="footer-logo">⟳ AJRLOOPS</div>
+  <div class="footer-disc">⚠️ This is a conceptual smart-city transport visualization. It is not an approved engineering, government, or construction proposal. All data and animations are simulated for demonstration purposes only.</div>
 </footer>
 
 <script>
 // ═══════════════════════════════════════════════
-//  ROUTE DATA
+//  ROUTE & DEMO DATA
 // ═══════════════════════════════════════════════
-// Base canvas: 1000 × 560 internal coords
 const BASE_W = 1000, BASE_H = 560;
 
 const ROUTES = {
-  all: { label: 'All Routes', color: '#ffffff' },
-  residential: {
-    label: 'Residential Loop', color: '#10b981',
-    points: [[95,145],[170,210],[255,270],[340,310],[430,295]],
-    pods: 6, speed: 0.0014
-  },
-  office: {
-    label: 'Office & Government', color: '#3b82f6',
-    points: [[270,175],[340,220],[400,265],[430,295],[510,345]],
-    pods: 5, speed: 0.0016
-  },
-  hospital: {
-    label: 'Hospital Emergency', color: '#ef4444',
-    points: [[320,490],[390,420],[430,295],[620,280]],
-    pods: 4, speed: 0.0024
-  },
-  market: {
-    label: 'Market & Shops', color: '#f59e0b',
-    points: [[150,450],[280,390],[430,295],[510,345],[620,400]],
-    pods: 5, speed: 0.0013
-  },
-  tourist: {
-    label: 'Tourist Route', color: '#8b5cf6',
-    points: [[565,175],[480,225],[430,295],[490,355],[615,415]],
-    pods: 4, speed: 0.0012
-  },
-  school: {
-    label: 'School & University', color: '#06b6d4',
-    points: [[740,140],[605,210],[490,260],[430,295],[215,340]],
-    pods: 5, speed: 0.0015
-  },
-  transit: {
-    label: 'Main Transit', color: '#a78bfa',
-    points: [[150,450],[320,490],[430,295],[565,175],[740,140]],
-    pods: 6, speed: 0.0017
-  }
+  all:         { label:'All Loops', color:'#ffffff' },
+  residential: { label:'Residential Loop', color:'#10b981', points:[[95,145],[170,210],[255,270],[340,310],[430,295]], pods:6, speed:.0014,
+                 origin:'Res. Hills Station', dest:'City Hub', junctionPt:[255,270], junctionTo:'Office Loop' },
+  office:      { label:'Office & Government', color:'#3b82f6', points:[[270,175],[340,220],[400,265],[430,295],[510,345]], pods:5, speed:.0016,
+                 origin:'Gov. Complex Station', dest:'Commercial Hub', junctionPt:[430,295], junctionTo:'Transit Loop' },
+  hospital:    { label:'Hospital Emergency', color:'#ef4444', points:[[320,490],[390,420],[430,295],[620,280]], pods:4, speed:.0028,
+                 origin:'Bus Stand Hub', dest:'Kandy Hospital', junctionPt:[430,295], junctionTo:'Transit Loop' },
+  market:      { label:'Market & Shops', color:'#f59e0b', points:[[150,450],[280,390],[430,295],[510,345],[620,400]], pods:5, speed:.0013,
+                 origin:'Railway Station', dest:'Market Zone', junctionPt:[430,295], junctionTo:'Tourist Loop' },
+  tourist:     { label:'Tourist Route', color:'#8b5cf6', points:[[565,175],[480,225],[430,295],[490,355],[615,415]], pods:4, speed:.0012,
+                 origin:'Hotel District', dest:'Market Zone', junctionPt:[430,295], junctionTo:'Transit Loop' },
+  school:      { label:'School & University', color:'#06b6d4', points:[[740,140],[605,210],[490,260],[430,295],[215,340]], pods:5, speed:.0015,
+                 origin:'University Hub', dest:'Schools Zone', junctionPt:[490,260], junctionTo:'Office Loop' },
+  transit:     { label:'Main Transit Loop', color:'#a78bfa', points:[[150,450],[320,490],[430,295],[565,175],[740,140]], pods:6, speed:.0017,
+                 origin:'Railway Station', dest:'University Hub', junctionPt:[430,295], junctionTo:'Residential Loop' },
 };
 
 const LANDMARKS = [
-  { name: 'Kandy Lake', x: 430, y: 295, type: 'lake', icon: '💧', color: '#1d4ed8' },
-  { name: 'Temple of Tooth', x: 440, y: 225, type: 'temple', icon: '🏛️', color: '#f59e0b' },
-  { name: 'Railway Station', x: 150, y: 450, type: 'station', icon: '🚉', color: '#6366f1' },
-  { name: 'Bus Stand', x: 320, y: 490, type: 'transit', icon: '🚌', color: '#6366f1' },
-  { name: 'Kandy Hospital', x: 620, y: 280, type: 'hospital', icon: '🏥', color: '#ef4444' },
-  { name: 'Market Zone', x: 620, y: 400, type: 'market', icon: '🛒', color: '#f59e0b' },
-  { name: 'University', x: 740, y: 140, type: 'school', icon: '🎓', color: '#06b6d4' },
-  { name: 'Schools Zone', x: 215, y: 340, type: 'school', icon: '🏫', color: '#06b6d4' },
-  { name: 'Res. Hills N', x: 95, y: 145, type: 'residential', icon: '🏠', color: '#10b981' },
-  { name: 'Tourist Hotels', x: 565, y: 175, type: 'tourist', icon: '🏨', color: '#8b5cf6' },
-  { name: 'Gov. Complex', x: 270, y: 175, type: 'government', icon: '🏛', color: '#3b82f6' },
-  { name: 'Commercial', x: 510, y: 345, type: 'commercial', icon: '🏢', color: '#f97316' },
+  { name:'Kandy Lake', x:430, y:295, icon:'', color:'#1d4ed8' },
+  { name:'Temple of Tooth', x:440, y:225, icon:'🏛️', color:'#f59e0b' },
+  { name:'Railway Station', x:150, y:450, icon:'🚉', color:'#6366f1' },
+  { name:'Bus Stand', x:320, y:490, icon:'🚌', color:'#6366f1' },
+  { name:'Hospital', x:620, y:280, icon:'🏥', color:'#ef4444' },
+  { name:'Market Zone', x:620, y:400, icon:'🛒', color:'#f59e0b' },
+  { name:'University', x:740, y:140, icon:'🎓', color:'#06b6d4' },
+  { name:'Schools Zone', x:215, y:340, icon:'🏫', color:'#06b6d4' },
+  { name:'Res. Hills', x:95, y:145, icon:'🏠', color:'#10b981' },
+  { name:'Hotels', x:565, y:175, icon:'🏨', color:'#8b5cf6' },
+  { name:'Gov. Complex', x:270, y:175, icon:'🏛', color:'#3b82f6' },
+  { name:'Commercial', x:510, y:345, icon:'🏢', color:'#f97316' },
 ];
 
 // ═══════════════════════════════════════════════
-//  POD SYSTEM
+//  GLOBAL STATE
 // ═══════════════════════════════════════════════
 let pods = [];
 let activeRoute = 'all';
+let cityT = 0;
+let cW, cH, scX, scY;
 
-function initPods() {
-  pods = [];
-  Object.entries(ROUTES).forEach(([key, r]) => {
-    if (key === 'all') return;
-    const count = r.pods;
-    for (let i = 0; i < count; i++) {
-      pods.push({ routeKey: key, t: i / count, color: r.color, speed: r.speed });
-    }
-  });
-}
+// Zoom/camera
+const cam = { x:500, y:280, zoom:1, tx:500, ty:280, tz:1 };
 
-function getPodPos(pod) {
-  const pts = ROUTES[pod.routeKey].points;
-  const total = pts.length - 1;
-  const segT = pod.t * total;
-  const si = Math.floor(segT);
-  const lt = segT - si;
-  const p1 = pts[Math.min(si, total - 1)];
-  const p2 = pts[Math.min(si + 1, total)];
-  return [p1[0] + (p2[0] - p1[0]) * lt, p1[1] + (p2[1] - p1[1]) * lt];
-}
+// Demo system
+const DEMO_PHASES = [
+  { id:'zoom_in',     label:'Zooming to station...', dur:2000 },
+  { id:'waiting',     label:'Passengers waiting at station', dur:2500 },
+  { id:'app_select',  label:'Selecting destination on AJRLoops app', dur:3000 },
+  { id:'pod_arrive',  label:'Pod approaching platform...', dur:2500 },
+  { id:'boarding',    label:'Boarding — doors closing', dur:2000 },
+  { id:'depart',      label:'Departing — entering main tube', dur:1500 },
+  { id:'travel_1',    label:'Travelling at 85 km/h through elevated loop', dur:3500 },
+  { id:'junction',    label:'Route junction — switching loop', dur:2500 },
+  { id:'passing',     label:'Express pod passing on opposite track', dur:2000 },
+  { id:'travel_2',    label:'Final approach to destination', dur:2500 },
+  { id:'arrival',     label:'Arrived! Doors opening...', dur:2000 },
+  { id:'exit',        label:'Passenger exiting via skybridge', dur:1500 },
+  { id:'zoom_out',    label:'Returning to overview...', dur:1500 },
+];
+const DEMO_STEPS = ['Book','Board','Travel','Junction','Arrive'];
 
-function getPodAngle(pod) {
-  const pts = ROUTES[pod.routeKey].points;
-  const total = pts.length - 1;
-  const segT = pod.t * total;
-  const si = Math.min(Math.floor(segT), total - 1);
-  const p1 = pts[si], p2 = pts[si + 1];
-  return Math.atan2(p2[1] - p1[1], p2[0] - p1[0]);
-}
-
-// ═══════════════════════════════════════════════
-//  HERO CANVAS
-// ═══════════════════════════════════════════════
-const heroCanvas = document.getElementById('hero-canvas');
-const hCtx = heroCanvas.getContext('2d');
-let heroW, heroH, heroT = 0;
-
-function resizeHero() {
-  heroW = heroCanvas.width = heroCanvas.offsetWidth;
-  heroH = heroCanvas.height = heroCanvas.offsetHeight;
-}
-
-function drawHero() {
-  heroT += 0.008;
-  hCtx.clearRect(0, 0, heroW, heroH);
-
-  // Grid
-  const gSize = 60;
-  hCtx.strokeStyle = 'rgba(0,245,255,0.04)';
-  hCtx.lineWidth = 1;
-  for (let x = 0; x < heroW; x += gSize) {
-    hCtx.beginPath(); hCtx.moveTo(x, 0); hCtx.lineTo(x, heroH); hCtx.stroke();
-  }
-  for (let y = 0; y < heroH; y += gSize) {
-    hCtx.beginPath(); hCtx.moveTo(0, y); hCtx.lineTo(heroW, y); hCtx.stroke();
-  }
-
-  // Scanning line
-  const sy = (heroT * 80) % heroH;
-  const sg = hCtx.createLinearGradient(0, sy - 30, 0, sy + 30);
-  sg.addColorStop(0, 'transparent');
-  sg.addColorStop(0.5, 'rgba(0,245,255,0.06)');
-  sg.addColorStop(1, 'transparent');
-  hCtx.fillStyle = sg;
-  hCtx.fillRect(0, sy - 30, heroW, 60);
-
-  // Tube network silhouette
-  const heroRoutes = [
-    { pts: [[0.1*heroW,0.6*heroH],[0.3*heroW,0.45*heroH],[0.5*heroW,0.5*heroH]], col: '#00f5ff', alpha: 0.15 },
-    { pts: [[0.5*heroW,0.5*heroH],[0.7*heroW,0.35*heroH],[heroW,0.4*heroH]], col: '#7c3aed', alpha: 0.12 },
-    { pts: [[0.2*heroW,0.8*heroH],[0.5*heroW,0.5*heroH],[0.8*heroW,0.3*heroH]], col: '#3b82f6', alpha: 0.1 },
-    { pts: [[0.4*heroW,0.9*heroH],[0.5*heroW,0.5*heroH],[0.65*heroW,0.2*heroH]], col: '#10b981', alpha: 0.1 },
-  ];
-
-  heroRoutes.forEach(r => {
-    hCtx.save();
-    hCtx.shadowBlur = 20;
-    hCtx.shadowColor = r.col;
-    hCtx.strokeStyle = r.col.replace(')', `,${r.alpha})`).replace('rgb', 'rgba').replace('#', 'rgba(').replace(')', '');
-    // fallback — just use fixed rgba
-    hCtx.strokeStyle = r.col + '33';
-    hCtx.lineWidth = 2;
-    hCtx.beginPath();
-    hCtx.moveTo(r.pts[0][0], r.pts[0][1]);
-    r.pts.slice(1).forEach(p => hCtx.lineTo(p[0], p[1]));
-    hCtx.stroke();
-    hCtx.restore();
-
-    // Pod on this route
-    const progress = (heroT * 0.3 + r.alpha * 10) % 1;
-    const total = r.pts.length - 1;
-    const segT = progress * total;
-    const si = Math.min(Math.floor(segT), total - 1);
-    const lt = segT - si;
-    const px = r.pts[si][0] + (r.pts[si+1][0] - r.pts[si][0]) * lt;
-    const py = r.pts[si][1] + (r.pts[si+1][1] - r.pts[si][1]) * lt;
-
-    hCtx.save();
-    hCtx.shadowBlur = 16;
-    hCtx.shadowColor = r.col;
-    hCtx.fillStyle = '#fff';
-    hCtx.beginPath();
-    hCtx.ellipse(px, py, 5, 3, 0, 0, Math.PI * 2);
-    hCtx.fill();
-    hCtx.restore();
-  });
-
-  // Pulsing nodes
-  const nodes = [[0.3*heroW,0.45*heroH],[0.5*heroW,0.5*heroH],[0.7*heroW,0.35*heroH]];
-  nodes.forEach((n, i) => {
-    const pulse = Math.sin(heroT * 2 + i * 1.5) * 0.5 + 0.5;
-    hCtx.save();
-    hCtx.strokeStyle = `rgba(0,245,255,${0.2 + pulse * 0.3})`;
-    hCtx.lineWidth = 1;
-    hCtx.beginPath();
-    hCtx.arc(n[0], n[1], 8 + pulse * 8, 0, Math.PI * 2);
-    hCtx.stroke();
-    hCtx.restore();
-  });
-
-  requestAnimationFrame(drawHero);
-}
+let demo = {
+  active: false,
+  routeKey: null,
+  phaseIdx: 0,
+  phaseT: 0,       // ms elapsed in current phase
+  lastTime: 0,
+  podT: 0,         // demo pod progress 0→1
+  passengerState: 'waiting', // waiting|boarding|onboard|exiting
+  junctionFlash: 0,
+  passingPodT: -1,
+  phoneAnim: 0,
+  arriveFlash: 0,
+};
 
 // ═══════════════════════════════════════════════
-//  CITY MAP CANVAS
+//  CANVAS SETUP
 // ═══════════════════════════════════════════════
 const cityCanvas = document.getElementById('city-canvas');
 const cCtx = cityCanvas.getContext('2d');
-let cW, cH, scX, scY, cityT = 0;
 
 function resizeCity() {
   const wrap = document.getElementById('city-canvas-wrap');
@@ -996,376 +612,841 @@ function resizeCity() {
   scY = cH / BASE_H;
 }
 
-function cx(x) { return x * scX; }
-function cy(y) { return y * scY; }
+const cx = x => x * scX;
+const cy = y => y * scY;
 
-function drawTube(pts, color, alpha, lineW, glow) {
-  if (!pts || pts.length < 2) return;
+function hexA(hex, a) {
+  const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+// ═══════════════════════════════════════════════
+//  PATH UTILITIES
+// ═══════════════════════════════════════════════
+function getPathPos(pts, t) {
+  t = Math.max(0, Math.min(1, t));
+  const total = pts.length - 1;
+  const segT = t * total;
+  const si = Math.min(Math.floor(segT), total - 1);
+  const lt = segT - si;
+  const p1 = pts[si], p2 = pts[si + 1];
+  return [p1[0] + (p2[0]-p1[0])*lt, p1[1] + (p2[1]-p1[1])*lt];
+}
+
+function getPathAngle(pts, t) {
+  t = Math.max(0, Math.min(0.999, t));
+  const total = pts.length - 1;
+  const segT = t * total;
+  const si = Math.min(Math.floor(segT), total - 1);
+  const p1 = pts[si], p2 = pts[si+1];
+  return Math.atan2(p2[1]-p1[1], p2[0]-p1[0]);
+}
+
+// ═══════════════════════════════════════════════
+//  AMBIENT PODS
+// ═══════════════════════════════════════════════
+function initPods() {
+  pods = [];
+  Object.entries(ROUTES).forEach(([key, r]) => {
+    if (key === 'all') return;
+    for (let i = 0; i < r.pods; i++) {
+      pods.push({ routeKey:key, t: i/r.pods, color:r.color, speed:r.speed });
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  CAMERA / ZOOM
+// ═══════════════════════════════════════════════
+function lerpCam(dt) {
+  const s = Math.min(1, dt * 0.005);
+  cam.zoom += (cam.tz - cam.zoom) * s;
+  cam.x    += (cam.tx - cam.x) * s;
+  cam.y    += (cam.ty - cam.y) * s;
+}
+
+function setCamTarget(worldX, worldY, zoom) {
+  cam.tx = worldX; cam.ty = worldY; cam.tz = zoom;
+}
+
+function applyCam() {
+  const z = cam.zoom;
   cCtx.save();
-  cCtx.shadowBlur = glow ? 18 : 0;
-  cCtx.shadowColor = color;
-  cCtx.strokeStyle = hexAlpha(color, alpha);
-  cCtx.lineWidth = lineW;
-  cCtx.lineCap = 'round';
-  cCtx.lineJoin = 'round';
+  cCtx.translate(cW/2, cH/2);
+  cCtx.scale(z, z);
+  cCtx.translate(-cx(cam.x), -cy(cam.y));
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: TERRAIN + ROADS
+// ═══════════════════════════════════════════════
+function drawTerrain() {
+  const bg = cCtx.createLinearGradient(0,0,0,cH);
+  bg.addColorStop(0,'#070c18'); bg.addColorStop(1,'#0d1428');
+  cCtx.fillStyle = bg; cCtx.fillRect(0,0,cW,cH);
+
+  const hills=[[[0,0],[200,0],[180,180],[60,260],[0,300]],[[BASE_W,0],[BASE_W,200],[820,250],[750,120]],[[0,BASE_H],[0,400],[120,380],[200,BASE_H]],[[BASE_W,BASE_H],[BASE_W,380],[800,360],[900,BASE_H]]];
+  hills.forEach(pts=>{
+    cCtx.fillStyle='#0d1f35';cCtx.beginPath();
+    cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1]));
+    pts.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));
+    cCtx.closePath();cCtx.fill();
+  });
+
+  const roads=[[[0,450],[150,450],[320,490],[500,480],[700,430],[900,400]],[[150,0],[150,450]],[[430,295],[430,150],[430,0]],[[0,300],[95,145],[200,80],[350,50]],[[430,295],[700,280],[900,280]],[[320,490],[430,295]],[[430,295],[565,175],[740,140],[900,120]]];
+  cCtx.lineWidth=cx(8); cCtx.strokeStyle='rgba(25,35,55,0.85)';
+  roads.forEach(r=>{cCtx.beginPath();cCtx.moveTo(cx(r[0][0]),cy(r[0][1]));r.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));cCtx.stroke();});
+  cCtx.lineWidth=1; cCtx.strokeStyle='rgba(35,50,75,0.4)';
+  roads.forEach(r=>{cCtx.beginPath();cCtx.moveTo(cx(r[0][0]),cy(r[0][1]));r.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));cCtx.stroke();});
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: BUILDINGS
+// ═══════════════════════════════════════════════
+function drawBuildings() {
+  const zones=[{cx:95,cy:145,r:55,col:'#10b981',d:12},{cx:270,cy:175,r:45,col:'#3b82f6',d:8},{cx:215,cy:340,r:40,col:'#06b6d4',d:8},{cx:510,cy:345,r:40,col:'#f97316',d:10},{cx:620,cy:400,r:45,col:'#f59e0b',d:12},{cx:620,cy:280,r:35,col:'#ef4444',d:6},{cx:565,cy:175,r:40,col:'#8b5cf6',d:8},{cx:740,cy:140,r:40,col:'#06b6d4',d:7},{cx:860,cy:350,r:45,col:'#f97316',d:10},{cx:150,cy:350,r:35,col:'#10b981',d:8}];
+  zones.forEach(z=>{
+    const seed=z.cx*13+z.cy*7;
+    const isActive=activeRoute==='all'||(activeRoute&&ROUTES[activeRoute]&&ROUTES[activeRoute].points&&ROUTES[activeRoute].points.some(p=>Math.hypot(p[0]-z.cx,p[1]-z.cy)<120));
+    for(let i=0;i<z.d;i++){
+      const angle=(seed*i*137.5*Math.PI/180)%(Math.PI*2);
+      const dist=((seed*i*23)%100)/100*z.r*.85;
+      const bx=z.cx+Math.cos(angle)*dist, by=z.cy+Math.sin(angle)*dist;
+      const bw=6+((seed*i*17)%10), bh=5+((seed*i*11)%8);
+      cCtx.fillStyle=hexA(z.col,isActive?.35:.1);
+      cCtx.fillRect(cx(bx-bw/2),cy(by-bh/2),cx(bw)-cx(0),cy(bh)-cy(0));
+      if(isActive){cCtx.strokeStyle=hexA(z.col,.45);cCtx.lineWidth=.5;cCtx.strokeRect(cx(bx-bw/2),cy(by-bh/2),cx(bw)-cx(0),cy(bh)-cy(0));}
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: LAKE
+// ═══════════════════════════════════════════════
+function drawLake() {
+  const lx=cx(430),ly=cy(295),lrx=cx(90),lry=cy(60);
+  const grad=cCtx.createRadialGradient(lx,ly-lry*.2,0,lx,ly,lrx);
+  grad.addColorStop(0,'rgba(30,64,175,0.92)');grad.addColorStop(.6,'rgba(29,78,216,0.76)');grad.addColorStop(1,'rgba(30,58,138,0.6)');
+  cCtx.fillStyle=grad;cCtx.beginPath();cCtx.ellipse(lx,ly,lrx,lry,0,0,Math.PI*2);cCtx.fill();
+  cCtx.strokeStyle=`rgba(96,165,250,${.12+Math.sin(cityT*.8)*.05})`;cCtx.lineWidth=1;cCtx.beginPath();cCtx.ellipse(lx,ly,lrx*.7,lry*.5,0,0,Math.PI*2);cCtx.stroke();
+  cCtx.fillStyle='rgba(147,197,253,0.65)';cCtx.font=`bold ${Math.max(8,cx(10))}px Inter`;cCtx.textAlign='center';cCtx.fillText('Kandy Lake',lx,ly+4);
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: TUBES
+// ═══════════════════════════════════════════════
+function drawTubeSet() {
+  Object.entries(ROUTES).forEach(([key,r])=>{
+    if(key==='all') return;
+    const isActive=activeRoute==='all'||activeRoute===key;
+    const alpha=isActive?.9:.1, lw=isActive?Math.max(2,cx(3)):Math.max(.8,cx(1.5));
+
+    // shadow
+    cCtx.strokeStyle='rgba(0,0,0,0.35)';cCtx.lineWidth=lw+cx(2);cCtx.lineCap='round';cCtx.lineJoin='round';
+    cCtx.beginPath();cCtx.moveTo(cx(r.points[0][0]),cy(r.points[0][1]+6));
+    r.points.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]+6)));cCtx.stroke();
+
+    // glow tube
+    cCtx.save();if(isActive){cCtx.shadowBlur=18;cCtx.shadowColor=r.color;}
+    cCtx.strokeStyle=hexA(r.color,alpha);cCtx.lineWidth=lw;cCtx.lineCap='round';cCtx.lineJoin='round';
+    cCtx.beginPath();cCtx.moveTo(cx(r.points[0][0]),cy(r.points[0][1]));
+    r.points.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1])));cCtx.stroke();cCtx.restore();
+
+    // highlight
+    if(isActive){
+      cCtx.strokeStyle='rgba(255,255,255,0.22)';cCtx.lineWidth=1;
+      cCtx.beginPath();cCtx.moveTo(cx(r.points[0][0]),cy(r.points[0][1]-1.5));
+      r.points.slice(1).forEach(p=>cCtx.lineTo(cx(p[0]),cy(p[1]-1.5)));cCtx.stroke();
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: STATIONS
+// ═══════════════════════════════════════════════
+function drawStations() {
+  const junctions=new Map();
+  Object.entries(ROUTES).forEach(([key,r])=>{
+    if(key==='all') return;
+    const isActive=activeRoute==='all'||activeRoute===key;
+    r.points.forEach(p=>{
+      const k=`${p[0]},${p[1]}`;
+      if(!junctions.has(k)) junctions.set(k,{x:p[0],y:p[1],active:false,color:r.color});
+      if(isActive) junctions.get(k).active=true;
+    });
+  });
+  junctions.forEach(j=>{
+    const pulse=Math.sin(cityT*3+j.x*.05)*.5+.5;
+    cCtx.save();
+    if(j.active){cCtx.shadowBlur=12;cCtx.shadowColor=j.color;}
+    cCtx.strokeStyle=hexA(j.color,j.active?(.35+pulse*.45):.12);cCtx.lineWidth=1;
+    cCtx.beginPath();cCtx.arc(cx(j.x),cy(j.y),cx(6+pulse*3),0,Math.PI*2);cCtx.stroke();
+    cCtx.fillStyle=hexA(j.color,j.active?.9:.18);
+    cCtx.beginPath();cCtx.arc(cx(j.x),cy(j.y),cx(3),0,Math.PI*2);cCtx.fill();
+    cCtx.restore();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: AMBIENT PODS
+// ═══════════════════════════════════════════════
+function drawAmbientPods() {
+  const ps=cx(8);
+  pods.forEach(pod=>{
+    const isActive=activeRoute==='all'||activeRoute===pod.routeKey;
+    // Slow down pods when demo is active (except selected route)
+    const spd = demo.active ? pod.speed * (activeRoute===pod.routeKey ? 0.3 : 0.1) : pod.speed;
+    pod.t=(pod.t+spd)%1;
+    if(!isActive&&Math.random()>.35) return;
+
+    const pos=getPathPos(ROUTES[pod.routeKey].points,pod.t);
+    const angle=getPathAngle(ROUTES[pod.routeKey].points,pod.t);
+    const alpha=isActive?1:.15;
+
+    cCtx.save();
+    cCtx.translate(cx(pos[0]),cy(pos[1]));cCtx.rotate(angle);
+    cCtx.shadowBlur=isActive?12:0;cCtx.shadowColor=pod.color;
+    const pw=ps,ph=ps*.42;
+    cCtx.fillStyle=`rgba(255,255,255,${alpha})`;
+    cCtx.beginPath();cCtx.roundRect(-pw/2,-ph/2,pw,ph,ph/2);cCtx.fill();
+    cCtx.fillStyle=hexA(pod.color,alpha);
+    cCtx.beginPath();cCtx.roundRect(-pw/2+1.5,-ph/2+1.5,pw-3,ph-3,ph/2-1);cCtx.fill();
+    cCtx.restore();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  DRAWING: LANDMARKS
+// ═══════════════════════════════════════════════
+function drawLandmarks() {
+  LANDMARKS.forEach(lm=>{
+    if(lm.name==='Kandy Lake') return;
+    const isActive=activeRoute==='all'||(ROUTES[activeRoute]&&ROUTES[activeRoute].points&&ROUTES[activeRoute].points.some(p=>Math.hypot(p[0]-lm.x,p[1]-lm.y)<90));
+    cCtx.globalAlpha=isActive?1:.28;
+    cCtx.font=`${Math.max(9,cx(13))}px serif`;cCtx.textAlign='center';
+    cCtx.fillText(lm.icon,cx(lm.x),cy(lm.y));
+    if(isActive&&cW>480){
+      cCtx.fillStyle=hexA(lm.color,.85);
+      cCtx.font=`bold ${Math.max(6,cx(8))}px Inter`;
+      cCtx.fillText(lm.name,cx(lm.x),cy(lm.y)+Math.max(11,cx(14)));
+    }
+    cCtx.globalAlpha=1;
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  DEMO: DETAILED STATION
+// ═══════════════════════════════════════════════
+function drawDetailedStation(wx, wy, name, color, isOrigin) {
+  const sx=cx(wx), sy=cy(wy);
+  const sw=cx(80), sh=cy(14), py=sy+cy(8);
+
+  // Platform base
+  cCtx.fillStyle='#1a2a45';
+  cCtx.beginPath();cCtx.roundRect(sx-sw/2,py,sw,sh,2);cCtx.fill();
+  cCtx.strokeStyle=hexA(color,.6);cCtx.lineWidth=1;
+  cCtx.beginPath();cCtx.roundRect(sx-sw/2,py,sw,sh,2);cCtx.stroke();
+
+  // Canopy top
+  cCtx.strokeStyle=hexA(color,.8);cCtx.lineWidth=cx(2);
+  cCtx.beginPath();cCtx.moveTo(sx-sw/2-cx(5),py-cy(20));cCtx.lineTo(sx+sw/2+cx(5),py-cy(20));cCtx.stroke();
+  // Canopy columns
+  [sx-sw/2,sx,sx+sw/2].forEach(x=>{
+    cCtx.beginPath();cCtx.moveTo(x,py-cy(20));cCtx.lineTo(x,py);cCtx.strokeStyle=hexA(color,.4);cCtx.lineWidth=1;cCtx.stroke();
+  });
+
+  // Station screen
+  cCtx.fillStyle='#0a1628';cCtx.fillRect(sx-cx(18),py-cy(38),cx(36),cy(16));
+  cCtx.strokeStyle=hexA(color,.5);cCtx.lineWidth=.5;cCtx.strokeRect(sx-cx(18),py-cy(38),cx(36),cy(16));
+  cCtx.fillStyle=color;cCtx.font=`bold ${Math.max(5,cx(6))}px Orbitron,monospace`;cCtx.textAlign='center';
+  cCtx.fillText('AJR STATION',sx,py-cy(26));
+
+  // Name label
+  cCtx.save();cCtx.shadowBlur=8;cCtx.shadowColor=color;
+  cCtx.fillStyle=color;cCtx.font=`bold ${Math.max(7,cx(9))}px Orbitron,monospace`;cCtx.textAlign='center';
+  cCtx.fillText(name,sx,py-cy(44));cCtx.restore();
+
+  // BOARDING / DESTINATION tag
+  const tag=isOrigin?'BOARDING':'DESTINATION';
+  cCtx.fillStyle=hexA(color,.18);
+  cCtx.beginPath();cCtx.roundRect(sx-cx(22),py+sh+cy(2),cx(44),cy(10),2);cCtx.fill();
+  cCtx.fillStyle=hexA(color,.8);cCtx.font=`${Math.max(4,cx(5.5))}px Orbitron,monospace`;cCtx.textAlign='center';
+  cCtx.fillText(tag,sx,py+sh+cy(9.5));
+}
+
+// ═══════════════════════════════════════════════
+//  DEMO: PASSENGER PERSON
+// ═══════════════════════════════════════════════
+function drawPerson(wx, wy, color, state, animT) {
+  const px=cx(wx), py=cy(wy);
+  const sc=cx(3.5);
+
+  // Sway when waiting
+  let ox=0, oy=0;
+  if(state==='waiting') ox=Math.sin(cityT*1.8+animT)*.8;
+  if(state==='boarding') { ox=animT*cx(20); oy=-animT*cy(4); }
+  if(state==='exiting')  { ox=animT*cx(18); }
+
+  const opacity=state==='onboard'?0:1;
+  cCtx.save();cCtx.globalAlpha=opacity;
+  cCtx.translate(px+ox,py+oy);
+  cCtx.shadowBlur=10;cCtx.shadowColor=color;
+
+  // Head
+  cCtx.fillStyle='#fcd5a8';cCtx.beginPath();cCtx.arc(0,-sc*3,sc,0,Math.PI*2);cCtx.fill();
+  // Body
+  cCtx.strokeStyle=color;cCtx.lineWidth=sc*.7;cCtx.lineCap='round';
+  cCtx.beginPath();cCtx.moveTo(0,-sc*2);cCtx.lineTo(0,sc*1.2);cCtx.stroke();
+  // Arms
+  const armAng=Math.sin(cityT*3+animT)*.3;
+  cCtx.beginPath();cCtx.moveTo(-sc*1.5,-sc*.5+Math.sin(armAng)*sc*.3);cCtx.lineTo(0,0);
+  cCtx.moveTo(sc*1.5,-sc*.5-Math.sin(armAng)*sc*.3);cCtx.lineTo(0,0);cCtx.stroke();
+  // Legs
+  const legAng=state==='waiting'?0:Math.sin(cityT*4)*0.4;
   cCtx.beginPath();
-  cCtx.moveTo(cx(pts[0][0]), cy(pts[0][1]));
-  pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+  cCtx.moveTo(0,sc*1.2);cCtx.lineTo(-sc*.8+Math.sin(legAng)*sc*.5,sc*2.8);
+  cCtx.moveTo(0,sc*1.2);cCtx.lineTo(sc*.8-Math.sin(legAng)*sc*.5,sc*2.8);
   cCtx.stroke();
 
-  // Highlight on top
-  if (glow) {
-    cCtx.shadowBlur = 0;
-    cCtx.strokeStyle = hexAlpha('#ffffff', alpha * 0.25);
-    cCtx.lineWidth = 1;
-    cCtx.beginPath();
-    cCtx.moveTo(cx(pts[0][0]), cy(pts[0][1] - 1.5));
-    pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1] - 1.5)));
-    cCtx.stroke();
+  // Phone if waiting
+  if(state==='waiting'||state==='phone') {
+    cCtx.fillStyle='#1a2a45';cCtx.fillRect(cx(4),-sc*3.5,cx(9),cy(13));
+    cCtx.strokeStyle=hexA(color,.7);cCtx.lineWidth=.5;cCtx.strokeRect(cx(4),-sc*3.5,cx(9),cy(13));
+    cCtx.fillStyle=color;cCtx.fillRect(cx(5),-sc*3.2,cx(7),cy(8));
+    // Screen glow
+    cCtx.fillStyle=hexA(color,.15);cCtx.fillRect(cx(4),-sc*3.5,cx(9),cy(13));
   }
   cCtx.restore();
 }
 
-function hexAlpha(hex, alpha) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
+// ═══════════════════════════════════════════════
+//  DEMO: PHONE UI PANEL (drawn on canvas)
+// ═══════════════════════════════════════════════
+function drawPhoneUI(wx, wy, phase, destName, animT) {
+  const px=cx(wx), py=cy(wy);
+  const pw=cx(80), ph=cy(110);
+
+  cCtx.save();
+  cCtx.globalAlpha=Math.min(1,animT*2);
+
+  // Phone shell
+  cCtx.fillStyle='#0e1a2e';cCtx.shadowBlur=20;cCtx.shadowColor='rgba(0,245,255,0.3)';
+  cCtx.beginPath();cCtx.roundRect(px-pw/2,py-ph/2,pw,ph,cx(8));cCtx.fill();
+  cCtx.strokeStyle='rgba(0,245,255,0.4)';cCtx.lineWidth=1;cCtx.shadowBlur=0;
+  cCtx.beginPath();cCtx.roundRect(px-pw/2,py-ph/2,pw,ph,cx(8));cCtx.stroke();
+
+  // Notch
+  cCtx.fillStyle='#070c18';cCtx.beginPath();cCtx.roundRect(px-cx(12),py-ph/2+cy(3),cx(24),cy(6),cx(3));cCtx.fill();
+
+  // App logo
+  cCtx.fillStyle='#00f5ff';cCtx.font=`bold ${Math.max(6,cx(8))}px Orbitron,monospace`;cCtx.textAlign='center';
+  cCtx.fillText('AJRLoops',px,py-ph/2+cy(22));
+
+  if(phase==='select') {
+    // Destination select UI
+    cCtx.fillStyle='rgba(255,255,255,0.4)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
+    cCtx.fillText('SELECT DESTINATION',px,py-ph/2+cy(34));
+    const dests=['City Center','Hospital','Market','University'];
+    dests.forEach((d,i)=>{
+      const isSelected=d===destName||(destName&&i===0&&animT>.7);
+      const dy=py-ph/2+cy(44+i*17);
+      cCtx.fillStyle=isSelected?'rgba(0,245,255,0.25)':'rgba(255,255,255,0.05)';
+      cCtx.beginPath();cCtx.roundRect(px-pw/2+cx(6),dy-cy(5),pw-cx(12),cy(13),cx(3));cCtx.fill();
+      cCtx.fillStyle=isSelected?'#00f5ff':'rgba(255,255,255,0.5)';
+      cCtx.font=`${Math.max(4,cx(6))}px Inter`;cCtx.textAlign='left';
+      cCtx.fillText(d,px-pw/2+cx(12),dy+cy(5));
+      if(isSelected){cCtx.fillStyle='#00f5ff';cCtx.textAlign='right';cCtx.fillText('✓',px+pw/2-cx(10),dy+cy(5));}
+    });
+  } else if(phase==='confirmed') {
+    // Booking confirmed
+    cCtx.fillStyle='rgba(0,245,255,0.15)';cCtx.beginPath();cCtx.roundRect(px-pw/2+cx(8),py-cy(14),pw-cx(16),cy(28),cx(4));cCtx.fill();
+    cCtx.fillStyle='#00f5ff';cCtx.font=`bold ${Math.max(5,cx(7))}px Inter`;cCtx.textAlign='center';
+    cCtx.fillText('✓ BOOKED',px,py-cy(2));
+    cCtx.fillStyle='rgba(255,255,255,0.5)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
+    cCtx.fillText('Pod A-247',px,py+cy(9));
+    cCtx.fillText('ETA: 2 min',px,py+cy(18));
+    // Progress pulse
+    const barW=pw-cx(24), barH=cy(4);
+    cCtx.fillStyle='rgba(255,255,255,0.1)';cCtx.fillRect(px-barW/2,py+cy(26),barW,barH);
+    cCtx.fillStyle='#00f5ff';cCtx.fillRect(px-barW/2,py+cy(26),barW*Math.min(1,animT*.8),barH);
+  } else if(phase==='tracking') {
+    // Live tracking
+    cCtx.fillStyle='rgba(16,185,129,0.15)';cCtx.beginPath();cCtx.roundRect(px-pw/2+cx(6),py-cy(30),pw-cx(12),cy(50),cx(4));cCtx.fill();
+    cCtx.fillStyle='#10b981';cCtx.font=`bold ${Math.max(5,cx(6.5))}px Orbitron,monospace`;cCtx.textAlign='center';
+    cCtx.fillText('TRAVELLING',px,py-cy(18));
+    const spd=Math.round(60+animT*25);
+    cCtx.fillStyle='#00f5ff';cCtx.font=`bold ${Math.max(8,cx(14))}px Orbitron,monospace`;
+    cCtx.fillText(spd+' km/h',px,py);
+    cCtx.fillStyle='rgba(255,255,255,0.4)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
+    cCtx.fillText('Pod A-247 · On-Time',px,py+cy(14));
+  }
+
+  cCtx.restore();
 }
 
-function drawBuildings() {
-  const zones = [
-    { cx: 95, cy: 145, r: 55, col: '#10b981', density: 12 },   // residential N
-    { cx: 270, cy: 175, r: 45, col: '#3b82f6', density: 8 },   // gov
-    { cx: 215, cy: 340, r: 40, col: '#06b6d4', density: 8 },   // schools
-    { cx: 510, cy: 345, r: 40, col: '#f97316', density: 10 },  // commercial
-    { cx: 620, cy: 400, r: 45, col: '#f59e0b', density: 12 },  // market
-    { cx: 620, cy: 280, r: 35, col: '#ef4444', density: 6 },   // hospital
-    { cx: 565, cy: 175, r: 40, col: '#8b5cf6', density: 8 },   // tourist
-    { cx: 740, cy: 140, r: 40, col: '#06b6d4', density: 7 },   // university
-    { cx: 860, cy: 350, r: 45, col: '#f97316', density: 10 },  // east commercial
-    { cx: 150, cy: 350, r: 35, col: '#10b981', density: 8 },   // west residential
-  ];
+// ═══════════════════════════════════════════════
+//  DEMO: DETAILED CAPSULE
+// ═══════════════════════════════════════════════
+function drawDetailedCapsule(wx, wy, angle, color, scale) {
+  const px=cx(wx), py=cy(wy);
+  const w=cx(32)*scale, h=cy(14)*scale;
+  cCtx.save();
+  cCtx.translate(px,py);cCtx.rotate(angle);
+  cCtx.shadowBlur=20;cCtx.shadowColor=color;
 
-  // Use seeded positions per zone
-  zones.forEach(z => {
-    const seed = z.cx * 13 + z.cy * 7;
-    for (let i = 0; i < z.density; i++) {
-      const angle = (seed * i * 137.5 * Math.PI / 180) % (Math.PI * 2);
-      const dist = ((seed * i * 23) % 100) / 100 * z.r * 0.85;
-      const bx = z.cx + Math.cos(angle) * dist;
-      const by = z.cy + Math.sin(angle) * dist;
-      const bw = 6 + ((seed * i * 17) % 10);
-      const bh = 5 + ((seed * i * 11) % 8);
+  // Body
+  cCtx.fillStyle='#1a2a45';cCtx.beginPath();cCtx.roundRect(-w/2,-h/2,w,h,h/2);cCtx.fill();
+  // Color stripe
+  cCtx.fillStyle=hexA(color,.85);cCtx.beginPath();cCtx.roundRect(-w/2+1,-h/2+2,w-2,h-4,h/2-1);cCtx.fill();
+  // Gloss top
+  const gloss=cCtx.createLinearGradient(0,-h/2,0,0);
+  gloss.addColorStop(0,'rgba(255,255,255,0.22)');gloss.addColorStop(1,'rgba(255,255,255,0)');
+  cCtx.fillStyle=gloss;cCtx.beginPath();cCtx.roundRect(-w/2+1,-h/2+2,w-2,(h-4)/2,h/2-1);cCtx.fill();
 
-      // Check if this building is in active route zone
-      const isActive = activeRoute === 'all' ||
-        (activeRoute && ROUTES[activeRoute] && ROUTES[activeRoute].points.some(p =>
-          Math.hypot(p[0] - z.cx, p[1] - z.cy) < 120));
+  // Windows
+  const winCount=3;
+  for(let i=0;i<winCount;i++){
+    const wx2=-w/2+cx(7)+i*cx(8);
+    cCtx.fillStyle='rgba(200,240,255,0.65)';
+    cCtx.beginPath();cCtx.roundRect(wx2,-cy(3.5),cx(5.5),cy(7),1);cCtx.fill();
+    // Passenger silhouette in window
+    cCtx.fillStyle='rgba(0,0,0,0.35)';
+    cCtx.beginPath();cCtx.arc(wx2+cx(2.5),-cy(1),cy(2.5),0,Math.PI*2);cCtx.fill();
+  }
 
-      cCtx.fillStyle = hexAlpha(z.col, isActive ? 0.35 : 0.12);
-      cCtx.fillRect(cx(bx - bw/2), cy(by - bh/2), cx(bw) - cx(0), cy(bh) - cy(0));
+  // Front headlight
+  cCtx.shadowBlur=14;cCtx.shadowColor='#fff';
+  cCtx.fillStyle='#fff';cCtx.beginPath();cCtx.arc(w/2-cx(2),0,cy(2.5),0,Math.PI*2);cCtx.fill();
+  cCtx.shadowBlur=0;
 
-      if (isActive) {
-        cCtx.strokeStyle = hexAlpha(z.col, 0.5);
-        cCtx.lineWidth = 0.5;
-        cCtx.strokeRect(cx(bx - bw/2), cy(by - bh/2), cx(bw) - cx(0), cy(bh) - cy(0));
-      }
-    }
-  });
+  // Undercarriage glow
+  cCtx.strokeStyle=hexA(color,.3);cCtx.lineWidth=1;
+  cCtx.beginPath();cCtx.moveTo(-w/2+h/2,h/2+1);cCtx.lineTo(w/2-h/2,h/2+1);cCtx.stroke();
+
+  cCtx.restore();
 }
 
-function drawLake() {
-  const lx = cx(430), ly = cy(295), lrx = cx(90), lry = cy(60);
+// ═══════════════════════════════════════════════
+//  DEMO: JUNCTION ANIMATION
+// ═══════════════════════════════════════════════
+function drawJunctionAnim(wx, wy, color1, color2, animT) {
+  const px=cx(wx), py=cy(wy), r=cx(22);
+  cCtx.save();
+  // Rotating ring
+  cCtx.save();cCtx.translate(px,py);cCtx.rotate(animT*Math.PI*2*2);
+  cCtx.strokeStyle=hexA(color1,.7);cCtx.lineWidth=2;
+  cCtx.setLineDash([cx(8),cx(4)]);cCtx.beginPath();cCtx.arc(0,0,r,0,Math.PI*2);cCtx.stroke();
+  cCtx.setLineDash([]);cCtx.restore();
 
-  // Depth gradient
-  const grad = cCtx.createRadialGradient(lx, ly - lry * 0.2, 0, lx, ly, lrx);
-  grad.addColorStop(0, 'rgba(30,64,175,0.9)');
-  grad.addColorStop(0.6, 'rgba(29,78,216,0.75)');
-  grad.addColorStop(1, 'rgba(30,58,138,0.6)');
-  cCtx.fillStyle = grad;
-  cCtx.beginPath();
-  cCtx.ellipse(lx, ly, lrx, lry, 0, 0, Math.PI * 2);
-  cCtx.fill();
+  // Inner pulse
+  const pulse=Math.sin(animT*Math.PI*6)*.5+.5;
+  cCtx.shadowBlur=16;cCtx.shadowColor=color2;
+  cCtx.strokeStyle=hexA(color2,.5+pulse*.4);cCtx.lineWidth=1.5;
+  cCtx.beginPath();cCtx.arc(px,py,r*.6,0,Math.PI*2);cCtx.stroke();
 
-  // Shimmer
-  const shimOffset = Math.sin(cityT * 0.8) * 20;
-  cCtx.strokeStyle = `rgba(96,165,250,${0.15 + Math.sin(cityT) * 0.05})`;
-  cCtx.lineWidth = 1;
-  cCtx.beginPath();
-  cCtx.ellipse(lx + shimOffset * 0.1, ly, lrx * 0.7, lry * 0.5, 0, 0, Math.PI * 2);
-  cCtx.stroke();
+  // Center dot
+  cCtx.fillStyle=color2;cCtx.shadowBlur=12;cCtx.shadowColor=color2;
+  cCtx.beginPath();cCtx.arc(px,py,cx(4),0,Math.PI*2);cCtx.fill();
 
   // Label
-  cCtx.fillStyle = 'rgba(147,197,253,0.7)';
-  cCtx.font = `bold ${Math.max(9, cx(11))}px Inter`;
-  cCtx.textAlign = 'center';
-  cCtx.fillText('Kandy Lake', lx, ly + 5);
+  cCtx.shadowBlur=0;cCtx.fillStyle=color2;cCtx.font=`bold ${Math.max(5,cx(7))}px Orbitron,monospace`;cCtx.textAlign='center';
+  cCtx.fillText('JUNCTION',px,py-r-cy(5));
+  cCtx.fillStyle='rgba(255,255,255,0.5)';cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;
+  cCtx.fillText('Switching loop...',px,py-r-cy(-3));
+  cCtx.restore();
 }
 
-function drawTerrain() {
-  // Background gradient
-  const bg = cCtx.createLinearGradient(0, 0, 0, cH);
-  bg.addColorStop(0, '#080f1e');
-  bg.addColorStop(1, '#0d1428');
-  cCtx.fillStyle = bg;
-  cCtx.fillRect(0, 0, cW, cH);
-
-  // Hill areas (corners and edges)
-  const hills = [
-    { x: 0, y: 0, points: [[0,0],[200,0],[180,180],[60,260],[0,300]], col: '#0d1f35' },
-    { x: BASE_W, y: 0, points: [[BASE_W,0],[BASE_W,200],[820,250],[750,120]], col: '#0d1f35' },
-    { x: 0, y: BASE_H, points: [[0,BASE_H],[0,400],[120,380],[200,BASE_H]], col: '#0d1f35' },
-    { x: BASE_W, y: BASE_H, points: [[BASE_W,BASE_H],[BASE_W,380],[800,360],[900,BASE_H]], col: '#0d1f35' },
-  ];
-  hills.forEach(h => {
-    cCtx.fillStyle = h.col;
-    cCtx.beginPath();
-    cCtx.moveTo(cx(h.points[0][0]), cy(h.points[0][1]));
-    h.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
-    cCtx.closePath();
-    cCtx.fill();
-  });
-
-  // Roads (subtle gray network)
-  const roads = [
-    [[0,450],[150,450],[320,490],[500,480],[700,430],[900,400]],
-    [[150,0],[150,450]],
-    [[430,295],[430,150],[430,0]],
-    [[0,300],[95,145],[200,80],[350,50]],
-    [[430,295],[700,280],[900,280]],
-    [[320,490],[430,295]],
-    [[430,295],[565,175],[740,140],[900,120]],
-  ];
-  cCtx.strokeStyle = 'rgba(30,40,60,0.8)';
-  cCtx.lineWidth = cx(8);
-  roads.forEach(road => {
-    cCtx.beginPath();
-    cCtx.moveTo(cx(road[0][0]), cy(road[0][1]));
-    road.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
-    cCtx.stroke();
-  });
-  cCtx.strokeStyle = 'rgba(40,55,80,0.5)';
-  cCtx.lineWidth = 1;
-  roads.forEach(road => {
-    cCtx.beginPath();
-    cCtx.moveTo(cx(road[0][0]), cy(road[0][1]));
-    road.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
-    cCtx.stroke();
-  });
+// ═══════════════════════════════════════════════
+//  DEMO: PASSING CAPSULE
+// ═══════════════════════════════════════════════
+function drawPassingCapsule(wx, wy, angle, color, t) {
+  // t goes 0→1, capsule sweeps across screen from one side
+  const ox=t*cx(200)-cx(80);
+  drawDetailedCapsule(wx+ox/scX, wy, angle+Math.PI, color, 0.85);
 }
 
-function drawRoutes() {
-  Object.entries(ROUTES).forEach(([key, r]) => {
-    if (key === 'all') return;
-    const isActive = activeRoute === 'all' || activeRoute === key;
-    const alpha = isActive ? 0.85 : 0.12;
-    const lw = isActive ? Math.max(2, cx(3)) : Math.max(1, cx(1.5));
-    const glow = isActive;
-
-    // Ground shadow
-    cCtx.save();
-    cCtx.strokeStyle = 'rgba(0,0,0,0.3)';
-    cCtx.lineWidth = lw + cx(2);
-    cCtx.lineCap = 'round';
-    cCtx.beginPath();
-    cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1] + 6));
-    r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1] + 6)));
-    cCtx.stroke();
-    cCtx.restore();
-
-    drawTube(r.points, r.color, alpha, lw, glow);
-  });
+// ═══════════════════════════════════════════════
+//  DEMO: SPEED INDICATOR HUD
+// ═══════════════════════════════════════════════
+function drawSpeedHUD(speed, color) {
+  const x=cW-cx(20), y=cy(20);
+  cCtx.save();
+  cCtx.fillStyle='rgba(0,0,0,0.5)';cCtx.beginPath();cCtx.roundRect(x-cx(55),y,cx(52),cy(36),cx(6));cCtx.fill();
+  cCtx.strokeStyle=hexA(color,.4);cCtx.lineWidth=.8;cCtx.beginPath();cCtx.roundRect(x-cx(55),y,cx(52),cy(36),cx(6));cCtx.stroke();
+  cCtx.fillStyle=hexA(color,.6);cCtx.font=`${Math.max(4,cx(5.5))}px Inter`;cCtx.textAlign='center';
+  cCtx.fillText('SPEED',x-cx(29),y+cy(10));
+  cCtx.fillStyle=color;cCtx.font=`bold ${Math.max(8,cx(13))}px Orbitron,monospace`;
+  cCtx.fillText(speed,x-cx(29),y+cy(26));
+  cCtx.fillStyle='rgba(255,255,255,0.3)';cCtx.font=`${Math.max(4,cx(5))}px Inter`;
+  cCtx.fillText('km/h',x-cx(29),y+cy(34));
+  cCtx.restore();
 }
 
-function drawStations() {
-  // Collect all unique junction points
-  const junctions = new Map();
-  Object.entries(ROUTES).forEach(([key, r]) => {
-    if (key === 'all') return;
-    const isActive = activeRoute === 'all' || activeRoute === key;
-    r.points.forEach(p => {
-      const k = `${p[0]},${p[1]}`;
-      if (!junctions.has(k)) junctions.set(k, { x: p[0], y: p[1], active: false, color: r.color });
-      if (isActive) junctions.get(k).active = true;
-    });
-  });
+// ═══════════════════════════════════════════════
+//  DEMO: GRID HUD OVERLAY
+// ═══════════════════════════════════════════════
+function drawCityGrid() {
+  const gs=cx(50);
+  cCtx.strokeStyle='rgba(0,245,255,0.022)';cCtx.lineWidth=.5;
+  for(let x=0;x<cW;x+=gs){cCtx.beginPath();cCtx.moveTo(x,0);cCtx.lineTo(x,cH);cCtx.stroke();}
+  for(let y=0;y<cH;y+=gs){cCtx.beginPath();cCtx.moveTo(0,y);cCtx.lineTo(cW,y);cCtx.stroke();}
+}
 
-  junctions.forEach(j => {
-    const pulse = Math.sin(cityT * 3 + j.x * 0.05) * 0.5 + 0.5;
-    cCtx.save();
-    if (j.active) {
-      cCtx.shadowBlur = 14;
-      cCtx.shadowColor = j.color;
+// ═══════════════════════════════════════════════
+//  DEMO CONTROLLER
+// ═══════════════════════════════════════════════
+function startDemo(routeKey) {
+  const r = ROUTES[routeKey];
+  if (!r || !r.points) return;
+  demo.active = true;
+  demo.routeKey = routeKey;
+  demo.phaseIdx = 0;
+  demo.phaseT = 0;
+  demo.lastTime = performance.now();
+  demo.podT = 0;
+  demo.passengerState = 'waiting';
+  demo.junctionFlash = 0;
+  demo.passingPodT = -1;
+  demo.phoneAnim = 0;
+
+  // Open panel
+  const panel = document.getElementById('demo-panel');
+  panel.classList.add('open');
+  document.getElementById('dp-origin-name').textContent = r.origin || r.points[0].join(',');
+  document.getElementById('dp-dest-name').textContent = r.dest || r.points[r.points.length-1].join(',');
+  document.getElementById('dp-pod-id').textContent = 'A-' + (200+Math.floor(Math.random()*100));
+
+  // Build step dots
+  const stepsEl = document.getElementById('dp-steps');
+  stepsEl.innerHTML = DEMO_STEPS.map(s=>`<span class="demo-step">${s}</span>`).join('');
+
+  updateDemoPanel();
+}
+
+function closeDemo() {
+  demo.active = false;
+  demo.routeKey = null;
+  document.getElementById('demo-panel').classList.remove('open');
+  // Zoom back to overview
+  cam.tx=500; cam.ty=280; cam.tz=1;
+}
+
+function updateDemoPanel() {
+  if (!demo.active) return;
+  const phase = DEMO_PHASES[demo.phaseIdx];
+  if (!phase) return;
+
+  const overallT = (demo.phaseIdx + demo.phaseT/phase.dur) / DEMO_PHASES.length;
+  document.getElementById('dp-phase').textContent = phase.label.toUpperCase();
+  document.getElementById('dp-fill').style.width = (overallT*100).toFixed(1)+'%';
+
+  // Speed
+  const speedMap = { travel_1:85, travel_2:70, junction:40, passing:85, depart:55, boarding:0, waiting:0, pod_arrive:30, arrival:20, exit:0, zoom_in:0, zoom_out:0, app_select:0 };
+  const spd = speedMap[phase.id] || 0;
+  document.getElementById('dp-speed').textContent = spd ? spd+' km/h' : '—';
+
+  // Status
+  const statusMap = { waiting:'WAITING',app_select:'BOOKING',pod_arrive:'POD ARRIVING',boarding:'BOARDING',depart:'DEPARTING',travel_1:'EN ROUTE',junction:'SWITCHING',passing:'EN ROUTE',travel_2:'EN ROUTE',arrival:'ARRIVED',exit:'EXITING',zoom_in:'LOADING',zoom_out:'DONE' };
+  const statusEl = document.getElementById('dp-status');
+  statusEl.textContent = statusMap[phase.id]||'ACTIVE';
+  statusEl.style.color = phase.id==='arrival'||phase.id==='exit'?'var(--green)':phase.id==='junction'?'var(--gold)':'var(--cyan)';
+
+  // ETA
+  const phasesLeft = DEMO_PHASES.length - demo.phaseIdx;
+  document.getElementById('dp-eta').textContent = phasesLeft > 3 ? Math.ceil(phasesLeft*1.8)+'s' : 'Arriving';
+
+  // Step highlights
+  const stepMap = { waiting:0,app_select:0,pod_arrive:1,boarding:1,depart:1,travel_1:2,junction:2,passing:2,travel_2:2,arrival:3,exit:4,zoom_out:4 };
+  const activeStep = stepMap[phase.id]||0;
+  document.querySelectorAll('.demo-step').forEach((el,i)=>el.classList.toggle('done',i<=activeStep));
+}
+
+function tickDemo(now) {
+  if (!demo.active) return;
+  const dt = Math.min(100, now - demo.lastTime);
+  demo.lastTime = now;
+  demo.phaseT += dt;
+  const phase = DEMO_PHASES[demo.phaseIdx];
+  if (!phase) { closeDemo(); return; }
+
+  const t = Math.min(1, demo.phaseT / phase.dur); // 0→1 within phase
+
+  // Update camera per phase
+  const r = ROUTES[demo.routeKey];
+  if (!r) return;
+  const pts = r.points;
+  const origin = pts[0], dest = pts[pts.length-1];
+  const midPt = pts[Math.floor(pts.length/2)];
+  const jPt = r.junctionPt || midPt;
+
+  switch(phase.id) {
+    case 'zoom_in':
+      setCamTarget(origin[0], origin[1]-20, 3.2);
+      break;
+    case 'waiting':
+    case 'app_select':
+      demo.phoneAnim = t;
+      demo.passengerState = 'waiting';
+      setCamTarget(origin[0], origin[1]-10, 3.5);
+      break;
+    case 'pod_arrive':
+      demo.podT = t * 0.15; // pod approaching station from 0.15 back
+      setCamTarget(origin[0], origin[1], 3.2);
+      break;
+    case 'boarding':
+      demo.passengerState = t > 0.5 ? 'boarding' : 'waiting';
+      demo.podT = 0.15 * (1-t*0.3);
+      setCamTarget(origin[0], origin[1], 3.0);
+      break;
+    case 'depart':
+      demo.passengerState = 'onboard';
+      demo.podT = 0.1 + t * 0.15;
+      setCamTarget(origin[0] + (midPt[0]-origin[0])*.3, origin[1], 3.0);
+      break;
+    case 'travel_1':
+      demo.passengerState = 'onboard';
+      demo.podT = 0.25 + t * 0.3;
+      const pos1 = getPathPos(pts, demo.podT);
+      setCamTarget(pos1[0], pos1[1], 2.8);
+      break;
+    case 'junction':
+      demo.junctionFlash = t;
+      demo.podT = 0.55 + t * 0.08;
+      const jp = getPathPos(pts, demo.podT);
+      setCamTarget(jp[0], jp[1], 3.0);
+      break;
+    case 'passing':
+      demo.passingPodT = t;
+      demo.podT = 0.63 + t * 0.07;
+      const pp = getPathPos(pts, demo.podT);
+      setCamTarget(pp[0], pp[1], 2.8);
+      break;
+    case 'travel_2':
+      demo.passingPodT = -1;
+      demo.podT = 0.70 + t * 0.28;
+      const pos2 = getPathPos(pts, demo.podT);
+      setCamTarget(pos2[0]*.7 + dest[0]*.3, pos2[1]*.7+dest[1]*.3, 2.8);
+      break;
+    case 'arrival':
+      demo.arriveFlash = t;
+      demo.podT = Math.min(0.98, 0.98 + t*.02);
+      setCamTarget(dest[0], dest[1]-10, 3.5);
+      break;
+    case 'exit':
+      demo.passengerState = 'exiting';
+      setCamTarget(dest[0], dest[1], 3.2);
+      break;
+    case 'zoom_out':
+      setCamTarget(500, 280, 1);
+      break;
+  }
+
+  // Advance phase
+  if (demo.phaseT >= phase.dur) {
+    demo.phaseIdx++;
+    demo.phaseT = 0;
+    if (demo.phaseIdx >= DEMO_PHASES.length) {
+      // Loop demo
+      setTimeout(() => {
+        if (demo.active) { demo.phaseIdx=0; demo.phaseT=0; }
+      }, 1000);
     }
-    // Outer ring
-    cCtx.strokeStyle = hexAlpha(j.color, j.active ? (0.4 + pulse * 0.4) : 0.15);
-    cCtx.lineWidth = 1;
-    cCtx.beginPath();
-    cCtx.arc(cx(j.x), cy(j.y), cx(7 + pulse * 3), 0, Math.PI * 2);
-    cCtx.stroke();
-    // Inner dot
-    cCtx.fillStyle = hexAlpha(j.color, j.active ? 0.9 : 0.2);
-    cCtx.beginPath();
-    cCtx.arc(cx(j.x), cy(j.y), cx(3.5), 0, Math.PI * 2);
-    cCtx.fill();
-    cCtx.restore();
-  });
-}
-
-function drawPods() {
-  const podSize = Math.max(4, cx(8));
-  pods.forEach(pod => {
-    pod.t = (pod.t + pod.speed * (activeRoute === 'all' || activeRoute === pod.routeKey ? 1 : 0.15)) % 1;
-    const isActive = activeRoute === 'all' || activeRoute === pod.routeKey;
-    if (!isActive && Math.random() > 0.3) return; // skip most pods on inactive routes
-
-    const pos = getPodPos(pod);
-    const angle = getPodAngle(pod);
-    const alpha = isActive ? 1 : 0.15;
-
-    cCtx.save();
-    cCtx.translate(cx(pos[0]), cy(pos[1]));
-    cCtx.rotate(angle);
-    cCtx.shadowBlur = isActive ? 14 : 0;
-    cCtx.shadowColor = pod.color;
-
-    // Pod body
-    const pw = podSize, ph = podSize * 0.45;
-    cCtx.fillStyle = `rgba(255,255,255,${alpha})`;
-    cCtx.beginPath();
-    cCtx.roundRect(-pw / 2, -ph / 2, pw, ph, ph / 2);
-    cCtx.fill();
-
-    cCtx.fillStyle = hexAlpha(pod.color, alpha);
-    cCtx.beginPath();
-    cCtx.roundRect(-pw / 2 + 1.5, -ph / 2 + 1.5, pw - 3, ph - 3, ph / 2 - 1);
-    cCtx.fill();
-
-    cCtx.restore();
-  });
-}
-
-function drawLandmarks() {
-  LANDMARKS.forEach(lm => {
-    if (lm.type === 'lake') return; // drawn separately
-    const isActive = activeRoute === 'all' ||
-      (ROUTES[activeRoute] && ROUTES[activeRoute].points.some(p =>
-        Math.hypot(p[0] - lm.x, p[1] - lm.y) < 80));
-
-    const alpha = isActive ? 1 : 0.3;
-
-    // Icon
-    cCtx.font = `${Math.max(10, cx(15))}px serif`;
-    cCtx.textAlign = 'center';
-    cCtx.globalAlpha = alpha;
-    cCtx.fillText(lm.icon, cx(lm.x), cy(lm.y));
-    cCtx.globalAlpha = 1;
-
-    // Label
-    if (isActive && cW > 500) {
-      cCtx.fillStyle = hexAlpha(lm.color, 0.85);
-      cCtx.font = `bold ${Math.max(7, cx(9))}px Inter`;
-      cCtx.textAlign = 'center';
-      cCtx.fillText(lm.name, cx(lm.x), cy(lm.y) + Math.max(12, cx(16)));
-    }
-  });
-}
-
-function drawGrid() {
-  const gs = cx(50);
-  cCtx.strokeStyle = 'rgba(0,245,255,0.025)';
-  cCtx.lineWidth = 0.5;
-  for (let x = 0; x < cW; x += gs) {
-    cCtx.beginPath(); cCtx.moveTo(x, 0); cCtx.lineTo(x, cH); cCtx.stroke();
   }
-  for (let y = 0; y < cH; y += gs) {
-    cCtx.beginPath(); cCtx.moveTo(0, y); cCtx.lineTo(cW, y); cCtx.stroke();
-  }
+  updateDemoPanel();
 }
 
-function drawHUD() {
-  // Active route name
-  const rData = ROUTES[activeRoute];
-  if (rData && activeRoute !== 'all') {
-    cCtx.fillStyle = hexAlpha(rData.color, 0.9);
-    cCtx.font = `bold ${Math.max(10, cx(12))}px Orbitron,monospace`;
-    cCtx.textAlign = 'left';
-    cCtx.fillText('▶ ' + rData.label.toUpperCase(), cx(12), cy(22));
-  }
+// ═══════════════════════════════════════════════
+//  MAIN RENDER LOOP
+// ═══════════════════════════════════════════════
+let lastFrameTime = 0;
 
-  // Live label
-  cCtx.fillStyle = 'rgba(0,245,255,0.5)';
-  cCtx.font = `${Math.max(8, cx(9))}px Orbitron,monospace`;
-  cCtx.textAlign = 'right';
-  cCtx.fillText('● LIVE SIMULATION', cW - cx(10), cy(22));
-}
-
-function animateCity() {
+function animateCity(now) {
+  const dt = Math.min(60, now - lastFrameTime);
+  lastFrameTime = now;
   cityT += 0.016;
+
+  // Update demo
+  tickDemo(now);
+
+  // Smooth camera
+  lerpCam(dt);
+
   cCtx.clearRect(0, 0, cW, cH);
+
+  // Apply zoom transform
+  cCtx.save();
+  cCtx.translate(cW/2, cH/2);
+  cCtx.scale(cam.zoom, cam.zoom);
+  cCtx.translate(-cx(cam.x), -cy(cam.y));
+
+  // Draw world
   drawTerrain();
-  drawGrid();
+  drawCityGrid();
   drawBuildings();
   drawLake();
-  drawRoutes();
+  drawTubeSet();
   drawStations();
-  drawPods();
+  drawAmbientPods();
   drawLandmarks();
-  drawHUD();
+
+  // Demo overlays (drawn in world space)
+  if (demo.active && demo.routeKey) {
+    const r = ROUTES[demo.routeKey];
+    const pts = r.points;
+    const origin = pts[0], dest = pts[pts.length-1];
+    const jPt = r.junctionPt || pts[Math.floor(pts.length/2)];
+    const phase = DEMO_PHASES[demo.phaseIdx] || {};
+    const t = Math.min(1, demo.phaseT / (phase.dur||1));
+
+    // Draw detailed origin station
+    if (phase.id !== 'zoom_out') {
+      drawDetailedStation(origin[0], origin[1], r.origin||'Station', r.color, true);
+    }
+
+    // Draw detailed destination station
+    if (['travel_2','arrival','exit','zoom_out'].includes(phase.id)) {
+      drawDetailedStation(dest[0], dest[1], r.dest||'Destination', r.color, false);
+    }
+
+    // Passenger at origin
+    const pState = demo.passengerState;
+    if (['waiting','app_select','pod_arrive','boarding'].includes(phase.id)) {
+      drawPerson(origin[0]-18, origin[1]+cy(20)/scY, r.color,
+        phase.id==='boarding'&&t>.5?'boarding':'waiting',
+        phase.id==='boarding'?t:0);
+    }
+
+    // Passenger exits at dest
+    if (phase.id==='exit') {
+      drawPerson(dest[0]+12, dest[1]+cy(20)/scY, r.color, 'exiting', t);
+    }
+
+    // Phone UI
+    if (phase.id==='waiting') drawPhoneUI(origin[0]+28, origin[1]-20, 'select', r.dest, 0.3);
+    if (phase.id==='app_select') drawPhoneUI(origin[0]+28, origin[1]-20, t<.6?'select':'confirmed', r.dest, t);
+    if (['travel_1','travel_2'].includes(phase.id)) {
+      const pp=getPathPos(pts,demo.podT);
+      drawPhoneUI(pp[0]+30, pp[1]-22, 'tracking', r.dest, t);
+    }
+
+    // Demo capsule
+    if (demo.podT > 0 && !['zoom_in','waiting','app_select'].includes(phase.id)) {
+      const podPos = getPathPos(pts, Math.min(.98, demo.podT));
+      const podAngle = getPathAngle(pts, Math.min(.98, demo.podT));
+      drawDetailedCapsule(podPos[0], podPos[1], podAngle, r.color,
+        phase.id==='boarding'||phase.id==='pod_arrive'?1:1);
+
+      // Speed HUD during travel
+      if (['travel_1','travel_2','passing'].includes(phase.id)) {
+        const speeds = {travel_1:85, travel_2:70, passing:85};
+        // draw in screen space — pop out of world transform
+        cCtx.restore();
+        cCtx.save();
+        drawSpeedHUD(speeds[phase.id]||80, r.color);
+        // re-apply world transform
+        cCtx.save();
+        cCtx.translate(cW/2,cH/2);cCtx.scale(cam.zoom,cam.zoom);cCtx.translate(-cx(cam.x),-cy(cam.y));
+      }
+    }
+
+    // Junction animation
+    if (phase.id==='junction') {
+      drawJunctionAnim(jPt[0], jPt[1], r.color, '#ffd700', t);
+    }
+
+    // Passing capsule (from opposite direction)
+    if (phase.id==='passing' && demo.passingPodT >= 0) {
+      const podPos = getPathPos(pts, demo.podT);
+      const podAngle = getPathAngle(pts, demo.podT);
+      const oppositeColor = r.color==='#3b82f6'?'#10b981':'#3b82f6';
+      drawPassingCapsule(podPos[0], podPos[1]-cy(6)/scY, podAngle, oppositeColor, demo.passingPodT);
+    }
+
+    // Arrival flash effect
+    if (phase.id==='arrival' && t > 0.3) {
+      const ap = getPathPos(pts, 0.98);
+      cCtx.save();
+      cCtx.shadowBlur=40;cCtx.shadowColor=r.color;
+      cCtx.strokeStyle=hexA(r.color, (.5+Math.sin(cityT*10)*.4)*(t-.3)/.7);
+      cCtx.lineWidth=2;
+      cCtx.beginPath();cCtx.arc(cx(ap[0]),cy(ap[1]),cx(20*(t-.3)/.7),0,Math.PI*2);cCtx.stroke();
+      cCtx.restore();
+    }
+  }
+
+  cCtx.restore(); // end world transform
+
+  // Screen-space HUD
+  drawScreenHUD();
+
   requestAnimationFrame(animateCity);
 }
 
+function drawScreenHUD() {
+  // Top-right live badge
+  cCtx.fillStyle='rgba(0,0,0,0.45)';
+  cCtx.beginPath();cCtx.roundRect(cW-cx(102),cy(6),cx(98),cy(18),cx(4));cCtx.fill();
+  cCtx.fillStyle='rgba(0,245,255,0.6)';cCtx.font=`${Math.max(6,cx(8))}px Orbitron,monospace`;cCtx.textAlign='right';
+  cCtx.fillText('● LIVE SIMULATION',cW-cx(8),cy(18));
+
+  // Demo phase label bottom
+  if (demo.active && demo.routeKey) {
+    const phase = DEMO_PHASES[demo.phaseIdx];
+    if (!phase) return;
+    cCtx.fillStyle='rgba(0,0,0,0.55)';
+    cCtx.beginPath();cCtx.roundRect(cx(8),cH-cy(26),cW-cx(16),cy(22),cx(5));cCtx.fill();
+    cCtx.fillStyle=ROUTES[demo.routeKey].color;
+    cCtx.font=`bold ${Math.max(7,cx(9))}px Orbitron,monospace`;cCtx.textAlign='left';
+    cCtx.fillText('▶ '+phase.label.toUpperCase(),cx(16),cH-cy(11));
+
+    // Overall progress bar
+    const overallT=(demo.phaseIdx+Math.min(1,demo.phaseT/(phase.dur||1)))/DEMO_PHASES.length;
+    cCtx.fillStyle='rgba(255,255,255,0.06)';cCtx.fillRect(cx(8),cH-cy(3),cW-cx(16),cy(3));
+    cCtx.fillStyle=ROUTES[demo.routeKey].color;cCtx.fillRect(cx(8),cH-cy(3),(cW-cx(16))*overallT,cy(3));
+  } else {
+    const r = ROUTES[activeRoute];
+    if (r && activeRoute!=='all') {
+      cCtx.fillStyle=hexA(r.color,.7);
+      cCtx.font=`bold ${Math.max(7,cx(9))}px Orbitron,monospace`;cCtx.textAlign='left';
+      cCtx.fillText('▶ '+r.label.toUpperCase()+' — Click to Watch Journey Demo',cx(12),cy(22));
+    }
+  }
+}
+
 // ═══════════════════════════════════════════════
-//  MINIMAP
+//  HERO CANVAS
 // ═══════════════════════════════════════════════
-const minimap = document.getElementById('minimap-canvas');
-const mCtx = minimap.getContext('2d');
-let mmT = 0;
-
-function drawMinimap() {
-  mmT += 0.012;
-  const mw = minimap.width = minimap.offsetWidth;
-  const mh = minimap.height = minimap.offsetHeight;
-  const msx = mw / BASE_W, msy = mh / BASE_H;
-
-  mCtx.clearRect(0, 0, mw, mh);
-  mCtx.fillStyle = '#060c18';
-  mCtx.fillRect(0, 0, mw, mh);
-
-  // Grid
-  mCtx.strokeStyle = 'rgba(0,245,255,0.06)';
-  mCtx.lineWidth = 0.5;
-  for (let x = 0; x < mw; x += 30) { mCtx.beginPath(); mCtx.moveTo(x,0); mCtx.lineTo(x,mh); mCtx.stroke(); }
-  for (let y = 0; y < mh; y += 30) { mCtx.beginPath(); mCtx.moveTo(0,y); mCtx.lineTo(mw,y); mCtx.stroke(); }
-
-  // Routes
-  Object.entries(ROUTES).forEach(([k, r]) => {
-    if (k === 'all') return;
-    mCtx.strokeStyle = r.color + '60';
-    mCtx.lineWidth = 1.5;
-    mCtx.beginPath();
-    mCtx.moveTo(r.points[0][0]*msx, r.points[0][1]*msy);
-    r.points.slice(1).forEach(p => mCtx.lineTo(p[0]*msx, p[1]*msy));
-    mCtx.stroke();
+const heroCanvas=document.getElementById('hero-canvas');
+const hCtx=heroCanvas.getContext('2d');
+let heroW,heroH,heroT=0;
+function resizeHero(){heroW=heroCanvas.width=heroCanvas.offsetWidth;heroH=heroCanvas.height=heroCanvas.offsetHeight;}
+function drawHero(){
+  heroT+=.008;hCtx.clearRect(0,0,heroW,heroH);
+  hCtx.strokeStyle='rgba(0,245,255,0.04)';hCtx.lineWidth=1;
+  const gs=60;
+  for(let x=0;x<heroW;x+=gs){hCtx.beginPath();hCtx.moveTo(x,0);hCtx.lineTo(x,heroH);hCtx.stroke();}
+  for(let y=0;y<heroH;y+=gs){hCtx.beginPath();hCtx.moveTo(0,y);hCtx.lineTo(heroW,y);hCtx.stroke();}
+  const sy=(heroT*80)%heroH;
+  const sg=hCtx.createLinearGradient(0,sy-30,0,sy+30);
+  sg.addColorStop(0,'transparent');sg.addColorStop(.5,'rgba(0,245,255,0.05)');sg.addColorStop(1,'transparent');
+  hCtx.fillStyle=sg;hCtx.fillRect(0,sy-30,heroW,60);
+  const hr=[{pts:[[.1*heroW,.6*heroH],[.3*heroW,.45*heroH],[.5*heroW,.5*heroH]],c:'#00f5ff'},{pts:[[.5*heroW,.5*heroH],[.7*heroW,.35*heroH],[heroW,.4*heroH]],c:'#7c3aed'},{pts:[[.2*heroW,.8*heroH],[.5*heroW,.5*heroH],[.8*heroW,.3*heroH]],c:'#3b82f6'},{pts:[[.4*heroW,.9*heroH],[.5*heroW,.5*heroH],[.65*heroW,.2*heroH]],c:'#10b981'}];
+  hr.forEach(r=>{
+    hCtx.save();hCtx.shadowBlur=18;hCtx.shadowColor=r.c;hCtx.strokeStyle=r.c+'28';hCtx.lineWidth=2;
+    hCtx.beginPath();hCtx.moveTo(r.pts[0][0],r.pts[0][1]);r.pts.slice(1).forEach(p=>hCtx.lineTo(p[0],p[1]));hCtx.stroke();hCtx.restore();
+    const prog=(heroT*.3+r.pts[0][0]*.0005)%1;
+    const tot=r.pts.length-1;const st=prog*tot;const si=Math.min(Math.floor(st),tot-1);const lt=st-si;
+    const px=r.pts[si][0]+(r.pts[si+1][0]-r.pts[si][0])*lt;const py=r.pts[si][1]+(r.pts[si+1][1]-r.pts[si][1])*lt;
+    hCtx.save();hCtx.shadowBlur=14;hCtx.shadowColor=r.c;hCtx.fillStyle='#fff';
+    hCtx.beginPath();hCtx.ellipse(px,py,5,3,0,0,Math.PI*2);hCtx.fill();hCtx.restore();
   });
-
-  // Lake
-  mCtx.fillStyle = 'rgba(29,78,216,0.5)';
-  mCtx.beginPath();
-  mCtx.ellipse(430*msx, 295*msy, 60*msx, 40*msy, 0, 0, Math.PI*2);
-  mCtx.fill();
-
-  // Moving pods on minimap
-  pods.forEach(pod => {
-    const pos = getPodPos(pod);
-    mCtx.fillStyle = ROUTES[pod.routeKey].color;
-    mCtx.beginPath();
-    mCtx.arc(pos[0]*msx, pos[1]*msy, 2, 0, Math.PI*2);
-    mCtx.fill();
+  const nodes=[[.3*heroW,.45*heroH],[.5*heroW,.5*heroH],[.7*heroW,.35*heroH]];
+  nodes.forEach((n,i)=>{
+    const pulse=Math.sin(heroT*2+i*1.5)*.5+.5;
+    hCtx.save();hCtx.strokeStyle=`rgba(0,245,255,${.18+pulse*.3})`;hCtx.lineWidth=1;
+    hCtx.beginPath();hCtx.arc(n[0],n[1],8+pulse*8,0,Math.PI*2);hCtx.stroke();hCtx.restore();
   });
-
-  requestAnimationFrame(drawMinimap);
+  requestAnimationFrame(drawHero);
 }
 
 // ═══════════════════════════════════════════════
@@ -1373,200 +1454,97 @@ function drawMinimap() {
 // ═══════════════════════════════════════════════
 function selectRoute(key, btn) {
   activeRoute = key;
-
-  // Update button styles
-  document.querySelectorAll('.route-btn').forEach(b => {
-    b.classList.remove('active');
-    b.style.background = '';
-    b.style.color = '';
-    b.style.borderColor = '';
+  document.querySelectorAll('.route-btn').forEach(b=>{
+    b.classList.remove('active');b.style.background='';b.style.color='';b.style.borderColor='';b.style.boxShadow='';
   });
-  if (btn) {
+  if(btn){
     btn.classList.add('active');
-    const col = key === 'all' ? '#00f5ff' : ROUTES[key].color;
-    btn.style.background = col;
-    btn.style.borderColor = col;
-    btn.style.boxShadow = `0 0 16px ${col}55`;
+    const col=key==='all'?'#00f5ff':ROUTES[key].color;
+    btn.style.background=col;btn.style.borderColor=col;btn.style.boxShadow=`0 0 14px ${col}44`;
   }
-
-  // Update route info chips
-  buildRouteInfo();
-}
-
-function buildRouteInfo() {
-  const wrap = document.getElementById('route-info');
-  wrap.innerHTML = '';
-  Object.entries(ROUTES).forEach(([k, r]) => {
-    if (k === 'all') return;
-    const show = activeRoute === 'all' || activeRoute === k;
-    const chip = document.createElement('div');
-    chip.className = 'route-info-chip';
-    chip.style.opacity = show ? '1' : '0.3';
-    chip.innerHTML = `<div class="route-dot" style="background:${r.color}"></div>${r.label}`;
-    wrap.appendChild(chip);
-  });
+  // Start demo if specific route
+  if (key !== 'all') {
+    setTimeout(() => startDemo(key), 300);
+    cam.tx=500;cam.ty=280;cam.tz=1; // reset first so zoom-in feels intentional
+  } else {
+    closeDemo();
+  }
 }
 
 // ═══════════════════════════════════════════════
-//  CONTROL CENTER LIVE DATA
+//  CONTROL CENTER
 // ═══════════════════════════════════════════════
-const ccRoutes = [
-  { name: 'Residential', color: '#10b981', pods: [5,7], load: [60,80] },
-  { name: 'Office & Gov', color: '#3b82f6', pods: [4,6], load: [50,75] },
-  { name: 'Hospital Emg', color: '#ef4444', pods: [2,4], load: [20,45] },
-  { name: 'Market', color: '#f59e0b', pods: [4,7], load: [55,85] },
-  { name: 'Tourist', color: '#8b5cf6', pods: [3,5], load: [30,60] },
-  { name: 'School', color: '#06b6d4', pods: [4,6], load: [40,70] },
-  { name: 'Transit', color: '#a78bfa', pods: [5,8], load: [65,90] },
-];
+const ccRoutes=[{name:'Residential',color:'#10b981',pods:[5,7],load:[60,80]},{name:'Office & Gov',color:'#3b82f6',pods:[4,6],load:[50,75]},{name:'Hospital Emg',color:'#ef4444',pods:[2,4],load:[20,45]},{name:'Market',color:'#f59e0b',pods:[4,7],load:[55,85]},{name:'Tourist',color:'#8b5cf6',pods:[3,5],load:[30,60]},{name:'School',color:'#06b6d4',pods:[4,6],load:[40,70]},{name:'Transit',color:'#a78bfa',pods:[5,8],load:[65,90]}];
 
-function buildRouteStatus() {
-  const wrap = document.getElementById('route-status');
-  wrap.innerHTML = '';
-  ccRoutes.forEach(r => {
-    const div = document.createElement('div');
-    div.className = 'route-status-item';
-    const load = r.load[0] + Math.floor(Math.random() * (r.load[1] - r.load[0]));
-    const podCount = r.pods[0] + Math.floor(Math.random() * (r.pods[1] - r.pods[0]));
-    div.innerHTML = `
-      <span class="rs-name">${r.name}</span>
-      <div class="rs-bar-wrap"><div class="rs-bar" style="width:${load}%;background:${r.color}"></div></div>
-      <span class="rs-pods">${podCount} pods</span>`;
+function buildRouteStatus(){
+  const wrap=document.getElementById('route-status');wrap.innerHTML='';
+  ccRoutes.forEach(r=>{
+    const div=document.createElement('div');div.className='route-status-item';
+    const load=r.load[0]+Math.floor(Math.random()*(r.load[1]-r.load[0]));
+    const pc=r.pods[0]+Math.floor(Math.random()*(r.pods[1]-r.pods[0]));
+    div.innerHTML=`<span class="rs-name">${r.name}</span><div class="rs-bar-wrap"><div class="rs-bar" style="width:${load}%;background:${r.color}"></div></div><span class="rs-pods">${pc} pods</span>`;
     wrap.appendChild(div);
   });
 }
 
-const alerts = [
-  'High demand on Market Route',
-  'School Route surge detected',
-  'Transit Route at 89% capacity',
-  'Hospital pod dispatched',
-  'Weather: Light rain detected',
-];
-
-function updateMetrics() {
-  const mPods = 44 + Math.floor(Math.random() * 12);
-  const mPass = 2800 + Math.floor(Math.random() * 200);
-  const mEnergy = 78 + Math.floor(Math.random() * 14);
-  const mAiPods = 3 + Math.floor(Math.random() * 4);
-
-  document.getElementById('m-pods').textContent = mPods;
-  document.getElementById('m-pass').textContent = mPass.toLocaleString();
-  document.getElementById('m-energy').innerHTML = mEnergy + '<span style="font-size:1rem">%</span>';
-  document.getElementById('ai-pods').textContent = mAiPods;
-  document.getElementById('mb-pods').style.width = (mPods / 60 * 100) + '%';
-  document.getElementById('mb-pass').style.width = (mPass / 4000 * 100) + '%';
-  document.getElementById('mb-energy').style.width = mEnergy + '%';
-  document.getElementById('alert-demand-text').textContent = alerts[Math.floor(Math.random() * alerts.length)];
-
-  const weathers = ['Rain sensors monitoring', 'Clear skies — optimal', 'Wind advisory: moderate'];
-  document.getElementById('ai-weather').textContent = weathers[Math.floor(Math.random() * weathers.length)];
-
+function updateMetrics(){
+  const mp=44+Math.floor(Math.random()*12);
+  document.getElementById('m-pods').textContent=mp;
+  document.getElementById('m-pass').textContent=(2800+Math.floor(Math.random()*200)).toLocaleString();
+  document.getElementById('m-energy').innerHTML=(78+Math.floor(Math.random()*14))+'<span style="font-size:1rem">%</span>';
+  document.getElementById('ai-pods').textContent=3+Math.floor(Math.random()*4);
+  document.getElementById('mb-pods').style.width=(mp/60*100)+'%';
+  const alerts=['High demand on Market Loop','School Loop surge — pods added','Transit at 88% capacity','All hospital routes clear','Tourist loop: peak hours'];
+  document.getElementById('alert-demand-text').textContent=alerts[Math.floor(Math.random()*alerts.length)];
+  const wx=['Rain sensors monitoring','Clear skies — optimal ops','Wind advisory: moderate'];
+  document.getElementById('ai-weather').textContent=wx[Math.floor(Math.random()*wx.length)];
   buildRouteStatus();
 }
 
 // ═══════════════════════════════════════════════
-//  SCROLL REVEAL
+//  SCROLL REVEAL & TIMELINE
 // ═══════════════════════════════════════════════
-function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  els.forEach(el => obs.observe(el));
-}
-
-// Timeline scroll
-function initTimeline() {
-  const items = document.querySelectorAll('.tl-item');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.2 });
-  items.forEach(el => obs.observe(el));
+function initReveal(){
+  const els=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>obs.observe(el));
+  const tl=document.querySelectorAll('.tl-item');
+  const obs2=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs2.unobserve(e.target);}});},{threshold:.2});
+  tl.forEach(el=>obs2.observe(el));
 }
 
 // ═══════════════════════════════════════════════
 //  REPLAY
 // ═══════════════════════════════════════════════
-function replayDemo() {
-  document.getElementById('city-map').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => {
-    selectRoute('all', document.querySelector('[data-route="all"]'));
-    initPods();
-  }, 800);
+function replayDemo(){
+  document.getElementById('city-map').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{selectRoute('residential',document.querySelector('[data-route="residential"]'));},800);
 }
 
 // ═══════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
-  // Hero
-  resizeHero();
-  drawHero();
-
-  // City map
-  resizeCity();
-  initPods();
-  animateCity();
-
-  // Minimap
-  drawMinimap();
-
-  // Route UI
-  selectRoute('all', document.querySelector('[data-route="all"]'));
-  buildRouteInfo();
-
-  // Control center
-  buildRouteStatus();
-  updateMetrics();
-  setInterval(updateMetrics, 3000);
-
-  // Scroll reveals
+window.addEventListener('DOMContentLoaded',()=>{
+  resizeHero(); drawHero();
+  resizeCity(); initPods();
+  requestAnimationFrame(animateCity);
+  selectRoute('all',document.querySelector('[data-route="all"]'));
+  buildRouteStatus(); updateMetrics();
+  setInterval(updateMetrics,3000);
   initReveal();
-  initTimeline();
+  window.addEventListener('resize',()=>{resizeHero();resizeCity();});
 
-  // Resize
-  window.addEventListener('resize', () => {
-    resizeHero();
-    resizeCity();
-  });
-
-  // Cycle alerts for demo
-  let alertCycle = 0;
-  const alertMsgs = [
-    'High demand on Market Route',
-    'School Route surge — adding pods',
-    'Emergency simulation: Hospital route',
-    'Tourist route: Peak visitor hours',
-    'Weather: Clear — optimal operations',
-  ];
-  setInterval(() => {
-    alertCycle = (alertCycle + 1) % alertMsgs.length;
-    document.getElementById('alert-demand-text').textContent = alertMsgs[alertCycle];
-  }, 5000);
-
-  // Auto-demo: cycle through routes every 8s if user hasn't interacted
-  let autoDemo = true;
-  const routeKeys = ['all', 'residential', 'office', 'hospital', 'market', 'tourist', 'school', 'transit'];
-  let autoIdx = 0;
-  document.querySelectorAll('.route-btn').forEach(b => {
-    b.addEventListener('click', () => { autoDemo = false; });
-  });
-  setInterval(() => {
-    if (autoDemo && document.getElementById('city-map').getBoundingClientRect().top > -200 &&
-        document.getElementById('city-map').getBoundingClientRect().top < window.innerHeight + 100) {
-      autoIdx = (autoIdx + 1) % routeKeys.length;
-      const key = routeKeys[autoIdx];
-      selectRoute(key, document.querySelector(`[data-route="${key}"]`));
-    }
-  }, 8000);
+  // Auto demo on city-map section entry
+  let autoDemoStarted=false;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting&&!autoDemoStarted){
+        autoDemoStarted=true;
+        setTimeout(()=>{selectRoute('residential',document.querySelector('[data-route="residential"]'));},1200);
+      }
+    });
+  },{threshold:.4});
+  obs.observe(document.getElementById('city-map'));
 });
 </script>
 </body>
