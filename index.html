@@ -3,1439 +3,1570 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kasun Ayya vs Shavin Malli 🥊</title>
+<title>Kandy HyperGrid — Smart Elevated Tunnel Transport Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@700;900&display=swap');
-
-*{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ayya:#6c63ff;--malli:#ff4757;--gold:#ffd700;
-  --bg:#0d0d1a;--card:rgba(255,255,255,0.05);--border:#2a2a3a;
+  --bg:#070c18;--bg2:#0d1424;--bg3:#111827;
+  --cyan:#00f5ff;--blue:#3b82f6;--violet:#7c3aed;
+  --green:#10b981;--orange:#f97316;--red:#ef4444;
+  --gold:#f59e0b;--purple:#8b5cf6;
+  --text:#e2e8f0;--dim:#64748b;--border:rgba(255,255,255,0.08);
 }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{
-  background:var(--bg);font-family:'Nunito',sans-serif;
-  color:#fff;min-height:100vh;overflow-x:hidden;user-select:none;
-}
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse at 15% 15%,#1a0a3a 0%,transparent 55%),
-             radial-gradient(ellipse at 85% 85%,#0a1a0a 0%,transparent 55%);
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',sans-serif;overflow-x:hidden;
+  line-height:1.6;
 }
 
-/* ── HEADER ── */
-header{
-  position:relative;z-index:2;text-align:center;
-  padding:14px 10px 8px;
-  background:linear-gradient(180deg,rgba(0,0,0,.7),transparent);
-}
-header h1{
-  font-family:'Bangers',cursive;
-  font-size:clamp(1.6rem,5.5vw,3.8rem);
-  letter-spacing:3px;line-height:1;
-  background:linear-gradient(90deg,var(--ayya),#fff 50%,var(--malli));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-header p{font-size:.8rem;color:#666;margin-top:2px;letter-spacing:1px;}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:#0d1424;}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:4px;}
 
-/* ── SCOREBOARD ── */
-.scoreboard{
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(7,12,24,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.nav-logo{
+  font-family:'Orbitron',monospace;font-weight:700;font-size:1.1rem;
+  color:var(--cyan);letter-spacing:2px;
+  text-shadow:0 0 20px rgba(0,245,255,0.5);
+}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{
+  font-size:.8rem;letter-spacing:1px;color:var(--dim);
+  text-decoration:none;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan);}
+.nav-cta{
+  font-size:.8rem;padding:7px 18px;border-radius:20px;
+  border:1px solid var(--cyan);color:var(--cyan);
+  background:rgba(0,245,255,0.05);cursor:pointer;
+  font-family:'Orbitron',monospace;letter-spacing:1px;
+  transition:background .2s,box-shadow .2s;
+}
+.nav-cta:hover{background:rgba(0,245,255,0.12);box-shadow:0 0 16px rgba(0,245,255,0.2);}
+
+/* ── HERO ── */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;overflow:hidden;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
+.hero-content{
   position:relative;z-index:2;
-  display:flex;justify-content:space-around;align-items:center;
-  padding:8px 20px;
-  background:rgba(0,0,0,.45);border-bottom:1px solid var(--border);
-  backdrop-filter:blur(8px);
+  max-width:700px;padding:0 40px;
 }
-.sc{text-align:center;}
-.sc .sn{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;}
-.sc.ka .sn{color:var(--ayya);}
-.sc.sh .sn{color:var(--malli);}
-.sc .sp{font-size:2.2rem;font-weight:900;line-height:1;}
-.vs-glyph{font-family:'Bangers',cursive;font-size:1.8rem;color:var(--gold);}
-
-/* ── CONNECTION STATUS ── */
-#conn-bar{
-  position:relative;z-index:2;
-  text-align:center;padding:6px;font-size:.8rem;
-  background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--cyan);border:1px solid rgba(0,245,255,0.3);
+  padding:6px 16px;border-radius:20px;margin-bottom:24px;
+  background:rgba(0,245,255,0.05);
+}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,245,255,.6);}50%{opacity:.7;box-shadow:0 0 0 6px transparent;}}
+.hero-title{
+  font-family:'Orbitron',monospace;font-weight:900;
+  font-size:clamp(2.4rem,5.5vw,5rem);
+  line-height:1.05;letter-spacing:-1px;
+  background:linear-gradient(135deg,#fff 0%,var(--cyan) 50%,var(--violet) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:10px;
+}
+.hero-sub{
+  font-family:'Orbitron',monospace;font-size:clamp(.85rem,1.5vw,1.1rem);
+  color:var(--cyan);letter-spacing:3px;margin-bottom:20px;opacity:.8;
+}
+.hero-desc{
+  font-size:1rem;color:rgba(226,232,240,0.7);
+  max-width:520px;margin-bottom:32px;line-height:1.7;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{
+  font-family:'Orbitron',monospace;font-size:.82rem;letter-spacing:2px;
+  padding:13px 28px;border-radius:40px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--cyan),var(--blue));
+  color:#000;font-weight:700;
+  box-shadow:0 4px 24px rgba(0,245,255,0.35);
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,245,255,0.5);}
+.btn-outline{
+  font-family:'Orbitron',monospace;font-size:.82rem;letter-spacing:2px;
+  padding:13px 28px;border-radius:40px;cursor:pointer;
+  background:transparent;border:1px solid rgba(255,255,255,0.2);
+  color:var(--text);transition:border-color .2s,background .2s;
+}
+.btn-outline:hover{border-color:var(--cyan);background:rgba(0,245,255,0.05);}
+.hero-minimap{
+  position:absolute;right:5%;top:50%;transform:translateY(-50%);
+  width:280px;height:200px;
+  border:1px solid rgba(0,245,255,0.2);border-radius:12px;
+  background:rgba(13,20,36,0.6);backdrop-filter:blur(8px);
+  overflow:hidden;z-index:2;
   display:none;
 }
-#conn-bar.show{display:block;}
-#conn-dot{
-  display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:#666;margin-right:6px;vertical-align:middle;
+@media(min-width:900px){.hero-minimap{display:block;}}
+#minimap-canvas{width:100%;height:100%;}
+.minimap-label{
+  position:absolute;bottom:8px;left:12px;
+  font-family:'Orbitron',monospace;font-size:.6rem;
+  letter-spacing:2px;color:var(--cyan);opacity:.6;
 }
-#conn-dot.connected{background:#22c55e;box-shadow:0 0 8px #22c55e;}
-#conn-dot.waiting{background:var(--gold);animation:blink 1s infinite;}
-#conn-dot.error{background:var(--malli);}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--dim);font-size:.72rem;letter-spacing:2px;z-index:2;
+  animation:bounce-up 2s infinite;
+}
+.scroll-hint::after{
+  content:'';width:1px;height:40px;
+  background:linear-gradient(to bottom,var(--cyan),transparent);
+}
+@keyframes bounce-up{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
 
-/* ── ARENA ── */
-#arena{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;
-  padding:16px 10px 40px;min-height:68vh;
+/* ── SECTIONS ── */
+section{padding:90px 40px;}
+.container{max-width:1200px;margin:0 auto;}
+.section-tag{
+  font-family:'Orbitron',monospace;font-size:.68rem;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:14px;display:block;
 }
+.section-title{
+  font-family:'Orbitron',monospace;font-weight:700;
+  font-size:clamp(1.6rem,3.5vw,2.6rem);
+  line-height:1.15;margin-bottom:16px;
+}
+.section-desc{color:rgba(226,232,240,.6);max-width:580px;font-size:.95rem;line-height:1.7;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:none;}
 
-/* ── SCREEN SYSTEM ── */
-.screen{display:none;width:100%;max-width:900px;flex-direction:column;align-items:center;gap:16px;}
-.screen.active{display:flex;}
-
-/* ── CARD ── */
-.card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:20px;padding:20px 24px;
-  width:100%;max-width:560px;text-align:center;
-}
-.card h2{font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:2px;margin-bottom:6px;}
-.card p{color:#aaa;font-size:.9rem;line-height:1.5;}
-
-/* ── BUTTONS ── */
-.btn{
-  font-family:'Bangers',cursive;font-size:1.4rem;letter-spacing:2px;
-  padding:12px 36px;border:none;border-radius:40px;cursor:pointer;
-  transition:transform .1s,box-shadow .15s;outline:none;
-}
-.btn:active{transform:scale(.92);}
-.btn:disabled{opacity:.45;pointer-events:none;}
-.btn-primary{
-  background:linear-gradient(135deg,var(--ayya),#a855f7);color:#fff;
-  box-shadow:0 4px 24px rgba(108,99,255,.5);
-}
-.btn-danger{
-  background:linear-gradient(135deg,var(--malli),#ff6b35);color:#fff;
-  box-shadow:0 4px 24px rgba(255,71,87,.5);
-}
-.btn-gold{
-  background:linear-gradient(135deg,#ffd700,#f59e0b);color:#000;
-  box-shadow:0 4px 24px rgba(255,215,0,.4);
-}
-.btn-sm{font-size:1rem;padding:8px 24px;letter-spacing:1px;}
-.btn-ghost{
-  background:rgba(255,255,255,.07);color:#ccc;
-  border:1px solid #444;font-size:1rem;padding:10px 28px;
+/* ── GLASS CARD ── */
+.glass{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:16px;
+  backdrop-filter:blur(10px);
 }
 
-/* ── HOME SCREEN ── */
-#home-screen .hero-row{
-  display:flex;gap:clamp(20px,6vw,60px);
-  justify-content:center;align-items:flex-end;margin:4px 0;
+/* ── CONCEPT SECTION ── */
+#concept{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
+.compare-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;margin-top:48px;
 }
-.hero-fighter{display:flex;flex-direction:column;align-items:center;gap:8px;}
-.hero-avatar{
-  width:clamp(80px,16vw,130px);height:clamp(80px,16vw,130px);
-  border-radius:50%;object-fit:cover;object-position:top;
-  border:4px solid #444;
-  box-shadow:0 8px 30px rgba(0,0,0,.5);
+.compare-card{
+  padding:24px;border-radius:16px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);
+  transition:border-color .3s,transform .2s;
+  position:relative;overflow:hidden;
 }
-.hero-fighter:first-child .hero-avatar{border-color:var(--ayya);animation:float-l 3s ease-in-out infinite;}
-.hero-fighter:last-child .hero-avatar{border-color:var(--malli);animation:float-r 3s ease-in-out infinite;}
-@keyframes float-l{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-12px) rotate(2deg);}}
-@keyframes float-r{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-12px) rotate(-2deg);}}
-.hero-name{font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:2px;}
-.hero-fighter:first-child .hero-name{color:var(--ayya);}
-.hero-fighter:last-child .hero-name{color:var(--malli);}
-.hero-label{font-size:.7rem;color:#555;letter-spacing:1px;}
-.sword-mid{font-size:clamp(2rem,6vw,4rem);align-self:center;filter:drop-shadow(0 0 10px rgba(255,215,0,.4));}
-.home-btn-row{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%;max-width:380px;}
-
-/* ── CHARACTER PICK ── */
-.char-pick-row{display:flex;gap:14px;justify-content:center;}
-.char-pick{
-  flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;
-  gap:8px;padding:14px 10px;border-radius:18px;cursor:pointer;
-  border:3px solid #333;background:rgba(255,255,255,.03);
-  transition:border-color .2s,background .2s,transform .15s;
+.compare-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent,var(--cyan));
 }
-.char-pick:hover{transform:scale(1.04);background:rgba(255,255,255,.07);}
-.char-pick.selected-kasun{border-color:var(--ayya);background:rgba(108,99,255,.15);}
-.char-pick.selected-shavin{border-color:var(--malli);background:rgba(255,71,87,.15);}
-.char-pick img{
-  width:70px;height:70px;border-radius:50%;object-fit:cover;object-position:top;
-  border:3px solid #444;
-}
-.char-pick.selected-kasun img{border-color:var(--ayya);}
-.char-pick.selected-shavin img{border-color:var(--malli);}
-.char-pick .cpn{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:1px;}
-.char-pick.kasun-cp .cpn{color:var(--ayya);}
-.char-pick.shavin-cp .cpn{color:var(--malli);}
-.char-pick .cpl{font-size:.68rem;color:#666;}
-
-/* ── ROOM CODE ── */
-.room-code-box{
-  background:#000;border:2px solid var(--gold);border-radius:14px;
-  padding:14px 28px;text-align:center;
-}
-.room-code-box .rc-label{font-size:.75rem;color:#888;letter-spacing:2px;margin-bottom:4px;}
-.room-code-box .rc-code{
-  font-family:'Bangers',cursive;font-size:3rem;letter-spacing:8px;
-  color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,.4);
-  line-height:1;
-}
-.share-link{
-  font-size:.75rem;color:#666;word-break:break-all;
-  padding:8px 14px;background:rgba(255,255,255,.04);
-  border-radius:8px;border:1px solid #333;margin-top:4px;
-  cursor:pointer;transition:color .2s;
-}
-.share-link:hover{color:#aaa;}
-.copy-hint{font-size:.72rem;color:var(--gold);min-height:16px;margin-top:2px;}
-
-/* ── JOIN INPUT ── */
-.code-input{
-  font-family:'Bangers',cursive;font-size:2rem;letter-spacing:8px;
-  width:200px;text-align:center;text-transform:uppercase;
-  background:#000;border:2px solid #444;border-radius:12px;
-  color:var(--gold);padding:10px 16px;outline:none;
-  transition:border-color .2s;
-}
-.code-input:focus{border-color:var(--gold);}
-
-/* ── LOBBY PLAYERS ── */
-.lobby-players{
-  display:flex;gap:20px;justify-content:center;align-items:center;
-  flex-wrap:wrap;
-}
-.lobby-player{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:16px 20px;border-radius:16px;min-width:140px;
-  border:2px solid #333;background:rgba(255,255,255,.04);
-  transition:border-color .3s,background .3s;
-}
-.lobby-player.connected{
-  border-color:var(--gold);background:rgba(255,215,0,.07);
-}
-.lobby-player img{
-  width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:top;
-  border:3px solid #444;
-}
-.lobby-player.kasun-lp img{border-color:var(--ayya);}
-.lobby-player.shavin-lp img{border-color:var(--malli);}
-.lobby-player .lpn{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:1px;}
-.lobby-player.kasun-lp .lpn{color:var(--ayya);}
-.lobby-player.shavin-lp .lpn{color:var(--malli);}
-.lobby-player .lps{
-  font-size:.72rem;padding:3px 10px;border-radius:20px;letter-spacing:1px;
-}
-.lps.waiting{background:#333;color:#888;}
-.lps.ready{background:#22c55e22;color:#22c55e;border:1px solid #22c55e;}
-.lobby-vs{font-family:'Bangers',cursive;font-size:2.5rem;color:var(--gold);}
-
-/* ── FIGHT SCREEN ── */
-.fight-stage{
-  width:100%;max-width:860px;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  padding:0 16px;min-height:320px;position:relative;
-}
-.fight-stage::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--ayya),var(--gold),var(--malli));
-  border-radius:3px;box-shadow:0 0 16px rgba(255,215,0,.3);
-}
-.fighter{
-  display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;
-}
-.fighter-name{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:1px;}
-.fighter.kasun-f .fighter-name{color:var(--ayya);}
-.fighter.shavin-f .fighter-name{color:var(--malli);}
-.hp-wrap{width:clamp(110px,18vw,160px);height:14px;background:#1a1a2e;border-radius:8px;overflow:hidden;border:1px solid #333;}
-.hp-bar{height:100%;border-radius:8px;transition:width .4s;}
-.fighter.kasun-f .hp-bar{background:linear-gradient(90deg,#6c63ff,#a855f7);}
-.fighter.shavin-f .hp-bar{background:linear-gradient(90deg,#ff4757,#ff6b35);}
-.hp-lbl{font-size:.65rem;color:#666;letter-spacing:1px;}
-.avatar-ring{
-  width:clamp(100px,18vw,155px);height:clamp(100px,18vw,155px);
-  border-radius:50%;border:4px solid #444;overflow:hidden;
-  box-shadow:0 0 24px rgba(0,0,0,.6);transition:border-color .3s;
-}
-.avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .1s;}
-.fighter.kasun-f .avatar-ring{border-color:var(--ayya);}
-.fighter.shavin-f .avatar-ring{border-color:var(--malli);}
-
-/* me indicator */
-.me-badge{
-  font-size:.65rem;padding:2px 8px;border-radius:10px;letter-spacing:1px;
-  font-weight:700;background:var(--gold);color:#000;
+.compare-card:hover{border-color:rgba(0,245,255,0.3);transform:translateY(-4px);}
+.compare-icon{font-size:2.2rem;margin-bottom:12px;}
+.compare-title{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:600;margin-bottom:8px;color:var(--accent,var(--cyan));}
+.compare-desc{font-size:.82rem;color:var(--dim);line-height:1.6;}
+.compare-tag{
+  display:inline-block;margin-top:10px;
+  font-size:.68rem;padding:3px 10px;border-radius:20px;
+  letter-spacing:1px;
 }
 
-/* ── FIGHT ANIMATIONS ── */
-@keyframes punch-r{0%{transform:translateX(0);}35%{transform:translateX(55px) scaleX(1.07);}65%{transform:translateX(25px);}100%{transform:translateX(0);}}
-@keyframes punch-l{0%{transform:translateX(0);}35%{transform:translateX(-55px) scaleX(1.07);}65%{transform:translateX(-25px);}100%{transform:translateX(0);}}
-@keyframes dodge-r{0%{transform:translateX(0) rotate(0);}40%{transform:translateX(-38px) rotate(-7deg);}100%{transform:translateX(0) rotate(0);}}
-@keyframes dodge-l{0%{transform:translateX(0) rotate(0);}40%{transform:translateX(38px) rotate(7deg);}100%{transform:translateX(0) rotate(0);}}
-@keyframes shake-hit{0%,100%{transform:translateX(0);}20%{transform:translateX(-7px);}40%{transform:translateX(7px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
-@keyframes flash-hit{0%,100%{filter:brightness(1);}30%{filter:brightness(3) saturate(0);}60%{filter:brightness(.3);}}
-@keyframes ko-fall{0%{transform:rotate(0) translateY(0);}35%{transform:rotate(-18deg) translateY(-15px);}65%{transform:rotate(85deg) translateY(35px);}100%{transform:rotate(90deg) translateY(55px);}}
-@keyframes win-dance{0%,100%{transform:translateY(0) rotate(-4deg) scale(1);}25%{transform:translateY(-28px) rotate(4deg) scale(1.06);}75%{transform:translateY(-16px) rotate(-2deg) scale(1.03);}}
-@keyframes spin-special{0%{transform:rotate(0) scale(1);}50%{transform:rotate(360deg) scale(1.18);}100%{transform:rotate(720deg) scale(1);}}
-@keyframes super-shake{0%,100%{transform:translateX(0) translateY(0);}25%{transform:translateX(-10px) translateY(-5px);}50%{transform:translateX(10px) translateY(5px);}75%{transform:translateX(-6px) translateY(-3px);}}
+/* ── CITY MAP SECTION ── */
+#city-map{background:var(--bg2);padding-bottom:60px;}
+.route-selector{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  margin:32px 0 24px;
+}
+.route-btn{
+  font-size:.72rem;padding:7px 16px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.04);color:var(--dim);
+  cursor:pointer;transition:all .2s;letter-spacing:1px;
+  font-weight:600;text-transform:uppercase;
+}
+.route-btn:hover{border-color:rgba(255,255,255,0.3);color:var(--text);}
+.route-btn.active{color:#000;font-weight:700;box-shadow:0 0 16px rgba(0,0,0,0.3);}
+#city-canvas-wrap{
+  width:100%;max-width:1100px;margin:0 auto;
+  border-radius:20px;overflow:hidden;
+  border:1px solid rgba(0,245,255,0.15);
+  box-shadow:0 0 60px rgba(0,245,255,0.05);
+  position:relative;
+}
+#city-canvas{width:100%;display:block;}
+.route-info{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  margin-top:20px;
+}
+.route-info-chip{
+  display:flex;align-items:center;gap:6px;
+  font-size:.75rem;padding:5px 12px;border-radius:20px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  color:var(--dim);
+}
+.route-dot{width:8px;height:8px;border-radius:50%;}
 
-.anim-pr{animation:punch-r .45s ease-out;}
-.anim-pl{animation:punch-l .45s ease-out;}
-.anim-dr{animation:dodge-r .45s ease-out;}
-.anim-dl{animation:dodge-l .45s ease-out;}
-.anim-hit{animation:shake-hit .4s;}
-.anim-hit .avatar-ring{animation:flash-hit .4s;}
-.anim-ko{animation:ko-fall .85s ease-in forwards;}
-.anim-win{animation:win-dance .9s ease-in-out infinite;}
-.anim-spin .avatar-ring img{animation:spin-special .55s ease-out;}
-.anim-super{animation:super-shake .35s;}
+/* ── INFRASTRUCTURE ── */
+#infrastructure{background:var(--bg);}
+.infra-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-top:48px;
+}
+.infra-card{
+  padding:22px 20px;border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  transition:border-color .2s,background .2s;
+}
+.infra-card:hover{border-color:rgba(0,245,255,0.25);background:rgba(0,245,255,0.03);}
+.infra-icon{font-size:2rem;margin-bottom:10px;}
+.infra-title{font-family:'Orbitron',monospace;font-size:.78rem;font-weight:600;color:var(--cyan);margin-bottom:6px;letter-spacing:1px;}
+.infra-desc{font-size:.78rem;color:var(--dim);line-height:1.5;}
 
-/* impact */
-#impact{
-  position:absolute;top:38%;left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  font-size:clamp(2.5rem,7vw,5rem);pointer-events:none;z-index:10;
-  transition:transform .12s cubic-bezier(.175,.885,.32,1.275);
+/* ── SAFETY ── */
+#safety{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+.safety-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;margin-top:40px;
 }
-#impact.show{transform:translate(-50%,-50%) scale(1);}
+.safety-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:18px;border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  transition:background .2s;
+}
+.safety-item:hover{background:rgba(239,68,68,0.05);}
+.safety-item-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
+.safety-item-title{font-size:.8rem;font-weight:600;color:var(--red);margin-bottom:4px;letter-spacing:.5px;}
+.safety-item-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
 
-/* commentary */
-#commentary{
-  width:100%;max-width:860px;min-height:50px;text-align:center;
-  font-size:clamp(.9rem,2.3vw,1.2rem);font-weight:700;
-  background:rgba(0,0,0,.4);border:1px solid #333;border-radius:14px;
-  padding:10px 18px;backdrop-filter:blur(4px);transition:color .25s;
+/* ── CONTROL CENTER ── */
+#control{background:var(--bg2);position:relative;overflow:hidden;}
+#control::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px),
+             repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,245,255,0.02) 59px,rgba(0,245,255,0.02) 60px);
+  pointer-events:none;
 }
+.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;}
+@media(max-width:768px){.control-grid{grid-template-columns:1fr;}}
+.metrics-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.metric-card{
+  padding:20px;border-radius:14px;border:1px solid var(--border);
+  background:rgba(0,0,0,0.3);position:relative;overflow:hidden;
+}
+.metric-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--mcol,var(--cyan)),transparent);
+}
+.metric-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.metric-value{
+  font-family:'Orbitron',monospace;font-size:2rem;font-weight:700;
+  color:var(--mcol,var(--cyan));line-height:1;
+}
+.metric-sub{font-size:.7rem;color:var(--dim);margin-top:4px;}
+.metric-bar-wrap{height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:10px;overflow:hidden;}
+.metric-bar{height:100%;border-radius:4px;transition:width .8s;}
+.cc-panel{
+  padding:20px;border-radius:14px;border:1px solid var(--border);
+  background:rgba(0,0,0,0.3);
+}
+.cc-panel-title{
+  font-family:'Orbitron',monospace;font-size:.72rem;
+  letter-spacing:2px;color:var(--cyan);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.cc-panel-title::before{content:'▶';font-size:.5rem;color:var(--green);}
+.alert-list{display:flex;flex-direction:column;gap:8px;}
+.alert-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:8px;
+  font-size:.75rem;
+}
+.alert-item.ok{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);}
+.alert-item.warn{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);animation:warn-pulse 3s infinite;}
+.alert-item.info{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);}
+@keyframes warn-pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+.alert-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.route-status{display:flex;flex-direction:column;gap:8px;}
+.route-status-item{display:flex;align-items:center;justify-content:space-between;font-size:.75rem;}
+.rs-name{color:var(--dim);}
+.rs-pods{font-family:'Orbitron',monospace;color:var(--cyan);font-size:.7rem;}
+.rs-bar-wrap{flex:1;margin:0 10px;height:3px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.rs-bar{height:100%;border-radius:3px;transition:width 1s;}
 
-/* mash zone (during countdown) */
-#mash-zone{
-  display:none;flex-direction:column;align-items:center;gap:10px;
-  width:100%;max-width:860px;
+/* ── TIMELINE ── */
+#timeline{background:var(--bg);}
+.tl-container{max-width:900px;margin:40px auto 0;position:relative;}
+.tl-line{
+  position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--cyan),transparent);
+  transform:translateX(-50%);
 }
-#mash-zone.show{display:flex;}
-.mash-row{display:flex;gap:16px;justify-content:center;width:100%;}
-.mash-side{
-  flex:1;max-width:300px;display:flex;flex-direction:column;
-  align-items:center;gap:8px;padding:14px 10px;border-radius:16px;
-  border:2px solid transparent;
+@media(max-width:640px){.tl-line{left:20px;}}
+.tl-items{display:flex;flex-direction:column;gap:24px;}
+.tl-item{
+  display:flex;gap:24px;align-items:flex-start;
+  opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;
 }
-.mash-side.ka-ms{background:rgba(108,99,255,.1);border-color:rgba(108,99,255,.3);}
-.mash-side.sh-ms{background:rgba(255,71,87,.1);border-color:rgba(255,71,87,.3);}
-.mash-lbl{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:1px;}
-.ka-ms .mash-lbl{color:var(--ayya);}
-.sh-ms .mash-lbl{color:var(--malli);}
-.mash-count{font-family:'Bangers',cursive;font-size:2.5rem;line-height:1;}
-.mash-prog-wrap{width:100%;height:14px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
-.mash-prog{height:100%;border-radius:10px;transition:width .08s;}
-.ka-ms .mash-prog{background:linear-gradient(90deg,var(--ayya),#a855f7);}
-.sh-ms .mash-prog{background:linear-gradient(90deg,var(--malli),#ff6b35);}
-.mash-btn{
-  font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:1px;
-  padding:12px 20px;border:none;border-radius:14px;cursor:pointer;width:100%;
-  transition:transform .05s;outline:none;
+.tl-item.visible{opacity:1;transform:none;}
+.tl-item:nth-child(even){flex-direction:row-reverse;}
+@media(max-width:640px){.tl-item,.tl-item:nth-child(even){flex-direction:row;padding-left:40px;}}
+.tl-content{
+  flex:1;padding:18px 20px;border-radius:14px;
+  border:1px solid var(--border);background:rgba(255,255,255,0.03);
 }
-.mash-btn:active,.mash-btn.pressed{transform:scale(.85);}
-.ka-ms .mash-btn{background:var(--ayya);color:#fff;box-shadow:0 3px 16px rgba(108,99,255,.4);}
-.sh-ms .mash-btn{background:var(--malli);color:#fff;box-shadow:0 3px 16px rgba(255,71,87,.4);}
-.mash-hint{font-size:.78rem;color:#666;text-align:center;}
+.tl-item:nth-child(even) .tl-content{text-align:right;}
+@media(max-width:640px){.tl-item:nth-child(even) .tl-content{text-align:left;}}
+.tl-time{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:2px;margin-bottom:6px;}
+.tl-title{font-weight:700;font-size:.9rem;margin-bottom:6px;}
+.tl-desc{font-size:.78rem;color:var(--dim);line-height:1.5;}
+.tl-node{
+  flex-shrink:0;width:36px;height:36px;border-radius:50%;
+  border:2px solid var(--cyan);background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;position:relative;z-index:2;
+  box-shadow:0 0 16px rgba(0,245,255,0.3);
+}
+.tl-spacer{flex:1;}
+@media(max-width:640px){.tl-spacer{display:none;}}
 
-/* taunt bar */
-#taunt-bar{
-  display:none;flex-wrap:wrap;gap:8px;justify-content:center;
-  width:100%;max-width:860px;padding:4px 0;
+/* ── CITY FLOW BATTLE ── */
+#battle{background:var(--bg2);}
+.battle-grid{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:20px;
+  align-items:stretch;margin-top:48px;
 }
-#taunt-bar.show{display:flex;}
-.taunt-btn{
-  font-size:1.2rem;padding:6px 14px;border:1px solid #333;
-  border-radius:20px;background:rgba(255,255,255,.06);
-  cursor:pointer;transition:transform .1s,background .15s;
+@media(max-width:640px){.battle-grid{grid-template-columns:1fr;}}
+.battle-side{display:flex;flex-direction:column;gap:12px;}
+.battle-card{
+  padding:16px;border-radius:12px;display:flex;gap:12px;align-items:center;
+  font-size:.82rem;
 }
-.taunt-btn:hover{background:rgba(255,255,255,.12);transform:scale(1.1);}
-.taunt-btn:active{transform:scale(.88);}
-
-/* speech bubble */
-.speech-bubble{
-  position:fixed;padding:10px 18px;border-radius:20px;
-  font-size:1.1rem;font-weight:700;z-index:500;pointer-events:none;
-  animation:bubble-life 2.5s ease-out forwards;
-  border:2px solid var(--gold);background:rgba(0,0,0,.85);color:#fff;
+.battle-card.villain{
+  background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);
 }
-@keyframes bubble-life{
-  0%{transform:translateY(0) scale(.5);opacity:0;}
-  15%{transform:translateY(-10px) scale(1);opacity:1;}
-  75%{transform:translateY(-30px) scale(1);opacity:1;}
-  100%{transform:translateY(-60px) scale(.8);opacity:0;}
+.battle-card.hero-c{
+  background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.2);
 }
-
-/* round dots */
-.round-dots{display:flex;gap:8px;justify-content:center;}
-.r-dot{width:14px;height:14px;border-radius:50%;background:#1a1a2e;border:2px solid #333;transition:.3s;}
-.r-dot.w-kasun{background:var(--ayya);border-color:var(--ayya);}
-.r-dot.w-shavin{background:var(--malli);border-color:var(--malli);}
-.r-dot.w-tie{background:var(--gold);border-color:var(--gold);}
-.r-dot.cur{border-color:#fff;box-shadow:0 0 6px rgba(255,255,255,.4);}
-
-/* fight button */
-.btn-fight{
-  font-family:'Bangers',cursive;font-size:clamp(1.6rem,3.5vw,2.2rem);
-  letter-spacing:3px;padding:14px 50px;border:none;border-radius:50px;cursor:pointer;
-  background:linear-gradient(135deg,#ff4757,#ff6b35,#ffd700);color:#000;
-  box-shadow:0 5px 32px rgba(255,71,87,.5);
-  transition:transform .1s;animation:fight-pulse 2s infinite;
+.battle-icon{font-size:1.6rem;flex-shrink:0;}
+.battle-label{font-weight:600;color:var(--text);}
+.battle-result{font-size:.72rem;color:var(--dim);margin-top:2px;}
+.battle-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.68rem;padding:2px 8px;border-radius:10px;margin-top:4px;
 }
-.btn-fight:hover{transform:scale(1.05);}
-.btn-fight:active{transform:scale(.91);}
-.btn-fight:disabled{opacity:.45;pointer-events:none;animation:none;}
-@keyframes fight-pulse{0%,100%{box-shadow:0 5px 32px rgba(255,71,87,.5);}50%{box-shadow:0 5px 52px rgba(255,107,53,.85);}}
-
-/* result */
-#result-screen{text-align:center;}
-.winner-photo{
-  width:clamp(110px,24vw,180px);height:clamp(110px,24vw,180px);
-  border-radius:50%;object-fit:cover;object-position:top;
-  border:5px solid var(--gold);box-shadow:0 0 40px rgba(255,215,0,.45);
-  animation:win-dance .9s ease-in-out infinite;
-}
-.winner-title{font-family:'Bangers',cursive;font-size:clamp(1.8rem,5.5vw,4rem);letter-spacing:2px;line-height:1;}
-.winner-roast{
-  max-width:460px;font-size:.95rem;color:#ccc;line-height:1.6;
-  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 18px;
-}
-.final-row{display:flex;gap:20px;justify-content:center;}
-.fc{padding:12px 24px;border-radius:14px;text-align:center;min-width:110px;}
-.fc.fk{background:rgba(108,99,255,.2);border:2px solid var(--ayya);}
-.fc.fs{background:rgba(255,71,87,.2);border:2px solid var(--malli);}
-.fc .fcn{font-family:'Bangers',cursive;font-size:1.2rem;}
-.fc.fk .fcn{color:var(--ayya);}
-.fc.fs .fcn{color:var(--malli);}
-.fc .fcp{font-size:2.8rem;font-weight:900;}
-
-/* announcer */
-#announcer{
-  position:fixed;top:50%;left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  background:rgba(0,0,0,.93);border:3px solid var(--gold);border-radius:18px;
-  padding:18px 42px;font-family:'Bangers',cursive;
-  font-size:clamp(1.8rem,4.5vw,3rem);color:var(--gold);
-  text-align:center;z-index:1000;pointer-events:none;
-  letter-spacing:3px;text-shadow:0 0 18px rgba(255,215,0,.5);
-  transition:transform .22s cubic-bezier(.175,.885,.32,1.275);
-  white-space:nowrap;
-}
-#announcer.show{transform:translate(-50%,-50%) scale(1);}
-
-/* countdown */
-#countdown-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.85);
+.badge-ok{background:rgba(16,185,129,.15);color:var(--green);}
+.badge-warn{background:rgba(239,68,68,.15);color:var(--red);}
+.vs-col{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:20px;z-index:900;opacity:0;pointer-events:none;transition:opacity .3s;
+  gap:8px;padding:0 10px;
 }
-#countdown-overlay.show{opacity:1;pointer-events:all;}
-#countdown-num{
-  font-family:'Bangers',cursive;font-size:clamp(7rem,16vw,13rem);
-  color:var(--gold);text-shadow:0 0 50px rgba(255,215,0,.55);line-height:1;
+.vs-text{
+  font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;
+  color:var(--cyan);text-shadow:0 0 20px rgba(0,245,255,0.5);
 }
-.cd-tap-wrap{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  background:rgba(0,0,0,.5);border-radius:16px;padding:14px 28px;
-  border:1px solid #333;
-}
-.cd-tap-label{font-size:.85rem;color:#888;letter-spacing:1px;}
-.cd-tap-count{font-family:'Bangers',cursive;font-size:3rem;color:var(--gold);line-height:1;}
-.cd-tap-btn{
-  font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:2px;
-  padding:12px 40px;border:none;border-radius:14px;cursor:pointer;
-  transition:transform .05s;
-}
-.cd-tap-btn:active,.cd-tap-btn.pressed{transform:scale(.82);}
-.ka-tap-btn{background:var(--ayya);color:#fff;}
-.sh-tap-btn{background:var(--malli);color:#fff;}
+.vs-line{flex:1;width:1px;background:rgba(0,245,255,0.2);}
 
-/* confetti */
-.conf{position:fixed;border-radius:2px;animation:cf linear forwards;z-index:999;pointer-events:none;}
-@keyframes cf{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+/* ── BENEFITS ── */
+#benefits{background:var(--bg);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;align-items:start;}
+@media(max-width:768px){.two-col{grid-template-columns:1fr;}}
+.list-card{padding:28px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.list-card-title{font-family:'Orbitron',monospace;font-size:.85rem;font-weight:700;margin-bottom:20px;letter-spacing:2px;}
+.check-list{display:flex;flex-direction:column;gap:12px;list-style:none;}
+.check-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.85rem;color:rgba(226,232,240,.75);line-height:1.4;
+}
+.check-list li::before{
+  content:'▸';font-size:.7rem;margin-top:2px;flex-shrink:0;
+}
+.list-card.benefits-card .check-list li::before{color:var(--green);}
+.list-card.challenges-card .check-list li::before{color:var(--orange);}
 
+/* ── CTA ── */
+#cta{
+  background:linear-gradient(135deg,#0d1424 0%,#12082a 50%,#080c18 100%);
+  text-align:center;padding:100px 40px;position:relative;overflow:hidden;
+}
+#cta::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(0,245,255,0.06) 0%,transparent 70%);
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.cta-title{font-family:'Orbitron',monospace;font-size:clamp(1.5rem,3.5vw,3rem);font-weight:900;margin-bottom:20px;}
+.cta-desc{color:rgba(226,232,240,.6);max-width:500px;margin:0 auto 36px;font-size:.95rem;}
+.btn-replay{
+  font-family:'Orbitron',monospace;font-size:.85rem;letter-spacing:2px;
+  padding:16px 36px;border-radius:40px;cursor:pointer;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  color:#fff;border:none;font-weight:700;
+  box-shadow:0 4px 30px rgba(0,245,255,0.3);
+  transition:transform .15s,box-shadow .2s;
+}
+.btn-replay:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(0,245,255,0.5);}
+
+/* ── FOOTER ── */
 footer{
-  position:relative;z-index:2;text-align:center;
-  padding:12px;color:#2a2a2a;font-size:.75rem;border-top:1px solid #111;
+  background:#050810;padding:32px 40px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
 }
-footer span{color:#444;}
+.footer-logo{font-family:'Orbitron',monospace;font-size:.85rem;color:var(--cyan);letter-spacing:2px;}
+.footer-disc{font-size:.72rem;color:var(--dim);max-width:550px;line-height:1.5;}
 
-/* loading spinner */
-.spinner{
-  width:32px;height:32px;border:3px solid #333;border-top-color:var(--gold);
-  border-radius:50%;animation:spin .8s linear infinite;
+/* ── MOBILE NAV ── */
+.nav-toggle{display:none;background:none;border:none;color:var(--cyan);font-size:1.2rem;cursor:pointer;}
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .nav-toggle{display:block;}
+  section{padding:70px 20px;}
+  .battle-grid{gap:12px;}
 }
-@keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>🥊 KASUN AYYA vs SHAVIN MALLI 🥊</h1>
-  <p>Multiplayer Brother Battle • ආААA vs මල්ලී</p>
-</header>
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">⚡ KANDY HYPERGRID</div>
+  <ul class="nav-links">
+    <li><a href="#concept">Concept</a></li>
+    <li><a href="#city-map">City Map</a></li>
+    <li><a href="#infrastructure">Infrastructure</a></li>
+    <li><a href="#control">Control</a></li>
+    <li><a href="#battle">City Flow</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})">Explore Map</button>
+</nav>
 
-<div class="scoreboard">
-  <div class="sc ka"><div class="sn">👑 KASUN</div><div class="sp" id="kasun-score">0</div></div>
-  <div class="vs-glyph">⚡</div>
-  <div class="sc sh"><div class="sn">SHAVIN 😈</div><div class="sp" id="shavin-score">0</div></div>
-</div>
-
-<div id="conn-bar">
-  <span id="conn-dot"></span><span id="conn-text">Connecting...</span>
-</div>
-
-<div id="arena">
-
-  <!-- ══ HOME ══ -->
-  <div id="home-screen" class="screen active">
-    <div class="hero-row">
-      <div class="hero-fighter">
-        <img src="img/kasun.png" class="hero-avatar" alt="Kasun"/>
-        <div class="hero-name">KASUN AYYA</div>
-        <div class="hero-label">👑 The Bearded Legend</div>
-      </div>
-      <div class="sword-mid">⚔️</div>
-      <div class="hero-fighter">
-        <img src="img/shavin.png" class="hero-avatar" alt="Shavin"/>
-        <div class="hero-name">SHAVIN MALLI</div>
-        <div class="hero-label">😈 The Specs Warrior</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>🌐 REAL-TIME BATTLE</h2>
-      <p>Play on <strong>different phones</strong>! One creates a room, shares the link, and you fight each other live! Mash your button during countdown to power up! 💪</p>
-    </div>
-
-    <div class="home-btn-row">
-      <button class="btn btn-gold" style="font-size:1.5rem;padding:14px 50px;width:100%;" onclick="showCreateFlow()">
-        ⚔️ CREATE BATTLE ROOM
-      </button>
-      <button class="btn btn-primary" style="width:100%;" onclick="showJoinFlow()">
-        🔗 JOIN WITH CODE
-      </button>
-      <button class="btn btn-ghost" onclick="startSolo()">
-        🤖 Solo Fight (vs Algorithm)
-      </button>
+<!-- ── HERO ── -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span>CONCEPTUAL SMART CITY DEMO · SRI LANKA</div>
+    <h1 class="hero-title">Kandy<br/>HyperGrid</h1>
+    <p class="hero-sub">Elevated Tunnel Transport Concept</p>
+    <p class="hero-desc">A visual demo of how homes, shops, offices, hospitals, schools, stations, and public buildings could be connected through an elevated smart pod network across Kandy.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('city-map').scrollIntoView({behavior:'smooth'})">Watch City Demo</button>
+      <button class="btn-outline" onclick="document.getElementById('infrastructure').scrollIntoView({behavior:'smooth'})">Explore Infrastructure</button>
     </div>
   </div>
-
-  <!-- ══ CREATE ══ -->
-  <div id="create-screen" class="screen">
-    <div class="card">
-      <h2>👤 PICK YOUR FIGHTER</h2>
-      <p>Who are you in this battle?</p>
-    </div>
-
-    <div class="char-pick-row" id="create-char-pick">
-      <div class="char-pick kasun-cp" onclick="pickChar('kasun','create')" id="pick-kasun-create">
-        <img src="img/kasun.png" alt="Kasun"/>
-        <div class="cpn" style="color:var(--ayya)">👑 KASUN AYYA</div>
-        <div class="cpl">The elder bro</div>
-      </div>
-      <div class="char-pick shavin-cp" onclick="pickChar('shavin','create')" id="pick-shavin-create">
-        <img src="img/shavin.png" alt="Shavin"/>
-        <div class="cpn" style="color:var(--malli)">SHAVIN MALLI 😈</div>
-        <div class="cpl">The younger bro</div>
-      </div>
-    </div>
-
-    <button class="btn btn-gold" id="create-go-btn" onclick="createRoom()" disabled style="width:280px;">
-      🚀 CREATE ROOM!
-    </button>
-    <button class="btn btn-ghost btn-sm" onclick="goHome()">← Back</button>
+  <div class="hero-minimap">
+    <canvas id="minimap-canvas"></canvas>
+    <div class="minimap-label">KANDY LIVE GRID</div>
   </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
 
-  <!-- ══ WAITING (host) ══ -->
-  <div id="waiting-screen" class="screen">
-    <div class="card">
-      <h2 id="wait-title">⏳ WAITING FOR OPPONENT...</h2>
-      <p id="wait-desc">Share this code or link with your brother!</p>
-    </div>
-
-    <div class="room-code-box">
-      <div class="rc-label">ROOM CODE</div>
-      <div class="rc-code" id="display-code">------</div>
-    </div>
-
-    <div class="share-link" id="share-link" onclick="copyLink()">
-      🔗 tap to copy link
-    </div>
-    <div class="copy-hint" id="copy-hint"></div>
-
-    <div class="spinner" id="wait-spinner"></div>
-    <button class="btn btn-ghost btn-sm" onclick="cancelRoom()">✕ Cancel</button>
-  </div>
-
-  <!-- ══ JOIN ══ -->
-  <div id="join-screen" class="screen">
-    <div class="card">
-      <h2>🔗 JOIN A BATTLE</h2>
-      <p>Enter the 6-digit room code from your brother!</p>
-    </div>
-
-    <div class="char-pick-row" id="join-char-pick">
-      <div class="char-pick kasun-cp" onclick="pickChar('kasun','join')" id="pick-kasun-join">
-        <img src="img/kasun.png" alt="Kasun"/>
-        <div class="cpn" style="color:var(--ayya)">👑 KASUN AYYA</div>
-        <div class="cpl">The elder bro</div>
+<!-- ── CONCEPT ── -->
+<section id="concept">
+  <div class="container">
+    <span class="section-tag reveal">What is this?</span>
+    <h2 class="section-title reveal">City-Scale Elevated<br/><span style="color:var(--cyan)">Pod Transport</span></h2>
+    <p class="section-desc reveal">Inspired by hyperloop principles, but reimagined for dense urban connectivity — not high-speed intercity travel. Pods run inside elevated transparent tubes above existing roads, connecting every key zone in Kandy.</p>
+    <div class="compare-grid">
+      <div class="compare-card reveal" style="--accent:#ef4444">
+        <div class="compare-icon">🚗</div>
+        <div class="compare-title">Current Roads</div>
+        <div class="compare-desc">Traffic congestion, narrow lanes, pollution, no priority for emergency vehicles.</div>
+        <div class="compare-tag" style="background:rgba(239,68,68,.1);color:#ef4444">CURRENT</div>
       </div>
-      <div class="char-pick shavin-cp" onclick="pickChar('shavin','join')" id="pick-shavin-join">
-        <img src="img/shavin.png" alt="Shavin"/>
-        <div class="cpn" style="color:var(--malli)">SHAVIN MALLI 😈</div>
-        <div class="cpl">The younger bro</div>
+      <div class="compare-card reveal" style="--accent:#f59e0b">
+        <div class="compare-icon">🚄</div>
+        <div class="compare-title">Hyperloop</div>
+        <div class="compare-desc">High-speed city-to-city travel. Long distances, vacuum tubes, very high cost per km.</div>
+        <div class="compare-tag" style="background:rgba(245,158,11,.1);color:#f59e0b">INSPIRATION</div>
+      </div>
+      <div class="compare-card reveal" style="--accent:#00f5ff">
+        <div class="compare-icon">⚡</div>
+        <div class="compare-title">Kandy HyperGrid</div>
+        <div class="compare-desc">City-scale pod network. Elevated above roads. Multiple stops. Smart routing. Clean energy.</div>
+        <div class="compare-tag" style="background:rgba(0,245,255,.1);color:#00f5ff">THIS CONCEPT</div>
+      </div>
+      <div class="compare-card reveal" style="--accent:#10b981">
+        <div class="compare-icon">🤖</div>
+        <div class="compare-title">Smart Integration</div>
+        <div class="compare-desc">AI scheduling, real-time routing, emergency priority, demand-based pod frequency.</div>
+        <div class="compare-tag" style="background:rgba(16,185,129,.1);color:#10b981">FEATURE</div>
       </div>
     </div>
-
-    <input class="code-input" id="join-code-input" maxlength="6" placeholder="CODE"
-           oninput="onCodeInput(this)" autocomplete="off" autocorrect="off" spellcheck="false"/>
-
-    <button class="btn btn-danger" id="join-go-btn" onclick="joinRoom()" disabled style="width:280px;">
-      ⚡ JOIN FIGHT!
-    </button>
-    <button class="btn btn-ghost btn-sm" onclick="goHome()">← Back</button>
-    <div id="join-error" style="color:var(--malli);font-size:.85rem;min-height:18px;"></div>
   </div>
+</section>
 
-  <!-- ══ LOBBY ══ -->
-  <div id="lobby-screen" class="screen">
-    <div class="card" style="padding:14px 20px;">
-      <h2>🏟️ BATTLE LOBBY</h2>
-      <p id="lobby-msg">Waiting for both players...</p>
+<!-- ── CITY MAP ── -->
+<section id="city-map">
+  <div class="container" style="max-width:1200px">
+    <span class="section-tag reveal">Interactive Demo</span>
+    <h2 class="section-title reveal">Kandy City <span style="color:var(--cyan)">Route Network</span></h2>
+    <p class="section-desc reveal">Click a route to see pods move through that corridor. All routes run simultaneously in real operation.</p>
+
+    <div class="route-selector" id="route-selector">
+      <button class="route-btn" data-route="all" onclick="selectRoute('all',this)">All Routes</button>
+      <button class="route-btn" data-route="residential" onclick="selectRoute('residential',this)">🏠 Residential</button>
+      <button class="route-btn" data-route="office" onclick="selectRoute('office',this)">🏛️ Office & Gov</button>
+      <button class="route-btn" data-route="hospital" onclick="selectRoute('hospital',this)">🏥 Hospital Emergency</button>
+      <button class="route-btn" data-route="market" onclick="selectRoute('market',this)">🛒 Market & Shops</button>
+      <button class="route-btn" data-route="tourist" onclick="selectRoute('tourist',this)">🏨 Tourist Route</button>
+      <button class="route-btn" data-route="school" onclick="selectRoute('school',this)">🎓 Schools</button>
+      <button class="route-btn" data-route="transit" onclick="selectRoute('transit',this)">🚉 Main Transit</button>
     </div>
 
-    <div class="lobby-players">
-      <div class="lobby-player kasun-lp" id="lobby-kasun">
-        <img src="img/kasun.png" alt="Kasun"/>
-        <div class="lpn">👑 KASUN AYYA</div>
-        <div class="lps waiting" id="kasun-ready-badge">Not ready</div>
+    <div id="city-canvas-wrap">
+      <canvas id="city-canvas"></canvas>
+    </div>
+
+    <div class="route-info" id="route-info"></div>
+  </div>
+</section>
+
+<!-- ── INFRASTRUCTURE ── -->
+<section id="infrastructure">
+  <div class="container">
+    <span class="section-tag reveal">How It's Built</span>
+    <h2 class="section-title reveal">Infrastructure <span style="color:var(--cyan)">Proposal</span></h2>
+    <p class="section-desc reveal">The system is designed to integrate with Kandy's existing urban fabric with minimum disruption.</p>
+    <div class="infra-grid">
+      <div class="infra-card reveal"><div class="infra-icon">🏗️</div><div class="infra-title">Elevated Tubes</div><div class="infra-desc">Transparent or semi-opaque tubes mounted on reinforced columns above road medians and edges.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🏛️</div><div class="infra-title">Support Columns</div><div class="infra-desc">Pylon-style columns spaced along road shoulders — no private land acquisition where roads exist.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🛗</div><div class="infra-title">Vertical Lift Stations</div><div class="infra-desc">Elevator and stairway access from ground level. Stations attached to buildings via skybridges.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🚨</div><div class="infra-title">Emergency Exits</div><div class="infra-desc">Safe exit platforms every defined interval. Manual evacuation walkways alongside main tube.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">☀️</div><div class="infra-title">Solar Canopy</div><div class="infra-desc">Solar panels integrated on tube tops and station roofs. Battery backup nodes at every station.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">📡</div><div class="infra-title">Smart Sensors</div><div class="infra-desc">Vibration, heat, structural load, crowd flow, pod location and emergency detection sensors.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🔇</div><div class="infra-title">Noise Reduction Shell</div><div class="infra-desc">Acoustic dampening on tube exterior. Pod speed limited in dense residential zones.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🌧️</div><div class="infra-title">Weather Protection</div><div class="infra-desc">Lightning arrestors, drainage channels, flood-resistant station design, rain sensor override.</div></div>
+      <div class="infra-card reveal"><div class="infra-icon">🔧</div><div class="infra-title">Maintenance Rail</div><div class="infra-desc">Inspection drone rail and hatches alongside tubes. Scheduled maintenance windows at night.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SAFETY ── -->
+<section id="safety">
+  <div class="container">
+    <span class="section-tag reveal">Risk Awareness</span>
+    <h2 class="section-title reveal">Safety & <span style="color:var(--red)">Hazard Planning</span></h2>
+    <p class="section-desc reveal">This concept takes real-world constraints seriously. Every design choice accounts for Kandy's unique geography, heritage, and urban density.</p>
+    <div class="safety-grid">
+      <div class="safety-item reveal"><div class="safety-item-icon">🏛️</div><div><div class="safety-item-title">Heritage Zones</div><div class="safety-item-desc">No elevated structures within restricted zones near the Temple of the Tooth. Routes re-planned around cultural corridors.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🏔️</div><div><div class="safety-item-title">Hilly Terrain</div><div class="safety-item-desc">Seismic and vibration monitoring for all columns. Soil stability assessment before any pylon placement.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🌊</div><div><div class="safety-item-title">Flood & Landslide</div><div class="safety-item-desc">Route planning avoids known landslide-prone corridors. Flood sensors trigger automatic pod hold.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🔥</div><div><div class="safety-item-title">Fire-Safe Stations</div><div class="safety-item-desc">Non-combustible materials, fire suppression systems, clear evacuation signage and emergency lighting.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🚪</div><div><div class="safety-item-title">Evacuation Platforms</div><div class="safety-item-desc">Rescue platforms accessible every 150m of tube. Manual access doors for emergency crew.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🏘️</div><div><div class="safety-item-title">Right-of-Way</div><div class="safety-item-desc">Routes use public road corridors first. Private land only with compensation and legal approval.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">⚡</div><div><div class="safety-item-title">Lightning Arrest</div><div class="safety-item-desc">Full lightning rod network across tube spans. Grounding systems at every column base.</div></div></div>
+      <div class="safety-item reveal"><div class="safety-item-icon">🤖</div><div><div class="safety-item-title">Inspection Drones</div><div class="safety-item-desc">Automated structural inspection drones run nightly checks. Alerts sent to control center.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTROL CENTER ── -->
+<section id="control">
+  <div class="container">
+    <span class="section-tag reveal">Live Operations</span>
+    <h2 class="section-title reveal">Control <span style="color:var(--cyan)">Command Center</span></h2>
+    <p class="section-desc reveal">A unified AI-powered command center monitors all routes, pods, passengers, energy, and alerts in real time.</p>
+    <div class="control-grid reveal">
+      <div>
+        <div class="metrics-row" style="margin-bottom:14px">
+          <div class="metric-card" style="--mcol:#00f5ff">
+            <div class="metric-label">Active Pods</div>
+            <div class="metric-value" id="m-pods">47</div>
+            <div class="metric-sub">across all routes</div>
+            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-pods" style="width:67%;background:var(--cyan)"></div></div>
+          </div>
+          <div class="metric-card" style="--mcol:#10b981">
+            <div class="metric-label">Routes Online</div>
+            <div class="metric-value" id="m-routes">7</div>
+            <div class="metric-sub">of 7 active</div>
+            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-routes" style="width:100%;background:var(--green)"></div></div>
+          </div>
+        </div>
+        <div class="metrics-row" style="margin-bottom:14px">
+          <div class="metric-card" style="--mcol:#f59e0b">
+            <div class="metric-label">Passenger Flow</div>
+            <div class="metric-value" id="m-pass">2,847</div>
+            <div class="metric-sub">today so far</div>
+            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-pass" style="width:72%;background:var(--gold)"></div></div>
+          </div>
+          <div class="metric-card" style="--mcol:#8b5cf6">
+            <div class="metric-label">Energy Level</div>
+            <div class="metric-value" id="m-energy">84<span style="font-size:1rem">%</span></div>
+            <div class="metric-sub">solar + grid</div>
+            <div class="metric-bar-wrap"><div class="metric-bar" id="mb-energy" style="width:84%;background:var(--purple)"></div></div>
+          </div>
+        </div>
+        <div class="cc-panel">
+          <div class="cc-panel-title">ROUTE STATUS</div>
+          <div class="route-status" id="route-status"></div>
+        </div>
       </div>
-      <div class="lobby-vs">⚔️</div>
-      <div class="lobby-player shavin-lp" id="lobby-shavin">
-        <img src="img/shavin.png" alt="Shavin"/>
-        <div class="lpn">SHAVIN MALLI 😈</div>
-        <div class="lps waiting" id="shavin-ready-badge">Not ready</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="cc-panel" style="flex:1">
+          <div class="cc-panel-title">SYSTEM ALERTS</div>
+          <div class="alert-list">
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span>All structural sensors nominal</span></div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span>No emergency routes activated</span></div>
+            <div class="alert-item warn" id="alert-demand"><div class="alert-dot" style="background:#f97316"></div><span id="alert-demand-text">High demand on Market Route</span></div>
+            <div class="alert-item info"><div class="alert-dot" style="background:#3b82f6"></div><span>AI rerouting 3 pods via Transit Loop</span></div>
+            <div class="alert-item ok"><div class="alert-dot" style="background:#10b981"></div><span>Solar panels at 91% efficiency</span></div>
+            <div class="alert-item info" id="alert-maint"><div class="alert-dot" style="background:#3b82f6"></div><span>Night maintenance scheduled: Zone B</span></div>
+          </div>
+        </div>
+        <div class="cc-panel">
+          <div class="cc-panel-title">AI OPTIMIZATION</div>
+          <div style="font-size:.78rem;color:var(--dim);line-height:1.8">
+            ▸ Rush hour prediction: <span style="color:var(--gold)">18:30 surge expected</span><br/>
+            ▸ Adding <span id="ai-pods" style="color:var(--cyan)">4</span> pods to School Route<br/>
+            ▸ Energy save mode: <span style="color:var(--green)">Active on off-peak routes</span><br/>
+            ▸ Weather alert: <span id="ai-weather" style="color:var(--orange)">Rain sensors monitoring</span>
+          </div>
+        </div>
       </div>
     </div>
-
-    <button class="btn-fight" id="ready-btn" onclick="pressReady()">
-      ✅ READY UP!
-    </button>
-    <button class="btn btn-ghost btn-sm" onclick="disconnectAndHome()">← Leave</button>
   </div>
+</section>
 
-  <!-- ══ FIGHT ══ -->
-  <div id="fight-screen" class="screen">
-    <div class="fight-stage" id="fight-stage">
-      <div class="fighter kasun-f" id="kasun-fighter">
-        <div class="hp-lbl">HP</div>
-        <div class="hp-wrap"><div class="hp-bar" id="kasun-hp" style="width:100%"></div></div>
-        <div class="avatar-ring"><img src="img/kasun.png" alt="Kasun"/></div>
-        <div class="fighter-name">👑 KASUN AYYA</div>
-        <div class="me-badge" id="kasun-me-badge" style="display:none">YOU</div>
+<!-- ── TIMELINE ── -->
+<section id="timeline">
+  <div class="container">
+    <span class="section-tag reveal">Day in the Grid</span>
+    <h2 class="section-title reveal">A Day Running on <span style="color:var(--cyan)">HyperGrid</span></h2>
+    <p class="section-desc reveal">From morning rush to evening return — how the network adapts throughout the day.</p>
+    <div class="tl-container">
+      <div class="tl-line"></div>
+      <div class="tl-items">
+        <div class="tl-item">
+          <div class="tl-content"><div class="tl-time">06:00 AM</div><div class="tl-title">Morning Rush Begins</div><div class="tl-desc">Pod frequency doubles on Residential routes. AI pre-positions pods at hill stations before peak demand.</div></div>
+          <div class="tl-node">🌅</div>
+          <div class="tl-spacer"></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-spacer"></div>
+          <div class="tl-node">🏠</div>
+          <div class="tl-content"><div class="tl-time">07:15 AM</div><div class="tl-title">Residential Zones Activate</div><div class="tl-desc">Houses connect to their nearest station. Pods load passengers and depart every 90 seconds.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-content"><div class="tl-time">08:00 AM</div><div class="tl-title">Pod Split — Work & School</div><div class="tl-desc">At central junction pods branch: some route toward government offices, others toward school zones and university.</div></div>
+          <div class="tl-node">🔀</div>
+          <div class="tl-spacer"></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-spacer"></div>
+          <div class="tl-node">🚨</div>
+          <div class="tl-content"><div class="tl-time">09:30 AM</div><div class="tl-title">Emergency Priority Activated</div><div class="tl-desc">Hospital route turns orange. Medical pod gets clear corridor — all other pods hold at nearest station. Response time: under 4 min.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-content"><div class="tl-time">11:00 AM</div><div class="tl-title">Tourist Route Highlights</div><div class="tl-desc">Purple tourist pods move through scenic elevated paths near Kandy Lake and cultural zones, with announcements in 3 languages.</div></div>
+          <div class="tl-node">🏛️</div>
+          <div class="tl-spacer"></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-spacer"></div>
+          <div class="tl-node">🌃</div>
+          <div class="tl-content"><div class="tl-time">06:00 PM</div><div class="tl-title">Evening Return Flow</div><div class="tl-desc">Flow reverses. AI predicts demand surges. Extra pods deployed. Market route stays active until 10 PM.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-content"><div class="tl-time">11:00 PM</div><div class="tl-title">Night Mode & Maintenance</div><div class="tl-desc">Reduced pod frequency. Inspection drones launch. Battery systems charge. Control center runs diagnostics for next day.</div></div>
+          <div class="tl-node">🔧</div>
+          <div class="tl-spacer"></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-spacer"></div>
+          <div class="tl-node">⚡</div>
+          <div class="tl-content"><div class="tl-time">Solar Hours</div><div class="tl-title">Energy Optimization</div><div class="tl-desc">Peak solar generation runs 9AM–3PM. Excess energy feeds back to grid. Tube lighting auto-dims in daylight hours.</div></div>
+        </div>
       </div>
-      <div id="impact">💥</div>
-      <div class="fighter shavin-f" id="shavin-fighter">
-        <div class="hp-lbl">HP</div>
-        <div class="hp-wrap"><div class="hp-bar" id="shavin-hp" style="width:100%"></div></div>
-        <div class="avatar-ring"><img src="img/shavin.png" alt="Shavin"/></div>
-        <div class="fighter-name">SHAVIN MALLI 😈</div>
-        <div class="me-badge" id="shavin-me-badge" style="display:none">YOU</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CITY FLOW BATTLE ── -->
+<section id="battle">
+  <div class="container">
+    <span class="section-tag reveal">City Flow Battle</span>
+    <h2 class="section-title reveal">HyperGrid vs <span style="color:var(--red)">City Problems</span></h2>
+    <p class="section-desc reveal">Every city has enemies. Here's how the HyperGrid handles them.</p>
+    <div class="battle-grid reveal">
+      <div class="battle-side">
+        <div class="battle-card villain"><div class="battle-icon">🚗</div><div><div class="battle-label">Traffic Jam Monster</div><div class="battle-result">Gridlocks entire city center at 8AM</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🌧️</div><div><div class="battle-label">Rain Delay</div><div class="battle-result">Floods narrow roads, delays buses 40min</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚧</div><div><div class="battle-label">Road Block</div><div class="battle-result">One blocked road cripples entire zone</div><div class="battle-badge badge-warn">THREAT: MED</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">😤</div><div><div class="battle-label">Rush Hour Crowd</div><div class="battle-result">Bus overloaded, school kids left behind</div><div class="battle-badge badge-warn">THREAT: HIGH</div></div></div>
+        <div class="battle-card villain"><div class="battle-icon">🚑</div><div><div class="battle-label">Emergency Blocked</div><div class="battle-result">Ambulance stuck behind traffic 12min</div><div class="battle-badge badge-warn">THREAT: CRITICAL</div></div></div>
+      </div>
+      <div class="vs-col">
+        <div class="vs-line"></div>
+        <div class="vs-text">⚡</div>
+        <div style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:2px;text-align:center;writing-mode:vertical-rl">HyperGrid Wins</div>
+        <div class="vs-text">⚡</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="battle-side">
+        <div class="battle-card hero-c"><div class="battle-icon">⚡</div><div><div class="battle-label">Traffic Jam Dodged</div><div class="battle-result">Pods fly above gridlock. Zero impact.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🌊</div><div><div class="battle-label">Rain Mode Active</div><div class="battle-result">Enclosed tubes unaffected. On-time.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🔀</div><div><div class="battle-label">Alt Route Deployed</div><div class="battle-result">AI reroutes pods in 8 seconds flat.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🤖</div><div><div class="battle-label">School Rush Balanced</div><div class="battle-result">AI adds 3 pods to school route. Done.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
+        <div class="battle-card hero-c"><div class="battle-icon">🚨</div><div><div class="battle-label">Emergency Route Cleared</div><div class="battle-result">Dedicated pod priority. Arrival: 3m 20s.</div><div class="battle-badge badge-ok">RESOLVED ✅</div></div></div>
       </div>
     </div>
-
-    <div id="commentary">Ready for the battle of the century! 🥊</div>
-
-    <div id="taunt-bar">
-      <div class="taunt-hint" style="font-size:.72rem;color:#555;width:100%;text-align:center;">Send a taunt to your opponent 👇</div>
-      <button class="taunt-btn" onclick="sendTaunt('😂 HAHA!')">😂</button>
-      <button class="taunt-btn" onclick="sendTaunt('💀 YOU\'RE DEAD!')">💀</button>
-      <button class="taunt-btn" onclick="sendTaunt('👑 I\'M THE KING!')">👑</button>
-      <button class="taunt-btn" onclick="sendTaunt('🔥 TOO EASY!')">🔥</button>
-      <button class="taunt-btn" onclick="sendTaunt('🙏 PLEASE STOP!')">🙏</button>
-      <button class="taunt-btn" onclick="sendTaunt('😤 IS THAT ALL?!')">😤</button>
-      <button class="taunt-btn" onclick="sendTaunt('🤣 LOL!')">🤣</button>
-    </div>
-
-    <div class="round-dots">
-      <div class="r-dot cur" id="fdot-0"></div>
-      <div class="r-dot" id="fdot-1"></div>
-      <div class="r-dot" id="fdot-2"></div>
-    </div>
-
-    <button class="btn-fight" id="fight-btn" onclick="initiateFight()">🥊 FIGHT!</button>
   </div>
+</section>
 
-  <!-- ══ RESULT ══ -->
-  <div id="result-screen" class="screen">
-    <img id="winner-photo" src="" class="winner-photo" alt="winner"/>
-    <div class="winner-title" id="winner-title"></div>
-    <div class="winner-roast" id="winner-roast"></div>
-    <div class="final-row">
-      <div class="fc fk"><div class="fcn">👑 KASUN</div><div class="fcp" id="final-kasun">0</div></div>
-      <div class="fc fs"><div class="fcn">SHAVIN 😈</div><div class="fcp" id="final-shavin">0</div></div>
+<!-- ── BENEFITS & CHALLENGES ── -->
+<section id="benefits">
+  <div class="container">
+    <span class="section-tag reveal">Honest Assessment</span>
+    <h2 class="section-title reveal">Benefits & <span style="color:var(--orange)">Challenges</span></h2>
+    <div class="two-col">
+      <div class="list-card benefits-card reveal">
+        <div class="list-card-title" style="color:var(--green)">✅ POTENTIAL BENEFITS</div>
+        <ul class="check-list">
+          <li>Reduced road congestion in city center</li>
+          <li>Faster connection between all city zones</li>
+          <li>Emergency priority routes save lives</li>
+          <li>Cleaner, quieter city movement</li>
+          <li>Better integration with rail & bus</li>
+          <li>Tourism-friendly routes near landmarks</li>
+          <li>Less pressure on narrow Kandy roads</li>
+          <li>Real-time city data and smart routing</li>
+          <li>Renewable energy powered operation</li>
+          <li>Barrier-free access with lifts and ramps</li>
+        </ul>
+      </div>
+      <div class="list-card challenges-card reveal">
+        <div class="list-card-title" style="color:var(--orange)">⚠️ REAL CHALLENGES</div>
+        <ul class="check-list">
+          <li>Extremely high construction cost</li>
+          <li>Complex regulatory and government approvals</li>
+          <li>Land and right-of-way legal issues</li>
+          <li>Ongoing maintenance complexity</li>
+          <li>Safety certification requirements</li>
+          <li>Heritage and environmental restrictions</li>
+          <li>Evacuation planning in dense city</li>
+          <li>Public acceptance and trust</li>
+          <li>Engineering challenges in hilly terrain</li>
+          <li>Seismic resilience design requirements</li>
+        </ul>
+      </div>
     </div>
-    <button class="btn btn-gold" id="rematch-btn" onclick="requestRematch()" style="width:240px;">🔄 REMATCH!</button>
-    <button class="btn btn-ghost" onclick="disconnectAndHome()">🏠 Leave</button>
   </div>
+</section>
 
-</div><!-- /arena -->
-
-<div id="announcer"></div>
-
-<!-- COUNTDOWN + MASH OVERLAY -->
-<div id="countdown-overlay">
-  <div id="countdown-num">3</div>
-  <div class="cd-tap-wrap" id="cd-tap-wrap" style="display:none">
-    <div class="cd-tap-label">⚡ MASH FOR POWER! ⚡</div>
-    <div class="cd-tap-count" id="cd-tap-count">0</div>
-    <button class="cd-tap-btn" id="cd-tap-btn" ontouchstart="cdTap(event)" onclick="cdTap(event)">
-      💥 TAP! TAP! TAP!
-    </button>
-    <div class="cd-tap-label" id="cd-tap-label" style="color:#666">More taps = more power!</div>
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="container">
+    <h2 class="cta-title reveal">Experience the<br/><span style="color:var(--cyan)">Future City Flow</span></h2>
+    <p class="cta-desc reveal">This is a concept — a spark. Real cities are built from bold ideas, careful engineering, and public will. What could Kandy become?</p>
+    <button class="btn-replay reveal" onclick="replayDemo()">⟳ Replay City Demo</button>
   </div>
-</div>
+</section>
 
-<footer>Made with ❤️ by <span>Yehen</span> for the brothers 🥊</footer>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">⚡ KANDY HYPERGRID</div>
+  <div class="footer-disc">⚠️ This is a conceptual smart-city transport visualization. It is not an approved engineering, government, or construction proposal. All data shown is simulated for demonstration purposes only.</div>
+</footer>
 
-<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 // ═══════════════════════════════════════════════
-//  STATE
+//  ROUTE DATA
 // ═══════════════════════════════════════════════
-const S = {
-  mode: null,           // 'host' | 'guest' | 'solo'
-  myChar: null,         // 'kasun' | 'shavin'
-  roomCode: null,
-  peer: null,
-  conn: null,
-  isConnected: false,
-  opponentReady: false,
-  myReady: false,
-  kasunScore: 0,
-  shavinScore: 0,
-  currentRound: 0,
-  roundWinners: [null,null,null],
-  fightInProgress: false,
-  isSolo: false,
-  myTaps: 0,
-  opponentTaps: 0,
-  cdInterval: null,
+// Base canvas: 1000 × 560 internal coords
+const BASE_W = 1000, BASE_H = 560;
+
+const ROUTES = {
+  all: { label: 'All Routes', color: '#ffffff' },
+  residential: {
+    label: 'Residential Loop', color: '#10b981',
+    points: [[95,145],[170,210],[255,270],[340,310],[430,295]],
+    pods: 6, speed: 0.0014
+  },
+  office: {
+    label: 'Office & Government', color: '#3b82f6',
+    points: [[270,175],[340,220],[400,265],[430,295],[510,345]],
+    pods: 5, speed: 0.0016
+  },
+  hospital: {
+    label: 'Hospital Emergency', color: '#ef4444',
+    points: [[320,490],[390,420],[430,295],[620,280]],
+    pods: 4, speed: 0.0024
+  },
+  market: {
+    label: 'Market & Shops', color: '#f59e0b',
+    points: [[150,450],[280,390],[430,295],[510,345],[620,400]],
+    pods: 5, speed: 0.0013
+  },
+  tourist: {
+    label: 'Tourist Route', color: '#8b5cf6',
+    points: [[565,175],[480,225],[430,295],[490,355],[615,415]],
+    pods: 4, speed: 0.0012
+  },
+  school: {
+    label: 'School & University', color: '#06b6d4',
+    points: [[740,140],[605,210],[490,260],[430,295],[215,340]],
+    pods: 5, speed: 0.0015
+  },
+  transit: {
+    label: 'Main Transit', color: '#a78bfa',
+    points: [[150,450],[320,490],[430,295],[565,175],[740,140]],
+    pods: 6, speed: 0.0017
+  }
 };
 
-const TAUNTS_RECEIVED = [];
+const LANDMARKS = [
+  { name: 'Kandy Lake', x: 430, y: 295, type: 'lake', icon: '💧', color: '#1d4ed8' },
+  { name: 'Temple of Tooth', x: 440, y: 225, type: 'temple', icon: '🏛️', color: '#f59e0b' },
+  { name: 'Railway Station', x: 150, y: 450, type: 'station', icon: '🚉', color: '#6366f1' },
+  { name: 'Bus Stand', x: 320, y: 490, type: 'transit', icon: '🚌', color: '#6366f1' },
+  { name: 'Kandy Hospital', x: 620, y: 280, type: 'hospital', icon: '🏥', color: '#ef4444' },
+  { name: 'Market Zone', x: 620, y: 400, type: 'market', icon: '🛒', color: '#f59e0b' },
+  { name: 'University', x: 740, y: 140, type: 'school', icon: '🎓', color: '#06b6d4' },
+  { name: 'Schools Zone', x: 215, y: 340, type: 'school', icon: '🏫', color: '#06b6d4' },
+  { name: 'Res. Hills N', x: 95, y: 145, type: 'residential', icon: '🏠', color: '#10b981' },
+  { name: 'Tourist Hotels', x: 565, y: 175, type: 'tourist', icon: '🏨', color: '#8b5cf6' },
+  { name: 'Gov. Complex', x: 270, y: 175, type: 'government', icon: '🏛', color: '#3b82f6' },
+  { name: 'Commercial', x: 510, y: 345, type: 'commercial', icon: '🏢', color: '#f97316' },
+];
 
 // ═══════════════════════════════════════════════
-//  UTILS
+//  POD SYSTEM
 // ═══════════════════════════════════════════════
-const $ = id => document.getElementById(id);
-const sleep = ms => new Promise(r=>setTimeout(r,ms));
-const rand = arr => arr[Math.floor(Math.random()*arr.length)];
+let pods = [];
+let activeRoute = 'all';
 
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  $(id).classList.add('active');
-}
-function announce(msg, dur=1700){
-  const el=$('announcer');
-  el.textContent=msg;el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),dur);
-}
-function setCommentary(msg,color='#fff'){
-  $('commentary').textContent=msg;
-  $('commentary').style.color=color;
-}
-function showImpact(e){
-  const el=$('impact');el.textContent=e;el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),480);
-}
-function confetti(){
-  const cols=['#6c63ff','#ff4757','#ffd700','#22c55e','#f97316','#ec4899','#06b6d4'];
-  for(let i=0;i<90;i++){
-    const el=document.createElement('div');
-    el.className='conf';
-    el.style.cssText=`left:${Math.random()*100}vw;width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;background:${rand(cols)};animation-duration:${1.5+Math.random()*2.5}s;animation-delay:${Math.random()*.7}s;border-radius:${Math.random()>.5?'50%':'2px'}`;
-    document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
-  }
-}
-function addAnim(id,cls,dur=550){
-  return new Promise(resolve=>{
-    const el=$(id);
-    el.classList.remove(cls);void el.offsetWidth;
-    el.classList.add(cls);
-    setTimeout(()=>{el.classList.remove(cls);resolve();},dur);
-  });
-}
-function setHP(who,pct){$(who+'-hp').style.width=Math.max(0,pct)+'%';}
-function updateScore(){
-  $('kasun-score').textContent=S.kasunScore;
-  $('shavin-score').textContent=S.shavinScore;
-  $('final-kasun').textContent=S.kasunScore;
-  $('final-shavin').textContent=S.shavinScore;
-}
-function updateDots(){
-  for(let i=0;i<3;i++){
-    const d=$(`fdot-${i}`);if(!d)return;
-    d.className='r-dot';
-    if(S.roundWinners[i]==='kasun')d.classList.add('w-kasun');
-    else if(S.roundWinners[i]==='shavin')d.classList.add('w-shavin');
-    else if(S.roundWinners[i]==='tie')d.classList.add('w-tie');
-    if(i===S.currentRound&&S.roundWinners[i]===null)d.classList.add('cur');
-  }
-}
-function setConnStatus(state,text){
-  $('conn-bar').classList.add('show');
-  $('conn-dot').className='';
-  $('conn-dot').classList.add(state);
-  $('conn-text').textContent=text;
-}
-function hideConnBar(){$('conn-bar').classList.remove('show');}
-
-// ═══════════════════════════════════════════════
-//  NAVIGATION
-// ═══════════════════════════════════════════════
-function goHome(){
-  destroyPeer();
-  hideConnBar();
-  resetGameState();
-  $('create-screen').querySelectorAll('.char-pick').forEach(p=>p.classList.remove('selected-kasun','selected-shavin'));
-  $('join-screen').querySelectorAll('.char-pick').forEach(p=>p.classList.remove('selected-kasun','selected-shavin'));
-  $('create-go-btn').disabled=true;
-  $('join-go-btn').disabled=true;
-  $('join-code-input').value='';
-  $('join-error').textContent='';
-  showScreen('home-screen');
-}
-function disconnectAndHome(){ goHome(); }
-function cancelRoom(){ goHome(); }
-
-// character pick
-function pickChar(char, flow){
-  S.myChar = char;
-  const prefix = `pick-`;
-  $(`${prefix}kasun-${flow}`).classList.remove('selected-kasun','selected-shavin');
-  $(`${prefix}shavin-${flow}`).classList.remove('selected-kasun','selected-shavin');
-  $(`${prefix}${char}-${flow}`).classList.add(`selected-${char}`);
-  if(flow==='create') $('create-go-btn').disabled=false;
-  if(flow==='join') checkJoinReady();
-}
-function checkJoinReady(){
-  const code=$('join-code-input').value.trim();
-  $('join-go-btn').disabled=!(S.myChar && code.length===6);
-}
-function onCodeInput(el){
-  el.value=el.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
-  checkJoinReady();
-}
-
-function showCreateFlow(){ S.myChar=null; showScreen('create-screen'); }
-function showJoinFlow(){
-  S.myChar=null;
-  const urlCode=new URLSearchParams(location.search).get('room');
-  if(urlCode){
-    $('join-code-input').value=urlCode.toUpperCase();
-    // auto-pick Shavin if host likely picked Kasun (can be overridden)
-    pickChar('shavin','join');
-    checkJoinReady();
-  }
-  showScreen('join-screen');
-}
-
-// ═══════════════════════════════════════════════
-//  ROOM CREATION (HOST)
-// ═══════════════════════════════════════════════
-function createRoom(){
-  S.mode='host';
-  const code=Math.random().toString(36).substr(2,6).toUpperCase();
-  S.roomCode=code;
-  const peerId='aymg-'+code.toLowerCase();
-
-  showScreen('waiting-screen');
-  $('display-code').textContent=code;
-  const link=location.origin+location.pathname+'?room='+code;
-  $('share-link').textContent='🔗 '+link;
-  $('wait-title').textContent='⏳ WAITING FOR OPPONENT...';
-  setConnStatus('waiting','Waiting for opponent to join...');
-
-  // show me badge
-  $(`${S.myChar}-me-badge`).style.display='block';
-
-  destroyPeer();
-  S.peer = new Peer(peerId);
-  S.peer.on('open', ()=>{
-    console.log('Host peer open:', peerId);
-  });
-  S.peer.on('error', e=>{
-    if(e.type==='unavailable-id'){
-      // code collision — try new code
-      destroyPeer();
-      createRoom();
-    } else {
-      setConnStatus('error','Connection error. Try again.');
-      $('wait-title').textContent='❌ ERROR';
-    }
-  });
-  S.peer.on('connection', conn=>{
-    S.conn=conn;
-    setupConn(conn);
-    conn.on('open', ()=>{
-      S.isConnected=true;
-      setConnStatus('connected','🟢 Opponent connected!');
-      // send welcome
-      send({t:'welcome', hostChar:S.myChar, code:S.roomCode});
-      enterLobby();
-    });
-  });
-}
-
-function copyLink(){
-  const code=S.roomCode;
-  const link=location.origin+location.pathname+'?room='+code;
-  navigator.clipboard.writeText(link).then(()=>{
-    $('copy-hint').textContent='✅ Copied!';
-    setTimeout(()=>$('copy-hint').textContent='',2000);
-  }).catch(()=>{
-    $('copy-hint').textContent='Copy manually: ?room='+code;
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  JOINING (GUEST)
-// ═══════════════════════════════════════════════
-function joinRoom(){
-  const code=$('join-code-input').value.trim().toUpperCase();
-  if(code.length!==6){$('join-error').textContent='Enter full 6-digit code';return;}
-  S.mode='guest';S.roomCode=code;
-  const peerId='aymg-'+code.toLowerCase();
-  $('join-error').textContent='';
-
-  setConnStatus('waiting','Connecting to room '+code+'...');
-  $(`${S.myChar}-me-badge`).style.display='block';
-
-  destroyPeer();
-  S.peer=new Peer();
-  S.peer.on('open', ()=>{
-    S.conn=S.peer.connect(peerId,{reliable:true});
-    setupConn(S.conn);
-    S.conn.on('open',()=>{
-      S.isConnected=true;
-      setConnStatus('connected','🟢 Connected!');
-      send({t:'guest_joined', guestChar:S.myChar});
-    });
-    S.conn.on('error',()=>{
-      $('join-error').textContent='Could not connect. Check code and try again.';
-      setConnStatus('error','Connection failed');
-    });
-  });
-  S.peer.on('error',e=>{
-    $('join-error').textContent='Error: '+e.type+'. Try again.';
-    setConnStatus('error','Error');
-  });
-}
-
-// ═══════════════════════════════════════════════
-//  PEER MESSAGING
-// ═══════════════════════════════════════════════
-function send(data){
-  if(S.conn && S.conn.open) S.conn.send(JSON.stringify(data));
-}
-function setupConn(conn){
-  conn.on('data', raw=>{
-    try{ handleMsg(JSON.parse(raw)); }catch(e){}
-  });
-  conn.on('close',()=>{
-    S.isConnected=false;
-    setConnStatus('error','⚠️ Opponent disconnected');
-    if($('fight-screen').classList.contains('active')){
-      setCommentary('⚠️ Opponent disconnected... 😢','#ff4757');
+function initPods() {
+  pods = [];
+  Object.entries(ROUTES).forEach(([key, r]) => {
+    if (key === 'all') return;
+    const count = r.pods;
+    for (let i = 0; i < count; i++) {
+      pods.push({ routeKey: key, t: i / count, color: r.color, speed: r.speed });
     }
   });
 }
 
-function handleMsg(msg){
-  switch(msg.t){
-    case 'welcome':
-      // host told us their char; we're the guest
-      enterLobby();
-      break;
-    case 'guest_joined':
-      // host receives this
-      break;
-    case 'ready':
-      S.opponentReady=true;
-      markReady(msg.char);
-      checkBothReady();
-      break;
-    case 'fight_start':
-      // guest receives fight params from host
-      startFightAnimation(msg.winner, msg.kasunTaps, msg.shavinTaps);
-      break;
-    case 'taunt':
-      showReceivedTaunt(msg.text);
-      break;
-    case 'rematch':
-      handleRematch();
-      break;
-    case 'tap_update':
-      // live tap update during countdown
-      if(msg.char==='kasun') S.opponentTaps = (msg.char!==S.myChar) ? msg.count : S.opponentTaps;
-      if(msg.char==='shavin') S.opponentTaps = (msg.char!==S.myChar) ? msg.count : S.opponentTaps;
-      // update opponent display
-      updateCdTapDisplay();
-      break;
+function getPodPos(pod) {
+  const pts = ROUTES[pod.routeKey].points;
+  const total = pts.length - 1;
+  const segT = pod.t * total;
+  const si = Math.floor(segT);
+  const lt = segT - si;
+  const p1 = pts[Math.min(si, total - 1)];
+  const p2 = pts[Math.min(si + 1, total)];
+  return [p1[0] + (p2[0] - p1[0]) * lt, p1[1] + (p2[1] - p1[1]) * lt];
+}
+
+function getPodAngle(pod) {
+  const pts = ROUTES[pod.routeKey].points;
+  const total = pts.length - 1;
+  const segT = pod.t * total;
+  const si = Math.min(Math.floor(segT), total - 1);
+  const p1 = pts[si], p2 = pts[si + 1];
+  return Math.atan2(p2[1] - p1[1], p2[0] - p1[0]);
+}
+
+// ═══════════════════════════════════════════════
+//  HERO CANVAS
+// ═══════════════════════════════════════════════
+const heroCanvas = document.getElementById('hero-canvas');
+const hCtx = heroCanvas.getContext('2d');
+let heroW, heroH, heroT = 0;
+
+function resizeHero() {
+  heroW = heroCanvas.width = heroCanvas.offsetWidth;
+  heroH = heroCanvas.height = heroCanvas.offsetHeight;
+}
+
+function drawHero() {
+  heroT += 0.008;
+  hCtx.clearRect(0, 0, heroW, heroH);
+
+  // Grid
+  const gSize = 60;
+  hCtx.strokeStyle = 'rgba(0,245,255,0.04)';
+  hCtx.lineWidth = 1;
+  for (let x = 0; x < heroW; x += gSize) {
+    hCtx.beginPath(); hCtx.moveTo(x, 0); hCtx.lineTo(x, heroH); hCtx.stroke();
   }
+  for (let y = 0; y < heroH; y += gSize) {
+    hCtx.beginPath(); hCtx.moveTo(0, y); hCtx.lineTo(heroW, y); hCtx.stroke();
+  }
+
+  // Scanning line
+  const sy = (heroT * 80) % heroH;
+  const sg = hCtx.createLinearGradient(0, sy - 30, 0, sy + 30);
+  sg.addColorStop(0, 'transparent');
+  sg.addColorStop(0.5, 'rgba(0,245,255,0.06)');
+  sg.addColorStop(1, 'transparent');
+  hCtx.fillStyle = sg;
+  hCtx.fillRect(0, sy - 30, heroW, 60);
+
+  // Tube network silhouette
+  const heroRoutes = [
+    { pts: [[0.1*heroW,0.6*heroH],[0.3*heroW,0.45*heroH],[0.5*heroW,0.5*heroH]], col: '#00f5ff', alpha: 0.15 },
+    { pts: [[0.5*heroW,0.5*heroH],[0.7*heroW,0.35*heroH],[heroW,0.4*heroH]], col: '#7c3aed', alpha: 0.12 },
+    { pts: [[0.2*heroW,0.8*heroH],[0.5*heroW,0.5*heroH],[0.8*heroW,0.3*heroH]], col: '#3b82f6', alpha: 0.1 },
+    { pts: [[0.4*heroW,0.9*heroH],[0.5*heroW,0.5*heroH],[0.65*heroW,0.2*heroH]], col: '#10b981', alpha: 0.1 },
+  ];
+
+  heroRoutes.forEach(r => {
+    hCtx.save();
+    hCtx.shadowBlur = 20;
+    hCtx.shadowColor = r.col;
+    hCtx.strokeStyle = r.col.replace(')', `,${r.alpha})`).replace('rgb', 'rgba').replace('#', 'rgba(').replace(')', '');
+    // fallback — just use fixed rgba
+    hCtx.strokeStyle = r.col + '33';
+    hCtx.lineWidth = 2;
+    hCtx.beginPath();
+    hCtx.moveTo(r.pts[0][0], r.pts[0][1]);
+    r.pts.slice(1).forEach(p => hCtx.lineTo(p[0], p[1]));
+    hCtx.stroke();
+    hCtx.restore();
+
+    // Pod on this route
+    const progress = (heroT * 0.3 + r.alpha * 10) % 1;
+    const total = r.pts.length - 1;
+    const segT = progress * total;
+    const si = Math.min(Math.floor(segT), total - 1);
+    const lt = segT - si;
+    const px = r.pts[si][0] + (r.pts[si+1][0] - r.pts[si][0]) * lt;
+    const py = r.pts[si][1] + (r.pts[si+1][1] - r.pts[si][1]) * lt;
+
+    hCtx.save();
+    hCtx.shadowBlur = 16;
+    hCtx.shadowColor = r.col;
+    hCtx.fillStyle = '#fff';
+    hCtx.beginPath();
+    hCtx.ellipse(px, py, 5, 3, 0, 0, Math.PI * 2);
+    hCtx.fill();
+    hCtx.restore();
+  });
+
+  // Pulsing nodes
+  const nodes = [[0.3*heroW,0.45*heroH],[0.5*heroW,0.5*heroH],[0.7*heroW,0.35*heroH]];
+  nodes.forEach((n, i) => {
+    const pulse = Math.sin(heroT * 2 + i * 1.5) * 0.5 + 0.5;
+    hCtx.save();
+    hCtx.strokeStyle = `rgba(0,245,255,${0.2 + pulse * 0.3})`;
+    hCtx.lineWidth = 1;
+    hCtx.beginPath();
+    hCtx.arc(n[0], n[1], 8 + pulse * 8, 0, Math.PI * 2);
+    hCtx.stroke();
+    hCtx.restore();
+  });
+
+  requestAnimationFrame(drawHero);
 }
 
 // ═══════════════════════════════════════════════
-//  LOBBY
+//  CITY MAP CANVAS
 // ═══════════════════════════════════════════════
-function enterLobby(){
-  resetFighters();
-  resetGameState();
-  updateScore();updateDots();
-  showScreen('lobby-screen');
-  $('lobby-msg').textContent='Both players connected! Press Ready to fight!';
-  // highlight connected players
-  $('lobby-kasun').classList.add('connected');
-  $('lobby-shavin').classList.add('connected');
-  $('kasun-ready-badge').textContent='Not ready';
-  $('kasun-ready-badge').className='lps waiting';
-  $('shavin-ready-badge').textContent='Not ready';
-  $('shavin-ready-badge').className='lps waiting';
-  $('ready-btn').textContent='✅ READY UP!';
-  $('ready-btn').disabled=false;
+const cityCanvas = document.getElementById('city-canvas');
+const cCtx = cityCanvas.getContext('2d');
+let cW, cH, scX, scY, cityT = 0;
+
+function resizeCity() {
+  const wrap = document.getElementById('city-canvas-wrap');
+  cW = cityCanvas.width = wrap.offsetWidth;
+  cH = cityCanvas.height = Math.min(cW * 0.58, 580);
+  scX = cW / BASE_W;
+  scY = cH / BASE_H;
 }
 
-function pressReady(){
-  S.myReady=true;
-  markReady(S.myChar);
-  send({t:'ready', char:S.myChar});
-  $('ready-btn').disabled=true;
-  $('ready-btn').textContent='Waiting for opponent...';
-  checkBothReady();
+function cx(x) { return x * scX; }
+function cy(y) { return y * scY; }
+
+function drawTube(pts, color, alpha, lineW, glow) {
+  if (!pts || pts.length < 2) return;
+  cCtx.save();
+  cCtx.shadowBlur = glow ? 18 : 0;
+  cCtx.shadowColor = color;
+  cCtx.strokeStyle = hexAlpha(color, alpha);
+  cCtx.lineWidth = lineW;
+  cCtx.lineCap = 'round';
+  cCtx.lineJoin = 'round';
+  cCtx.beginPath();
+  cCtx.moveTo(cx(pts[0][0]), cy(pts[0][1]));
+  pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+  cCtx.stroke();
+
+  // Highlight on top
+  if (glow) {
+    cCtx.shadowBlur = 0;
+    cCtx.strokeStyle = hexAlpha('#ffffff', alpha * 0.25);
+    cCtx.lineWidth = 1;
+    cCtx.beginPath();
+    cCtx.moveTo(cx(pts[0][0]), cy(pts[0][1] - 1.5));
+    pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1] - 1.5)));
+    cCtx.stroke();
+  }
+  cCtx.restore();
 }
 
-function markReady(char){
-  const badge=$(char+'-ready-badge');
-  badge.textContent='✅ READY!';
-  badge.className='lps ready';
+function hexAlpha(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
-function checkBothReady(){
-  if(S.myReady && S.opponentReady){
-    setTimeout(()=>{
-      showScreen('fight-screen');
-      $('taunt-bar').classList.add('show');
-      $('fight-btn').textContent='🥊 FIGHT!';
-      $('fight-btn').disabled=false;
-      setCommentary('Both ready! HOST presses FIGHT to start! 🥊');
-      // Only host can initiate fight
-      if(S.mode==='guest'){
-        $('fight-btn').disabled=true;
-        $('fight-btn').textContent='⏳ Waiting for host...';
-        setCommentary('Waiting for Kasun (host) to start the fight... 😤');
+function drawBuildings() {
+  const zones = [
+    { cx: 95, cy: 145, r: 55, col: '#10b981', density: 12 },   // residential N
+    { cx: 270, cy: 175, r: 45, col: '#3b82f6', density: 8 },   // gov
+    { cx: 215, cy: 340, r: 40, col: '#06b6d4', density: 8 },   // schools
+    { cx: 510, cy: 345, r: 40, col: '#f97316', density: 10 },  // commercial
+    { cx: 620, cy: 400, r: 45, col: '#f59e0b', density: 12 },  // market
+    { cx: 620, cy: 280, r: 35, col: '#ef4444', density: 6 },   // hospital
+    { cx: 565, cy: 175, r: 40, col: '#8b5cf6', density: 8 },   // tourist
+    { cx: 740, cy: 140, r: 40, col: '#06b6d4', density: 7 },   // university
+    { cx: 860, cy: 350, r: 45, col: '#f97316', density: 10 },  // east commercial
+    { cx: 150, cy: 350, r: 35, col: '#10b981', density: 8 },   // west residential
+  ];
+
+  // Use seeded positions per zone
+  zones.forEach(z => {
+    const seed = z.cx * 13 + z.cy * 7;
+    for (let i = 0; i < z.density; i++) {
+      const angle = (seed * i * 137.5 * Math.PI / 180) % (Math.PI * 2);
+      const dist = ((seed * i * 23) % 100) / 100 * z.r * 0.85;
+      const bx = z.cx + Math.cos(angle) * dist;
+      const by = z.cy + Math.sin(angle) * dist;
+      const bw = 6 + ((seed * i * 17) % 10);
+      const bh = 5 + ((seed * i * 11) % 8);
+
+      // Check if this building is in active route zone
+      const isActive = activeRoute === 'all' ||
+        (activeRoute && ROUTES[activeRoute] && ROUTES[activeRoute].points.some(p =>
+          Math.hypot(p[0] - z.cx, p[1] - z.cy) < 120));
+
+      cCtx.fillStyle = hexAlpha(z.col, isActive ? 0.35 : 0.12);
+      cCtx.fillRect(cx(bx - bw/2), cy(by - bh/2), cx(bw) - cx(0), cy(bh) - cy(0));
+
+      if (isActive) {
+        cCtx.strokeStyle = hexAlpha(z.col, 0.5);
+        cCtx.lineWidth = 0.5;
+        cCtx.strokeRect(cx(bx - bw/2), cy(by - bh/2), cx(bw) - cx(0), cy(bh) - cy(0));
       }
-      // show "YOU" badge
-      $(`${S.myChar}-me-badge`).style.display='block';
-    },600);
+    }
+  });
+}
+
+function drawLake() {
+  const lx = cx(430), ly = cy(295), lrx = cx(90), lry = cy(60);
+
+  // Depth gradient
+  const grad = cCtx.createRadialGradient(lx, ly - lry * 0.2, 0, lx, ly, lrx);
+  grad.addColorStop(0, 'rgba(30,64,175,0.9)');
+  grad.addColorStop(0.6, 'rgba(29,78,216,0.75)');
+  grad.addColorStop(1, 'rgba(30,58,138,0.6)');
+  cCtx.fillStyle = grad;
+  cCtx.beginPath();
+  cCtx.ellipse(lx, ly, lrx, lry, 0, 0, Math.PI * 2);
+  cCtx.fill();
+
+  // Shimmer
+  const shimOffset = Math.sin(cityT * 0.8) * 20;
+  cCtx.strokeStyle = `rgba(96,165,250,${0.15 + Math.sin(cityT) * 0.05})`;
+  cCtx.lineWidth = 1;
+  cCtx.beginPath();
+  cCtx.ellipse(lx + shimOffset * 0.1, ly, lrx * 0.7, lry * 0.5, 0, 0, Math.PI * 2);
+  cCtx.stroke();
+
+  // Label
+  cCtx.fillStyle = 'rgba(147,197,253,0.7)';
+  cCtx.font = `bold ${Math.max(9, cx(11))}px Inter`;
+  cCtx.textAlign = 'center';
+  cCtx.fillText('Kandy Lake', lx, ly + 5);
+}
+
+function drawTerrain() {
+  // Background gradient
+  const bg = cCtx.createLinearGradient(0, 0, 0, cH);
+  bg.addColorStop(0, '#080f1e');
+  bg.addColorStop(1, '#0d1428');
+  cCtx.fillStyle = bg;
+  cCtx.fillRect(0, 0, cW, cH);
+
+  // Hill areas (corners and edges)
+  const hills = [
+    { x: 0, y: 0, points: [[0,0],[200,0],[180,180],[60,260],[0,300]], col: '#0d1f35' },
+    { x: BASE_W, y: 0, points: [[BASE_W,0],[BASE_W,200],[820,250],[750,120]], col: '#0d1f35' },
+    { x: 0, y: BASE_H, points: [[0,BASE_H],[0,400],[120,380],[200,BASE_H]], col: '#0d1f35' },
+    { x: BASE_W, y: BASE_H, points: [[BASE_W,BASE_H],[BASE_W,380],[800,360],[900,BASE_H]], col: '#0d1f35' },
+  ];
+  hills.forEach(h => {
+    cCtx.fillStyle = h.col;
+    cCtx.beginPath();
+    cCtx.moveTo(cx(h.points[0][0]), cy(h.points[0][1]));
+    h.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+    cCtx.closePath();
+    cCtx.fill();
+  });
+
+  // Roads (subtle gray network)
+  const roads = [
+    [[0,450],[150,450],[320,490],[500,480],[700,430],[900,400]],
+    [[150,0],[150,450]],
+    [[430,295],[430,150],[430,0]],
+    [[0,300],[95,145],[200,80],[350,50]],
+    [[430,295],[700,280],[900,280]],
+    [[320,490],[430,295]],
+    [[430,295],[565,175],[740,140],[900,120]],
+  ];
+  cCtx.strokeStyle = 'rgba(30,40,60,0.8)';
+  cCtx.lineWidth = cx(8);
+  roads.forEach(road => {
+    cCtx.beginPath();
+    cCtx.moveTo(cx(road[0][0]), cy(road[0][1]));
+    road.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+    cCtx.stroke();
+  });
+  cCtx.strokeStyle = 'rgba(40,55,80,0.5)';
+  cCtx.lineWidth = 1;
+  roads.forEach(road => {
+    cCtx.beginPath();
+    cCtx.moveTo(cx(road[0][0]), cy(road[0][1]));
+    road.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1])));
+    cCtx.stroke();
+  });
+}
+
+function drawRoutes() {
+  Object.entries(ROUTES).forEach(([key, r]) => {
+    if (key === 'all') return;
+    const isActive = activeRoute === 'all' || activeRoute === key;
+    const alpha = isActive ? 0.85 : 0.12;
+    const lw = isActive ? Math.max(2, cx(3)) : Math.max(1, cx(1.5));
+    const glow = isActive;
+
+    // Ground shadow
+    cCtx.save();
+    cCtx.strokeStyle = 'rgba(0,0,0,0.3)';
+    cCtx.lineWidth = lw + cx(2);
+    cCtx.lineCap = 'round';
+    cCtx.beginPath();
+    cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1] + 6));
+    r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1] + 6)));
+    cCtx.stroke();
+    cCtx.restore();
+
+    drawTube(r.points, r.color, alpha, lw, glow);
+  });
+}
+
+function drawStations() {
+  // Collect all unique junction points
+  const junctions = new Map();
+  Object.entries(ROUTES).forEach(([key, r]) => {
+    if (key === 'all') return;
+    const isActive = activeRoute === 'all' || activeRoute === key;
+    r.points.forEach(p => {
+      const k = `${p[0]},${p[1]}`;
+      if (!junctions.has(k)) junctions.set(k, { x: p[0], y: p[1], active: false, color: r.color });
+      if (isActive) junctions.get(k).active = true;
+    });
+  });
+
+  junctions.forEach(j => {
+    const pulse = Math.sin(cityT * 3 + j.x * 0.05) * 0.5 + 0.5;
+    cCtx.save();
+    if (j.active) {
+      cCtx.shadowBlur = 14;
+      cCtx.shadowColor = j.color;
+    }
+    // Outer ring
+    cCtx.strokeStyle = hexAlpha(j.color, j.active ? (0.4 + pulse * 0.4) : 0.15);
+    cCtx.lineWidth = 1;
+    cCtx.beginPath();
+    cCtx.arc(cx(j.x), cy(j.y), cx(7 + pulse * 3), 0, Math.PI * 2);
+    cCtx.stroke();
+    // Inner dot
+    cCtx.fillStyle = hexAlpha(j.color, j.active ? 0.9 : 0.2);
+    cCtx.beginPath();
+    cCtx.arc(cx(j.x), cy(j.y), cx(3.5), 0, Math.PI * 2);
+    cCtx.fill();
+    cCtx.restore();
+  });
+}
+
+function drawPods() {
+  const podSize = Math.max(4, cx(8));
+  pods.forEach(pod => {
+    pod.t = (pod.t + pod.speed * (activeRoute === 'all' || activeRoute === pod.routeKey ? 1 : 0.15)) % 1;
+    const isActive = activeRoute === 'all' || activeRoute === pod.routeKey;
+    if (!isActive && Math.random() > 0.3) return; // skip most pods on inactive routes
+
+    const pos = getPodPos(pod);
+    const angle = getPodAngle(pod);
+    const alpha = isActive ? 1 : 0.15;
+
+    cCtx.save();
+    cCtx.translate(cx(pos[0]), cy(pos[1]));
+    cCtx.rotate(angle);
+    cCtx.shadowBlur = isActive ? 14 : 0;
+    cCtx.shadowColor = pod.color;
+
+    // Pod body
+    const pw = podSize, ph = podSize * 0.45;
+    cCtx.fillStyle = `rgba(255,255,255,${alpha})`;
+    cCtx.beginPath();
+    cCtx.roundRect(-pw / 2, -ph / 2, pw, ph, ph / 2);
+    cCtx.fill();
+
+    cCtx.fillStyle = hexAlpha(pod.color, alpha);
+    cCtx.beginPath();
+    cCtx.roundRect(-pw / 2 + 1.5, -ph / 2 + 1.5, pw - 3, ph - 3, ph / 2 - 1);
+    cCtx.fill();
+
+    cCtx.restore();
+  });
+}
+
+function drawLandmarks() {
+  LANDMARKS.forEach(lm => {
+    if (lm.type === 'lake') return; // drawn separately
+    const isActive = activeRoute === 'all' ||
+      (ROUTES[activeRoute] && ROUTES[activeRoute].points.some(p =>
+        Math.hypot(p[0] - lm.x, p[1] - lm.y) < 80));
+
+    const alpha = isActive ? 1 : 0.3;
+
+    // Icon
+    cCtx.font = `${Math.max(10, cx(15))}px serif`;
+    cCtx.textAlign = 'center';
+    cCtx.globalAlpha = alpha;
+    cCtx.fillText(lm.icon, cx(lm.x), cy(lm.y));
+    cCtx.globalAlpha = 1;
+
+    // Label
+    if (isActive && cW > 500) {
+      cCtx.fillStyle = hexAlpha(lm.color, 0.85);
+      cCtx.font = `bold ${Math.max(7, cx(9))}px Inter`;
+      cCtx.textAlign = 'center';
+      cCtx.fillText(lm.name, cx(lm.x), cy(lm.y) + Math.max(12, cx(16)));
+    }
+  });
+}
+
+function drawGrid() {
+  const gs = cx(50);
+  cCtx.strokeStyle = 'rgba(0,245,255,0.025)';
+  cCtx.lineWidth = 0.5;
+  for (let x = 0; x < cW; x += gs) {
+    cCtx.beginPath(); cCtx.moveTo(x, 0); cCtx.lineTo(x, cH); cCtx.stroke();
+  }
+  for (let y = 0; y < cH; y += gs) {
+    cCtx.beginPath(); cCtx.moveTo(0, y); cCtx.lineTo(cW, y); cCtx.stroke();
   }
 }
 
-// ═══════════════════════════════════════════════
-//  SOLO MODE
-// ═══════════════════════════════════════════════
-function startSolo(){
-  S.isSolo=true;S.mode='solo';S.myChar='kasun';
-  $('kasun-me-badge').style.display='block';
-  resetGameState();updateScore();updateDots();
-  resetFighters();
-  showScreen('fight-screen');
-  $('taunt-bar').classList.remove('show');
-  $('fight-btn').textContent='🥊 FIGHT!';$('fight-btn').disabled=false;
-  setCommentary('Solo mode — press FIGHT to watch! 🎮');
+function drawHUD() {
+  // Active route name
+  const rData = ROUTES[activeRoute];
+  if (rData && activeRoute !== 'all') {
+    cCtx.fillStyle = hexAlpha(rData.color, 0.9);
+    cCtx.font = `bold ${Math.max(10, cx(12))}px Orbitron,monospace`;
+    cCtx.textAlign = 'left';
+    cCtx.fillText('▶ ' + rData.label.toUpperCase(), cx(12), cy(22));
+  }
+
+  // Live label
+  cCtx.fillStyle = 'rgba(0,245,255,0.5)';
+  cCtx.font = `${Math.max(8, cx(9))}px Orbitron,monospace`;
+  cCtx.textAlign = 'right';
+  cCtx.fillText('● LIVE SIMULATION', cW - cx(10), cy(22));
+}
+
+function animateCity() {
+  cityT += 0.016;
+  cCtx.clearRect(0, 0, cW, cH);
+  drawTerrain();
+  drawGrid();
+  drawBuildings();
+  drawLake();
+  drawRoutes();
+  drawStations();
+  drawPods();
+  drawLandmarks();
+  drawHUD();
+  requestAnimationFrame(animateCity);
 }
 
 // ═══════════════════════════════════════════════
-//  COUNTDOWN + MASH PHASE
+//  MINIMAP
 // ═══════════════════════════════════════════════
-let cdTapCount=0;
+const minimap = document.getElementById('minimap-canvas');
+const mCtx = minimap.getContext('2d');
+let mmT = 0;
 
-function showCountdownWithMash(){
-  return new Promise(async resolve=>{
-    const overlay=$('countdown-overlay'), num=$('countdown-num');
-    const tapWrap=$('cd-tap-wrap'), tapCountEl=$('cd-tap-count');
-    const tapBtn=$('cd-tap-btn');
+function drawMinimap() {
+  mmT += 0.012;
+  const mw = minimap.width = minimap.offsetWidth;
+  const mh = minimap.height = minimap.offsetHeight;
+  const msx = mw / BASE_W, msy = mh / BASE_H;
 
-    // style tap btn for my character
-    tapBtn.className='cd-tap-btn '+(S.myChar==='kasun'?'ka-tap-btn':'sh-tap-btn');
+  mCtx.clearRect(0, 0, mw, mh);
+  mCtx.fillStyle = '#060c18';
+  mCtx.fillRect(0, 0, mw, mh);
 
-    cdTapCount=0;S.myTaps=0;S.opponentTaps=0;
-    overlay.classList.add('show');
-    tapWrap.style.display='none';
-    num.textContent='3';
+  // Grid
+  mCtx.strokeStyle = 'rgba(0,245,255,0.06)';
+  mCtx.lineWidth = 0.5;
+  for (let x = 0; x < mw; x += 30) { mCtx.beginPath(); mCtx.moveTo(x,0); mCtx.lineTo(x,mh); mCtx.stroke(); }
+  for (let y = 0; y < mh; y += 30) { mCtx.beginPath(); mCtx.moveTo(0,y); mCtx.lineTo(mw,y); mCtx.stroke(); }
 
-    await sleep(100);
+  // Routes
+  Object.entries(ROUTES).forEach(([k, r]) => {
+    if (k === 'all') return;
+    mCtx.strokeStyle = r.color + '60';
+    mCtx.lineWidth = 1.5;
+    mCtx.beginPath();
+    mCtx.moveTo(r.points[0][0]*msx, r.points[0][1]*msy);
+    r.points.slice(1).forEach(p => mCtx.lineTo(p[0]*msx, p[1]*msy));
+    mCtx.stroke();
+  });
 
-    // count 3→2→1 then show mash phase
-    for(let c=3;c>=1;c--){
-      num.textContent=c;
-      if(c===1){
-        // show mash button during "1" second
-        tapWrap.style.display='flex';
-        tapCountEl.textContent='0';
+  // Lake
+  mCtx.fillStyle = 'rgba(29,78,216,0.5)';
+  mCtx.beginPath();
+  mCtx.ellipse(430*msx, 295*msy, 60*msx, 40*msy, 0, 0, Math.PI*2);
+  mCtx.fill();
+
+  // Moving pods on minimap
+  pods.forEach(pod => {
+    const pos = getPodPos(pod);
+    mCtx.fillStyle = ROUTES[pod.routeKey].color;
+    mCtx.beginPath();
+    mCtx.arc(pos[0]*msx, pos[1]*msy, 2, 0, Math.PI*2);
+    mCtx.fill();
+  });
+
+  requestAnimationFrame(drawMinimap);
+}
+
+// ═══════════════════════════════════════════════
+//  ROUTE SELECTION
+// ═══════════════════════════════════════════════
+function selectRoute(key, btn) {
+  activeRoute = key;
+
+  // Update button styles
+  document.querySelectorAll('.route-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = '';
+    b.style.color = '';
+    b.style.borderColor = '';
+  });
+  if (btn) {
+    btn.classList.add('active');
+    const col = key === 'all' ? '#00f5ff' : ROUTES[key].color;
+    btn.style.background = col;
+    btn.style.borderColor = col;
+    btn.style.boxShadow = `0 0 16px ${col}55`;
+  }
+
+  // Update route info chips
+  buildRouteInfo();
+}
+
+function buildRouteInfo() {
+  const wrap = document.getElementById('route-info');
+  wrap.innerHTML = '';
+  Object.entries(ROUTES).forEach(([k, r]) => {
+    if (k === 'all') return;
+    const show = activeRoute === 'all' || activeRoute === k;
+    const chip = document.createElement('div');
+    chip.className = 'route-info-chip';
+    chip.style.opacity = show ? '1' : '0.3';
+    chip.innerHTML = `<div class="route-dot" style="background:${r.color}"></div>${r.label}`;
+    wrap.appendChild(chip);
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  CONTROL CENTER LIVE DATA
+// ═══════════════════════════════════════════════
+const ccRoutes = [
+  { name: 'Residential', color: '#10b981', pods: [5,7], load: [60,80] },
+  { name: 'Office & Gov', color: '#3b82f6', pods: [4,6], load: [50,75] },
+  { name: 'Hospital Emg', color: '#ef4444', pods: [2,4], load: [20,45] },
+  { name: 'Market', color: '#f59e0b', pods: [4,7], load: [55,85] },
+  { name: 'Tourist', color: '#8b5cf6', pods: [3,5], load: [30,60] },
+  { name: 'School', color: '#06b6d4', pods: [4,6], load: [40,70] },
+  { name: 'Transit', color: '#a78bfa', pods: [5,8], load: [65,90] },
+];
+
+function buildRouteStatus() {
+  const wrap = document.getElementById('route-status');
+  wrap.innerHTML = '';
+  ccRoutes.forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'route-status-item';
+    const load = r.load[0] + Math.floor(Math.random() * (r.load[1] - r.load[0]));
+    const podCount = r.pods[0] + Math.floor(Math.random() * (r.pods[1] - r.pods[0]));
+    div.innerHTML = `
+      <span class="rs-name">${r.name}</span>
+      <div class="rs-bar-wrap"><div class="rs-bar" style="width:${load}%;background:${r.color}"></div></div>
+      <span class="rs-pods">${podCount} pods</span>`;
+    wrap.appendChild(div);
+  });
+}
+
+const alerts = [
+  'High demand on Market Route',
+  'School Route surge detected',
+  'Transit Route at 89% capacity',
+  'Hospital pod dispatched',
+  'Weather: Light rain detected',
+];
+
+function updateMetrics() {
+  const mPods = 44 + Math.floor(Math.random() * 12);
+  const mPass = 2800 + Math.floor(Math.random() * 200);
+  const mEnergy = 78 + Math.floor(Math.random() * 14);
+  const mAiPods = 3 + Math.floor(Math.random() * 4);
+
+  document.getElementById('m-pods').textContent = mPods;
+  document.getElementById('m-pass').textContent = mPass.toLocaleString();
+  document.getElementById('m-energy').innerHTML = mEnergy + '<span style="font-size:1rem">%</span>';
+  document.getElementById('ai-pods').textContent = mAiPods;
+  document.getElementById('mb-pods').style.width = (mPods / 60 * 100) + '%';
+  document.getElementById('mb-pass').style.width = (mPass / 4000 * 100) + '%';
+  document.getElementById('mb-energy').style.width = mEnergy + '%';
+  document.getElementById('alert-demand-text').textContent = alerts[Math.floor(Math.random() * alerts.length)];
+
+  const weathers = ['Rain sensors monitoring', 'Clear skies — optimal', 'Wind advisory: moderate'];
+  document.getElementById('ai-weather').textContent = weathers[Math.floor(Math.random() * weathers.length)];
+
+  buildRouteStatus();
+}
+
+// ═══════════════════════════════════════════════
+//  SCROLL REVEAL
+// ═══════════════════════════════════════════════
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
       }
-      await sleep(900);
-    }
-    // FIGHT moment
-    tapWrap.style.display='none';
-    num.textContent='FIGHT!';
-    num.style.fontSize='clamp(4rem,9vw,6rem)';
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => obs.observe(el));
+}
 
-    // report my final tap count
-    S.myTaps=cdTapCount;
-    send({t:'tap_update', char:S.myChar, count:cdTapCount, final:true});
+// Timeline scroll
+function initTimeline() {
+  const items = document.querySelectorAll('.tl-item');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  items.forEach(el => obs.observe(el));
+}
 
-    await sleep(800);
-    overlay.classList.remove('show');
-    num.style.fontSize='';
-    resolve(cdTapCount);
+// ═══════════════════════════════════════════════
+//  REPLAY
+// ═══════════════════════════════════════════════
+function replayDemo() {
+  document.getElementById('city-map').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    selectRoute('all', document.querySelector('[data-route="all"]'));
+    initPods();
+  }, 800);
+}
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  // Hero
+  resizeHero();
+  drawHero();
+
+  // City map
+  resizeCity();
+  initPods();
+  animateCity();
+
+  // Minimap
+  drawMinimap();
+
+  // Route UI
+  selectRoute('all', document.querySelector('[data-route="all"]'));
+  buildRouteInfo();
+
+  // Control center
+  buildRouteStatus();
+  updateMetrics();
+  setInterval(updateMetrics, 3000);
+
+  // Scroll reveals
+  initReveal();
+  initTimeline();
+
+  // Resize
+  window.addEventListener('resize', () => {
+    resizeHero();
+    resizeCity();
   });
-}
 
-function cdTap(e){
-  if(e&&e.preventDefault)e.preventDefault();
-  cdTapCount++;
-  $('cd-tap-count').textContent=cdTapCount;
-  S.myTaps=cdTapCount;
-  send({t:'tap_update', char:S.myChar, count:cdTapCount});
-  // animate button
-  const btn=$('cd-tap-btn');
-  btn.classList.add('pressed');
-  setTimeout(()=>btn.classList.remove('pressed'),70);
-}
+  // Cycle alerts for demo
+  let alertCycle = 0;
+  const alertMsgs = [
+    'High demand on Market Route',
+    'School Route surge — adding pods',
+    'Emergency simulation: Hospital route',
+    'Tourist route: Peak visitor hours',
+    'Weather: Clear — optimal operations',
+  ];
+  setInterval(() => {
+    alertCycle = (alertCycle + 1) % alertMsgs.length;
+    document.getElementById('alert-demand-text').textContent = alertMsgs[alertCycle];
+  }, 5000);
 
-function updateCdTapDisplay(){
-  // could show opponent tap count too if desired
-}
-
-// ═══════════════════════════════════════════════
-//  FIGHT INITIATION
-// ═══════════════════════════════════════════════
-async function initiateFight(){
-  if(S.fightInProgress)return;
-  if(S.mode==='guest')return; // only host initiates
-  S.fightInProgress=true;
-  $('fight-btn').disabled=true;
-  $('taunt-bar').classList.remove('show');
-  resetFighters();
-
-  await showCountdownWithMash();
-
-  // host decides winner based on taps
-  let kasunTaps = S.myChar==='kasun' ? S.myTaps : S.opponentTaps;
-  let shavinTaps= S.myChar==='shavin'? S.myTaps : S.opponentTaps;
-  const winner = decideWinner(kasunTaps, shavinTaps);
-
-  // send to guest
-  send({t:'fight_start', winner, kasunTaps, shavinTaps});
-
-  await startFightAnimation(winner, kasunTaps, shavinTaps);
-}
-
-function decideWinner(kasunTaps, shavinTaps){
-  // weighted random based on taps
-  const total=(kasunTaps+shavinTaps)||1;
-  const kasunWeight = 0.3 + (kasunTaps/total)*0.4; // 30-70% range
-  return Math.random()<kasunWeight ? 'kasun' : 'shavin';
-}
-
-// ═══════════════════════════════════════════════
-//  FIGHT ANIMATION ENGINE
-// ═══════════════════════════════════════════════
-const LINES={
-  kPunch:[
-    "Kasun fires a BEARD-GUIDED punch! 🧔💥",
-    "KASUN UNCLE-STRENGTH COMBO! 💪",
-    "Age and experience SMASHES through! 👊",
-    "Kasun's beard charges the hit! 🧔⚡",
-  ],
-  sPunch:[
-    "Shavin uses the BIRTHDAY ENERGY BLAST! 🎂💥",
-    "Shavin's glasses REFLECT and AMPLIFY! 🕶️⚡",
-    "MALLI POWER ACTIVATED! 😈🔥",
-    "Shavin hits back — youth is UNSTOPPABLE! 💨",
-  ],
-  kDodge:[
-    "Kasun's beard senses the attack and dodges! 🧔",
-    "EXPERIENCE > YOUTH — Kasun sidesteps! 😏",
-    "Kasun rolls gracefully... almost. 💅",
-  ],
-  sDodge:[
-    "Shavin's glasses deflect the blast! 🕶️",
-    "MALLI SPEED — Shavin is already behind you! ⚡",
-    "Shavin ducks under like a pro! 😎",
-  ],
-  kSpecial:[
-    "KASUN ACTIVATES: THE AYYA AURA! 🌟🧔",
-    "BEARD TORNADO SPECIAL ATTACK! 🌪️",
-    "KASUN GOES FULL UNCLE MODE! 💥👑",
-  ],
-  sSpecial:[
-    "SHAVIN CHARGES THE MALLI CANNON! 🔥😈",
-    "GLASSES BEAM — MAXIMUM POWER! 🕶️💀",
-    "SHAVIN UNLEASHES BIRTHDAY RAGE! 🎂⚡",
-  ],
-};
-
-async function startFightAnimation(winner, kasunTaps, shavinTaps){
-  if(winner==='guest_wait')return; // guest waiting, do nothing
-
-  announce('ROUND '+(S.currentRound+1)+'! FIGHT!', 1000);
-
-  // Show tap power
-  const kasunPower=Math.min(kasunTaps||0, 99);
-  const shavinPower=Math.min(shavinTaps||0,99);
-  setCommentary(`⚡ Kasun powered up: ${kasunPower} taps | Shavin powered up: ${shavinPower} taps!`,'#ffd700');
-  await sleep(1200);
-
-  // Run fight based on winner
-  if(winner==='kasun'){
-    await runKasunWins();
-  } else {
-    await runShavinWins();
-  }
-
-  // award round
-  S.roundWinners[S.currentRound]=winner;
-  if(winner==='kasun'){S.kasunScore++;confetti();}
-  else{S.shavinScore++;confetti();}
-  updateScore();updateDots();
-
-  const winnerName=winner==='kasun'?'👑 KASUN AYYA':'SHAVIN MALLI 😈';
-  announce(winnerName+' WINS THE ROUND!',2000);
-  setCommentary(winnerName+' wins Round '+(S.currentRound+1)+'! 🔥',winner==='kasun'?'#a78bfa':'#fb7185');
-
-  // win dance
-  addAnim(winner+'-fighter','anim-win',2500);
-
-  S.currentRound++;
-  await sleep(2400);
-
-  if(S.kasunScore>=2||S.shavinScore>=2||S.currentRound>=3){
-    showResult();
-  } else {
-    S.fightInProgress=false;
-    $('taunt-bar').classList.add('show');
-    setCommentary('Round '+(S.currentRound+1)+'! Host press FIGHT! 🥊');
-    if(S.mode==='host'||S.isSolo){
-      $('fight-btn').textContent='🥊 ROUND '+(S.currentRound+1)+'!';
-      $('fight-btn').disabled=false;
-    } else {
-      $('fight-btn').textContent='⏳ Waiting for host...';
-      $('fight-btn').disabled=true;
-    }
-  }
-}
-
-async function runKasunWins(){
-  setCommentary(rand(LINES.kPunch),'#a78bfa');
-  addAnim('kasun-fighter','anim-pr');await sleep(300);
-  showImpact('👊');addAnim('shavin-fighter','anim-hit');setHP('shavin',65);await sleep(600);
-
-  setCommentary(rand(LINES.sPunch),'#fb7185');
-  addAnim('shavin-fighter','anim-pl');await sleep(300);
-  showImpact('💥');addAnim('kasun-fighter','anim-hit');setHP('kasun',72);await sleep(600);
-
-  setCommentary(rand(LINES.kDodge),'#6ee7b7');
-  addAnim('kasun-fighter','anim-dr');await sleep(500);
-
-  setCommentary(rand(LINES.kSpecial),'#fbbf24');
-  addAnim('kasun-fighter','anim-spin');await sleep(400);
-  showImpact('🌟');addAnim('shavin-fighter','anim-hit');setHP('shavin',18);await sleep(800);
-
-  setCommentary("KASUN DELIVERS THE FINAL BEARD-POWERED BLOW! 💀",'#ffd700');
-  addAnim('kasun-fighter','anim-pr');await sleep(300);
-  showImpact('💥');setHP('shavin',0);
-  await addAnim('shavin-fighter','anim-ko',900);await sleep(300);
-}
-
-async function runShavinWins(){
-  setCommentary(rand(LINES.sPunch),'#fb7185');
-  addAnim('shavin-fighter','anim-pl');await sleep(300);
-  showImpact('💥');addAnim('kasun-fighter','anim-hit');setHP('kasun',60);await sleep(600);
-
-  setCommentary(rand(LINES.kPunch),'#a78bfa');
-  addAnim('kasun-fighter','anim-pr');await sleep(300);
-  showImpact('👊');addAnim('shavin-fighter','anim-hit');setHP('shavin',74);await sleep(600);
-
-  setCommentary(rand(LINES.sDodge),'#6ee7b7');
-  addAnim('shavin-fighter','anim-dl');await sleep(500);
-
-  setCommentary(rand(LINES.sSpecial),'#fbbf24');
-  addAnim('shavin-fighter','anim-spin');await sleep(400);
-  showImpact('🌟');addAnim('kasun-fighter','anim-hit');setHP('kasun',16);await sleep(800);
-
-  setCommentary("SHAVIN ENDS IT! MALLI REBELLION SUCCESSFUL! 💀",'#ffd700');
-  addAnim('shavin-fighter','anim-pl');await sleep(300);
-  showImpact('💥');setHP('kasun',0);
-  await addAnim('kasun-fighter','anim-ko',900);await sleep(300);
-}
-
-// ═══════════════════════════════════════════════
-//  SOLO FIGHT
-// ═══════════════════════════════════════════════
-async function initiateSoloFight(){
-  if(S.fightInProgress)return;
-  S.fightInProgress=true;
-  $('fight-btn').disabled=true;
-  resetFighters();
-
-  await showCountdownWithMash();
-
-  const winner=Math.random()<0.5?'kasun':'shavin';
-  await startFightAnimation(winner, S.myTaps, 0);
-}
-
-// override initiateFight to handle solo
-const _origInitiate=initiateFight;
-window.initiateFight=function(){
-  if(S.isSolo) initiateSoloFight();
-  else _origInitiate();
-};
-
-// ═══════════════════════════════════════════════
-//  TAUNTS
-// ═══════════════════════════════════════════════
-function sendTaunt(text){
-  send({t:'taunt',text});
-  // show self taunt
-  spawnBubble(text,true);
-}
-function showReceivedTaunt(text){
-  spawnBubble(text,false);
-}
-function spawnBubble(text,isMine){
-  const el=document.createElement('div');
-  el.className='speech-bubble';
-  el.textContent=(isMine?'You: ':' Opp: ')+text;
-  // position near my fighter or opponent
-  const fighter=$(isMine?S.myChar+'-fighter':(S.myChar==='kasun'?'shavin-fighter':'kasun-fighter'));
-  const rect=fighter.getBoundingClientRect();
-  el.style.left=rect.left+'px';
-  el.style.top=rect.top+'px';
-  el.style.borderColor=isMine?(S.myChar==='kasun'?'var(--ayya)':'var(--malli)'):'var(--gold)';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),2600);
-}
-
-// ═══════════════════════════════════════════════
-//  RESULT
-// ═══════════════════════════════════════════════
-const ROASTS={
-  kasun:[
-    "AYYA DOMINATES! Beard + age + breakfast = UNBEATABLE! 🧔👑",
-    "Kasun proves: experience ALWAYS beats youth! 💪",
-    "Shavin tried. Kasun had extra rice. Kasun wins. 😂🍚",
-    "The elder brother retains his UNDISPUTED crown! 👑",
-  ],
-  shavin:[
-    "THE MALLI UPRISING! Kasun sent to another dimension! 😱💀",
-    "Shavin asks: 'Who's the BEST brother now, Ayya?!' 😈🔥",
-    "Little bro BIGGER energy! Kasun needs to hit the gym! 😂💪",
-    "GLASSES > BEARD. This is science now. 🕶️⚡",
-  ],
-  tie:[
-    "DRAW! You are literally the same person. 🤝😂",
-    "Nobody wins. Yehen wins. 😂❤️",
-    "Even the algorithm can't decide who's worse! 🤣",
-  ],
-};
-
-function showResult(){
-  showScreen('result-screen');
-  $('taunt-bar').classList.remove('show');
-  const wp=$('winner-photo'),wt=$('winner-title'),wr=$('winner-roast');
-  if(S.kasunScore>S.shavinScore){
-    wp.src='img/kasun.png';
-    wt.textContent='👑 KASUN AYYA WINS! 👑';
-    wt.style.color='var(--ayya)';
-    wr.textContent=rand(ROASTS.kasun);
-    confetti();confetti();
-  } else if(S.shavinScore>S.kasunScore){
-    wp.src='img/shavin.png';
-    wt.textContent='😈 SHAVIN MALLI WINS! 😈';
-    wt.style.color='var(--malli)';
-    wr.textContent=rand(ROASTS.shavin);
-    confetti();confetti();
-  } else {
-    wp.src=Math.random()<.5?'img/kasun.png':'img/shavin.png';
-    wt.textContent="🤝 IT'S A DRAW! 🤝";
-    wt.style.color='var(--gold)';
-    wr.textContent=rand(ROASTS.tie);
-  }
-  updateScore();
-
-  // rematch
-  if(S.mode==='guest'){
-    $('rematch-btn').textContent='⏳ Ask host to rematch';
-    $('rematch-btn').onclick=()=>send({t:'rematch'});
-  }
-}
-
-function requestRematch(){
-  if(S.isSolo){ soloRematch(); return; }
-  send({t:'rematch'});
-  handleRematch();
-}
-function handleRematch(){
-  S.kasunScore=0;S.shavinScore=0;S.currentRound=0;
-  S.roundWinners=[null,null,null];
-  S.fightInProgress=false;
-  updateScore();updateDots();
-  resetFighters();
-  $('taunt-bar').classList.add('show');
-  $('fight-btn').textContent='🥊 FIGHT!';
-  if(S.mode==='host'||S.isSolo) $('fight-btn').disabled=false;
-  else{$('fight-btn').disabled=true;$('fight-btn').textContent='⏳ Waiting for host...';}
-  setCommentary('REMATCH! Same battlefield, different outcome! 🔥');
-  showScreen('fight-screen');
-}
-function soloRematch(){
-  S.kasunScore=0;S.shavinScore=0;S.currentRound=0;
-  S.roundWinners=[null,null,null];S.fightInProgress=false;
-  updateScore();updateDots();resetFighters();
-  $('fight-btn').textContent='🥊 FIGHT!';$('fight-btn').disabled=false;
-  setCommentary('REMATCH! Press FIGHT! 🥊');
-  showScreen('fight-screen');
-}
-
-// ═══════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════
-function resetFighters(){
-  setHP('kasun',100);setHP('shavin',100);
-  ['kasun-fighter','shavin-fighter'].forEach(id=>{
-    $(id).className=id==='kasun-fighter'?'fighter kasun-f':'fighter shavin-f';
+  // Auto-demo: cycle through routes every 8s if user hasn't interacted
+  let autoDemo = true;
+  const routeKeys = ['all', 'residential', 'office', 'hospital', 'market', 'tourist', 'school', 'transit'];
+  let autoIdx = 0;
+  document.querySelectorAll('.route-btn').forEach(b => {
+    b.addEventListener('click', () => { autoDemo = false; });
   });
-}
-function resetGameState(){
-  S.kasunScore=0;S.shavinScore=0;S.currentRound=0;
-  S.roundWinners=[null,null,null];S.fightInProgress=false;
-  S.myReady=false;S.opponentReady=false;
-  updateScore();updateDots();
-}
-function destroyPeer(){
-  if(S.peer){try{S.peer.destroy();}catch(e){} S.peer=null;}
-  S.conn=null;S.isConnected=false;
-}
-
-// ═══════════════════════════════════════════════
-//  AUTO-JOIN FROM URL
-// ═══════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded',()=>{
-  const urlCode=new URLSearchParams(location.search).get('room');
-  if(urlCode&&urlCode.length===6){
-    showJoinFlow();
-  }
-});
-
-// keyboard support during fight
-document.addEventListener('keydown', e=>{
-  if(e.code==='Space'||e.code==='Enter'){
-    if($('cd-tap-wrap').style.display!=='none') cdTap(e);
-  }
+  setInterval(() => {
+    if (autoDemo && document.getElementById('city-map').getBoundingClientRect().top > -200 &&
+        document.getElementById('city-map').getBoundingClientRect().top < window.innerHeight + 100) {
+      autoIdx = (autoIdx + 1) % routeKeys.length;
+      const key = routeKeys[autoIdx];
+      selectRoute(key, document.querySelector(`[data-route="${key}"]`));
+    }
+  }, 8000);
 });
 </script>
 </body>
