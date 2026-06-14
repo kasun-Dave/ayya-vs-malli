@@ -521,8 +521,9 @@ footer{background:#050810;padding:24px 40px;border-top:1px solid var(--border);d
 </footer>
 
 <script>
+'use strict';
 // ═══════════════════════════════════════════════
-//  LANGUAGE SYSTEM
+//  LANGUAGE
 // ═══════════════════════════════════════════════
 let lang = 'en';
 
@@ -569,148 +570,154 @@ function updateActiveRouteBtn() {
 }
 
 // ═══════════════════════════════════════════════
-//  REAL KANDY MAP — ROUTE DATA
-//  Coordinates based on actual Kandy geography
-//  Canvas: 1000 x 570 internal
+//  NETWORK GRAPH — BINARY TREE (5 clean 2-way junctions)
+//
+//  Each junction splits into EXACTLY 2 branches.
+//  Everyone can reach everywhere via transfers.
+//
+//  Tree layout:
+//  [Peradeniya] ──[JUNC A: Railway]── [Randles Hill]
+//                       │
+//                  [JUNC B: Bus Stand]── [Market]──[Buwelikada]
+//                       │
+//                  [JUNC C: City Hub]── [Hospital]
+//                       │
+//                  [JUNC D: Dalada] ── [Tourist loop]
+//                       │
+//                  [JUNC E: Asgiriya]── [Gov Area]
+//                       │
+//                  [Katugastota]
 // ═══════════════════════════════════════════════
 const BASE_W = 1000, BASE_H = 570;
 
-// Key location nodes (traced from real Kandy map)
-const NODES = {
-  railwayStation: [345, 408],   // Kandy Railway Station (Suduhumpola)
-  busStand:       [432, 388],   // Central Bus Stand
-  lakeCenter:     [468, 328],   // Kandy Lake center
-  dalada:         [448, 285],   // Temple of the Tooth
-  hospital:       [375, 212],   // Kandy Hospital (northwest)
-  udawatta:       [510, 250],   // Udawatta Kele Sanctuary
-  asgiriya:       [362, 188],   // Asgiriya
-  katugastota:    [490, 88],    // Katugastota / Mawinmada (north)
-  buwelikada:     [608, 328],   // Buwelikada (east of lake)
-  lewella:        [625, 242],   // Lewella
-  market:         [488, 358],   // City Market / Commercial
-  university:     [132, 405],   // Peradeniya University
-  peradeniya:     [165, 428],   // Peradeniya area
-  randlesHill:    [268, 492],   // Randles Hill (south residential)
-  bowala:         [285, 552],   // Bowala (south)
-  ampitiya:       [570, 475],   // Ampitiya (south-east)
-  tennekumbura:   [748, 445],   // Tennekumbura (east)
-  gohagoda:       [240, 195],   // Gohagoda / Cinnamon area (northwest)
-  alawathugoda:   [305, 128],   // Alawathugoda (north)
+// Named network nodes
+const NN = {
+  randles:     [268,492],
+  railway:     [345,408],   // JUNCTION A
+  peradeniya:  [132,405],
+  busstand:    [432,388],   // JUNCTION B
+  market:      [522,360],
+  buwelikada:  [608,328],
+  cityhub:     [468,338],   // JUNCTION C
+  hospital:    [375,212],
+  dalada:      [448,285],   // JUNCTION D
+  tNE:         [530,296],
+  tSE:         [520,354],
+  tSW:         [428,370],
+  asgiriya:    [362,188],   // JUNCTION E
+  govarea:     [280,162],
+  katugastota: [490,88],
 };
 
+// 2-way junctions: at each junction the track forks into b1 and b2
+const JUNCTIONS = {
+  railway:  { en:'Railway Jct',   si:'දුම්රිය',  pos:[345,408], b1:'peradeniya', b2:'randles'    },
+  busstand: { en:'Bus Stand Jct', si:'බස් සන්ධිය',pos:[432,388], b1:'cityhub',    b2:'market'     },
+  cityhub:  { en:'City Hub Jct',  si:'නගර සන්ධිය',pos:[468,338], b1:'hospital',   b2:'dalada'     },
+  dalada:   { en:'Dalada Jct',    si:'දළදා සන්ධිය',pos:[448,285], b1:'tNE',        b2:'asgiriya'   },
+  asgiriya: { en:'Asgiriya Jct',  si:'අස්ගිරිය', pos:[362,188], b1:'govarea',    b2:'katugastota'},
+};
+
+// Track segments — physical tube pieces with waypoints following Kandy roads
+const SEGS = {
+  'randles-railway':      [[268,492],[292,470],[318,450],[335,430],[345,408]],
+  'peradeniya-railway':   [[132,405],[185,408],[240,410],[295,410],[345,408]],
+  'railway-busstand':     [[345,408],[375,402],[405,396],[432,388]],
+  'busstand-market':      [[432,388],[468,378],[492,366],[522,360]],
+  'market-buwelikada':    [[522,360],[562,345],[608,328]],
+  'busstand-cityhub':     [[432,388],[445,368],[455,352],[468,338]],
+  'cityhub-hospital':     [[468,338],[448,318],[428,292],[408,265],[390,240],[375,212]],
+  'cityhub-dalada':       [[468,338],[460,320],[452,303],[448,285]],
+  'dalada-tNE':           [[448,285],[480,280],[530,296]],
+  'tNE-tSE':              [[530,296],[540,325],[520,354]],
+  'tSE-tSW':              [[520,354],[492,370],[428,370]],
+  'tSW-dalada':           [[428,370],[418,348],[422,318],[435,298],[448,285]],
+  'dalada-asgiriya':      [[448,285],[425,260],[398,228],[362,188]],
+  'asgiriya-govarea':     [[362,188],[330,178],[280,162]],
+  'asgiriya-katugastota': [[362,188],[390,162],[422,136],[455,108],[490,88]],
+};
+
+// Get full waypoint path for a route (concatenate segments)
+function segPath(segList) {
+  const path = [];
+  segList.forEach((sk, i) => {
+    const s = SEGS[sk]; if (!s) return;
+    path.push(...(i===0 ? s : s.slice(1)));
+  });
+  return path;
+}
+
+// Routes — each defined as ordered segment list
+// Shared segments = shared physical track (different highlight colors)
 const ROUTES = {
-  all: { label: 'All Routes', labelSi: 'සියලු මාර්ග', color: '#ffffff' },
+  all: { label:'All Routes', labelSi:'සියලු', color:'#ffffff' },
 
   residential: {
-    label: 'Residential Loop', labelSi: 'නිවාස ලූපය',
-    color: '#10b981',
-    // A1 road: Randles Hill → Suduhumpola → Railway → Bus Stand → Lake
-    points: [
-      [268,492],[295,468],[318,448],[338,430],[345,408],
-      [370,400],[400,394],[432,388],[450,360],[468,328]
-    ],
-    origin: 'Randles Hill', originSi: 'රෑන්ඩල්ස් කන්ද',
-    dest: 'City Hub', destSi: 'නගර කේන්ද්‍රය',
-    pods: 5, speed: .0013,
+    label:'Residential', labelSi:'නිවාස',  color:'#10b981',
+    segs:['randles-railway','railway-busstand','busstand-cityhub'],
+    origin:'Randles Hill', originSi:'රෑන්ඩල්ස් කන්ද',
+    dest:'City Hub', destSi:'නගර කේන්ද්‍රය',
+    pods:4, speed:.0014,
   },
-
-  office: {
-    label: 'Office & Government', labelSi: 'කාර්යාල සහ රජය',
-    color: '#3b82f6',
-    // Asgiriya area → hospital road → dalada → city center
-    points: [
-      [362,188],[372,205],[385,225],[400,250],[425,270],
-      [448,285],[458,305],[468,328],[488,358]
-    ],
-    origin: 'Asgiriya', originSi: 'අස්ගිරිය',
-    dest: 'Commercial Zone', destSi: 'වාණිජ කලාපය',
-    pods: 5, speed: .0015,
-  },
-
-  hospital: {
-    label: 'Hospital Emergency', labelSi: 'රෝහල් හදිසි',
-    color: '#ef4444',
-    // Bus Stand → Lake → Temple area → Hospital (follows upper lake road)
-    points: [
-      [432,388],[448,360],[458,340],[455,315],[448,295],
-      [440,270],[415,248],[395,230],[375,212]
-    ],
-    origin: 'Bus Stand', originSi: 'බස් නිලයාමය',
-    dest: 'Kandy Hospital', destSi: 'කන්ඩි රෝහල',
-    pods: 4, speed: .0025,
-  },
-
-  market: {
-    label: 'Market & Shops', labelSi: 'වෙළඳ සහ කඩ',
-    color: '#f59e0b',
-    // Railway Station → Bus Stand → Market → Buwelikada
-    points: [
-      [345,408],[390,400],[432,388],[455,375],[475,358],
-      [488,358],[530,348],[570,338],[608,328]
-    ],
-    origin: 'Railway Station', originSi: 'දුම්රිය ස්ථානය',
-    dest: 'Buwelikada Market', destSi: 'බූවැලිකඩ',
-    pods: 5, speed: .0012,
-  },
-
-  tourist: {
-    label: 'Tourist Route', labelSi: 'සංචාරක මාර්ගය',
-    color: '#8b5cf6',
-    // Lake road circuit: goes around Kandy Lake
-    points: [
-      [448,285],[462,278],[485,272],[510,278],[535,295],
-      [548,318],[545,342],[530,358],[510,368],[488,372],
-      [462,368],[440,355],[425,338],[418,318],[420,298],
-      [432,285],[448,285]
-    ],
-    origin: 'Dalada Maligawa', originSi: 'ශ්‍රී දළදා මාළිගාව',
-    dest: 'Lake Road Circuit', destSi: 'වැව් මාර්ගය',
-    pods: 5, speed: .0010,
-  },
-
   school: {
-    label: 'School & University', labelSi: 'පාසල් සහ විශ්ව',
-    color: '#06b6d4',
-    // Peradeniya → Katugastota road through city north
-    points: [
-      [132,405],[165,428],[210,418],[265,412],[305,410],
-      [345,408],[390,400],[432,388],[448,360],[448,318],
-      [445,285],[440,255],[442,222],[458,192],[490,168],[490,88]
-    ],
-    origin: 'Peradeniya Univ.', originSi: 'පේරාදෙණිය',
-    dest: 'Katugastota', destSi: 'කටුගස්තොට',
-    pods: 5, speed: .0012,
+    label:'School & Univ.', labelSi:'පාසල් ලූපය', color:'#06b6d4',
+    segs:['peradeniya-railway','railway-busstand'],
+    origin:'Peradeniya Univ.', originSi:'පේරාදෙණිය',
+    dest:'Bus Stand', destSi:'බස් නිලයාමය',
+    pods:4, speed:.0013,
   },
-
   transit: {
-    label: 'Main Transit', labelSi: 'ප්‍රධාන ගමනාගමන',
-    color: '#a78bfa',
-    // Railway → City → A9 north to Katugastota (main spine)
-    points: [
-      [345,408],[370,395],[405,390],[432,388],[448,360],
-      [455,338],[455,308],[448,285],[438,260],[428,238],
-      [415,215],[405,192],[408,165],[428,138],[460,112],[490,88]
-    ],
-    origin: 'Railway Station', originSi: 'දුම්රිය ස්ථානය',
-    dest: 'Katugastota', destSi: 'කටුගස්තොට',
-    pods: 6, speed: .0014,
+    label:'Main Transit', labelSi:'ප්‍රධාන ගමනාගමන', color:'#a78bfa',
+    segs:['railway-busstand','busstand-cityhub','cityhub-dalada','dalada-asgiriya','asgiriya-katugastota'],
+    origin:'Railway Station', originSi:'දුම්රිය ස්ථානය',
+    dest:'Katugastota', destSi:'කටුගස්තොට',
+    pods:6, speed:.0012,
+  },
+  market: {
+    label:'Market & Shops', labelSi:'වෙළඳ සහ කඩ', color:'#f59e0b',
+    segs:['railway-busstand','busstand-market','market-buwelikada'],
+    origin:'Railway Station', originSi:'දුම්රිය ස්ථානය',
+    dest:'Buwelikada', destSi:'බූවැලිකඩ',
+    pods:5, speed:.0013,
+  },
+  hospital: {
+    label:'Hospital Emergency', labelSi:'රෝහල් හදිසි', color:'#ef4444',
+    segs:['busstand-cityhub','cityhub-hospital'],
+    origin:'Bus Stand', originSi:'බස් නිලයාමය',
+    dest:'Kandy Hospital', destSi:'කන්ඩි රෝහල',
+    pods:3, speed:.0026,
+  },
+  tourist: {
+    label:'Tourist Route', labelSi:'සංචාරක ලූපය', color:'#8b5cf6',
+    segs:['dalada-tNE','tNE-tSE','tSE-tSW','tSW-dalada'],
+    origin:'Dalada Maligawa', originSi:'ශ්‍රී දළදා',
+    dest:'Lake Road Circuit', destSi:'වැව් ලූපය',
+    pods:4, speed:.0011,
+  },
+  office: {
+    label:'Office & Gov', labelSi:'කාර්යාල සහ රජය', color:'#3b82f6',
+    segs:['busstand-cityhub','cityhub-dalada','dalada-asgiriya','asgiriya-govarea'],
+    origin:'Bus Stand', originSi:'බස් නිලයාමය',
+    dest:'Gov. Complex', destSi:'රජයේ සංකීර්ණය',
+    pods:4, speed:.0014,
   },
 };
 
-// Landmarks with Sinhala names
+// Landmarks with Sinhala names (anchored to real node positions)
 const LANDMARKS = [
-  { key:'dalada',   x:448, y:285, en:'Dalada Maligawa', si:'ශ්‍රී දළදා',  icon:'🏛️', col:'#f59e0b', type:'temple' },
-  { key:'railway',  x:345, y:408, en:'Railway Station',  si:'දුම්රිය',     icon:'🚉', col:'#6366f1', type:'station' },
-  { key:'bus',      x:432, y:388, en:'Bus Stand',         si:'බස් නිලය',   icon:'🚌', col:'#6366f1', type:'transit' },
-  { key:'hospital', x:375, y:212, en:'Kandy Hospital',    si:'රෝහල',       icon:'🏥', col:'#ef4444', type:'hospital' },
-  { key:'udawatta', x:510, y:250, en:'Udawatta Kele',     si:'උඩවත්ත කෙළේ',icon:'🌿', col:'#22c55e', type:'nature' },
-  { key:'market',   x:488, y:358, en:'City Market',       si:'නගර වෙළ',   icon:'🛒', col:'#f59e0b', type:'market' },
-  { key:'univ',     x:132, y:405, en:'Peradeniya Univ.', si:'පේරාදෙණිය', icon:'🎓', col:'#06b6d4', type:'school' },
-  { key:'buweli',   x:608, y:328, en:'Buwelikada',        si:'බූවැලිකඩ',  icon:'🏢', col:'#f97316', type:'commercial' },
-  { key:'randles',  x:268, y:492, en:'Randles Hill',      si:'රෑන්ඩල්ස්', icon:'🏠', col:'#10b981', type:'residential' },
-  { key:'katuga',   x:490, y:88,  en:'Katugastota',       si:'කටුගස්',    icon:'🏘️', col:'#06b6d4', type:'residential' },
-  { key:'asgiri',   x:362, y:188, en:'Asgiriya',          si:'අස්ගිරිය',  icon:'🏛', col:'#3b82f6', type:'government' },
-  { key:'lewella',  x:625, y:242, en:'Lewella',            si:'ලේවැල්ල',  icon:'🏘', col:'#10b981', type:'residential' },
+  { x:448, y:285, en:'Dalada Maligawa', si:'ශ්‍රී දළදා', icon:'🏛️', col:'#f59e0b' },
+  { x:345, y:408, en:'Railway Station',  si:'දුම්රිය',    icon:'🚉', col:'#6366f1' },
+  { x:432, y:388, en:'Bus Stand',         si:'බස් නිලය',  icon:'🚌', col:'#6366f1' },
+  { x:375, y:212, en:'Kandy Hospital',    si:'රෝහල',      icon:'🏥', col:'#ef4444' },
+  { x:510, y:250, en:'Udawatta Kele',     si:'උඩවත්ත',   icon:'🌿', col:'#22c55e' },
+  { x:522, y:360, en:'City Market',       si:'නගර වෙළ',  icon:'🛒', col:'#f59e0b' },
+  { x:132, y:405, en:'Peradeniya Univ.', si:'පේරාදෙණිය',icon:'🎓', col:'#06b6d4' },
+  { x:608, y:328, en:'Buwelikada',        si:'බූවැලිකඩ', icon:'🏢', col:'#f97316' },
+  { x:268, y:492, en:'Randles Hill',      si:'රෑන්ඩල්ස්',icon:'🏠', col:'#10b981' },
+  { x:490, y:88,  en:'Katugastota',       si:'කටුගස්',   icon:'🏘️', col:'#06b6d4' },
+  { x:362, y:188, en:'Asgiriya Jct',     si:'අස්ගිරිය', icon:'🏛', col:'#3b82f6' },
+  { x:280, y:162, en:'Gov. Complex',      si:'රජයේ',     icon:'🏛', col:'#3b82f6' },
+  { x:468, y:338, en:'City Hub',          si:'නගර කේන්ද්‍ර',icon:'⭕',col:'#00f5ff' },
 ];
 
 // ═══════════════════════════════════════════════
@@ -785,6 +792,14 @@ function pathAngle(pts, t) {
   return Math.atan2(pts[si+1][1]-pts[si][1], pts[si+1][0]-pts[si][0]);
 }
 
+// Helper: get computed path points for a route
+function getRoutePoints(routeKey) {
+  const r = ROUTES[routeKey];
+  if (!r) return [];
+  if (r.segs) return segPath(r.segs);
+  return r.points || [];
+}
+
 // ═══════════════════════════════════════════════
 //  AMBIENT PODS
 // ═══════════════════════════════════════════════
@@ -792,8 +807,10 @@ function initPods() {
   pods = [];
   Object.entries(ROUTES).forEach(([key,r]) => {
     if (key === 'all') return;
+    const pts = getRoutePoints(key);
+    if (!pts.length) return;
     for (let i = 0; i < r.pods; i++) {
-      pods.push({ routeKey:key, t:i/r.pods, color:r.color, speed:r.speed });
+      pods.push({ routeKey:key, t:i/r.pods, color:r.color, speed:r.speed, pts });
     }
   });
 }
@@ -969,8 +986,9 @@ function drawBuildings() {
 
   zones.forEach(z => {
     const seed = z.cx * 13 + z.cy * 7;
-    const isActive = activeRoute === 'all' || (ROUTES[activeRoute] &&
-      ROUTES[activeRoute].points.some(p => Math.hypot(p[0]-z.cx, p[1]-z.cy) < 110));
+    const activePts2 = activeRoute !== 'all' ? getRoutePoints(activeRoute) : [];
+    const isActive = activeRoute === 'all' ||
+      activePts2.some(p => Math.hypot(p[0]-z.cx, p[1]-z.cy) < 110);
 
     for (let i = 0; i < z.d; i++) {
       const angle = (seed*i*137.5*Math.PI/180) % (Math.PI*2);
@@ -999,72 +1017,157 @@ function drawGrid() {
 }
 
 // ═══════════════════════════════════════════════
-//  ELEVATED TUBES
+//  ELEVATED TUBES — segment-based network
 // ═══════════════════════════════════════════════
 function drawTubes() {
-  Object.entries(ROUTES).forEach(([key, r]) => {
-    if (key === 'all') return;
-    const isActive = activeRoute === 'all' || activeRoute === key;
-    const alpha = isActive ? .88 : .1;
-    const lw = isActive ? Math.max(1.5, cx(2.5)) : Math.max(.6, cx(1));
+  // Collect which segments are active
+  const activeSegs = new Set();
+  if (activeRoute !== 'all') {
+    const r = ROUTES[activeRoute];
+    if (r && r.segs) r.segs.forEach(s => activeSegs.add(s));
+  }
 
-    // Ground shadow
-    cCtx.strokeStyle = 'rgba(0,0,0,0.3)';
+  // Draw all segments; active ones bright, rest dim
+  Object.entries(SEGS).forEach(([key, pts]) => {
+    const isActive = activeRoute === 'all' || activeSegs.has(key);
+    const alpha = isActive ? .9 : .12;
+    const lw = isActive ? Math.max(1.5, cx(2.5)) : Math.max(.5, cx(.9));
+
+    // Shadow
+    cCtx.strokeStyle = 'rgba(0,0,0,0.28)';
     cCtx.lineWidth = lw + cx(2); cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
-    cCtx.beginPath(); cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1]+5));
-    r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1]+5))); cCtx.stroke();
+    cCtx.beginPath(); cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1]+4));
+    pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]),cy(p[1]+4))); cCtx.stroke();
 
-    // Tube glow
+    // Determine color: use route color if only one active route uses this segment
+    let segColor = '#4a5568'; // dim base
+    if (activeRoute !== 'all') {
+      const r = ROUTES[activeRoute];
+      segColor = r ? r.color : '#4a5568';
+    }
+
     cCtx.save();
-    if (isActive) { cCtx.shadowBlur = 14; cCtx.shadowColor = r.color; }
-    cCtx.strokeStyle = hexA(r.color, alpha);
+    if (isActive) { cCtx.shadowBlur = 14; cCtx.shadowColor = segColor; }
+    cCtx.strokeStyle = isActive ? hexA(segColor, alpha) : 'rgba(50,70,100,0.18)';
     cCtx.lineWidth = lw; cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
-    cCtx.beginPath(); cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1]));
-    r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1]))); cCtx.stroke();
+    cCtx.beginPath(); cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1]));
+    pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]),cy(p[1]))); cCtx.stroke();
 
-    // Top highlight
     if (isActive) {
       cCtx.shadowBlur = 0;
-      cCtx.strokeStyle = 'rgba(255,255,255,0.18)'; cCtx.lineWidth = cx(.8);
-      cCtx.beginPath(); cCtx.moveTo(cx(r.points[0][0]), cy(r.points[0][1]-1.2));
-      r.points.slice(1).forEach(p => cCtx.lineTo(cx(p[0]), cy(p[1]-1.2))); cCtx.stroke();
+      cCtx.strokeStyle = 'rgba(255,255,255,0.16)'; cCtx.lineWidth = cx(.7);
+      cCtx.beginPath(); cCtx.moveTo(cx(pts[0][0]),cy(pts[0][1]-1.2));
+      pts.slice(1).forEach(p => cCtx.lineTo(cx(p[0]),cy(p[1]-1.2))); cCtx.stroke();
     }
     cCtx.restore();
   });
 }
 
 // ═══════════════════════════════════════════════
-//  STATION NODES — small, no big circles
+//  JUNCTION FORKS — 2-way fork icon at each junction
 // ═══════════════════════════════════════════════
-function drawStationNodes() {
-  const seen = new Map();
-  Object.entries(ROUTES).forEach(([key, r]) => {
-    if (key === 'all') return;
-    const isActive = activeRoute === 'all' || activeRoute === key;
-    r.points.forEach((p, i) => {
-      const k = `${Math.round(p[0])},${Math.round(p[1])}`;
-      if (!seen.has(k)) seen.set(k, { x:p[0], y:p[1], active:false, color:r.color });
-      if (isActive) seen.get(k).active = true;
-    });
-  });
+function drawJunctionForks() {
+  Object.entries(JUNCTIONS).forEach(([key, j]) => {
+    const pos = j.pos;
+    const px = cx(pos[0]), py = cy(pos[1]);
 
-  seen.forEach(n => {
-    const pulse = Math.sin(cityT*2.5 + n.x*.04) * .5 + .5;
+    // Is this junction on the active route path?
+    let isActive = (activeRoute === 'all');
+    if (!isActive && activeRoute) {
+      const r = ROUTES[activeRoute];
+      if (r && r.segs) {
+        // Junction is active if any of its connected segs are in the active route
+        isActive = r.segs.some(s => s.includes(key));
+      }
+    }
+
+    const pulse = Math.sin(cityT * 2.2 + pos[0] * .04) * .5 + .5;
+    const col = isActive ? '#00f5ff' : 'rgba(70,100,140,0.6)';
+
+    // Get angles to the 2 branches
+    const p1 = NN[j.b1], p2 = NN[j.b2];
+    const a1 = Math.atan2(p1[1]-pos[1], p1[0]-pos[0]);
+    const a2 = Math.atan2(p2[1]-pos[1], p2[0]-pos[0]);
+    const armLen = isActive ? cx(9) : cx(5);
+
     cCtx.save();
-    // Small station dot — no big rings
-    if (n.active) { cCtx.shadowBlur = 8; cCtx.shadowColor = n.color; }
-    cCtx.fillStyle = hexA(n.color, n.active ? (.65+pulse*.3) : .18);
+    cCtx.lineWidth = isActive ? cx(1.5) : cx(1);
+    cCtx.strokeStyle = isActive ? hexA(col, .7+pulse*.25) : hexA(col, .35);
+    cCtx.lineCap = 'round';
+
+    // Fork arm 1
     cCtx.beginPath();
-    cCtx.arc(cx(n.x), cy(n.y), cx(n.active ? 3 : 2), 0, Math.PI*2);
+    cCtx.moveTo(px, py);
+    cCtx.lineTo(px + Math.cos(a1)*armLen, py + Math.sin(a1)*armLen);
+    cCtx.stroke();
+
+    // Fork arm 2
+    cCtx.beginPath();
+    cCtx.moveTo(px, py);
+    cCtx.lineTo(px + Math.cos(a2)*armLen, py + Math.sin(a2)*armLen);
+    cCtx.stroke();
+
+    // Centre dot
+    if (isActive) { cCtx.shadowBlur = 10; cCtx.shadowColor = col; }
+    cCtx.fillStyle = isActive ? hexA(col, .85+pulse*.15) : hexA(col, .4);
+    cCtx.beginPath();
+    cCtx.arc(px, py, isActive ? cx(3.5) : cx(2.2), 0, Math.PI*2);
     cCtx.fill();
 
-    // Tiny pulse ring (active only, subtle)
-    if (n.active) {
-      cCtx.strokeStyle = hexA(n.color, pulse*.3);
-      cCtx.lineWidth = .8;
-      cCtx.beginPath();
-      cCtx.arc(cx(n.x), cy(n.y), cx(4.5+pulse*2), 0, Math.PI*2);
-      cCtx.stroke();
+    // Tiny label on active junction when zoomed
+    if (isActive && cam.zoom > 2) {
+      cCtx.shadowBlur = 0;
+      cCtx.fillStyle = hexA(col, .75);
+      cCtx.font = `bold ${Math.max(4.5,cx(6))}px Orbitron,monospace`;
+      cCtx.textAlign = 'center';
+      cCtx.fillText(lang==='si'?j.si:j.en, px, py - cx(10));
+    }
+    cCtx.restore();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  TERMINAL STATION DOTS (non-junction endpoints)
+// ═══════════════════════════════════════════════
+function drawTerminalDots() {
+  const terminals = {
+    randles:     { en:'Randles Hill', si:'රෑන්ඩල්ස්', col:'#10b981' },
+    peradeniya:  { en:'Peradeniya',   si:'පේරාදෙණිය', col:'#06b6d4' },
+    buwelikada:  { en:'Buwelikada',   si:'බූවැලිකඩ',  col:'#f59e0b' },
+    hospital:    { en:'Hospital',      si:'රෝහල',       col:'#ef4444' },
+    tNE:         { en:'',             si:'',            col:'#8b5cf6' },
+    tSE:         { en:'',             si:'',            col:'#8b5cf6' },
+    tSW:         { en:'',             si:'',            col:'#8b5cf6' },
+    govarea:     { en:'Gov. Complex', si:'රජය',        col:'#3b82f6' },
+    katugastota: { en:'Katugastota',  si:'කටුගස්',    col:'#a78bfa' },
+    market:      { en:'Market',       si:'වෙළඳ',      col:'#f59e0b' },
+  };
+
+  Object.entries(terminals).forEach(([key, t]) => {
+    const pos = NN[key]; if (!pos) return;
+    const px = cx(pos[0]), py = cy(pos[1]);
+    const pulse = Math.sin(cityT*2.5 + pos[0]*.06) * .5 + .5;
+
+    // Is this terminal on an active route?
+    let isActive = (activeRoute === 'all');
+    if (!isActive && activeRoute) {
+      const r = ROUTES[activeRoute];
+      if (r && r.segs) isActive = r.segs.some(s => s.startsWith(key+'-') || s.endsWith('-'+key));
+    }
+
+    cCtx.save();
+    if (isActive) { cCtx.shadowBlur = 8; cCtx.shadowColor = t.col; }
+    cCtx.fillStyle = hexA(t.col, isActive ? (.65+pulse*.3) : .2);
+    cCtx.beginPath();
+    cCtx.arc(px, py, cx(isActive?3.2:2), 0, Math.PI*2);
+    cCtx.fill();
+
+    if (isActive && t.en && cW > 480) {
+      cCtx.shadowBlur = 0;
+      cCtx.fillStyle = hexA(t.col, .78);
+      cCtx.font = `bold ${Math.max(5.5,cx(7))}px Inter`;
+      cCtx.textAlign = 'center';
+      cCtx.fillText(lang==='si'?t.si:t.en, px, py + cx(10));
     }
     cCtx.restore();
   });
@@ -1077,12 +1180,14 @@ function drawAmbientPods() {
   const ps = cx(7);
   pods.forEach(pod => {
     const isActive = activeRoute === 'all' || activeRoute === pod.routeKey;
-    const spd = demo.active ? pod.speed * (activeRoute===pod.routeKey?.2:.08) : pod.speed;
+    const spd = demo.active ? pod.speed * (activeRoute===pod.routeKey ? .2 : .08) : pod.speed;
     pod.t = (pod.t + spd) % 1;
     if (!isActive && Math.random() > .3) return;
 
-    const pos = pathPos(ROUTES[pod.routeKey].points, pod.t);
-    const angle = pathAngle(ROUTES[pod.routeKey].points, pod.t);
+    const pts = pod.pts || getRoutePoints(pod.routeKey);
+    if (!pts.length) return;
+    const pos = pathPos(pts, pod.t);
+    const angle = pathAngle(pts, pod.t);
     const alpha = isActive ? 1 : .12;
 
     cCtx.save();
@@ -1101,10 +1206,10 @@ function drawAmbientPods() {
 //  LANDMARKS
 // ═══════════════════════════════════════════════
 function drawLandmarks() {
+  const activePts = activeRoute !== 'all' ? getRoutePoints(activeRoute) : [];
   LANDMARKS.forEach(lm => {
     const isActive = activeRoute === 'all' ||
-      (ROUTES[activeRoute] && ROUTES[activeRoute].points.some(p =>
-        Math.hypot(p[0]-lm.x, p[1]-lm.y) < 85));
+      activePts.some(p => Math.hypot(p[0]-lm.x, p[1]-lm.y) < 90);
     cCtx.globalAlpha = isActive ? 1 : .25;
     cCtx.font = `${Math.max(9,cx(12))}px serif`;
     cCtx.textAlign = 'center';
@@ -1332,7 +1437,8 @@ function tickDemo(now) {
   const phase = DEMO_PHASES[demo.phaseIdx]; if (!phase){closeDemo();return;}
   const t = Math.min(1, demo.phaseT/phase.dur);
   const r = ROUTES[demo.routeKey]; if (!r) return;
-  const pts = r.points, origin=pts[0], dest=pts[pts.length-1];
+  const pts = getRoutePoints(demo.routeKey); if (!pts.length) return;
+  const origin=pts[0], dest=pts[pts.length-1];
   const jIdx=Math.floor(pts.length/2);
   const jPt=pts[jIdx];
 
@@ -1393,13 +1499,15 @@ function animateCity(now) {
   drawBuildings();
   drawKandyLake();
   drawTubes();
-  drawStationNodes();
+  drawTerminalDots();
+  drawJunctionForks();
   drawAmbientPods();
   drawLandmarks();
 
   // Demo world-space overlays
   if (demo.active && demo.routeKey) {
-    const r=ROUTES[demo.routeKey], pts=r.points;
+    const r=ROUTES[demo.routeKey];
+    const pts=getRoutePoints(demo.routeKey); if(!pts.length) return;
     const origin=pts[0], dest=pts[pts.length-1];
     const jPt=pts[Math.floor(pts.length/2)];
     const phase=DEMO_PHASES[demo.phaseIdx]||{};
@@ -1430,7 +1538,42 @@ function animateCity(now) {
       }
     }
 
-    if (phase.id==='junction') drawJunctionSubtle(jPt[0],jPt[1],r.color,'#ffd700',t);
+    if (phase.id==='junction') {
+      // Find nearest junction node on this route's path
+      let nearestJ = null, nearestD = 1e9;
+      Object.entries(JUNCTIONS).forEach(([jk,jv]) => {
+        if (!r.segs) return;
+        const onRoute = r.segs.some(s => s.includes(jk));
+        if (!onRoute) return;
+        const jp = jv.pos;
+        const d = Math.hypot(jp[0]-jPt[0], jp[1]-jPt[1]);
+        if (d < nearestD) { nearestD=d; nearestJ=jv; }
+      });
+      if (nearestJ) {
+        // Draw fork flash at junction
+        const jp=nearestJ.pos, px2=cx(jp[0]), py2=cy(jp[1]);
+        const flash=Math.sin(t*Math.PI*8)*.5+.5;
+        cCtx.save();
+        cCtx.shadowBlur=18;cCtx.shadowColor='#ffd700';
+        cCtx.fillStyle=`rgba(255,215,0,${.45+flash*.4})`;
+        cCtx.beginPath();cCtx.arc(px2,py2,cx(5+flash*3),0,Math.PI*2);cCtx.fill();
+        // Fork arms flash
+        const p1=NN[nearestJ.b1],p2=NN[nearestJ.b2];
+        [p1,p2].forEach(p=>{
+          const a=Math.atan2(p[1]-jp[1],p[0]-jp[0]);
+          cCtx.strokeStyle=`rgba(255,215,0,${.35+flash*.45})`;
+          cCtx.lineWidth=cx(1.8);cCtx.lineCap='round';
+          cCtx.beginPath();cCtx.moveTo(px2,py2);
+          cCtx.lineTo(px2+Math.cos(a)*cx(14),py2+Math.sin(a)*cx(14));cCtx.stroke();
+        });
+        cCtx.shadowBlur=0;
+        cCtx.fillStyle='rgba(0,0,0,0.5)';
+        cCtx.beginPath();cCtx.roundRect(px2-cx(28),py2-cy(22),cx(56),cy(11),cx(3));cCtx.fill();
+        cCtx.fillStyle='#ffd700';cCtx.font=`bold ${Math.max(4.5,cx(5.5))}px Orbitron,monospace`;cCtx.textAlign='center';
+        cCtx.fillText(lang==='si'?'AI 2-මාරු':'AI 2-WAY SWITCH',px2,py2-cy(13));
+        cCtx.restore();
+      }
+    }
 
     if (phase.id==='passing'&&demo.passingPodT>=0) {
       const pos=pathPos(pts,demo.podT);
